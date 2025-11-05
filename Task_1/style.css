@@ -27,11 +27,11 @@ a{
     text-decoration: none;
 }
 a:hover{
-    text-decoration: underline;
+    text-decoration: unset;
+    color: #3a25dd;
 }
 nav ul li a{
     font-size: 18px;
-}
-nav ul li a:hover{
-    color: #ff6347;
+    font-weight: bold;
+    transition: color 0.8s ease;
 }
