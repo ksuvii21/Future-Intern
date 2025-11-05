@@ -1,3 +1,17 @@
+:root {
+            --primary: #4a6cfa;
+            --primary-dark: #3a5bd9;
+            --secondary: #6c63ff;
+            --accent: #ff64c7;
+            --dark: #2d2f48;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #28a745;
+            --error: #dc3545;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --radius: 10px;
+        }
 *{
     margin: 0;
     padding: 0;
