@@ -5,7 +5,7 @@
 - [x] Update link to open resume.pdf in assets folder in new tab
 
 ## 2. About Me Section - Add More Description
-- [ ] Add <h3>Who Am I?</h3> and provided paragraphs after existing text
+- [x] Add <h3>Who Am I?</h3> and provided paragraphs after existing text
 
 ## 3. Skills Section - Rename and Adjust Speed
 - [x] Add section title "Skills" with description
