@@ -333,51 +333,57 @@ nav {
     display: block;
 }
 
-.skills {
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 20px;
-    justify-items: center;
-}
-
-.skill-logo {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    transition: var(--transition);
+/* Skills Section */
+.skills-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+    overflow: hidden;
     position: relative;
 }
 
+.skills-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.skills-track {
+    display: flex;
+    width: calc(200px * 50); /* Adjust based on number of skills */
+    animation: scroll 40s linear infinite;
+}
+
+.skill-logo {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    margin: 0 10px;
+    flex-shrink: 0;
+}
+
 .skill-logo:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .skill-img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
 }
 
-.skill-icon {
-    font-size: 1.8rem;
-    color: var(--primary);
-    margin-bottom: 2px;
-}
-
-.skill-text {
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: var(--dark);
-    text-align: center;
-    line-height: 1;
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-200px * 25)); /* Half the total width for seamless loop */
+    }
 }
 
 /* Experience Section */
@@ -799,27 +805,29 @@ footer {
         max-width: 100%;
     }
 
-    .skills {
-        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-        gap: 15px;
+    .skills-track {
+        width: calc(100px * 50);
+        animation: scroll 30s linear infinite;
     }
 
     .skill-logo {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
+        margin: 0 5px;
     }
 
     .skill-img {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
 
-    .skill-icon {
-        font-size: 1.5rem;
-    }
-
-    .skill-text {
-        font-size: 0.6rem;
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100px * 25));
+        }
     }
 
     .social-links {
