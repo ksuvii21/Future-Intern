@@ -8,8 +8,8 @@
 - [ ] Add <h3>Who Am I?</h3> and provided paragraphs after existing text
 
 ## 3. Skills Section - Rename and Adjust Speed
-- [ ] Add section title "Skills" with description
-- [ ] Decrease animation speed from 60s to 120s
+- [x] Add section title "Skills" with description
+- [x] Decrease animation speed from 60s to 120s
 
 ## 4. Portfolio Section - Rename to Projects
 - [ ] Change section title from "My Portfolio" to "My Projects"
