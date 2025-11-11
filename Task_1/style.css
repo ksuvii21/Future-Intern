@@ -530,14 +530,61 @@ footer {
     font-size: 0.9rem;
 }
 
+/* Animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Form Validation Styles */
+.form-group.error input,
+.form-group.error textarea {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.form-group.success input,
+.form-group.success textarea {
+    border-color: var(--success);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.error-message {
+    color: var(--error);
+    font-size: 0.875rem;
+    margin-top: 5px;
+    display: block;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     .about-content, .contact-container {
         grid-template-columns: 1fr;
     }
-            
+
     .hero h1 {
         font-size: 2.8rem;
+    }
+
+    .social-links {
+        justify-content: center;
     }
 }
 
@@ -554,25 +601,35 @@ footer {
         justify-content: center;
         transition: var(--transition);
     }
-            
+
     .nav-links.active {
         left: 0;
     }
-            
+
     .nav-links li {
         margin: 15px 0;
     }
-            
+
     .hamburger {
         display: block;
     }
-            
+
     .hero h1 {
         font-size: 2.3rem;
     }
-            
+
     .btn {
         padding: 10px 20px;
+    }
+
+    .social-links {
+        gap: 10px;
+    }
+
+    .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
     }
 }
 
@@ -580,12 +637,37 @@ footer {
     .hero h1 {
         font-size: 2rem;
     }
-            
+
     .section-title h2 {
         font-size: 2rem;
     }
-            
+
     .feature-card, .portfolio-item {
         max-width: 100%;
+    }
+
+    .skills {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: 15px;
+    }
+
+    .skill-logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .skill-img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .social-links {
+        gap: 8px;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
     }
 }
