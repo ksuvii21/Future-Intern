@@ -484,6 +484,18 @@ nav {
     color: white;
 }
 
+.skills-section .section-title h2 {
+    color: white;
+}
+
+.certifications .section-title h2 {
+    color: white;
+}
+
+.contact-info h3 {
+    color: white;
+}
+
 .experience-content {
     display: flex;
     flex-direction: column;
