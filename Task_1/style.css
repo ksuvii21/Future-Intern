@@ -389,7 +389,25 @@ nav {
 /* Experience Section */
 .experience {
     padding: 100px 0;
-    background-color: white;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+}
+
+.experience .section-title h2 {
+    color: white;
+}
+
+.experience-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid rgba(255, 255, 255, 0.5);
+    color: white;
+}
+
+.experience-item h5 {
+    color: white;
+}
+
+.experience-item .company {
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .experience-content {
