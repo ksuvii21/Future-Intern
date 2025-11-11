@@ -40,26 +40,37 @@ filterButtons.forEach(button => {
     });
 });
 
-// Skill Bars Animation
-const skillBars = document.querySelectorAll('.skill-progress-bar');
-        
-function animateSkillBars() {
-    skillBars.forEach(bar => {
-        const width = bar.getAttribute('data-width');
-        bar.style.width = width;
+// Skill Logos Animation
+const skillLogos = document.querySelectorAll('.skill-logo');
+
+function animateSkillLogos() {
+    skillLogos.forEach((logo, index) => {
+        setTimeout(() => {
+            logo.style.opacity = '1';
+            logo.style.transform = 'translateY(0)';
+        }, index * 100);
     });
 }
 
-// Animate skill bars when they come into view
+// Animate skill logos when they come into view
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            animateSkillBars();
+            animateSkillLogos();
         }
     });
 }, { threshold: 0.5 });
 
-observer.observe(document.querySelector('.skills'));
+if (document.querySelector('.skills')) {
+    observer.observe(document.querySelector('.skills'));
+    
+    // Initialize logos as hidden
+    skillLogos.forEach(logo => {
+        logo.style.opacity = '0';
+        logo.style.transform = 'translateY(20px)';
+        logo.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+}
 
 // Form Validation
 const contactForm = document.getElementById('contactForm');
