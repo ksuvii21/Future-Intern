@@ -690,8 +690,20 @@ footer {
     }
 
     .skills {
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-        gap: 15px;
+        gap: 20px;
+    }
+
+    .skill-category {
+        padding: 15px;
+    }
+
+    .skill-category h4 {
+        font-size: 1rem;
+    }
+
+    .skill-logos {
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+        gap: 10px;
     }
 
     .skill-logo {
@@ -700,8 +712,16 @@ footer {
     }
 
     .skill-img {
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .skill-icon {
+        font-size: 1.5rem;
+    }
+
+    .skill-text {
+        font-size: 0.6rem;
     }
 
     .social-links {
