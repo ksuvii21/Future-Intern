@@ -412,7 +412,7 @@ nav {
 .skills-track {
     display: flex;
     width: calc(200px * 50); /* Adjust based on number of skills */
-    animation: scroll 60s linear infinite;
+    animation: scroll 120s linear infinite;
 }
 
 .skill-logo {
