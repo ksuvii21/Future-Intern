@@ -22,5 +22,5 @@
 
 ## Followup Steps
 - [x] Test website locally
-- [ ] Verify responsiveness
+- [x] Verify responsiveness
 - [ ] Check accessibility
