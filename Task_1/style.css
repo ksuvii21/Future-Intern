@@ -186,9 +186,6 @@ nav {
     color: white;
 }
 
-.hero h1 span {
-    color: var(--primary);
-}
 
 .hero p {
     font-size: 1.2rem;
