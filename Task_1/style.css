@@ -236,7 +236,7 @@ nav {
 /* Portfolio Section */
 .portfolio {
     padding: 100px 0;
-    background-color: #f8f9fa;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
 }
 
 .portfolio-filters {
