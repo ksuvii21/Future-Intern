@@ -7,11 +7,11 @@
 - [x] Update contact section background
 
 ## 2. Replace Skills Progress Bars with Logos
-- [ ] Update About section HTML to replace skill bars with logo images for Python, MERN, JavaScript, Java, C++
-- [ ] Add alt text for accessibility
-- [ ] Adjust CSS for skills section to style logos in a grid layout
-- [ ] Remove progress bar related CSS
-- [ ] Ensure logos are responsive
+- [x] Update About section HTML to replace skill bars with logo images for Python, MERN, JavaScript, Java, C++
+- [x] Add alt text for accessibility
+- [x] Adjust CSS for skills section to style logos in a grid layout
+- [x] Remove progress bar related CSS
+- [x] Ensure logos are responsive
 
 ## 3. Improve Contact Me Section
 - [ ] Enhance contact info styling with better icons and layout
