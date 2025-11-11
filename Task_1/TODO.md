@@ -24,5 +24,5 @@
 - [ ] Remove feature cards to keep only 3
 
 ## 8. Contact Me Section - Improve Data Display
-- [ ] Increase font sizes in contact-info
-- [ ] Add more spacing for better readability
+- [x] Increase font sizes in contact-info
+- [x] Add more spacing for better readability
