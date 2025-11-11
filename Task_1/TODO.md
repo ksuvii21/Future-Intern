@@ -1,26 +1,28 @@
-# Portfolio Website Update Tasks
+# TODO List for Portfolio Updates
 
-## 1. Update Background Colors to Scorpio Palette
-- [x] Modify CSS variables in :root to incorporate Scorpio colors (#94373E, #C95400, #501950, #810121, #000000)
-- [x] Update hero section background gradient
-- [x] Update portfolio section background
-- [x] Update contact section background
+## 1. Home Section - Contact Button to Resume
+- [ ] Change "Contact Me" button to "View Resume"
+- [ ] Update link to open resume.pdf in assets folder in new tab
 
-## 2. Replace Skills Progress Bars with Logos
-- [x] Update About section HTML to replace skill bars with logo images for Python, MERN, JavaScript, Java, C++
-- [x] Add alt text for accessibility
-- [x] Adjust CSS for skills section to style logos in a grid layout
-- [x] Remove progress bar related CSS
-- [x] Ensure logos are responsive
+## 2. About Me Section - Add More Description
+- [ ] Add <h3>Who Am I?</h3> and provided paragraphs after existing text
 
-## 3. Improve Contact Me Section
-- [x] Enhance contact info styling with better icons and layout
-- [x] Improve form design with hover effects and better spacing
-- [x] Add success message animation for form submission
-- [x] Update JavaScript for enhanced form validation and feedback
-- [x] Add social media links in contact section
+## 3. Skills Section - Rename and Adjust Speed
+- [ ] Add section title "Skills" with description
+- [ ] Decrease animation speed from 60s to 120s
 
-## Followup Steps
-- [x] Test website locally
-- [x] Verify responsiveness
-- [ ] Check accessibility
+## 4. Portfolio Section - Rename to Projects
+- [ ] Change section title from "My Portfolio" to "My Projects"
+
+## 5. Experience Section - Add 4th Experience
+- [ ] Add one more experience item to make 4 total
+
+## 6. Certifications Section - Reduce to 3
+- [ ] Remove one certification to have exactly 3
+
+## 7. What I Offer Section - Keep 3 Points
+- [ ] Remove feature cards to keep only 3
+
+## 8. Contact Me Section - Improve Data Display
+- [ ] Increase font sizes in contact-info
+- [ ] Add more spacing for better readability
