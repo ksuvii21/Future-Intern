@@ -1,9 +1,9 @@
 :root {
-    --primary: #4a6cfa;
-    --primary-dark: #3a5bd9;
-    --secondary: #6c63ff;
-    --accent: #ff64c7;
-    --dark: #2d2f48;
+    --primary: #94373E;
+    --primary-dark: #810121;
+    --secondary: #C95400;
+    --accent: #501950;
+    --dark: #000000;
     --light: #f8f9fa;
     --gray: #6c757d;
     --success: #28a745;
@@ -114,7 +114,7 @@ nav {
 /* Hero Section */
 .hero {
     padding: 150px 0 100px;
-    background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
     text-align: center;
     position: relative;
     overflow: hidden;
