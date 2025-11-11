@@ -180,11 +180,6 @@ nav {
     margin: 0 auto;
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-    color: var(--dark);
-}
 
 .hero h1 span {
     color: var(--primary);
