@@ -1,8 +1,8 @@
 # TODO List for Portfolio Updates
 
 ## 1. Home Section - Contact Button to Resume
-- [ ] Change "Contact Me" button to "View Resume"
-- [ ] Update link to open resume.pdf in assets folder in new tab
+- [x] Change "Contact Me" button to "View Resume"
+- [x] Update link to open resume.pdf in assets folder in new tab
 
 ## 2. About Me Section - Add More Description
 - [ ] Add <h3>Who Am I?</h3> and provided paragraphs after existing text
