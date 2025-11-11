@@ -15,7 +15,7 @@
 - [x] Change section title from "My Portfolio" to "My Projects"
 
 ## 5. Experience Section - Add 4th Experience
-- [ ] Add one more experience item to make 4 total
+- [x] Add one more experience item to make 4 total
 
 ## 6. Certifications Section - Reduce to 3
 - [ ] Remove one certification to have exactly 3
