@@ -18,7 +18,7 @@
 - [x] Add one more experience item to make 4 total
 
 ## 6. Certifications Section - Reduce to 3
-- [ ] Remove one certification to have exactly 3
+- [x] Remove one certification to have exactly 3
 
 ## 7. What I Offer Section - Keep 3 Points
 - [ ] Remove feature cards to keep only 3
