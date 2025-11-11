@@ -72,18 +72,18 @@ if (document.querySelector('.skills')) {
     });
 }
 
-// Form Validation
+// Form Validation with Enhanced Feedback
 const contactForm = document.getElementById('contactForm');
-        
+
 contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
-            
+
     const name = document.getElementById('name');
     const email = document.getElementById('email');
     const message = document.getElementById('message');
-            
+
     let isValid = true;
-            
+
     // Simple validation
     if (name.value.trim() === '') {
         showError(name, 'Name is required');
@@ -91,7 +91,7 @@ contactForm.addEventListener('submit', function(e) {
     } else {
         showSuccess(name);
     }
-            
+
     if (email.value.trim() === '') {
         showError(email, 'Email is required');
         isValid = false;
@@ -101,20 +101,65 @@ contactForm.addEventListener('submit', function(e) {
     } else {
         showSuccess(email);
     }
-            
+
     if (message.value.trim() === '') {
         showError(message, 'Message is required');
         isValid = false;
     } else {
         showSuccess(message);
     }
-            
+
     if (isValid) {
-    // In a real application, you would submit the form here
-        alert('Form submitted successfully!');
+        // Enhanced success feedback
+        showSuccessMessage();
         contactForm.reset();
+        // Clear all validation states
+        clearValidationStates();
     }
 });
+
+function showSuccessMessage() {
+    // Create success message element
+    const successMsg = document.createElement('div');
+    successMsg.className = 'success-message';
+    successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.';
+    successMsg.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--success);
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        animation: slideIn 0.5s ease;
+        font-weight: 500;
+    `;
+
+    document.body.appendChild(successMsg);
+
+    // Remove after 5 seconds
+    setTimeout(() => {
+        successMsg.style.animation = 'slideOut 0.5s ease';
+        setTimeout(() => {
+            if (successMsg.parentNode) {
+                successMsg.parentNode.removeChild(successMsg);
+            }
+        }, 500);
+    }, 5000);
+}
+
+function clearValidationStates() {
+    const formGroups = contactForm.querySelectorAll('.form-group');
+    formGroups.forEach(group => {
+        group.classList.remove('error', 'success');
+        const errorMsg = group.querySelector('.error-message');
+        if (errorMsg) {
+            errorMsg.remove();
+        }
+    });
+}
         
 function showError(input, message) {
     const formGroup = input.parentElement;
