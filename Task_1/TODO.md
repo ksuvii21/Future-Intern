@@ -12,7 +12,7 @@
 - [x] Decrease animation speed from 60s to 120s
 
 ## 4. Portfolio Section - Rename to Projects
-- [ ] Change section title from "My Portfolio" to "My Projects"
+- [x] Change section title from "My Portfolio" to "My Projects"
 
 ## 5. Experience Section - Add 4th Experience
 - [ ] Add one more experience item to make 4 total
