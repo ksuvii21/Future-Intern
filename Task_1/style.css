@@ -365,7 +365,7 @@ nav {
 /* Contact Section */
 .contact {
     padding: 100px 0;
-    background-color: #f8f9fa;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
 }
 
 .contact-container {
