@@ -429,6 +429,10 @@ nav {
     position: relative;
 }
 
+.skills-section p {
+    color: rgba(255, 255, 255, 0.648);
+}
+
 .skills-container {
     width: 100%;
     overflow: hidden;
@@ -483,7 +487,9 @@ nav {
 .experience .section-title h2 {
     color: white;
 }
-
+.experience p {
+    color: rgba(255, 255, 255, 0.648);
+}
 .skills-section .section-title h2 {
     color: white;
 }
@@ -609,6 +615,10 @@ nav {
     gap: 30px;
 }
 
+.certifications .section-title p {
+    color: rgba(255, 255, 255, 0.648);
+}
+
 .certifications-details {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -655,6 +665,14 @@ nav {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 50px;
+}
+
+.contact .section-title h2 {
+    color: white;
+}
+
+.contact .section-title p {
+    color: rgba(255, 255, 255, 0.648);
 }
 
 .contact-info {
