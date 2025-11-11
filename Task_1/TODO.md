@@ -21,7 +21,7 @@
 - [x] Remove one certification to have exactly 3
 
 ## 7. What I Offer Section - Keep 3 Points
-- [ ] Remove feature cards to keep only 3
+- [x] Remove feature cards to keep only 3
 
 ## 8. Contact Me Section - Improve Data Display
 - [x] Increase font sizes in contact-info
