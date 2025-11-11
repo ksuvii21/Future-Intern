@@ -1,13 +1,10 @@
 # Portfolio Website Update Tasks
 
 ## 1. Update Background Colors to Scorpio Palette
-- [ ] Modify CSS variables in :root to incorporate Scorpio colors (#94373E, #C95400, #501950, #810121, #000000)
-- [ ] Update hero section background gradient
-- [ ] Update features section background
-- [ ] Update portfolio section background
-- [ ] Update about section background
-- [ ] Update contact section background
-- [ ] Update footer background
+- [x] Modify CSS variables in :root to incorporate Scorpio colors (#94373E, #C95400, #501950, #810121, #000000)
+- [x] Update hero section background gradient
+- [x] Update portfolio section background
+- [x] Update contact section background
 
 ## 2. Replace Skills Progress Bars with Logos
 - [ ] Update About section HTML to replace skill bars with logo images for Python, MERN, JavaScript, Java, C++
