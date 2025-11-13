@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
-  const addToCart = () => {
+  const addToCart = (e) => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const existingItem = cart.find(item => item._id === product._id);
 
@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
 
     localStorage.setItem('cart', JSON.stringify(cart));
     // Show a brief success message
-    const button = event.target;
+    const button = e.target;
     const originalText = button.textContent;
     button.textContent = 'Added!';
     button.classList.add('bg-green-600', 'hover:bg-green-700');
