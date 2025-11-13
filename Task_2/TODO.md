@@ -9,7 +9,7 @@
 - [x] Create client/src/components/ProductList.js with basic React component
 - [x] Create client/src/components/ProductCard.js with basic React component
 - [x] Create client/src/components/Cart.js with basic React component
-- [ ] Create client/src/components/Checkout.js with basic React component
+- [x] Create client/src/components/Checkout.js with basic React component
 - [ ] Create client/src/components/Login.js with basic React component
 - [ ] Create client/src/components/Admin.js with basic React component
 - [ ] Create client/src/pages/Home.js with basic page component
