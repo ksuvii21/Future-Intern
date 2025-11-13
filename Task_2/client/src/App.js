@@ -5,6 +5,8 @@ import ProductDetail from './pages/ProductDetail';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import Login from './components/Login';
+import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword';
 import Admin from './components/Admin';
 import './App.css';
 
@@ -117,6 +119,8 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
