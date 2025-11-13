@@ -60,7 +60,7 @@ const ProductCard = ({ product }) => {
         <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{product.name}</h3>
         <p className="text-gray-600 mb-4 line-clamp-3">{product.description}</p>
         <div className="flex justify-between items-center mb-4">
-          <span className="text-3xl font-bold text-indigo-600">${product.price}</span>
+          <span className="text-3xl font-bold text-orange-600">${product.price}</span>
           <span className="text-sm text-gray-500">Stock: {product.stock}</span>
         </div>
         <div className="flex space-x-3">
@@ -76,7 +76,7 @@ const ProductCard = ({ product }) => {
             className={`flex-1 py-3 px-4 rounded-lg transition-colors font-medium ${
               product.stock === 0
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                : 'bg-orange-500 text-white hover:bg-orange-600'
             }`}
           >
             {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
