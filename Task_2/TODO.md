@@ -17,5 +17,5 @@
 - [x] Create client/src/pages/CartPage.js with basic page component
 - [x] Create client/src/pages/CheckoutPage.js with basic page component
 - [x] Create client/src/tailwind.config.js with basic Tailwind config
-- [ ] Create .gitignore at root with standard ignores
+- [x] Create .gitignore at root with standard ignores
 - [ ] Create README.md at root with basic description
