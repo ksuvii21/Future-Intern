@@ -15,7 +15,7 @@
 - [x] Create client/src/pages/Home.js with basic page component
 - [x] Create client/src/pages/ProductDetail.js with basic page component
 - [x] Create client/src/pages/CartPage.js with basic page component
-- [ ] Create client/src/pages/CheckoutPage.js with basic page component
+- [x] Create client/src/pages/CheckoutPage.js with basic page component
 - [ ] Create client/src/tailwind.config.js with basic Tailwind config
 - [ ] Create .gitignore at root with standard ignores
 - [ ] Create README.md at root with basic description
