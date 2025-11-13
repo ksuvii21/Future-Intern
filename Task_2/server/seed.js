@@ -55,7 +55,8 @@ const sampleProducts = [
 
 async function seedDatabase() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/shophub';
+    await mongoose.connect(mongoURI);
     console.log('Connected to MongoDB');
 
     await Product.deleteMany({});
