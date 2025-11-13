@@ -53,7 +53,7 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="p-6">
         <div className="mb-2">
-          <span className="inline-block bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full font-medium">
+          <span className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full font-medium">
             {product.category}
           </span>
         </div>
