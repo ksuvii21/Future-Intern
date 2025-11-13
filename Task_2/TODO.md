@@ -4,7 +4,7 @@
 - [x] Create server/routes/productRoutes.js with basic routes
 - [x] Create server/controllers/productController.js with basic controller functions
 - [x] Create server/middleware/auth.js with JWT auth middleware
-- [ ] Create server/.env (empty)
+- [x] Create server/.env (empty)
 - [ ] Create server/server.js with basic Express setup
 - [ ] Create client/src/components/ProductList.js with basic React component
 - [ ] Create client/src/components/ProductCard.js with basic React component
