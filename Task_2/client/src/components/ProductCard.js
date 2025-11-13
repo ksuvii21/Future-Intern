@@ -18,11 +18,11 @@ const ProductCard = ({ product }) => {
     const originalText = button.textContent;
     button.textContent = 'Added!';
     button.classList.add('bg-green-600', 'hover:bg-green-700');
-    button.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+    button.classList.remove('bg-orange-500', 'hover:bg-orange-600');
     setTimeout(() => {
       button.textContent = originalText;
       button.classList.remove('bg-green-600', 'hover:bg-green-700');
-      button.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+      button.classList.add('bg-orange-500', 'hover:bg-orange-600');
     }, 1000);
   };
 
