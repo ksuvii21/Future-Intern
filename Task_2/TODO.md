@@ -6,7 +6,7 @@
 - [x] Create server/middleware/auth.js with JWT auth middleware
 - [x] Create server/.env (empty)
 - [x] Create server/server.js with basic Express setup
-- [ ] Create client/src/components/ProductList.js with basic React component
+- [x] Create client/src/components/ProductList.js with basic React component
 - [ ] Create client/src/components/ProductCard.js with basic React component
 - [ ] Create client/src/components/Cart.js with basic React component
 - [ ] Create client/src/components/Checkout.js with basic React component
