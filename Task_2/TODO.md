@@ -1,0 +1,21 @@
+# TODO for Task 2 Structure Creation
+
+- [ ] Create server/models/Product.js with basic Mongoose model
+- [ ] Create server/routes/productRoutes.js with basic routes
+- [ ] Create server/controllers/productController.js with basic controller functions
+- [ ] Create server/middleware/auth.js with JWT auth middleware
+- [ ] Create server/.env (empty)
+- [ ] Create server/server.js with basic Express setup
+- [ ] Create client/src/components/ProductList.js with basic React component
+- [ ] Create client/src/components/ProductCard.js with basic React component
+- [ ] Create client/src/components/Cart.js with basic React component
+- [ ] Create client/src/components/Checkout.js with basic React component
+- [ ] Create client/src/components/Login.js with basic React component
+- [ ] Create client/src/components/Admin.js with basic React component
+- [ ] Create client/src/pages/Home.js with basic page component
+- [ ] Create client/src/pages/ProductDetail.js with basic page component
+- [ ] Create client/src/pages/CartPage.js with basic page component
+- [ ] Create client/src/pages/CheckoutPage.js with basic page component
+- [ ] Create client/src/tailwind.config.js with basic Tailwind config
+- [ ] Create .gitignore at root with standard ignores
+- [ ] Create README.md at root with basic description
