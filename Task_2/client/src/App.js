@@ -46,8 +46,8 @@ function App() {
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <div className="flex items-center">
-                <Link to="/" className="text-3xl font-bold text-orange-500 hover:text-orange-600 transition-colors">
-                  ShopHub
+                <Link to="/" className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors">
+                  EleganceHub
                 </Link>
               </div>
 
@@ -56,10 +56,10 @@ function App() {
                 <div className="relative">
                   <input
                     type="text"
-                    placeholder="Search for products, brands and more..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    placeholder="Search for elegant dresses, jewelry and more..."
+                    className="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                   />
-                  <button className="absolute right-0 top-0 h-full px-4 bg-orange-500 text-white rounded-r-md hover:bg-orange-600 transition-colors">
+                  <button className="absolute right-0 top-0 h-full px-4 bg-pink-500 text-white rounded-r-md hover:bg-pink-600 transition-colors">
                     🔍
                   </button>
                 </div>
@@ -69,17 +69,17 @@ function App() {
               <div className="flex items-center space-x-6">
                 <Link
                   to="/login"
-                  className="text-gray-700 hover:text-orange-500 font-medium transition-colors"
+                  className="text-gray-700 hover:text-pink-500 font-medium transition-colors"
                 >
                   Hello, Sign in
                 </Link>
                 <Link
                   to="/cart"
-                  className="relative text-gray-700 hover:text-orange-500 transition-colors"
+                  className="relative text-gray-700 hover:text-pink-500 transition-colors"
                 >
                   <span className="text-2xl">🛒</span>
                   {cartCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                       {cartCount}
                     </span>
                   )}
@@ -92,20 +92,20 @@ function App() {
           <div className="bg-gray-100 border-t border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <nav className="flex space-x-8 py-3">
-                <Link to="/" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
+                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
                   All Categories
                 </Link>
-                <Link to="/" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
-                  Electronics
+                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                  Dresses
                 </Link>
-                <Link to="/" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
-                  Fashion
+                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                  Jewelry
                 </Link>
-                <Link to="/" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
-                  Home & Kitchen
+                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                  Accessories
                 </Link>
-                <Link to="/" className="text-gray-700 hover:text-orange-500 font-medium transition-colors">
-                  Sports
+                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                  Collections
                 </Link>
               </nav>
             </div>
@@ -130,13 +130,13 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-orange-400">ShopHub</h3>
-                <p className="text-gray-300 text-sm mb-4">Your one-stop destination for quality products at unbeatable prices.</p>
+                <h3 className="text-lg font-semibold mb-4 text-pink-400">EleganceHub</h3>
+                <p className="text-gray-300 text-sm mb-4">Your premier destination for elegant women's fashion, exquisite jewelry, and luxury accessories.</p>
                 <div className="flex space-x-4">
-                  <span className="text-2xl">📘</span>
-                  <span className="text-2xl">📷</span>
-                  <span className="text-2xl">🐦</span>
-                  <span className="text-2xl">📺</span>
+                  <span className="text-2xl">💎</span>
+                  <span className="text-2xl">👗</span>
+                  <span className="text-2xl">💄</span>
+                  <span className="text-2xl">👠</span>
                 </div>
               </div>
               <div>
@@ -170,7 +170,7 @@ function App() {
               </div>
             </div>
             <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-              <p className="text-gray-400 text-sm">&copy; 2024 ShopHub. All rights reserved.</p>
+              <p className="text-gray-400 text-sm">&copy; 2024 EleganceHub. All rights reserved.</p>
             </div>
           </div>
         </footer>
