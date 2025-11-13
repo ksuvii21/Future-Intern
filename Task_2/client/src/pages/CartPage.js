@@ -1,10 +1,12 @@
 import React from 'react';
+import Cart from '../components/Cart';
 
 const CartPage = () => {
   return (
-    <div className="cart-page">
-      <h1>Your Cart</h1>
-      {/* Add cart page logic here */}
+    <div className="min-h-screen bg-gray-100 py-8">
+      <div className="max-w-4xl mx-auto px-4">
+        <Cart />
+      </div>
     </div>
   );
 };
