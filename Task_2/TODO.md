@@ -2,7 +2,7 @@
 
 - [x] Create server/models/Product.js with basic Mongoose model
 - [ ] Create server/routes/productRoutes.js with basic routes
-- [ ] Create server/controllers/productController.js with basic controller functions
+- [x] Create server/controllers/productController.js with basic controller functions
 - [ ] Create server/middleware/auth.js with JWT auth middleware
 - [ ] Create server/.env (empty)
 - [ ] Create server/server.js with basic Express setup
