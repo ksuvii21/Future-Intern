@@ -28,11 +28,15 @@ const CategoryPage = () => {
 
   const categories = [
     'All',
+    'New Arrivals',
+    'Collections',
     ...new Set(products.map(product => product.category)),
   ];
 
   const filteredProducts = products.filter(product => {
     if (selectedCategory === 'All') return true;
+    if (selectedCategory === 'New Arrivals') return product.isNewArrival === true;
+    if (selectedCategory === 'Collections') return true; // Show all products for Collections
     return product.category.toLowerCase() === selectedCategory.toLowerCase();
   });
 
