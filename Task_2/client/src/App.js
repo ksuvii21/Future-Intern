@@ -60,11 +60,11 @@ function App() {
 
   return (
     <Router>
-      <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
+      <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-indigo-custom to-indigo-2' : 'bg-gradient-primary'}`}>
         {/* Header */}
         <header className={`shadow-sm border-b sticky top-0 z-50 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
           {/* Top Bar */}
-          <div className={`text-white text-sm py-1 ${darkMode ? 'bg-gray-950' : 'bg-gray-900'}`}>
+          <div className={`text-white text-sm py-1 ${darkMode ? 'bg-gray-950' : 'bg-gradient-secondary'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
               <span>Free shipping on orders over $50</span>
               <div className="flex space-x-4">
@@ -98,7 +98,7 @@ function App() {
                     alt="Fansee Rebel"
                     className="h-8 w-auto"
                   />
-                  <span className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors">
+                  <span className="text-3xl font-bold text-blush hover:text-thulian-pink transition-colors">
                     Fansee Rebel
                   </span>
                 </Link>
@@ -110,11 +110,11 @@ function App() {
                   <input
                     type="text"
                     placeholder="Search for elegant dresses, jewelry and more..."
-                    className={`w-full px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blush focus:border-transparent transition-colors ${
                       darkMode ? 'border-gray-600 bg-gray-700 text-white' : 'border-gray-300 bg-white text-gray-900'
                     }`}
                   />
-                  <button className="absolute right-0 top-0 h-full px-4 bg-pink-500 text-white rounded-r-md hover:bg-pink-600 transition-colors">
+                  <button className="absolute right-0 top-0 h-full px-4 bg-blush text-white rounded-r-md hover:bg-thulian-pink transition-colors">
                     🔍
                   </button>
                 </div>
@@ -131,7 +131,7 @@ function App() {
                 >
                   {darkMode ? '☀️' : '🌙'}
                 </button>
-                <div className={`hover:text-pink-500 font-medium transition-colors ${
+                <div className={`hover:text-blush font-medium transition-colors ${
                   darkMode ? 'text-gray-300' : 'text-gray-700'
                 }`}>
                   {user ? (
@@ -142,13 +142,13 @@ function App() {
                 </div>
                 <Link
                   to="/cart"
-                  className={`relative hover:text-pink-500 transition-colors ${
+                  className={`relative hover:text-blush transition-colors ${
                     darkMode ? 'text-gray-300' : 'text-gray-700'
                   }`}
                 >
                   <span className="text-2xl">🛒</span>
                   {cartCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    <span className="absolute -top-2 -right-2 bg-blush text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                       {cartCount}
                     </span>
                   )}
@@ -165,7 +165,7 @@ function App() {
               <nav className="flex space-x-8">
                 <Link
                   to="/"
-                  className={`font-medium transition-colors hover:text-pink-500 ${
+                  className={`font-medium transition-colors hover:text-blush ${
                     darkMode ? 'text-gray-300' : 'text-gray-700'
                   }`}
                 >
@@ -173,7 +173,7 @@ function App() {
                 </Link>
                 <Link
                   to="/category/dresses"
-                  className={`font-medium transition-colors hover:text-pink-500 ${
+                  className={`font-medium transition-colors hover:text-blush ${
                     darkMode ? 'text-gray-300' : 'text-gray-700'
                   }`}
                 >
@@ -181,7 +181,7 @@ function App() {
                 </Link>
                 <Link
                   to="/category/jewelry"
-                  className={`font-medium transition-colors hover:text-pink-500 ${
+                  className={`font-medium transition-colors hover:text-blush ${
                     darkMode ? 'text-gray-300' : 'text-gray-700'
                   }`}
                 >
@@ -189,7 +189,7 @@ function App() {
                 </Link>
                 <Link
                   to="/category/accessories"
-                  className={`font-medium transition-colors hover:text-pink-500 ${
+                  className={`font-medium transition-colors hover:text-blush ${
                     darkMode ? 'text-gray-300' : 'text-gray-700'
                   }`}
                 >
@@ -197,7 +197,7 @@ function App() {
                 </Link>
                 <Link
                   to="/category/collections"
-                  className={`font-medium transition-colors hover:text-pink-500 ${
+                  className={`font-medium transition-colors hover:text-blush ${
                     darkMode ? 'text-gray-300' : 'text-gray-700'
                   }`}
                 >
@@ -223,11 +223,11 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className={`mt-16 ${darkMode ? 'bg-gray-950' : 'bg-gray-900'} text-white`}>
+        <footer className={`mt-16 ${darkMode ? 'bg-gray-950' : 'bg-gradient-dark'} text-white`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-pink-400">
+                <h3 className="text-lg font-semibold mb-4 text-blush">
                   Fansee Rebel
                 </h3>
                 <p className="text-gray-300 text-sm mb-4">
