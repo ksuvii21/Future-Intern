@@ -146,12 +146,32 @@ const CategoryPage = () => {
               </button>
             ))}
           </div>
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div>
               <h2 className="text-3xl font-bold text-white mb-2">
                 {selectedCategory === 'All' ? 'All Products' : selectedCategory}
               </h2>
-              <p className="text-gray-400">{filteredProducts.length} exquisite items</p>
+              <p className="text-gray-400">{sortedProducts.length} exquisite items</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <label className="text-gray-300 text-sm">Sort by:</label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-4 py-2 bg-white/5 border border-[#571089]/30 rounded-lg text-white focus:outline-none focus:border-[#ea698b] transition-all"
+                >
+                  <option value="name">Name</option>
+                  <option value="price">Price</option>
+                  <option value="rating">Rating</option>
+                </select>
+              </div>
+              <button
+                onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                className="px-4 py-2 bg-white/5 border border-[#571089]/30 rounded-lg text-white hover:bg-white/10 hover:border-[#ea698b]/50 transition-all"
+              >
+                {sortOrder === 'asc' ? '↑' : '↓'}
+              </button>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
