@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
+import CategoryPage from './pages/CategoryPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
@@ -12,8 +13,15 @@ import './App.css';
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // Check for user in localStorage on app load
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+
     const updateCartCount = () => {
       const cart = JSON.parse(localStorage.getItem('cart') || '[]');
       const count = cart.reduce((total, item) => total + item.quantity, 0);
@@ -24,6 +32,12 @@ function App() {
     window.addEventListener('storage', updateCartCount);
     return () => window.removeEventListener('storage', updateCartCount);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+  };
 
   return (
     <Router>
@@ -36,7 +50,11 @@ function App() {
               <span>Free shipping on orders over $50</span>
               <div className="flex space-x-4">
                 <Link to="/admin" className="hover:text-gray-300">Sell</Link>
-                <Link to="/login" className="hover:text-gray-300">Account</Link>
+                {user ? (
+                  <button onClick={handleLogout} className="hover:text-gray-300">Logout</button>
+                ) : (
+                  <Link to="/login" className="hover:text-gray-300">Account</Link>
+                )}
               </div>
             </div>
           </div>
@@ -47,7 +65,7 @@ function App() {
               {/* Logo */}
               <div className="flex items-center">
                 <Link to="/" className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors">
-                  ShopHub
+                  EleganceHub
                 </Link>
               </div>
 
@@ -67,12 +85,11 @@ function App() {
 
               {/* Right Side */}
               <div className="flex items-center space-x-6">
-                <Link
-                  to="/login"
-                  className="text-gray-700 hover:text-pink-500 font-medium transition-colors"
-                >
-                  Hello, Sign in
-                </Link>
+                <div className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                  {user ? `Hello, ${user.username}` : (
+                    <Link to="/login">Hello, Sign in</Link>
+                  )}
+                </div>
                 <Link
                   to="/cart"
                   className="relative text-gray-700 hover:text-pink-500 transition-colors"
@@ -95,16 +112,16 @@ function App() {
                 <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
                   All Categories
                 </Link>
-                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <Link to="/category/dresses" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
                   Dresses
                 </Link>
-                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <Link to="/category/jewelry" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
                   Jewelry
                 </Link>
-                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <Link to="/category/accessories" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
                   Accessories
                 </Link>
-                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <Link to="/category/collections" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
                   Collections
                 </Link>
               </nav>
@@ -115,6 +132,7 @@ function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/category/:category" element={<CategoryPage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
@@ -130,7 +148,7 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-pink-400">ShopHub</h3>
+                <h3 className="text-lg font-semibold mb-4 text-pink-400">EleganceHub</h3>
                 <p className="text-gray-300 text-sm mb-4">Your premier destination for elegant women's fashion, exquisite jewelry, and luxury accessories.</p>
                 <div className="flex space-x-4">
                   <span className="text-2xl">💎</span>
@@ -170,7 +188,7 @@ function App() {
               </div>
             </div>
             <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-              <p className="text-gray-400 text-sm">&copy; 2024 ShopHub. All rights reserved.</p>
+              <p className="text-gray-400 text-sm">&copy; 2024 EleganceHub. All rights reserved.</p>
             </div>
           </div>
         </footer>
