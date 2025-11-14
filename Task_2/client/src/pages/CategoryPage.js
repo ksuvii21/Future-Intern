@@ -174,10 +174,11 @@ const CategoryPage = () => {
               </button>
             </div>
           </div>
+          {/* Collection View */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {sortedProducts.map((product) => (
               <div
-                key={product.id}
+                key={product._id}
                 className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#ea698b]/20 hover:-translate-y-2"
               >
                 <div className="relative overflow-hidden bg-gradient-to-br from-[#571089]/20 to-[#47126b]/20 aspect-square">
@@ -189,6 +190,11 @@ const CategoryPage = () => {
                       e.target.src = 'https://via.placeholder.com/400x400?text=No+Image';
                     }}
                   />
+                  {product.isNewArrival && (
+                    <div className="absolute top-4 left-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-xs font-bold px-3 py-1 rounded-full">
+                      NEW
+                    </div>
+                  )}
                   <button className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#ea698b]">
                     <Heart className="w-5 h-5" />
                   </button>
