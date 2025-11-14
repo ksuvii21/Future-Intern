@@ -46,27 +46,71 @@ const Checkout = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8">Checkout</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">Order Summary</h2>
-            {cartItems.map(item => (
-              <div
-                key={item._id}
-                className="flex justify-between items-center mb-2"
-              >
-                <span>
-                  {item.name} x {item.quantity}
-                </span>
-                <span>${(item.price * item.quantity).toFixed(2)}</span>
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
+      {/* Header */}
+      <div className="bg-black/20 backdrop-blur-sm border-b border-[#571089]/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <h1 className="text-4xl font-bold text-white">Checkout</h1>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Order Summary */}
+          <div className="lg:col-span-1">
+            <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 sticky top-6">
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                <Award className="w-6 h-6 text-[#ea698b]" />
+                Order Summary
+              </h2>
+
+              <div className="space-y-4 mb-6">
+                {cartItems.map(item => (
+                  <div key={item._id} className="flex gap-4 p-4 bg-white/5 rounded-lg border border-[#571089]/20">
+                    <img
+                      src={item.imageUrl || 'https://via.placeholder.com/80x80?text=No+Image'}
+                      alt={item.name}
+                      className="w-16 h-16 object-cover rounded-lg"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/80x80?text=No+Image';
+                      }}
+                    />
+                    <div className="flex-1">
+                      <h3 className="text-white font-medium mb-1">{item.name}</h3>
+                      <p className="text-gray-400 text-sm mb-2">
+                        {item.selectedColor && `Color: ${item.selectedColor} | `}
+                        {item.selectedSize && `Size: ${item.selectedSize}`}
+                      </p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-400">Qty: {item.quantity}</span>
+                        <span className="text-[#ea698b] font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-            <div className="border-t pt-4 mt-4">
-              <div className="flex justify-between items-center font-bold">
-                <span>Total:</span>
-                <span>${totalPrice.toFixed(2)}</span>
+
+              <div className="border-t border-[#571089]/30 pt-4 space-y-2">
+                <div className="flex justify-between text-gray-400">
+                  <span>Subtotal:</span>
+                  <span>${totalPrice.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-gray-400">
+                  <span>Shipping:</span>
+                  <span className="text-green-400">Free</span>
+                </div>
+                <div className="flex justify-between text-gray-400">
+                  <span>Tax:</span>
+                  <span>${(totalPrice * 0.08).toFixed(2)}</span>
+                </div>
+                <div className="border-t border-[#571089]/30 pt-2 mt-4">
+                  <div className="flex justify-between text-xl font-bold text-white">
+                    <span>Total:</span>
+                    <span className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                      ${(totalPrice + totalPrice * 0.08).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
