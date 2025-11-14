@@ -205,9 +205,7 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-[#ea698b] to-[#822faf] rounded-lg flex items-center justify-center">
-                    <ShoppingBag className="w-6 h-6 text-white" />
-                  </div>
+                  <img src="/logo.png" alt="Fansee Rebel" className="w-10 h-10 rounded-lg" />
                   <h3 className="text-xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
                     Fansee Rebel
                   </h3>
