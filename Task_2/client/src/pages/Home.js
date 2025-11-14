@@ -74,7 +74,7 @@ const Home = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="bg-gray-50 py-6 border-b border-gray-200">
+      <section className="bg-white py-6 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map(category => (
