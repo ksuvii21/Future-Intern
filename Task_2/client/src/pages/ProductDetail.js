@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft, Star, Heart, ShoppingBag, Truck, Shield, RotateCcw } from 'lucide-react';
 import axios from 'axios';
 
 const ProductDetail = () => {
@@ -7,6 +8,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -25,51 +27,203 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
-  if (error)
-    return <div className="text-center py-8 text-red-500">{error}</div>;
-  if (!product)
-    return <div className="text-center py-8">Product not found</div>;
+  const addToCart = () => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existingItem = cart.find(item => item._id === product._id);
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.push({ ...product, quantity });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Product added to cart!');
+  };
+
+  const addToWishlist = () => {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    const existingItem = wishlist.find(item => item._id === product._id);
+
+    if (!existingItem) {
+      wishlist.push(product);
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      alert('Product added to wishlist!');
+    } else {
+      alert('Product already in wishlist!');
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-pink-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">😔</div>
+          <h2 className="text-2xl font-bold text-white mb-2">Oops! Something went wrong</h2>
+          <p className="text-gray-400 mb-6">{error}</p>
+          <Link to="/" className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
+            Go Back Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">🔍</div>
+          <h2 className="text-2xl font-bold text-white mb-2">Product Not Found</h2>
+          <p className="text-gray-400 mb-6">The product you're looking for doesn't exist.</p>
+          <Link to="/" className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
+            Go Back Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="md:flex">
-            <div className="md:flex-shrink-0">
-              {product.imageUrl && (
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
+      {/* Header */}
+      <div className="bg-black/20 backdrop-blur-sm border-b border-[#571089]/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <Link to="/" className="inline-flex items-center text-gray-300 hover:text-[#ea698b] transition-colors">
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Back to Shop
+          </Link>
+        </div>
+      </div>
+
+      {/* Product Details */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Product Image */}
+          <div className="space-y-4">
+            <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden">
+              {product.imageUrl ? (
                 <img
-                  className="h-96 w-full object-cover md:w-96"
                   src={product.imageUrl}
                   alt={product.name}
+                  className="w-full h-96 object-cover"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/600x600?text=No+Image';
+                  }}
                 />
+              ) : (
+                <div className="w-full h-96 bg-gradient-to-br from-[#571089]/20 to-[#47126b]/20 flex items-center justify-center">
+                  <span className="text-8xl">🛍️</span>
+                </div>
               )}
             </div>
-            <div className="p-8">
-              <div className="uppercase tracking-wide text-sm text-indigo-600 font-semibold">
-                {product.category}
+            {product.isNewArrival && (
+              <div className="inline-block bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-sm font-bold px-4 py-2 rounded-full">
+                NEW ARRIVAL
               </div>
-              <h1 className="block mt-1 text-lg leading-tight font-medium text-black">
-                {product.name}
-              </h1>
-              <p className="mt-2 text-gray-500">{product.description}</p>
-              <div className="mt-4">
-                <span className="text-3xl font-bold text-gray-900">
-                  ${product.price}
+            )}
+          </div>
+
+          {/* Product Info */}
+          <div className="space-y-6">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-sm text-[#ea698b] font-medium px-3 py-1 bg-[#ea698b]/10 rounded-full">
+                  {product.category}
                 </span>
+                {product.rating && (
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 fill-[#ea698b] text-[#ea698b]" />
+                    <span className="text-sm text-gray-400">{product.rating} ({product.reviews} reviews)</span>
+                  </div>
+                )}
               </div>
-              <div className="mt-4">
-                <span className="text-sm text-gray-600">
-                  Stock: {product.stock}
-                </span>
+              <h1 className="text-4xl font-bold text-white mb-4">{product.name}</h1>
+              <p className="text-gray-300 text-lg leading-relaxed">{product.description}</p>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <span className="text-5xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                ${product.price}
+              </span>
+              <span className={`text-sm px-3 py-1 rounded-full font-medium ${
+                product.stock > 10
+                  ? 'bg-green-500/20 text-green-400'
+                  : product.stock > 0
+                    ? 'bg-yellow-500/20 text-yellow-400'
+                    : 'bg-red-500/20 text-red-400'
+              }`}>
+                {product.stock > 10
+                  ? 'In Stock'
+                  : product.stock > 0
+                    ? `Only ${product.stock} left`
+                    : 'Out of Stock'}
+              </span>
+            </div>
+
+            {/* Quantity Selector */}
+            <div className="flex items-center gap-4">
+              <label className="text-gray-300 font-medium">Quantity:</label>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="w-10 h-10 bg-white/5 border border-[#571089]/30 rounded-lg text-white hover:bg-white/10 transition-all"
+                >
+                  -
+                </button>
+                <span className="w-12 text-center text-white font-semibold">{quantity}</span>
+                <button
+                  onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                  className="w-10 h-10 bg-white/5 border border-[#571089]/30 rounded-lg text-white hover:bg-white/10 transition-all"
+                >
+                  +
+                </button>
               </div>
-              <div className="mt-6">
-                <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mr-4">
-                  Add to Cart
-                </button>
-                <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded">
-                  Add to Wishlist
-                </button>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-4">
+              <button
+                onClick={addToCart}
+                disabled={product.stock === 0}
+                className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+                  product.stock === 0
+                    ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105'
+                }`}
+              >
+                <ShoppingBag className="w-5 h-5" />
+                {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+              </button>
+              <button
+                onClick={addToWishlist}
+                className="p-4 bg-white/5 border border-[#571089]/30 rounded-xl text-white hover:bg-white/10 hover:border-[#ea698b]/50 transition-all"
+              >
+                <Heart className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Features */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[#571089]/30">
+              <div className="flex items-center gap-3 text-gray-300">
+                <Truck className="w-5 h-5 text-[#ea698b]" />
+                <span className="text-sm">Free Shipping</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-300">
+                <Shield className="w-5 h-5 text-[#ea698b]" />
+                <span className="text-sm">Secure Payment</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-300">
+                <RotateCcw className="w-5 h-5 text-[#ea698b]" />
+                <span className="text-sm">Easy Returns</span>
               </div>
             </div>
           </div>
