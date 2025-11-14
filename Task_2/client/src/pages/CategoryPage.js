@@ -170,7 +170,7 @@ const CategoryPage = () => {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div>
               <h2 className="text-3xl font-bold text-white mb-2">
-                {selectedCategory === 'All' ? 'All Products' : selectedCategory}
+                {selectedCategory === 'All' ? 'All Products' : getCategoryTitle(selectedCategory)}
               </h2>
               <p className="text-gray-400">{sortedProducts.length} exquisite items</p>
             </div>
