@@ -299,8 +299,15 @@ const Home = () => {
                     key={product.id}
                     className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#ea698b]/20 hover:-translate-y-2"
                   >
-                    <div className="relative overflow-hidden bg-gradient-to-br from-[#571089]/20 to-[#47126b]/20 aspect-square flex items-center justify-center">
-                      <span className="text-8xl">{product.image}</span>
+                    <div className="relative overflow-hidden bg-gradient-to-br from-[#571089]/20 to-[#47126b]/20 aspect-square">
+                      <img
+                        src={product.imageUrl}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        onError={(e) => {
+                          e.target.src = 'https://via.placeholder.com/400x400?text=No+Image';
+                        }}
+                      />
                       <button className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#ea698b]">
                         <Heart className="w-5 h-5" />
                       </button>
@@ -449,7 +456,7 @@ const Home = () => {
           </div>
           <div className="border-t border-[#571089]/30 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              © 2024 Fansee Rebel. All rights reserved.
+              © 2025 Fansee Rebel. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <span className="text-gray-400 text-sm">Secure payments via</span>
