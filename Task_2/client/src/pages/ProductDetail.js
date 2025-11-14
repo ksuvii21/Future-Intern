@@ -201,6 +201,107 @@ const ProductDetail = () => {
               </span>
             </div>
 
+            {/* Color Selection */}
+            <div className="space-y-3">
+              <label className="text-gray-300 font-medium">Color:</label>
+              <div className="flex gap-3">
+                {['Black', 'White', 'Red', 'Blue', 'Green'].map(color => (
+                  <button
+                    key={color}
+                    onClick={() => setSelectedColor(color)}
+                    className={`px-4 py-2 rounded-lg border-2 transition-all ${
+                      selectedColor === color
+                        ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
+                        : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
+                    }`}
+                  >
+                    {color}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Size Selection */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <label className="text-gray-300 font-medium">Size:</label>
+                <button
+                  onClick={() => setShowSizeChart(!showSizeChart)}
+                  className="text-[#ea698b] hover:text-[#d55d92] text-sm underline"
+                >
+                  Size Chart
+                </button>
+              </div>
+              <div className="flex gap-2">
+                {['S', 'M', 'L', 'XL', 'XXL'].map(size => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(size)}
+                    className={`w-12 h-12 rounded-lg border-2 transition-all ${
+                      selectedSize === size
+                        ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
+                        : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
+                    }`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Size Chart Modal */}
+            {showSizeChart && (
+              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+                  <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-2xl font-bold text-white">Size Chart</h3>
+                    <button
+                      onClick={() => setShowSizeChart(false)}
+                      className="text-gray-400 hover:text-white text-2xl"
+                    >
+                      ×
+                    </button>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-6 gap-4 text-center text-sm font-medium text-gray-300 border-b border-[#571089]/30 pb-2">
+                      <div>Size</div>
+                      <div>Chest (in)</div>
+                      <div>Chest (cm)</div>
+                      <div>Length (in)</div>
+                      <div>Length (cm)</div>
+                      <div>Shoulder (in)</div>
+                    </div>
+                    {[
+                      { size: 'S', chestIn: 36, chestCm: 91, lengthIn: 27, lengthCm: 69, shoulder: 16 },
+                      { size: 'M', chestIn: 38, chestCm: 97, lengthIn: 28, lengthCm: 71, shoulder: 17 },
+                      { size: 'L', chestIn: 40, chestCm: 102, lengthIn: 29, lengthCm: 74, shoulder: 18 },
+                      { size: 'XL', chestIn: 42, chestCm: 107, lengthIn: 30, lengthCm: 76, shoulder: 19 },
+                      { size: 'XXL', chestIn: 44, chestCm: 112, lengthIn: 31, lengthCm: 79, shoulder: 20 }
+                    ].map(row => (
+                      <div key={row.size} className="grid grid-cols-6 gap-4 text-center text-gray-400 border-b border-[#571089]/20 py-2">
+                        <div className="font-medium text-white">{row.size}</div>
+                        <div>{row.chestIn}"</div>
+                        <div>{row.chestCm}cm</div>
+                        <div>{row.lengthIn}"</div>
+                        <div>{row.lengthCm}cm</div>
+                        <div>{row.shoulder}"</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 p-4 bg-[#571089]/10 rounded-lg">
+                    <h4 className="text-white font-semibold mb-2">How to Measure</h4>
+                    <ul className="text-sm text-gray-300 space-y-1">
+                      <li>• Chest: Measure around the fullest part of your chest</li>
+                      <li>• Length: Measure from shoulder to bottom hem</li>
+                      <li>• Shoulder: Measure from shoulder seam to shoulder seam</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Quantity Selector */}
             <div className="flex items-center gap-4">
               <label className="text-gray-300 font-medium">Quantity:</label>
