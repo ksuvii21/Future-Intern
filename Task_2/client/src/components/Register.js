@@ -68,7 +68,7 @@ const Register = () => {
         <div className="max-w-md w-full space-y-8">
           <div className="bg-white rounded-2xl shadow-2xl p-8 text-center">
             <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome to ShopHub!</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome to Fansee Rebel!</h2>
             <p className="text-gray-600 mb-6">Your account has been created successfully.</p>
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
             <p className="text-sm text-gray-500 mt-4">Redirecting to homepage...</p>
@@ -84,10 +84,10 @@ const Register = () => {
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <div className="text-center">
             <Link to="/" className="text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors">
-              ShopHub
+              Fansee Rebel
             </Link>
             <h2 className="mt-6 text-3xl font-bold text-gray-900">Create Account</h2>
-            <p className="mt-2 text-sm text-gray-600">Join ShopHub for exclusive access to premium fashion</p>
+            <p className="mt-2 text-sm text-gray-600">Join Fansee Rebel for exclusive access to premium fashion</p>
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -194,11 +194,19 @@ const Register = () => {
               )}
             </button>
 
-            <div className="text-center">
-              <span className="text-sm text-gray-600">Already have an account? </span>
-              <Link to="/login" className="text-sm text-blue-600 hover:text-blue-500 font-medium">
-                Sign in here
-              </Link>
+            <div className="text-center space-y-2">
+              <div>
+                <span className="text-sm text-gray-600">Remember your password? </span>
+                <Link to="/login" className="text-sm text-blue-600 hover:text-blue-500 font-medium">
+                  Sign in here
+                </Link>
+              </div>
+              <div>
+                <span className="text-sm text-gray-600">Don't have an account? </span>
+                <Link to="/register" className="text-sm text-blue-600 hover:text-blue-500 font-medium">
+                  Create one here
+                </Link>
+              </div>
             </div>
 
             <div className="text-center">
