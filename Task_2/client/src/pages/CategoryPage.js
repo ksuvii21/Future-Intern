@@ -36,6 +36,33 @@ const CategoryPage = () => {
     return product.category.toLowerCase() === selectedCategory.toLowerCase();
   });
 
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    let aValue, bValue;
+
+    switch (sortBy) {
+      case 'price':
+        aValue = a.price;
+        bValue = b.price;
+        break;
+      case 'name':
+        aValue = a.name.toLowerCase();
+        bValue = b.name.toLowerCase();
+        break;
+      case 'rating':
+        aValue = a.rating || 0;
+        bValue = b.rating || 0;
+        break;
+      default:
+        return 0;
+    }
+
+    if (sortOrder === 'asc') {
+      return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
+    } else {
+      return aValue < bValue ? 1 : aValue > bValue ? -1 : 0;
+    }
+  });
+
   const getCategoryTitle = cat => {
     switch (cat.toLowerCase()) {
       case 'dresses':
