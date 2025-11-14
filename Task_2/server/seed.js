@@ -103,7 +103,7 @@ const sampleProducts = [
 
 async function seedDatabase() {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Fansee Rebel';
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/shophub';
     await mongoose.connect(mongoURI);
     console.log('Connected to MongoDB');
 
