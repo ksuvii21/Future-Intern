@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ChevronRight, Star, Shield, Truck, RotateCcw } from 'lucide-react';
 import axios from 'axios';
 
+const Home = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
