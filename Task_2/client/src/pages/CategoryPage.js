@@ -236,9 +236,12 @@ const CategoryPage = () => {
                     <Heart className="w-5 h-5" />
                   </button>
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                    <button className="w-full py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
+                    <Link
+                      to={`/product/${product._id}`}
+                      className="block w-full py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all text-center"
+                    >
                       Quick View
-                    </button>
+                    </Link>
                   </div>
                 </div>
                 <div className="p-6">
@@ -259,9 +262,26 @@ const CategoryPage = () => {
                     <span className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
                       ${product.price}
                     </span>
-                    <button className="p-2 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
-                      <ShoppingBag className="w-5 h-5" />
-                    </button>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                      const existingItem = cart.find(item => item._id === product._id);
+
+                      if (existingItem) {
+                        existingItem.quantity += 1;
+                      } else {
+                        cart.push({ ...product, quantity: 1 });
+                      }
+
+                      localStorage.setItem('cart', JSON.stringify(cart));
+                      alert('Added to cart!');
+                    }}
+                    className="p-2 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all"
+                  >
+                    <ShoppingBag className="w-5 h-5" />
+                  </button>
                   </div>
                 </div>
               </div>
