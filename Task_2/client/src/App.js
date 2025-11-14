@@ -93,14 +93,8 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               {/* Logo */}
-              <Link to="/" className="flex items-center gap-3">
-                <img src="/logo.png" alt="Fansee Rebel" className="w-10 h-10 rounded-lg" />
-                <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] via-[#d55d92] to-[#c05299] bg-clip-text text-transparent">
-                    Fansee Rebel
-                  </h1>
-                  <p className="text-xs text-gray-400">Luxury Fashion & Jewelry</p>
-                </div>
+              <Link to="/" className="flex items-center">
+                <img src="/logo.png" alt="Fansee Rebel" className="w-16 h-16 rounded-lg" />
               </Link>
 
               {/* Search Bar - Desktop */}
