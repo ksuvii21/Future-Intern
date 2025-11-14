@@ -6,9 +6,15 @@ import axios from 'axios';
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [selectedColor, setSelectedColor] = useState('Black');
+  const [selectedSize, setSelectedSize] = useState('M');
+  const [showSizeChart, setShowSizeChart] = useState(false);
+  const [pincode, setPincode] = useState('');
+  const [deliveryInfo, setDeliveryInfo] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
