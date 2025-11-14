@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ShoppingBag, Search, User, Heart, Menu, X, ChevronRight, Star, TrendingUp, Shield, Truck, RotateCcw } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import CartPage from './pages/CartPage';
