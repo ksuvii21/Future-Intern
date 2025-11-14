@@ -1,46 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Search, User, Heart, Menu, X, ChevronRight, Star, TrendingUp, Shield, Truck, RotateCcw } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import ProductList from '../components/ProductList';
+import { ChevronRight, Star, Shield, Truck, RotateCcw } from 'lucide-react';
 import axios from 'axios';
-
-const Home = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
-  const [scrolled, setScrolled] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Check for user in localStorage
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-
-    // Update cart count
-    const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const count = cart.reduce((total, item) => total + item.quantity, 0);
-      setCartCount(count);
-    };
-    updateCartCount();
-
-    // Handle scroll effect
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
-  };
 
   useEffect(() => {
     const fetchProducts = async () => {
