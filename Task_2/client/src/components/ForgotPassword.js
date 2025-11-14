@@ -51,7 +51,7 @@ const ForgotPassword = () => {
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <div className="text-center">
             <Link to="/" className="text-3xl font-bold text-purple-600 hover:text-purple-700 transition-colors">
-              ShopHub
+              Fansee Rebel
             </Link>
             <h2 className="mt-6 text-3xl font-bold text-gray-900">Reset Password</h2>
             <p className="mt-2 text-sm text-gray-600">
