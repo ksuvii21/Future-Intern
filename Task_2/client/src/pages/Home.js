@@ -118,9 +118,8 @@ const Home = () => {
                 <div className="relative">
                   {/* Rotating Offers */}
                   <div className="bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm transition-all duration-500">
-                    <div className="flex justify-center items-center gap-4 mb-4">
-                      <div className="text-9xl">{offers[currentOffer].emoji}</div>
-                      <img src="/logo.png" alt="Fansee Rebel" className="w-16 h-16 rounded-lg" />
+                    <div className="text-center mb-4">
+                      <img src="/logo.png" alt="Fansee Rebel" className="w-24 h-24 rounded-lg mx-auto" />
                     </div>
                     <div className="text-center">
                       <p className="text-2xl font-bold text-white mb-2">{offers[currentOffer].title}</p>
