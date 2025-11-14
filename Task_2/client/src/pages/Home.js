@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, Star, Shield, Truck, RotateCcw } from 'lucide-react';
+import { ChevronRight, Star, Shield, Truck, RotateCcw, Heart, ShoppingBag } from 'lucide-react';
 import axios from 'axios';
 
 const Home = () => {
