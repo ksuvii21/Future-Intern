@@ -105,6 +105,8 @@ const CategoryPage = () => {
         return 'Explore our curated designer collections featuring the latest trends in womens fashion and accessories.';
       case 'new arrivals':
         return 'Discover the latest additions to our collection. Fresh styles, innovative designs, and timeless pieces that define modern elegance.';
+      case 'all categories':
+        return 'Browse our complete collection of elegant womens fashion, jewelry, and accessories.';
       default:
         return 'Browse our complete collection of elegant womens fashion, jewelry, and accessories.';
     }
