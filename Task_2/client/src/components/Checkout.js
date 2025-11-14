@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { CreditCard, Smartphone, Truck, MapPin, User, Mail, Home, Calendar, Award } from 'lucide-react';
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [paymentMethod, setPaymentMethod] = useState('card');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     address: '',
     city: '',
+    state: '',
     zipCode: '',
     cardNumber: '',
     expiryDate: '',
     cvv: '',
+    upiId: '',
   });
 
   useEffect(() => {
