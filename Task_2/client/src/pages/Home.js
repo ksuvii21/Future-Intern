@@ -43,6 +43,13 @@ const Home = () => {
     };
 
     fetchProducts();
+
+    // Auto-rotate offers every 4 seconds
+    const offerInterval = setInterval(() => {
+      setCurrentOffer((prev) => (prev + 1) % offers.length);
+    }, 4000);
+
+    return () => clearInterval(offerInterval);
   }, []);
 
   const categories = [
