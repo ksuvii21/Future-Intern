@@ -41,11 +41,11 @@ function App() {
 
   return (
     <Router>
-      <div className="App min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="App min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800">
         {/* Header */}
-        <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
           {/* Top Bar */}
-          <div className="bg-gray-900 text-white text-sm py-1">
+          <div className="bg-gray-900 dark:bg-gray-950 text-white text-sm py-1">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
               <span>Free shipping on orders over $50</span>
               <div className="flex space-x-4">
@@ -64,8 +64,11 @@ function App() {
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <div className="flex items-center">
-                <Link to="/" className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors">
-                  Fansee Rebel
+                <Link to="/" className="flex items-center space-x-2">
+                  <img src="/Logo.png" alt="Fansee Rebel" className="h-8 w-auto" />
+                  <span className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors">
+                    Fansee Rebel
+                  </span>
                 </Link>
               </div>
 
@@ -75,7 +78,7 @@ function App() {
                   <input
                     type="text"
                     placeholder="Search for elegant dresses, jewelry and more..."
-                    className="w-full px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                   <button className="absolute right-0 top-0 h-full px-4 bg-pink-500 text-white rounded-r-md hover:bg-pink-600 transition-colors">
                     🔍
@@ -85,14 +88,14 @@ function App() {
 
               {/* Right Side */}
               <div className="flex items-center space-x-6">
-                <div className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <div className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
                   {user ? `Hello, ${user.username}` : (
                     <Link to="/login">Hello, Sign in</Link>
                   )}
                 </div>
                 <Link
                   to="/cart"
-                  className="relative text-gray-700 hover:text-pink-500 transition-colors"
+                  className="relative text-gray-700 dark:text-gray-300 hover:text-pink-500 transition-colors"
                 >
                   <span className="text-2xl">🛒</span>
                   {cartCount > 0 && (
@@ -106,22 +109,22 @@ function App() {
           </div>
 
           {/* Category Navigation */}
-          <div className="bg-gray-100 border-t border-gray-200">
+          <div className="bg-gray-100 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <nav className="flex space-x-8 py-3">
-                <Link to="/" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <Link to="/" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
                   All Categories
                 </Link>
-                <Link to="/category/dresses" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <Link to="/category/dresses" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
                   Dresses
                 </Link>
-                <Link to="/category/jewelry" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <Link to="/category/jewelry" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
                   Jewelry
                 </Link>
-                <Link to="/category/accessories" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <Link to="/category/accessories" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
                   Accessories
                 </Link>
-                <Link to="/category/collections" className="text-gray-700 hover:text-pink-500 font-medium transition-colors">
+                <Link to="/category/collections" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
                   Collections
                 </Link>
               </nav>
@@ -144,7 +147,7 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-900 text-white mt-16">
+        <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
