@@ -2,6 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { ChevronRight, Star, Shield, Truck, RotateCcw, Heart, ShoppingBag } from 'lucide-react';
 import axios from 'axios';
 
+const offers = [
+  {
+    emoji: '👗',
+    title: 'Limited Time Offer',
+    discount: '70% OFF',
+    description: 'On Selected Premium Items'
+  },
+  {
+    emoji: '💍',
+    title: 'Jewelry Collection',
+    discount: '50% OFF',
+    description: 'Exquisite Diamond Pieces'
+  },
+  {
+    emoji: '👠',
+    title: 'Designer Shoes',
+    discount: '60% OFF',
+    description: 'Luxury Footwear Collection'
+  }
+];
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
