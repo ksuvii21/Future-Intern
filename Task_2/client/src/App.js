@@ -20,6 +20,8 @@ function App() {
     const stored = localStorage.getItem('darkMode');
     return stored ? JSON.parse(stored) : true;
   });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     // Check for user in localStorage on app load
@@ -36,7 +38,17 @@ function App() {
 
     updateCartCount();
     window.addEventListener('storage', updateCartCount);
-    return () => window.removeEventListener('storage', updateCartCount);
+
+    // Handle scroll effect
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('storage', updateCartCount);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -61,8 +73,125 @@ function App() {
 
   return (
     <Router>
-      <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-indigo-2 to-indigo' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
-        <main className="flex-1">
+      <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
+        {/* Elegant Header */}
+        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-transparent'
+        }`}>
+          {/* Top Announcement Bar */}
+          <div className="bg-gradient-to-r from-[#ea698b] via-[#ac46a1] to-[#822faf] text-white text-sm py-2">
+            <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+              <span className="flex items-center gap-2">
+                <TrendingUp className="w-4 h-4" />
+                Exclusive: Up to 70% OFF on Premium Collections
+              </span>
+              <span className="hidden md:block">Free Shipping on Orders Over $50</span>
+            </div>
+          </div>
+
+          {/* Main Header */}
+          <div className="max-w-7xl mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              {/* Logo */}
+              <Link to="/" className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-[#ea698b] to-[#822faf] rounded-lg flex items-center justify-center">
+                  <ShoppingBag className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] via-[#d55d92] to-[#c05299] bg-clip-text text-transparent">
+                    Fansee Rebel
+                  </h1>
+                  <p className="text-xs text-gray-400">Luxury Fashion & Jewelry</p>
+                </div>
+              </Link>
+
+              {/* Search Bar - Desktop */}
+              <div className="hidden lg:flex flex-1 max-w-2xl mx-8">
+                <div className="relative w-full">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search for elegant dresses, jewelry and more..."
+                    className="w-full pl-12 pr-4 py-3 bg-white/5 border border-[#571089]/30 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] focus:bg-white/10 transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Right Actions */}
+              <div className="flex items-center gap-4">
+                <button className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                  <Heart className="w-5 h-5" />
+                  <span className="text-sm">Wishlist</span>
+                </button>
+                {user ? (
+                  <div className="hidden md:flex items-center gap-2 text-gray-300">
+                    <User className="w-5 h-5" />
+                    <span className="text-sm">Hello, {user.username}</span>
+                    <button onClick={handleLogout} className="text-sm hover:text-[#ea698b] ml-2">
+                      Logout
+                    </button>
+                  </div>
+                ) : (
+                  <Link to="/login" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                    <User className="w-5 h-5" />
+                    <span className="text-sm">Account</span>
+                  </Link>
+                )}
+                <Link to="/cart" className="relative p-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                  <ShoppingBag className="w-6 h-6" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
+                <Link to="/admin" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                  <span className="text-sm">Sell</span>
+                </Link>
+                <button className="lg:hidden text-gray-300" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                  {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Category Navigation */}
+            <nav className="hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-[#571089]/20">
+              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'New Arrivals'].map((item) => (
+                <Link
+                  key={item}
+                  to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase()}`}
+                  className="text-sm text-gray-300 hover:text-[#ea698b] transition-colors font-medium relative group"
+                >
+                  {item}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ea698b] to-[#d55d92] group-hover:w-full transition-all duration-300"></span>
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </header>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-40 lg:hidden">
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
+            <div className="absolute right-0 top-0 h-full w-64 bg-[#0a0015] border-l border-[#571089]/30 p-6">
+              <nav className="flex flex-col gap-4 mt-16">
+                {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'Login', 'Sell'].map((item) => (
+                  <Link
+                    key={item}
+                    to={item === 'All Categories' ? '/' : item === 'Login' ? '/login' : item === 'Sell' ? '/admin' : `/category/${item.toLowerCase()}`}
+                    className="text-left text-gray-300 hover:text-[#ea698b] transition-colors py-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          </div>
+        )}
+
+        <main className="flex-1 pt-32">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/category/:category" element={<CategoryPage />} />
@@ -75,6 +204,79 @@ function App() {
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
+
+        {/* Footer */}
+        <footer className="border-t border-[#571089]/30 bg-[#0a0015]">
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#ea698b] to-[#822faf] rounded-lg flex items-center justify-center">
+                    <ShoppingBag className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                    Fansee Rebel
+                  </h3>
+                </div>
+                <p className="text-gray-400 text-sm mb-4">
+                  Your premier destination for luxury fashion, exquisite jewelry, and timeless elegance.
+                </p>
+                <div className="flex gap-3">
+                  {['💎', '👗', '💄', '👠'].map((icon, i) => (
+                    <span key={i} className="text-2xl opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+                      {icon}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="text-white font-semibold mb-4">Shop</h4>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  {['New Arrivals', 'Dresses', 'Jewelry', 'Accessories', 'Sale'].map((item) => (
+                    <li key={item}>
+                      <Link to={`/category/${item.toLowerCase()}`} className="hover:text-[#ea698b] transition-colors">{item}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-white font-semibold mb-4">Customer Care</h4>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  {['Contact Us', 'Track Order', 'Returns', 'Shipping Info', 'Size Guide'].map((item) => (
+                    <li key={item}>
+                      <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-white font-semibold mb-4">Company</h4>
+                <ul className="space-y-2 text-sm text-gray-400">
+                  {['About Us', 'Careers', 'Press', 'Blog', 'Affiliate Program'].map((item) => (
+                    <li key={item}>
+                      <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-[#571089]/30 pt-8 flex flex-col md:flex-row justify-between items-center">
+              <p className="text-gray-400 text-sm mb-4 md:mb-0">
+                © 2025 Fansee Rebel. All rights reserved.
+              </p>
+              <div className="flex items-center gap-4">
+                <span className="text-gray-400 text-sm">Secure payments via</span>
+                <div className="flex gap-2">
+                  {['VISA', 'MC', 'AMEX', 'PayPal'].map((payment) => (
+                    <span key={payment} className="px-3 py-1 bg-white/5 border border-[#571089]/30 rounded text-xs text-gray-400 font-medium">
+                      {payment}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </Router>
   );
