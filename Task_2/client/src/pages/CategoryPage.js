@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import ProductList from '../components/ProductList';
+import { ChevronRight, Star, Heart, ShoppingBag } from 'lucide-react';
 import axios from 'axios';
 
 const CategoryPage = () => {
