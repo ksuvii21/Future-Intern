@@ -48,11 +48,16 @@ const ProductDetail = () => {
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      cart.push({ ...product, quantity });
+      cart.push({ ...product, quantity, selectedColor, selectedSize });
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
     alert('Product added to cart!');
+  };
+
+  const buyNow = () => {
+    addToCart();
+    window.location.href = '/cart';
   };
 
   const addToWishlist = () => {
@@ -65,6 +70,19 @@ const ProductDetail = () => {
       alert('Product added to wishlist!');
     } else {
       alert('Product already in wishlist!');
+    }
+  };
+
+  const checkDelivery = () => {
+    if (pincode.length === 6) {
+      // Mock delivery calculation
+      const deliveryDate = new Date();
+      deliveryDate.setDate(deliveryDate.getDate() + Math.floor(Math.random() * 7) + 2);
+      setDeliveryInfo({
+        available: true,
+        date: deliveryDate.toLocaleDateString(),
+        location: 'Your Area'
+      });
     }
   };
 
