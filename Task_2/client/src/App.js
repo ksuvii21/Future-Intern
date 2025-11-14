@@ -205,8 +205,8 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <img src="/logo.png" alt="Fansee Rebel" className="w-10 h-10 rounded-lg" />
-                  <h3 className="text-xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                  <img src="/logo.png" alt="Fansee Rebel" className="w-25 h-20 rounded-lg" />
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
                     Fansee Rebel
                   </h3>
                 </div>
