@@ -55,9 +55,9 @@ const CategoryPage = () => {
       case 'accessories':
         return 'Complete your look with our luxury accessories including designer handbags, crystal hair accessories, and embroidered clutches.';
       case 'collections':
-        return 'Explore our curated designer collections featuring the latest trends in women's fashion and accessories.';
+        return 'Explore our curated designer collections featuring the latest trends in womens fashion and accessories.';
       default:
-        return 'Browse our complete collection of elegant women's fashion, jewelry, and accessories.';
+        return 'Browse our complete collection of elegant womens fashion, jewelry, and accessories.';
     }
   };
 
