@@ -57,7 +57,7 @@ const ProductDetail = () => {
 
   const buyNow = () => {
     addToCart();
-    window.location.href = '/cart';
+    window.location.href = '/checkout';
   };
 
   const addToWishlist = () => {
