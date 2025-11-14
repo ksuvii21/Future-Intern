@@ -12,6 +12,10 @@ const CategoryPage = () => {
   const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
+    setSelectedCategory(category);
+  }, [category]);
+
+  useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/products');
