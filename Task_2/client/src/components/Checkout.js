@@ -114,113 +114,269 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">
-              Shipping & Payment Information
-            </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Address</label>
-                <input
-                  type="text"
-                  name="address"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block text-gray-700 mb-2">City</label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    required
-                  />
+          {/* Shipping & Payment Information */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Shipping Information */}
+            <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-8">
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                <MapPin className="w-6 h-6 text-[#ea698b]" />
+                Shipping Information
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-gray-300 mb-2 flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                      placeholder="Enter your full name"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-300 mb-2 flex items-center gap-2">
+                      <Mail className="w-4 h-4" />
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                      placeholder="Enter your email"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-300 mb-2 flex items-center gap-2">
+                      <Smartphone className="w-4 h-4" />
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                      placeholder="Enter your phone number"
+                      required
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-gray-700 mb-2">ZIP Code</label>
-                  <input
-                    type="text"
-                    name="zipCode"
-                    value={formData.zipCode}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    required
-                  />
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-gray-300 mb-2 flex items-center gap-2">
+                      <Home className="w-4 h-4" />
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                      placeholder="Enter your address"
+                      required
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-300 mb-2">City</label>
+                      <input
+                        type="text"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                        placeholder="City"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-gray-300 mb-2">State</label>
+                      <input
+                        type="text"
+                        name="state"
+                        value={formData.state}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                        placeholder="State"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-gray-300 mb-2">ZIP Code</label>
+                    <input
+                      type="text"
+                      name="zipCode"
+                      value={formData.zipCode}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                      placeholder="ZIP Code"
+                      required
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Card Number</label>
-                <input
-                  type="text"
-                  name="cardNumber"
-                  value={formData.cardNumber}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
+            </div>
+
+            {/* Payment Method */}
+            <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-8">
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                <CreditCard className="w-6 h-6 text-[#ea698b]" />
+                Payment Method
+              </h2>
+
+              {/* Payment Options */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <button
+                  onClick={() => setPaymentMethod('card')}
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                    paymentMethod === 'card'
+                      ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
+                      : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
+                  }`}
+                >
+                  <CreditCard className="w-6 h-6" />
+                  <div className="text-left">
+                    <div className="font-semibold">Credit/Debit Card</div>
+                    <div className="text-sm opacity-75">Visa, MasterCard, etc.</div>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => setPaymentMethod('upi')}
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                    paymentMethod === 'upi'
+                      ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
+                      : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
+                  }`}
+                >
+                  <Smartphone className="w-6 h-6" />
+                  <div className="text-left">
+                    <div className="font-semibold">UPI</div>
+                    <div className="text-sm opacity-75">Google Pay, PhonePe, etc.</div>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => setPaymentMethod('cod')}
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                    paymentMethod === 'cod'
+                      ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
+                      : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
+                  }`}
+                >
+                  <Truck className="w-6 h-6" />
+                  <div className="text-left">
+                    <div className="font-semibold">Cash on Delivery</div>
+                    <div className="text-sm opacity-75">Pay when you receive</div>
+                  </div>
+                </button>
               </div>
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div>
-                  <label className="block text-gray-700 mb-2">
-                    Expiry Date
-                  </label>
-                  <input
-                    type="text"
-                    name="expiryDate"
-                    value={formData.expiryDate}
-                    onChange={handleInputChange}
-                    placeholder="MM/YY"
-                    className="w-full px-3 py-2 border rounded-lg"
-                    required
-                  />
+
+              {/* Payment Forms */}
+              {paymentMethod === 'card' && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-gray-300 mb-2">Card Number</label>
+                    <input
+                      type="text"
+                      name="cardNumber"
+                      value={formData.cardNumber}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                      placeholder="1234 5678 9012 3456"
+                      required
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-gray-300 mb-2 flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        Expiry Date
+                      </label>
+                      <input
+                        type="text"
+                        name="expiryDate"
+                        value={formData.expiryDate}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                        placeholder="MM/YY"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-gray-300 mb-2">CVV</label>
+                      <input
+                        type="text"
+                        name="cvv"
+                        value={formData.cvv}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                        placeholder="123"
+                        required
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-gray-700 mb-2">CVV</label>
-                  <input
-                    type="text"
-                    name="cvv"
-                    value={formData.cvv}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    required
-                  />
+              )}
+
+              {paymentMethod === 'upi' && (
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-gray-300 mb-2">UPI ID</label>
+                    <input
+                      type="text"
+                      name="upiId"
+                      value={formData.upiId}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
+                      placeholder="yourname@upi"
+                      required
+                    />
+                  </div>
+                  <div className="p-4 bg-[#ea698b]/10 border border-[#ea698b]/30 rounded-lg">
+                    <p className="text-[#ea698b] text-sm">
+                      You will be redirected to your UPI app to complete the payment securely.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {paymentMethod === 'cod' && (
+                <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+                  <p className="text-green-400 text-sm">
+                    Pay in cash when your order is delivered to your doorstep. No advance payment required.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Place Order Button */}
+            <div className="flex justify-end">
               <button
-                type="submit"
-                className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-4 rounded"
+                onClick={handleSubmit}
+                className="px-12 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
               >
-                Place Order
+                <Award className="w-5 h-5" />
+                Place Order - ${(totalPrice + totalPrice * 0.08).toFixed(2)}
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
