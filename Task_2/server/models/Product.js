@@ -24,6 +24,18 @@ const productSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
   },
+  isNewArrival: {
+    type: Boolean,
+    default: false,
+  },
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  reviews: {
+    type: Number,
+    default: 0,
+  },
 }, {
   timestamps: true,
 });
