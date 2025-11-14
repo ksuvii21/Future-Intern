@@ -112,10 +112,10 @@ function App() {
 
               {/* Right Actions */}
               <div className="flex items-center gap-4">
-                <button className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                <Link to="/wishlist" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
                   <Heart className="w-5 h-5" />
                   <span className="text-sm">Wishlist</span>
-                </button>
+                </Link>
                 {user ? (
                   <div className="hidden md:flex items-center gap-2 text-gray-300">
                     <User className="w-5 h-5" />
