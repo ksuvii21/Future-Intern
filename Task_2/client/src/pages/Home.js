@@ -44,32 +44,32 @@ const Home = () => {
   return (
     <div className="home bg-white min-h-screen">
       {/* Hero Banner */}
-      <section className="bg-white text-gray-900 py-20 relative overflow-hidden border-b border-gray-200">
-        <div className="absolute inset-0 bg-gray-50"></div>
+      <section className="bg-gradient-primary text-white py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black bg-opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up">
               <h1 className="text-6xl font-extrabold mb-6 leading-tight">
-                Deals of the <span className="text-blush">Day</span>
+                Deals of the <span className="text-thulian-pink">Day</span>
               </h1>
-              <p className="text-xl mb-8 opacity-90 leading-relaxed text-gray-700">
+              <p className="text-xl mb-8 opacity-90 leading-relaxed">
                 Up to 70% off on selected items. Limited time offer! Don't miss
                 out on these amazing deals.
               </p>
-              <button className="bg-blush text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-thulian-pink hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <button className="bg-white text-blush px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 Shop Now →
               </button>
             </div>
             <div className="text-center animate-bounce-slow">
               <div className="text-9xl filter drop-shadow-2xl">🛍️</div>
-              <div className="mt-4 text-2xl font-semibold opacity-80 text-gray-700">
+              <div className="mt-4 text-2xl font-semibold opacity-80">
                 Shop Smart, Save Big!
               </div>
             </div>
           </div>
         </div>
         {/* Decorative elements */}
-        <div className="absolute top-10 right-10 w-20 h-20 bg-blush bg-opacity-10 rounded-full animate-pulse"></div>
+        <div className="absolute top-10 right-10 w-20 h-20 bg-white bg-opacity-10 rounded-full animate-pulse"></div>
         <div className="absolute bottom-10 left-10 w-16 h-16 bg-thulian-pink bg-opacity-20 rounded-full animate-ping"></div>
       </section>
 
