@@ -7,12 +7,14 @@ const CategoryPage = () => {
   const { category } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState(category);
+  const [selectedCategory, setSelectedCategory] = useState(category || 'All');
   const [sortBy, setSortBy] = useState('name');
   const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
-    setSelectedCategory(category);
+    if (category) {
+      setSelectedCategory(category);
+    }
   }, [category]);
 
   useEffect(() => {
