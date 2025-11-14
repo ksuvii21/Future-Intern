@@ -73,22 +73,27 @@ const CategoryPage = () => {
   }
 
   return (
-    <div className="category-page">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
       {/* Hero Banner */}
-      <section className="bg-gradient-to-r from-pink-400 to-purple-500 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-20 px-4">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center">
-            <h1 className="text-5xl font-bold mb-4">
-              {getCategoryTitle(category)}
+            <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#ea698b]/20 to-[#822faf]/20 border border-[#ea698b]/30 rounded-full mb-6">
+              <span className="text-[#ea698b] text-sm font-medium">✨ {getCategoryTitle(category)}</span>
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
+              <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
+                {getCategoryTitle(category)}
+              </span>
             </h1>
-            <p className="text-xl mb-6 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto mb-8">
               {getCategoryDescription(category)}
             </p>
-            <nav className="text-sm">
-              <Link to="/" className="hover:underline">
+            <nav className="text-sm text-gray-400">
+              <Link to="/" className="hover:text-[#ea698b] transition-colors">
                 Home
               </Link>{' '}
-              / <span>{getCategoryTitle(category)}</span>
+              / <span className="text-[#ea698b]">{getCategoryTitle(category)}</span>
             </nav>
           </div>
         </div>
