@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import CartPage from './pages/CartPage';
@@ -16,7 +16,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem('darkMode');
-    return stored ? JSON.parse(stored) : true; // Default to dark mode
+    return stored ? JSON.parse(stored) : true;
   });
 
   useEffect(() => {
@@ -44,7 +44,6 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    // Store preference
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
@@ -61,133 +60,6 @@ function App() {
   return (
     <Router>
       <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-indigo-2 to-indigo' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
-        {/* Header */}
-        <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-          {/* Top Bar */}
-          <div className="bg-gradient-to-r from-indigo to-grape-3 text-white text-sm py-1">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-              <span>Free shipping on orders over $50</span>
-              <div className="flex space-x-4">
-                <Link to="/admin" className="hover:text-gray-300">
-                  Sell
-                </Link>
-                {user ? (
-                  <button
-                    onClick={handleLogout}
-                    className="hover:text-gray-300"
-                  >
-                    Logout
-                  </button>
-                ) : (
-                  <Link to="/login" className="hover:text-gray-300">
-                    Account
-                  </Link>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Main Header */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              {/* Logo */}
-              <div className="flex items-center">
-                <Link to="/" className="flex items-center space-x-2">
-                  <img
-                    src="/Logo.png"
-                    alt="Fansee Rebel"
-                    className="h-8 w-auto"
-                  />
-                  <span className="text-3xl font-bold text-gray-900 hover:text-blush transition-colors">
-                    Fansee Rebel
-                  </span>
-                </Link>
-              </div>
-
-              {/* Search Bar */}
-              <div className="flex-1 max-w-2xl mx-8">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search for elegant dresses, jewelry and more..."
-                    className="w-full px-4 py-2 border border-gray-300 bg-white text-gray-900 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blush focus:border-transparent transition-colors"
-                  />
-                  <button className="absolute right-0 top-0 h-full px-4 bg-blush text-white rounded-r-md hover:bg-thulian-pink transition-colors">
-                    🔍
-                  </button>
-                </div>
-              </div>
-
-              {/* Right Side */}
-              <div className="flex items-center space-x-6">
-                <button
-                  onClick={toggleDarkMode}
-                  className="p-2 rounded-lg hover:bg-gray-100 text-gray-700 transition-colors"
-                  title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                >
-                  {darkMode ? '☀️' : '🌙'}
-                </button>
-                <div className="hover:text-blush font-medium text-gray-700 transition-colors">
-                  {user ? (
-                    `Hello, ${user.username}`
-                  ) : (
-                    <Link to="/login">Hello, Sign in</Link>
-                  )}
-                </div>
-                <Link
-                  to="/cart"
-                  className="relative hover:text-blush text-gray-700 transition-colors"
-                >
-                  <span className="text-2xl">🛒</span>
-                  {cartCount > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-blush text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Category Navigation */}
-          <div className="bg-gray-100 border-t border-gray-200 py-3">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <nav className="flex space-x-8">
-                <Link
-                  to="/"
-                  className="font-medium text-gray-700 transition-colors hover:text-blush"
-                >
-                  All Categories
-                </Link>
-                <Link
-                  to="/category/dresses"
-                  className="font-medium text-gray-700 transition-colors hover:text-blush"
-                >
-                  Dresses
-                </Link>
-                <Link
-                  to="/category/jewelry"
-                  className="font-medium text-gray-700 transition-colors hover:text-blush"
-                >
-                  Jewelry
-                </Link>
-                <Link
-                  to="/category/accessories"
-                  className="font-medium text-gray-700 transition-colors hover:text-blush"
-                >
-                  Accessories
-                </Link>
-                <Link
-                  to="/category/collections"
-                  className="font-medium text-gray-700 transition-colors hover:text-blush"
-                >
-                  Collections
-                </Link>
-              </nav>
-            </div>
-          </div>
-        </header>
-
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -201,101 +73,6 @@ function App() {
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
-
-        {/* Footer */}
-        <footer className="mt-16 bg-white text-gray-900 border-t border-gray-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold mb-4 text-blush">
-                  Fansee Rebel
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Your premier destination for elegant women's fashion,
-                  exquisite jewelry, and luxury accessories.
-                </p>
-                <div className="flex space-x-4">
-                  <span className="text-2xl">💎</span>
-                  <span className="text-2xl">👗</span>
-                  <span className="text-2xl">💄</span>
-                  <span className="text-2xl">👠</span>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-4">Customer Service</h4>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>
-                    <Link to="/" className="hover:text-blush">
-                      Contact Us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="hover:text-blush">
-                      Track Order
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="hover:text-blush">
-                      Returns & Exchanges
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="hover:text-blush">
-                      Shipping Info
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-4">About Us</h4>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li>
-                    <Link to="/" className="hover:text-blush">
-                      Our Story
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="hover:text-blush">
-                      Careers
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="hover:text-blush">
-                      Press
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/" className="hover:text-blush">
-                      Corporate Sales
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-4">Payment & Security</h4>
-                <div className="space-y-2">
-                  <p className="text-sm text-gray-600">100% Secure Payments</p>
-                  <div className="flex space-x-2">
-                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">
-                      VISA
-                    </span>
-                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">
-                      MC
-                    </span>
-                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">
-                      PayPal
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="border-t border-gray-300 mt-8 pt-8 text-center">
-              <p className="text-gray-500 text-sm">
-                &copy; 2024 Fansee Rebel. All rights reserved.
-              </p>
-            </div>
-          </div>
-        </footer>
       </div>
     </Router>
   );
