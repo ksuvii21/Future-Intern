@@ -111,7 +111,7 @@ const Home = () => {
                   <div className="bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm transition-all duration-500">
                     <div className="text-center mb-4">
                       {offers[currentOffer].logo ? (
-                        <img src="/logo.png" alt="Fansee Rebel" className="w-48 h-48 rounded-lg mx-auto" />
+                        <img src="/logo.png" alt="Fansee Rebel" className="w-58 h-56 rounded-lg mx-auto" />
                       ) : (
                         <div className="text-9xl">{offers[currentOffer].emoji}</div>
                       )}
