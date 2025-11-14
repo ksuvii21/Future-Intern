@@ -3,8 +3,8 @@ import Cart from '../components/Cart';
 
 const CartPage = () => {
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="max-w-4xl mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] pt-32 pb-20 px-4">
+      <div className="max-w-7xl mx-auto">
         <Cart />
       </div>
     </div>
