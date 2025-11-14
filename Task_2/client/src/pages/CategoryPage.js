@@ -216,7 +216,23 @@ const CategoryPage = () => {
                       NEW
                     </div>
                   )}
-                  <button className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#ea698b]">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                      const existingItem = wishlist.find(item => item._id === product._id);
+
+                      if (!existingItem) {
+                        wishlist.push(product);
+                        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                        alert('Added to wishlist!');
+                      } else {
+                        alert('Already in wishlist!');
+                      }
+                    }}
+                    className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#ea698b]"
+                  >
                     <Heart className="w-5 h-5" />
                   </button>
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
