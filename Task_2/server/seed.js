@@ -213,8 +213,8 @@ const sampleProducts = [
     reviews: 11
   },
   {
-    name: 'Tulle Skirt',
-    description: 'Romantic tulle skirt with layered design and elastic waist. Perfect for special occasions or everyday elegance.',
+    name: 'Tulle Shirt',
+    description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
     price: 159.99,
     category: 'Dresses',
     stock: 24,
