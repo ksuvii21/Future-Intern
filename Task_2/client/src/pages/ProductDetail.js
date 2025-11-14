@@ -356,6 +356,72 @@ const ProductDetail = () => {
               </button>
             </div>
 
+            {/* Delivery Information */}
+            <div className="space-y-4 pt-6 border-t border-[#571089]/30">
+              <h3 className="text-lg font-semibold text-white">Delivery & Returns</h3>
+              <div className="flex gap-4">
+                <div className="flex-1">
+                  <input
+                    type="text"
+                    placeholder="Enter pincode"
+                    value={pincode}
+                    onChange={(e) => setPincode(e.target.value)}
+                    className="w-full px-4 py-2 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b]"
+                    maxLength="6"
+                  />
+                </div>
+                <button
+                  onClick={checkDelivery}
+                  disabled={pincode.length !== 6}
+                  className="px-6 py-2 bg-[#ea698b] text-white rounded-lg hover:bg-[#d55d92] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                >
+                  Check
+                </button>
+              </div>
+              {deliveryInfo && (
+                <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
+                  <div className="flex items-center gap-2 text-green-400 mb-2">
+                    <MapPin className="w-4 h-4" />
+                    <span className="font-medium">Delivery Available</span>
+                  </div>
+                  <p className="text-sm text-gray-300">
+                    Estimated delivery by <span className="text-white font-medium">{deliveryInfo.date}</span> to {deliveryInfo.location}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Sold By */}
+            <div className="pt-6 border-t border-[#571089]/30">
+              <div className="flex items-center gap-3">
+                <Award className="w-5 h-5 text-[#ea698b]" />
+                <span className="text-gray-300">Sold by <span className="text-white font-medium">EleganceHub</span></span>
+              </div>
+            </div>
+
+            {/* Product Details */}
+            <div className="pt-6 border-t border-[#571089]/30">
+              <h3 className="text-lg font-semibold text-white mb-4">Product Details</h3>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Fabric:</span>
+                  <span className="text-white">Premium Cotton</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Length:</span>
+                  <span className="text-white">Regular</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Pattern:</span>
+                  <span className="text-white">Solid</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Occasion:</span>
+                  <span className="text-white">Casual</span>
+                </div>
+              </div>
+            </div>
+
             {/* Features */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[#571089]/30">
               <div className="flex items-center gap-3 text-gray-300">
