@@ -47,7 +47,7 @@ function App() {
               {/* Logo */}
               <div className="flex items-center">
                 <Link to="/" className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors">
-                  EleganceHub
+                  ShopHub
                 </Link>
               </div>
 
@@ -130,7 +130,7 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-pink-400">EleganceHub</h3>
+                <h3 className="text-lg font-semibold mb-4 text-pink-400">ShopHub</h3>
                 <p className="text-gray-300 text-sm mb-4">Your premier destination for elegant women's fashion, exquisite jewelry, and luxury accessories.</p>
                 <div className="flex space-x-4">
                   <span className="text-2xl">💎</span>
@@ -170,7 +170,7 @@ function App() {
               </div>
             </div>
             <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-              <p className="text-gray-400 text-sm">&copy; 2024 EleganceHub. All rights reserved.</p>
+              <p className="text-gray-400 text-sm">&copy; 2024 ShopHub. All rights reserved.</p>
             </div>
           </div>
         </footer>
