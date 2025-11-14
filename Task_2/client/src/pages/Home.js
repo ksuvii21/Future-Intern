@@ -4,19 +4,19 @@ import axios from 'axios';
 
 const offers = [
   {
-    emoji: '👗',
+    logo: true,
     title: 'Limited Time Offer',
     discount: '70% OFF',
     description: 'On Selected Premium Items'
   },
   {
-    emoji: '💍',
+    logo: true,
     title: 'Jewelry Collection',
     discount: '50% OFF',
     description: 'Exquisite Diamond Pieces'
   },
   {
-    emoji: '👠',
+    logo: true,
     title: 'Designer Shoes',
     discount: '60% OFF',
     description: 'Luxury Footwear Collection'
