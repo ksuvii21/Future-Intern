@@ -42,23 +42,20 @@ const Home = () => {
     setUser(null);
   };
 
-  // Simulated products data
-  const mockProducts = [
-    { id: 1, name: 'Velvet Evening Gown', price: 299, category: 'Dresses', image: '👗', rating: 4.8, reviews: 124 },
-    { id: 2, name: 'Diamond Pendant Necklace', price: 499, category: 'Jewelry', image: '💎', rating: 4.9, reviews: 89 },
-    { id: 3, name: 'Silk Cocktail Dress', price: 249, category: 'Dresses', image: '👗', rating: 4.7, reviews: 156 },
-    { id: 4, name: 'Rose Gold Bracelet', price: 179, category: 'Jewelry', image: '💍', rating: 4.6, reviews: 92 },
-    { id: 5, name: 'Designer Handbag', price: 399, category: 'Accessories', image: '👜', rating: 4.8, reviews: 203 },
-    { id: 6, name: 'Pearl Earrings', price: 149, category: 'Jewelry', image: '💎', rating: 4.9, reviews: 178 },
-  ];
-
   useEffect(() => {
-    // Simulate API call
-    setLoading(true);
-    setTimeout(() => {
-      setProducts(mockProducts);
-      setLoading(false);
-    }, 1000);
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('http://localhost:5000/api/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   const categories = [
