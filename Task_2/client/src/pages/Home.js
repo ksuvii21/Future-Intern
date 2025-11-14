@@ -27,6 +27,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [currentOffer, setCurrentOffer] = useState(0);
 
   useEffect(() => {
     const fetchProducts = async () => {
