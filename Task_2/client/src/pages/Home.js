@@ -122,12 +122,12 @@ const Home = () => {
                   </div>
 
                   {/* Rotating Offers */}
-                  <div className="bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm">
-                    <div className="text-9xl text-center mb-4">👗</div>
+                  <div className="bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm transition-all duration-500">
+                    <div className="text-9xl text-center mb-4">{offers[currentOffer].emoji}</div>
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-white mb-2">Limited Time Offer</p>
-                      <p className="text-[#ea698b] text-4xl font-bold mb-4">70% OFF</p>
-                      <p className="text-gray-400">On Selected Premium Items</p>
+                      <p className="text-2xl font-bold text-white mb-2">{offers[currentOffer].title}</p>
+                      <p className="text-[#ea698b] text-4xl font-bold mb-4">{offers[currentOffer].discount}</p>
+                      <p className="text-gray-400">{offers[currentOffer].description}</p>
                     </div>
                   </div>
                 </div>
