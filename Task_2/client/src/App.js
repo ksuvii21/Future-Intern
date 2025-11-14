@@ -62,9 +62,9 @@ function App() {
     <Router>
       <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-indigo-2 to-indigo' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
         {/* Header */}
-        <header className={`shadow-sm border-b sticky top-0 z-50 ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
+        <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
           {/* Top Bar */}
-          <div className={`text-white text-sm py-1 ${darkMode ? 'bg-indigo' : 'bg-gradient-to-r from-indigo to-grape-3'}`}>
+          <div className="bg-gradient-to-r from-indigo to-grape-3 text-white text-sm py-1">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
               <span>Free shipping on orders over $50</span>
               <div className="flex space-x-4">
@@ -98,7 +98,7 @@ function App() {
                     alt="Fansee Rebel"
                     className="h-8 w-auto"
                   />
-                  <span className={`text-3xl font-bold hover:text-blush transition-colors ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                  <span className="text-3xl font-bold text-gray-900 hover:text-blush transition-colors">
                     Fansee Rebel
                   </span>
                 </Link>
@@ -110,9 +110,7 @@ function App() {
                   <input
                     type="text"
                     placeholder="Search for elegant dresses, jewelry and more..."
-                    className={`w-full px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blush focus:border-transparent transition-colors ${
-                      darkMode ? 'border-gray-700 bg-gray-800 text-white placeholder-gray-400' : 'border-gray-300 bg-white text-gray-900'
-                    }`}
+                    className="w-full px-4 py-2 border border-gray-300 bg-white text-gray-900 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blush focus:border-transparent transition-colors"
                   />
                   <button className="absolute right-0 top-0 h-full px-4 bg-blush text-white rounded-r-md hover:bg-thulian-pink transition-colors">
                     🔍
@@ -124,16 +122,12 @@ function App() {
               <div className="flex items-center space-x-6">
                 <button
                   onClick={toggleDarkMode}
-                  className={`p-2 rounded-lg transition-colors ${
-                    darkMode ? 'hover:bg-gray-800 text-gray-300' : 'hover:bg-gray-100 text-gray-700'
-                  }`}
+                  className="p-2 rounded-lg hover:bg-gray-100 text-gray-700 transition-colors"
                   title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
                 >
                   {darkMode ? '☀️' : '🌙'}
                 </button>
-                <div className={`hover:text-blush font-medium transition-colors ${
-                  darkMode ? 'text-gray-300' : 'text-gray-700'
-                }`}>
+                <div className="hover:text-blush font-medium text-gray-700 transition-colors">
                   {user ? (
                     `Hello, ${user.username}`
                   ) : (
@@ -142,9 +136,7 @@ function App() {
                 </div>
                 <Link
                   to="/cart"
-                  className={`relative hover:text-blush transition-colors ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}
+                  className="relative hover:text-blush text-gray-700 transition-colors"
                 >
                   <span className="text-2xl">🛒</span>
                   {cartCount > 0 && (
@@ -158,48 +150,36 @@ function App() {
           </div>
 
           {/* Category Navigation */}
-          <div className={`border-t py-3 ${
-            darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-100 border-gray-200'
-          }`}>
+          <div className="bg-gray-100 border-t border-gray-200 py-3">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <nav className="flex space-x-8">
                 <Link
                   to="/"
-                  className={`font-medium transition-colors hover:text-blush ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}
+                  className="font-medium text-gray-700 transition-colors hover:text-blush"
                 >
                   All Categories
                 </Link>
                 <Link
                   to="/category/dresses"
-                  className={`font-medium transition-colors hover:text-blush ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}
+                  className="font-medium text-gray-700 transition-colors hover:text-blush"
                 >
                   Dresses
                 </Link>
                 <Link
                   to="/category/jewelry"
-                  className={`font-medium transition-colors hover:text-blush ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}
+                  className="font-medium text-gray-700 transition-colors hover:text-blush"
                 >
                   Jewelry
                 </Link>
                 <Link
                   to="/category/accessories"
-                  className={`font-medium transition-colors hover:text-blush ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}
+                  className="font-medium text-gray-700 transition-colors hover:text-blush"
                 >
                   Accessories
                 </Link>
                 <Link
                   to="/category/collections"
-                  className={`font-medium transition-colors hover:text-blush ${
-                    darkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}
+                  className="font-medium text-gray-700 transition-colors hover:text-blush"
                 >
                   Collections
                 </Link>
