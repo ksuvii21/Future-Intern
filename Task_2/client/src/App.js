@@ -94,7 +94,7 @@ function App() {
             <div className="flex items-center justify-between">
               {/* Logo */}
               <Link to="/" className="flex items-center">
-                <img src="/logo.png" alt="Fansee Rebel" className="w-20 h-20 rounded-lg" />
+                <img src="/logo.png" alt="Fansee Rebel" className="w-28 h-28 rounded-lg" />
               </Link>
 
               {/* Search Bar - Desktop */}
