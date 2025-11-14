@@ -16,7 +16,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem('darkMode');
-    return stored ? JSON.parse(stored) : false;
+    return stored ? JSON.parse(stored) : true; // Default to dark mode
   });
 
   useEffect(() => {
@@ -60,11 +60,11 @@ function App() {
 
   return (
     <Router>
-      <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-indigo-custom to-indigo-2' : 'bg-gradient-primary'}`}>
+      <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-indigo-2 to-indigo' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
         {/* Header */}
-        <header className={`shadow-sm border-b sticky top-0 z-50 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+        <header className={`shadow-sm border-b sticky top-0 z-50 ${darkMode ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
           {/* Top Bar */}
-          <div className={`text-white text-sm py-1 ${darkMode ? 'bg-gray-950' : 'bg-gradient-secondary'}`}>
+          <div className={`text-white text-sm py-1 ${darkMode ? 'bg-indigo' : 'bg-gradient-to-r from-indigo to-grape-3'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
               <span>Free shipping on orders over $50</span>
               <div className="flex space-x-4">
@@ -98,7 +98,7 @@ function App() {
                     alt="Fansee Rebel"
                     className="h-8 w-auto"
                   />
-                  <span className="text-3xl font-bold text-blush hover:text-thulian-pink transition-colors">
+                  <span className={`text-3xl font-bold hover:text-blush transition-colors ${darkMode ? 'text-white' : 'text-gray-900'}`}>
                     Fansee Rebel
                   </span>
                 </Link>
@@ -111,7 +111,7 @@ function App() {
                     type="text"
                     placeholder="Search for elegant dresses, jewelry and more..."
                     className={`w-full px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blush focus:border-transparent transition-colors ${
-                      darkMode ? 'border-gray-600 bg-gray-700 text-white' : 'border-gray-300 bg-white text-gray-900'
+                      darkMode ? 'border-gray-700 bg-gray-800 text-white placeholder-gray-400' : 'border-gray-300 bg-white text-gray-900'
                     }`}
                   />
                   <button className="absolute right-0 top-0 h-full px-4 bg-blush text-white rounded-r-md hover:bg-thulian-pink transition-colors">
@@ -125,7 +125,7 @@ function App() {
                 <button
                   onClick={toggleDarkMode}
                   className={`p-2 rounded-lg transition-colors ${
-                    darkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-700'
+                    darkMode ? 'hover:bg-gray-800 text-gray-300' : 'hover:bg-gray-100 text-gray-700'
                   }`}
                   title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
                 >
@@ -159,7 +159,7 @@ function App() {
 
           {/* Category Navigation */}
           <div className={`border-t py-3 ${
-            darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-200'
+            darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-100 border-gray-200'
           }`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <nav className="flex space-x-8">
@@ -223,7 +223,7 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="mt-16 bg-black text-white">
+        <footer className="mt-16 bg-gray-900 text-white border-t border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
@@ -242,74 +242,74 @@ function App() {
                 </div>
               </div>
               <div>
-                <h4 className="font-semibold mb-4">Customer Service</h4>
+                <h4 className="font-semibold mb-4 text-white">Customer Service</h4>
                 <ul className="space-y-2 text-sm text-gray-300">
                   <li>
-                    <Link to="/" className="hover:text-white">
+                    <Link to="/" className="hover:text-blush transition-colors">
                       Contact Us
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-white">
+                    <Link to="/" className="hover:text-blush transition-colors">
                       Track Order
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-white">
+                    <Link to="/" className="hover:text-blush transition-colors">
                       Returns & Exchanges
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-white">
+                    <Link to="/" className="hover:text-blush transition-colors">
                       Shipping Info
                     </Link>
                   </li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-4">About Us</h4>
+                <h4 className="font-semibold mb-4 text-white">About Us</h4>
                 <ul className="space-y-2 text-sm text-gray-300">
                   <li>
-                    <Link to="/" className="hover:text-white">
+                    <Link to="/" className="hover:text-blush transition-colors">
                       Our Story
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-white">
+                    <Link to="/" className="hover:text-blush transition-colors">
                       Careers
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-white">
+                    <Link to="/" className="hover:text-blush transition-colors">
                       Press
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-white">
+                    <Link to="/" className="hover:text-blush transition-colors">
                       Corporate Sales
                     </Link>
                   </li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-4">Payment & Security</h4>
+                <h4 className="font-semibold mb-4 text-white">Payment & Security</h4>
                 <div className="space-y-2">
                   <p className="text-sm text-gray-300">100% Secure Payments</p>
                   <div className="flex space-x-2">
-                    <span className="bg-white text-gray-900 px-2 py-1 rounded text-xs font-medium">
+                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium border border-gray-700">
                       VISA
                     </span>
-                    <span className="bg-white text-gray-900 px-2 py-1 rounded text-xs font-medium">
+                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium border border-gray-700">
                       MC
                     </span>
-                    <span className="bg-white text-gray-900 px-2 py-1 rounded text-xs font-medium">
+                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium border border-gray-700">
                       PayPal
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+            <div className="border-t border-gray-800 mt-8 pt-8 text-center">
               <p className="text-gray-400 text-sm">
                 &copy; 2024 Fansee Rebel. All rights reserved.
               </p>
