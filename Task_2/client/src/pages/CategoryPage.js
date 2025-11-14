@@ -41,6 +41,9 @@ const CategoryPage = () => {
     if (selectedCategory === 'All') return true;
     if (selectedCategory === 'New Arrivals') return product.isNewArrival === true;
     if (selectedCategory === 'Collections') return true; // Show all products for Collections
+    if (selectedCategory === 'all categories') return true; // Handle navbar "All Categories" link
+    if (selectedCategory === 'new arrivals') return product.isNewArrival === true; // Handle navbar "New Arrivals" link
+    if (selectedCategory === 'collections') return true; // Handle navbar "Collections" link
     return product.category.toLowerCase() === selectedCategory.toLowerCase();
   });
 
@@ -83,6 +86,8 @@ const CategoryPage = () => {
         return 'Designer Collections';
       case 'new arrivals':
         return 'New Arrivals';
+      case 'all categories':
+        return 'All Categories';
       default:
         return 'All Categories';
     }
