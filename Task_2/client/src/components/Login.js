@@ -41,10 +41,10 @@ const Login = () => {
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <div className="text-center">
             <Link to="/" className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors">
-              ShopHub
+              Fansee Rebel
             </Link>
             <h2 className="mt-6 text-3xl font-bold text-gray-900">Welcome Back</h2>
-            <p className="mt-2 text-sm text-gray-600">Sign in to your ShopHub account</p>
+            <p className="mt-2 text-sm text-gray-600">Sign in to your Fansee Rebel account</p>
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
