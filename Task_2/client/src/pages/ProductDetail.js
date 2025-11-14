@@ -440,6 +440,118 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Customer Reviews */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-8">
+          <div className="flex items-center gap-3 mb-6">
+            <MessageCircle className="w-6 h-6 text-[#ea698b]" />
+            <h2 className="text-2xl font-bold text-white">Customer Reviews</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="flex">
+                  {[1,2,3,4,5].map(star => (
+                    <Star key={star} className="w-5 h-5 fill-[#ea698b] text-[#ea698b]" />
+                  ))}
+                </div>
+                <span className="text-white font-medium">4.8 out of 5</span>
+                <span className="text-gray-400">(128 reviews)</span>
+              </div>
+
+              <div className="space-y-2">
+                {[5,4,3,2,1].map(rating => (
+                  <div key={rating} className="flex items-center gap-3">
+                    <span className="text-sm text-gray-400 w-8">{rating}★</span>
+                    <div className="flex-1 bg-white/10 rounded-full h-2">
+                      <div
+                        className="bg-[#ea698b] h-2 rounded-full"
+                        style={{ width: `${rating === 5 ? 70 : rating === 4 ? 20 : rating === 3 ? 5 : rating === 2 ? 3 : 2}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm text-gray-400 w-8">{rating === 5 ? 89 : rating === 4 ? 26 : rating === 3 ? 6 : rating === 2 ? 4 : 3}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="p-4 bg-white/5 rounded-lg border border-[#571089]/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 bg-[#ea698b] rounded-full flex items-center justify-center text-white font-bold text-sm">S</div>
+                  <span className="text-white font-medium">Sarah M.</span>
+                  <div className="flex ml-auto">
+                    {[1,2,3,4,5].map(star => (
+                      <Star key={star} className="w-4 h-4 fill-[#ea698b] text-[#ea698b]" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm">"Absolutely love this dress! The quality is amazing and it fits perfectly. Will definitely buy more from this brand."</p>
+                <span className="text-xs text-gray-500 mt-2 block">2 weeks ago</span>
+              </div>
+
+              <div className="p-4 bg-white/5 rounded-lg border border-[#571089]/30">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-8 h-8 bg-[#ea698b] rounded-full flex items-center justify-center text-white font-bold text-sm">J</div>
+                  <span className="text-white font-medium">Jessica L.</span>
+                  <div className="flex ml-auto">
+                    {[1,2,3,4,5].map(star => (
+                      <Star key={star} className="w-4 h-4 fill-[#ea698b] text-[#ea698b]" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm">"Great customer service and fast shipping. The product arrived exactly as described. Highly recommend!"</p>
+                <span className="text-xs text-gray-500 mt-2 block">1 month ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Similar Products */}
+      {similarProducts.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 className="text-3xl font-bold text-white mb-8">Similar Products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {similarProducts.map(product => (
+              <div key={product._id} className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 transform hover:-translate-y-2">
+                <div className="relative">
+                  <img
+                    src={product.imageUrl || 'https://via.placeholder.com/300x300?text=No+Image'}
+                    alt={product.name}
+                    className="w-full h-48 object-cover"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/300x300?text=No+Image';
+                    }}
+                  />
+                  {product.isNewArrival && (
+                    <div className="absolute top-3 left-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-xs font-bold px-2 py-1 rounded-full">
+                      NEW
+                    </div>
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="text-white font-semibold mb-2 line-clamp-2">{product.name}</h3>
+                  <p className="text-gray-400 text-sm mb-3 line-clamp-2">{product.description}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                      ${product.price}
+                    </span>
+                    <Link
+                      to={`/product/${product._id}`}
+                      className="px-4 py-2 bg-[#ea698b] text-white text-sm rounded-lg hover:bg-[#d55d92] transition-all"
+                    >
+                      View
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
