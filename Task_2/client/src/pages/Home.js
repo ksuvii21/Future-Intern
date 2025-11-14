@@ -86,12 +86,20 @@ const Home = () => {
               </div>
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#ea698b] to-[#822faf] rounded-3xl blur-3xl opacity-20"></div>
-                <div className="relative bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm">
-                  <div className="text-9xl text-center mb-4">👗</div>
-                  <div className="text-center">
-                    <p className="text-2xl font-bold text-white mb-2">Limited Time Offer</p>
-                    <p className="text-[#ea698b] text-4xl font-bold mb-4">70% OFF</p>
-                    <p className="text-gray-400">On Selected Premium Items</p>
+                <div className="relative">
+                  {/* Logo Banner */}
+                  <div className="flex justify-center mb-4">
+                    <img src="/logo.png" alt="Fansee Rebel" className="w-16 h-16 rounded-lg" />
+                  </div>
+
+                  {/* Rotating Offers */}
+                  <div className="bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm">
+                    <div className="text-9xl text-center mb-4">👗</div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-white mb-2">Limited Time Offer</p>
+                      <p className="text-[#ea698b] text-4xl font-bold mb-4">70% OFF</p>
+                      <p className="text-gray-400">On Selected Premium Items</p>
+                    </div>
                   </div>
                 </div>
               </div>
