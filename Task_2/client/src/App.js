@@ -94,9 +94,7 @@ function App() {
             <div className="flex items-center justify-between">
               {/* Logo */}
               <Link to="/" className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-[#ea698b] to-[#822faf] rounded-lg flex items-center justify-center">
-                  <ShoppingBag className="w-6 h-6 text-white" />
-                </div>
+                <img src="/logo.png" alt="Fansee Rebel" className="w-10 h-10 rounded-lg" />
                 <div>
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] via-[#d55d92] to-[#c05299] bg-clip-text text-transparent">
                     Fansee Rebel
