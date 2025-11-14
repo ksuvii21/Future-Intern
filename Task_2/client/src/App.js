@@ -14,6 +14,10 @@ import './App.css';
 function App() {
   const [cartCount, setCartCount] = useState(0);
   const [user, setUser] = useState(null);
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem('darkMode');
+    return stored ? JSON.parse(stored) : false;
+  });
 
   useEffect(() => {
     // Check for user in localStorage on app load
@@ -33,19 +37,34 @@ function App() {
     return () => window.removeEventListener('storage', updateCartCount);
   }, []);
 
+  useEffect(() => {
+    // Apply dark mode to document
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    // Store preference
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
     <Router>
-      <div className="App min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-800">
+      <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
         {/* Header */}
-        <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+        <header className={`shadow-sm border-b sticky top-0 z-50 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
           {/* Top Bar */}
-          <div className="bg-gray-900 dark:bg-gray-950 text-white text-sm py-1">
+          <div className={`text-white text-sm py-1 ${darkMode ? 'bg-gray-950' : 'bg-gray-900'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
               <span>Free shipping on orders over $50</span>
               <div className="flex space-x-4">
@@ -91,7 +110,9 @@ function App() {
                   <input
                     type="text"
                     placeholder="Search for elegant dresses, jewelry and more..."
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    className={`w-full px-4 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors ${
+                      darkMode ? 'border-gray-600 bg-gray-700 text-white' : 'border-gray-300 bg-white text-gray-900'
+                    }`}
                   />
                   <button className="absolute right-0 top-0 h-full px-4 bg-pink-500 text-white rounded-r-md hover:bg-pink-600 transition-colors">
                     🔍
@@ -101,7 +122,18 @@ function App() {
 
               {/* Right Side */}
               <div className="flex items-center space-x-6">
-                <div className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
+                <button
+                  onClick={toggleDarkMode}
+                  className={`p-2 rounded-lg transition-colors ${
+                    darkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-700'
+                  }`}
+                  title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                >
+                  {darkMode ? '☀️' : '🌙'}
+                </button>
+                <div className={`hover:text-pink-500 font-medium transition-colors ${
+                  darkMode ? 'text-gray-300' : 'text-gray-700'
+                }`}>
                   {user ? (
                     `Hello, ${user.username}`
                   ) : (
@@ -110,7 +142,9 @@ function App() {
                 </div>
                 <Link
                   to="/cart"
-                  className="relative text-gray-700 dark:text-gray-300 hover:text-pink-500 transition-colors"
+                  className={`relative hover:text-pink-500 transition-colors ${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}
                 >
                   <span className="text-2xl">🛒</span>
                   {cartCount > 0 && (
@@ -124,36 +158,48 @@ function App() {
           </div>
 
           {/* Category Navigation */}
-          <div className="bg-gray-100 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600">
+          <div className={`border-t py-3 ${
+            darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-100 border-gray-200'
+          }`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <nav className="flex space-x-8 py-3">
+              <nav className="flex space-x-8">
                 <Link
                   to="/"
-                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                  className={`font-medium transition-colors hover:text-pink-500 ${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}
                 >
                   All Categories
                 </Link>
                 <Link
                   to="/category/dresses"
-                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                  className={`font-medium transition-colors hover:text-pink-500 ${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}
                 >
                   Dresses
                 </Link>
                 <Link
                   to="/category/jewelry"
-                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                  className={`font-medium transition-colors hover:text-pink-500 ${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}
                 >
                   Jewelry
                 </Link>
                 <Link
                   to="/category/accessories"
-                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                  className={`font-medium transition-colors hover:text-pink-500 ${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}
                 >
                   Accessories
                 </Link>
                 <Link
                   to="/category/collections"
-                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                  className={`font-medium transition-colors hover:text-pink-500 ${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
+                  }`}
                 >
                   Collections
                 </Link>
@@ -177,7 +223,7 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-900 dark:bg-gray-950 text-white mt-16">
+        <footer className={`mt-16 ${darkMode ? 'bg-gray-950' : 'bg-gray-900'} text-white`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
