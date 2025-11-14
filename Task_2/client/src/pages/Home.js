@@ -22,10 +22,14 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  const categories = ['All', ...new Set(products.map(product => product.category))];
+  const categories = [
+    'All',
+    ...new Set(products.map(product => product.category)),
+  ];
 
   const filteredProducts = products.filter(product => {
-    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
+    const matchesCategory =
+      selectedCategory === 'All' || product.category === selectedCategory;
     return matchesCategory;
   });
 
@@ -49,7 +53,8 @@ const Home = () => {
                 Deals of the <span className="text-yellow-300">Day</span>
               </h1>
               <p className="text-xl mb-8 opacity-90 leading-relaxed">
-                Up to 70% off on selected items. Limited time offer! Don't miss out on these amazing deals.
+                Up to 70% off on selected items. Limited time offer! Don't miss
+                out on these amazing deals.
               </p>
               <button className="bg-white text-orange-600 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 Shop Now →
@@ -57,7 +62,9 @@ const Home = () => {
             </div>
             <div className="text-center animate-bounce-slow">
               <div className="text-9xl filter drop-shadow-2xl">🛍️</div>
-              <div className="mt-4 text-2xl font-semibold opacity-80">Shop Smart, Save Big!</div>
+              <div className="mt-4 text-2xl font-semibold opacity-80">
+                Shop Smart, Save Big!
+              </div>
             </div>
           </div>
         </div>
@@ -94,7 +101,9 @@ const Home = () => {
             <h2 className="text-3xl font-bold text-gray-900">
               {selectedCategory === 'All' ? 'All Products' : selectedCategory}
             </h2>
-            <span className="text-gray-600">{filteredProducts.length} items</span>
+            <span className="text-gray-600">
+              {filteredProducts.length} items
+            </span>
           </div>
           <ProductList products={filteredProducts} />
         </div>
@@ -127,7 +136,9 @@ const Home = () => {
       <section className="py-12 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-          <p className="text-gray-300 mb-6">Subscribe to get special offers and updates</p>
+          <p className="text-gray-300 mb-6">
+            Subscribe to get special offers and updates
+          </p>
           <div className="max-w-md mx-auto flex">
             <input
               type="email"

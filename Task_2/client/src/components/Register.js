@@ -7,21 +7,21 @@ const Register = () => {
     username: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
     setError('');
@@ -41,11 +41,14 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password
-      });
+      const response = await axios.post(
+        'http://localhost:5000/api/auth/register',
+        {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        }
+      );
 
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -68,10 +71,16 @@ const Register = () => {
         <div className="max-w-md w-full space-y-8">
           <div className="bg-white rounded-2xl shadow-2xl p-8 text-center">
             <div className="text-6xl mb-4">🎉</div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome to Fansee Rebel!</h2>
-            <p className="text-gray-600 mb-6">Your account has been created successfully.</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Welcome to Fansee Rebel!
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Your account has been created successfully.
+            </p>
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
-            <p className="text-sm text-gray-500 mt-4">Redirecting to homepage...</p>
+            <p className="text-sm text-gray-500 mt-4">
+              Redirecting to homepage...
+            </p>
           </div>
         </div>
       </div>
@@ -83,11 +92,18 @@ const Register = () => {
       <div className="max-w-md w-full space-y-8">
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <div className="text-center">
-            <Link to="/" className="text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors">
+            <Link
+              to="/"
+              className="text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            >
               Fansee Rebel
             </Link>
-            <h2 className="mt-6 text-3xl font-bold text-gray-900">Create Account</h2>
-            <p className="mt-2 text-sm text-gray-600">Join Fansee Rebel for exclusive access to premium fashion</p>
+            <h2 className="mt-6 text-3xl font-bold text-gray-900">
+              Create Account
+            </h2>
+            <p className="mt-2 text-sm text-gray-600">
+              Join Fansee Rebel for exclusive access to premium fashion
+            </p>
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -99,7 +115,10 @@ const Register = () => {
 
             <div className="space-y-4">
               <div>
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="username"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Username
                 </label>
                 <div className="relative">
@@ -114,12 +133,17 @@ const Register = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors pl-12"
                     placeholder="Choose a username"
                   />
-                  <span className="absolute left-4 top-3.5 text-gray-400">👤</span>
+                  <span className="absolute left-4 top-3.5 text-gray-400">
+                    👤
+                  </span>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Email Address
                 </label>
                 <div className="relative">
@@ -134,12 +158,17 @@ const Register = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors pl-12"
                     placeholder="Enter your email"
                   />
-                  <span className="absolute left-4 top-3.5 text-gray-400">📧</span>
+                  <span className="absolute left-4 top-3.5 text-gray-400">
+                    📧
+                  </span>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Password
                 </label>
                 <div className="relative">
@@ -154,12 +183,17 @@ const Register = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors pl-12"
                     placeholder="Create a password"
                   />
-                  <span className="absolute left-4 top-3.5 text-gray-400">🔒</span>
+                  <span className="absolute left-4 top-3.5 text-gray-400">
+                    🔒
+                  </span>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Confirm Password
                 </label>
                 <div className="relative">
@@ -174,7 +208,9 @@ const Register = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors pl-12"
                     placeholder="Confirm your password"
                   />
-                  <span className="absolute left-4 top-3.5 text-gray-400">🔐</span>
+                  <span className="absolute left-4 top-3.5 text-gray-400">
+                    🔐
+                  </span>
                 </div>
               </div>
             </div>
@@ -196,21 +232,34 @@ const Register = () => {
 
             <div className="text-center space-y-2">
               <div>
-                <span className="text-sm text-gray-600">Remember your password? </span>
-                <Link to="/login" className="text-sm text-blue-600 hover:text-blue-500 font-medium">
+                <span className="text-sm text-gray-600">
+                  Remember your password?{' '}
+                </span>
+                <Link
+                  to="/login"
+                  className="text-sm text-blue-600 hover:text-blue-500 font-medium"
+                >
                   Sign in here
                 </Link>
               </div>
               <div>
-                <span className="text-sm text-gray-600">Don't have an account? </span>
-                <Link to="/register" className="text-sm text-blue-600 hover:text-blue-500 font-medium">
+                <span className="text-sm text-gray-600">
+                  Don't have an account?{' '}
+                </span>
+                <Link
+                  to="/register"
+                  className="text-sm text-blue-600 hover:text-blue-500 font-medium"
+                >
                   Create one here
                 </Link>
               </div>
             </div>
 
             <div className="text-center">
-              <Link to="/forgot-password" className="text-sm text-gray-500 hover:text-gray-700">
+              <Link
+                to="/forgot-password"
+                className="text-sm text-gray-500 hover:text-gray-700"
+              >
                 Forgot your password?
               </Link>
             </div>

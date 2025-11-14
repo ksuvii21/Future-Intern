@@ -49,11 +49,20 @@ function App() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
               <span>Free shipping on orders over $50</span>
               <div className="flex space-x-4">
-                <Link to="/admin" className="hover:text-gray-300">Sell</Link>
+                <Link to="/admin" className="hover:text-gray-300">
+                  Sell
+                </Link>
                 {user ? (
-                  <button onClick={handleLogout} className="hover:text-gray-300">Logout</button>
+                  <button
+                    onClick={handleLogout}
+                    className="hover:text-gray-300"
+                  >
+                    Logout
+                  </button>
                 ) : (
-                  <Link to="/login" className="hover:text-gray-300">Account</Link>
+                  <Link to="/login" className="hover:text-gray-300">
+                    Account
+                  </Link>
                 )}
               </div>
             </div>
@@ -65,7 +74,11 @@ function App() {
               {/* Logo */}
               <div className="flex items-center">
                 <Link to="/" className="flex items-center space-x-2">
-                  <img src="/Logo.png" alt="Fansee Rebel" className="h-8 w-auto" />
+                  <img
+                    src="/Logo.png"
+                    alt="Fansee Rebel"
+                    className="h-8 w-auto"
+                  />
                   <span className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors">
                     Fansee Rebel
                   </span>
@@ -89,7 +102,9 @@ function App() {
               {/* Right Side */}
               <div className="flex items-center space-x-6">
                 <div className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
-                  {user ? `Hello, ${user.username}` : (
+                  {user ? (
+                    `Hello, ${user.username}`
+                  ) : (
                     <Link to="/login">Hello, Sign in</Link>
                   )}
                 </div>
@@ -112,19 +127,34 @@ function App() {
           <div className="bg-gray-100 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <nav className="flex space-x-8 py-3">
-                <Link to="/" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
+                <Link
+                  to="/"
+                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                >
                   All Categories
                 </Link>
-                <Link to="/category/dresses" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
+                <Link
+                  to="/category/dresses"
+                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                >
                   Dresses
                 </Link>
-                <Link to="/category/jewelry" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
+                <Link
+                  to="/category/jewelry"
+                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                >
                   Jewelry
                 </Link>
-                <Link to="/category/accessories" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
+                <Link
+                  to="/category/accessories"
+                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                >
                   Accessories
                 </Link>
-                <Link to="/category/collections" className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors">
+                <Link
+                  to="/category/collections"
+                  className="text-gray-700 dark:text-gray-300 hover:text-pink-500 font-medium transition-colors"
+                >
                   Collections
                 </Link>
               </nav>
@@ -151,8 +181,13 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
-                <h3 className="text-lg font-semibold mb-4 text-pink-400">Fansee Rebel</h3>
-                <p className="text-gray-300 text-sm mb-4">Your premier destination for elegant women's fashion, exquisite jewelry, and luxury accessories.</p>
+                <h3 className="text-lg font-semibold mb-4 text-pink-400">
+                  Fansee Rebel
+                </h3>
+                <p className="text-gray-300 text-sm mb-4">
+                  Your premier destination for elegant women's fashion,
+                  exquisite jewelry, and luxury accessories.
+                </p>
                 <div className="flex space-x-4">
                   <span className="text-2xl">💎</span>
                   <span className="text-2xl">👗</span>
@@ -163,19 +198,51 @@ function App() {
               <div>
                 <h4 className="font-semibold mb-4">Customer Service</h4>
                 <ul className="space-y-2 text-sm text-gray-300">
-                  <li><Link to="/" className="hover:text-white">Contact Us</Link></li>
-                  <li><Link to="/" className="hover:text-white">Track Order</Link></li>
-                  <li><Link to="/" className="hover:text-white">Returns & Exchanges</Link></li>
-                  <li><Link to="/" className="hover:text-white">Shipping Info</Link></li>
+                  <li>
+                    <Link to="/" className="hover:text-white">
+                      Contact Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/" className="hover:text-white">
+                      Track Order
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/" className="hover:text-white">
+                      Returns & Exchanges
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/" className="hover:text-white">
+                      Shipping Info
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold mb-4">About Us</h4>
                 <ul className="space-y-2 text-sm text-gray-300">
-                  <li><Link to="/" className="hover:text-white">Our Story</Link></li>
-                  <li><Link to="/" className="hover:text-white">Careers</Link></li>
-                  <li><Link to="/" className="hover:text-white">Press</Link></li>
-                  <li><Link to="/" className="hover:text-white">Corporate Sales</Link></li>
+                  <li>
+                    <Link to="/" className="hover:text-white">
+                      Our Story
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/" className="hover:text-white">
+                      Careers
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/" className="hover:text-white">
+                      Press
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/" className="hover:text-white">
+                      Corporate Sales
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div>
@@ -183,15 +250,23 @@ function App() {
                 <div className="space-y-2">
                   <p className="text-sm text-gray-300">100% Secure Payments</p>
                   <div className="flex space-x-2">
-                    <span className="bg-white text-gray-900 px-2 py-1 rounded text-xs font-medium">VISA</span>
-                    <span className="bg-white text-gray-900 px-2 py-1 rounded text-xs font-medium">MC</span>
-                    <span className="bg-white text-gray-900 px-2 py-1 rounded text-xs font-medium">PayPal</span>
+                    <span className="bg-white text-gray-900 px-2 py-1 rounded text-xs font-medium">
+                      VISA
+                    </span>
+                    <span className="bg-white text-gray-900 px-2 py-1 rounded text-xs font-medium">
+                      MC
+                    </span>
+                    <span className="bg-white text-gray-900 px-2 py-1 rounded text-xs font-medium">
+                      PayPal
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
             <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-              <p className="text-gray-400 text-sm">&copy; 2024 Fansee Rebel. All rights reserved.</p>
+              <p className="text-gray-400 text-sm">
+                &copy; 2024 Fansee Rebel. All rights reserved.
+              </p>
             </div>
           </div>
         </footer>

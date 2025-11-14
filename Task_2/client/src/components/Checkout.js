@@ -10,7 +10,7 @@ const Checkout = () => {
     zipCode: '',
     cardNumber: '',
     expiryDate: '',
-    cvv: ''
+    cvv: '',
   });
 
   useEffect(() => {
@@ -20,14 +20,14 @@ const Checkout = () => {
     }
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     // Here you would typically send the order to your backend
     alert('Order placed successfully!');
@@ -35,7 +35,10 @@ const Checkout = () => {
     setCartItems([]);
   };
 
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
   return (
     <div className="min-h-screen bg-gray-100 py-8">
@@ -44,9 +47,14 @@ const Checkout = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-bold mb-4">Order Summary</h2>
-            {cartItems.map((item) => (
-              <div key={item._id} className="flex justify-between items-center mb-2">
-                <span>{item.name} x {item.quantity}</span>
+            {cartItems.map(item => (
+              <div
+                key={item._id}
+                className="flex justify-between items-center mb-2"
+              >
+                <span>
+                  {item.name} x {item.quantity}
+                </span>
                 <span>${(item.price * item.quantity).toFixed(2)}</span>
               </div>
             ))}
@@ -58,7 +66,9 @@ const Checkout = () => {
             </div>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">Shipping & Payment Information</h2>
+            <h2 className="text-xl font-bold mb-4">
+              Shipping & Payment Information
+            </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-gray-700 mb-2">Name</label>
@@ -130,7 +140,9 @@ const Checkout = () => {
               </div>
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
-                  <label className="block text-gray-700 mb-2">Expiry Date</label>
+                  <label className="block text-gray-700 mb-2">
+                    Expiry Date
+                  </label>
                   <input
                     type="text"
                     name="expiryDate"

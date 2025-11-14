@@ -9,7 +9,7 @@ const Admin = () => {
     price: '',
     category: '',
     stock: '',
-    imageUrl: ''
+    imageUrl: '',
   });
   const [editingProduct, setEditingProduct] = useState(null);
 
@@ -26,24 +26,32 @@ const Admin = () => {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     setNewProduct({
       ...newProduct,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
       if (editingProduct) {
-        await axios.put(`http://localhost:5000/api/products/${editingProduct._id}`, newProduct, config);
+        await axios.put(
+          `http://localhost:5000/api/products/${editingProduct._id}`,
+          newProduct,
+          config
+        );
         setEditingProduct(null);
       } else {
-        await axios.post('http://localhost:5000/api/products', newProduct, config);
+        await axios.post(
+          'http://localhost:5000/api/products',
+          newProduct,
+          config
+        );
       }
 
       setNewProduct({
@@ -52,7 +60,7 @@ const Admin = () => {
         price: '',
         category: '',
         stock: '',
-        imageUrl: ''
+        imageUrl: '',
       });
       fetchProducts();
     } catch (error) {
@@ -60,12 +68,12 @@ const Admin = () => {
     }
   };
 
-  const handleEdit = (product) => {
+  const handleEdit = product => {
     setNewProduct(product);
     setEditingProduct(product);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async id => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -172,7 +180,7 @@ const Admin = () => {
                       price: '',
                       category: '',
                       stock: '',
-                      imageUrl: ''
+                      imageUrl: '',
                     });
                   }}
                   className="w-full mt-2 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
@@ -186,7 +194,7 @@ const Admin = () => {
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-bold mb-4">Product List</h2>
             <div className="space-y-4 max-h-96 overflow-y-auto">
-              {products.map((product) => (
+              {products.map(product => (
                 <div key={product._id} className="border rounded-lg p-4">
                   <h3 className="font-semibold">{product.name}</h3>
                   <p className="text-gray-600 text-sm">{product.description}</p>

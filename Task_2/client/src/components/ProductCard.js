@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
-  const addToCart = (e) => {
+  const addToCart = e => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const existingItem = cart.find(item => item._id === product._id);
 
@@ -41,13 +41,20 @@ const ProductCard = ({ product }) => {
           </div>
         )}
         <div className="absolute top-3 right-3">
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold shadow-md ${
-            product.stock > 10 ? 'bg-green-500 text-white' :
-            product.stock > 0 ? 'bg-yellow-500 text-white' :
-            'bg-red-500 text-white'
-          }`}>
-            {product.stock > 10 ? '✓ In Stock' :
-             product.stock > 0 ? '⚠ Low Stock' : '✗ Out of Stock'}
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold shadow-md ${
+              product.stock > 10
+                ? 'bg-green-500 text-white'
+                : product.stock > 0
+                  ? 'bg-yellow-500 text-white'
+                  : 'bg-red-500 text-white'
+            }`}
+          >
+            {product.stock > 10
+              ? '✓ In Stock'
+              : product.stock > 0
+                ? '⚠ Low Stock'
+                : '✗ Out of Stock'}
           </span>
         </div>
         <div className="absolute top-3 left-3">
@@ -57,11 +64,19 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-orange-600 transition-colors">{product.name}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed">{product.description}</p>
+        <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-orange-600 transition-colors">
+          {product.name}
+        </h3>
+        <p className="text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed">
+          {product.description}
+        </p>
         <div className="flex justify-between items-center mb-5">
-          <span className="text-3xl font-extrabold text-orange-600">${product.price}</span>
-          <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Stock: {product.stock}</span>
+          <span className="text-3xl font-extrabold text-orange-600">
+            ${product.price}
+          </span>
+          <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+            Stock: {product.stock}
+          </span>
         </div>
         <div className="flex space-x-3">
           <Link

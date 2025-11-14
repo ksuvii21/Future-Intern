@@ -5,26 +5,29 @@ import axios from 'axios';
 const Login = () => {
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const response = await axios.post(
+        'http://localhost:5000/api/auth/login',
+        formData
+      );
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/');
@@ -40,11 +43,18 @@ const Login = () => {
       <div className="max-w-md w-full space-y-8">
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <div className="text-center">
-            <Link to="/" className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors">
+            <Link
+              to="/"
+              className="text-3xl font-bold text-pink-500 hover:text-pink-600 transition-colors"
+            >
               Fansee Rebel
             </Link>
-            <h2 className="mt-6 text-3xl font-bold text-gray-900">Welcome Back</h2>
-            <p className="mt-2 text-sm text-gray-600">Sign in to your Fansee Rebel account</p>
+            <h2 className="mt-6 text-3xl font-bold text-gray-900">
+              Welcome Back
+            </h2>
+            <p className="mt-2 text-sm text-gray-600">
+              Sign in to your Fansee Rebel account
+            </p>
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -56,7 +66,10 @@ const Login = () => {
 
             <div className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Email Address
                 </label>
                 <div className="relative">
@@ -71,12 +84,17 @@ const Login = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors pl-12"
                     placeholder="Enter your email"
                   />
-                  <span className="absolute left-4 top-3.5 text-gray-400">📧</span>
+                  <span className="absolute left-4 top-3.5 text-gray-400">
+                    📧
+                  </span>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Password
                 </label>
                 <div className="relative">
@@ -91,14 +109,19 @@ const Login = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-colors pl-12"
                     placeholder="Enter your password"
                   />
-                  <span className="absolute left-4 top-3.5 text-gray-400">🔒</span>
+                  <span className="absolute left-4 top-3.5 text-gray-400">
+                    🔒
+                  </span>
                 </div>
               </div>
             </div>
 
             <div className="flex items-center justify-between">
               <div className="text-sm">
-                <Link to="/forgot-password" className="text-pink-600 hover:text-pink-500 font-medium">
+                <Link
+                  to="/forgot-password"
+                  className="text-pink-600 hover:text-pink-500 font-medium"
+                >
                   Forgot your password?
                 </Link>
               </div>
@@ -120,8 +143,13 @@ const Login = () => {
             </button>
 
             <div className="text-center">
-              <span className="text-sm text-gray-600">Don't have an account? </span>
-              <Link to="/register" className="text-sm text-pink-600 hover:text-pink-500 font-medium">
+              <span className="text-sm text-gray-600">
+                Don't have an account?{' '}
+              </span>
+              <Link
+                to="/register"
+                className="text-sm text-pink-600 hover:text-pink-500 font-medium"
+              >
                 Create one here
               </Link>
             </div>

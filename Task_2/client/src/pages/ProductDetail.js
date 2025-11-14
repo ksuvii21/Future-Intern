@@ -11,7 +11,9 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/products/${id}`);
+        const response = await axios.get(
+          `http://localhost:5000/api/products/${id}`
+        );
         setProduct(response.data);
         setLoading(false);
       } catch (error) {
@@ -24,8 +26,10 @@ const ProductDetail = () => {
   }, [id]);
 
   if (loading) return <div className="text-center py-8">Loading...</div>;
-  if (error) return <div className="text-center py-8 text-red-500">{error}</div>;
-  if (!product) return <div className="text-center py-8">Product not found</div>;
+  if (error)
+    return <div className="text-center py-8 text-red-500">{error}</div>;
+  if (!product)
+    return <div className="text-center py-8">Product not found</div>;
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -50,10 +54,14 @@ const ProductDetail = () => {
               </h1>
               <p className="mt-2 text-gray-500">{product.description}</p>
               <div className="mt-4">
-                <span className="text-3xl font-bold text-gray-900">${product.price}</span>
+                <span className="text-3xl font-bold text-gray-900">
+                  ${product.price}
+                </span>
               </div>
               <div className="mt-4">
-                <span className="text-sm text-gray-600">Stock: {product.stock}</span>
+                <span className="text-sm text-gray-600">
+                  Stock: {product.stock}
+                </span>
               </div>
               <div className="mt-6">
                 <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mr-4">

@@ -24,14 +24,17 @@ const CategoryPage = () => {
     fetchProducts();
   }, []);
 
-  const categories = ['All', ...new Set(products.map(product => product.category))];
+  const categories = [
+    'All',
+    ...new Set(products.map(product => product.category)),
+  ];
 
   const filteredProducts = products.filter(product => {
     if (selectedCategory === 'All') return true;
     return product.category.toLowerCase() === selectedCategory.toLowerCase();
   });
 
-  const getCategoryTitle = (cat) => {
+  const getCategoryTitle = cat => {
     switch (cat.toLowerCase()) {
       case 'dresses':
         return 'Elegant Dresses';
@@ -46,7 +49,7 @@ const CategoryPage = () => {
     }
   };
 
-  const getCategoryDescription = (cat) => {
+  const getCategoryDescription = cat => {
     switch (cat.toLowerCase()) {
       case 'dresses':
         return 'Discover our collection of elegant dresses perfect for any occasion. From cocktail dresses to evening gowns, find your perfect look.';
@@ -75,10 +78,17 @@ const CategoryPage = () => {
       <section className="bg-gradient-to-r from-pink-400 to-purple-500 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl font-bold mb-4">{getCategoryTitle(category)}</h1>
-            <p className="text-xl mb-6 max-w-3xl mx-auto">{getCategoryDescription(category)}</p>
+            <h1 className="text-5xl font-bold mb-4">
+              {getCategoryTitle(category)}
+            </h1>
+            <p className="text-xl mb-6 max-w-3xl mx-auto">
+              {getCategoryDescription(category)}
+            </p>
             <nav className="text-sm">
-              <Link to="/" className="hover:underline">Home</Link> / <span>{getCategoryTitle(category)}</span>
+              <Link to="/" className="hover:underline">
+                Home
+              </Link>{' '}
+              / <span>{getCategoryTitle(category)}</span>
             </nav>
           </div>
         </div>
@@ -106,7 +116,9 @@ const CategoryPage = () => {
             <h2 className="text-3xl font-bold text-gray-900">
               {selectedCategory === 'All' ? 'All Products' : selectedCategory}
             </h2>
-            <span className="text-gray-600">{filteredProducts.length} items</span>
+            <span className="text-gray-600">
+              {filteredProducts.length} items
+            </span>
           </div>
           <ProductList products={filteredProducts} />
         </div>
@@ -119,17 +131,25 @@ const CategoryPage = () => {
             <div className="text-center">
               <div className="text-4xl mb-4">💎</div>
               <h3 className="text-xl font-semibold mb-2">Premium Quality</h3>
-              <p className="text-gray-600">Only the finest materials and craftsmanship in every piece</p>
+              <p className="text-gray-600">
+                Only the finest materials and craftsmanship in every piece
+              </p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-4">🎨</div>
-              <h3 className="text-xl font-semibold mb-2">Designer Collection</h3>
-              <p className="text-gray-600">Curated by fashion experts for the discerning woman</p>
+              <h3 className="text-xl font-semibold mb-2">
+                Designer Collection
+              </h3>
+              <p className="text-gray-600">
+                Curated by fashion experts for the discerning woman
+              </p>
             </div>
             <div className="text-center">
               <div className="text-4xl mb-4">✨</div>
               <h3 className="text-xl font-semibold mb-2">Timeless Elegance</h3>
-              <p className="text-gray-600">Pieces that transcend trends and become wardrobe staples</p>
+              <p className="text-gray-600">
+                Pieces that transcend trends and become wardrobe staples
+              </p>
             </div>
           </div>
         </div>
@@ -138,8 +158,12 @@ const CategoryPage = () => {
       {/* Newsletter Signup */}
       <section className="py-12 bg-pink-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-gray-900">Stay in Style</h2>
-          <p className="text-gray-600 mb-6">Subscribe to get exclusive access to new arrivals and special offers</p>
+          <h2 className="text-3xl font-bold mb-4 text-gray-900">
+            Stay in Style
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Subscribe to get exclusive access to new arrivals and special offers
+          </p>
           <div className="max-w-md mx-auto flex">
             <input
               type="email"

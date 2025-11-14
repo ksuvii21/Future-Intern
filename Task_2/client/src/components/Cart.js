@@ -12,7 +12,7 @@ const Cart = () => {
     }
   }, []);
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = productId => {
     const updatedCart = cartItems.filter(item => item._id !== productId);
     setCartItems(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
@@ -27,7 +27,10 @@ const Cart = () => {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
   return (
     <div className="cart bg-white rounded-lg shadow-md p-6">
@@ -37,8 +40,11 @@ const Cart = () => {
       ) : (
         <>
           <div className="space-y-4">
-            {cartItems.map((item) => (
-              <div key={item._id} className="flex items-center space-x-4 border-b pb-4">
+            {cartItems.map(item => (
+              <div
+                key={item._id}
+                className="flex items-center space-x-4 border-b pb-4"
+              >
                 {item.imageUrl && (
                   <img
                     src={item.imageUrl}
@@ -76,7 +82,9 @@ const Cart = () => {
           </div>
           <div className="mt-6 border-t pt-4">
             <div className="flex justify-between items-center">
-              <span className="text-xl font-bold">Total: ${totalPrice.toFixed(2)}</span>
+              <span className="text-xl font-bold">
+                Total: ${totalPrice.toFixed(2)}
+              </span>
               <Link
                 to="/checkout"
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
