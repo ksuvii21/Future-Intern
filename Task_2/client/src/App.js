@@ -223,14 +223,14 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="mt-16 bg-gray-900 text-white border-t border-gray-800">
+        <footer className="mt-16 bg-white text-gray-900 border-t border-gray-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div>
                 <h3 className="text-lg font-semibold mb-4 text-blush">
                   Fansee Rebel
                 </h3>
-                <p className="text-gray-300 text-sm mb-4">
+                <p className="text-gray-600 text-sm mb-4">
                   Your premier destination for elegant women's fashion,
                   exquisite jewelry, and luxury accessories.
                 </p>
@@ -242,75 +242,75 @@ function App() {
                 </div>
               </div>
               <div>
-                <h4 className="font-semibold mb-4 text-white">Customer Service</h4>
-                <ul className="space-y-2 text-sm text-gray-300">
+                <h4 className="font-semibold mb-4">Customer Service</h4>
+                <ul className="space-y-2 text-sm text-gray-600">
                   <li>
-                    <Link to="/" className="hover:text-blush transition-colors">
+                    <Link to="/" className="hover:text-blush">
                       Contact Us
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-blush transition-colors">
+                    <Link to="/" className="hover:text-blush">
                       Track Order
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-blush transition-colors">
+                    <Link to="/" className="hover:text-blush">
                       Returns & Exchanges
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-blush transition-colors">
+                    <Link to="/" className="hover:text-blush">
                       Shipping Info
                     </Link>
                   </li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-4 text-white">About Us</h4>
-                <ul className="space-y-2 text-sm text-gray-300">
+                <h4 className="font-semibold mb-4">About Us</h4>
+                <ul className="space-y-2 text-sm text-gray-600">
                   <li>
-                    <Link to="/" className="hover:text-blush transition-colors">
+                    <Link to="/" className="hover:text-blush">
                       Our Story
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-blush transition-colors">
+                    <Link to="/" className="hover:text-blush">
                       Careers
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-blush transition-colors">
+                    <Link to="/" className="hover:text-blush">
                       Press
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" className="hover:text-blush transition-colors">
+                    <Link to="/" className="hover:text-blush">
                       Corporate Sales
                     </Link>
                   </li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-semibold mb-4 text-white">Payment & Security</h4>
+                <h4 className="font-semibold mb-4">Payment & Security</h4>
                 <div className="space-y-2">
-                  <p className="text-sm text-gray-300">100% Secure Payments</p>
+                  <p className="text-sm text-gray-600">100% Secure Payments</p>
                   <div className="flex space-x-2">
-                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium border border-gray-700">
+                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">
                       VISA
                     </span>
-                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium border border-gray-700">
+                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">
                       MC
                     </span>
-                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium border border-gray-700">
+                    <span className="bg-gray-800 text-white px-2 py-1 rounded text-xs font-medium">
                       PayPal
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-              <p className="text-gray-400 text-sm">
+            <div className="border-t border-gray-300 mt-8 pt-8 text-center">
+              <p className="text-gray-500 text-sm">
                 &copy; 2024 Fansee Rebel. All rights reserved.
               </p>
             </div>
