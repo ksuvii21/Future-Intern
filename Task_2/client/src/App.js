@@ -76,7 +76,7 @@ function App() {
       <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
         {/* Elegant Header */}
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-transparent'
+          scrolled ? 'bg-white/95 backdrop-blur-lg shadow-xl border-b border-gray-200' : 'bg-white'
         }`}>
           {/* Top Announcement Bar */}
           <div className="bg-gradient-to-r from-[#ea698b] via-[#ac46a1] to-[#822faf] text-white text-sm py-2">
@@ -101,7 +101,7 @@ function App() {
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] via-[#d55d92] to-[#c05299] bg-clip-text text-transparent">
                     Fansee Rebel
                   </h1>
-                  <p className="text-xs text-gray-400">Luxury Fashion & Jewelry</p>
+                  <p className="text-xs text-gray-600">Luxury Fashion & Jewelry</p>
                 </div>
               </Link>
 
@@ -112,19 +112,19 @@ function App() {
                   <input
                     type="text"
                     placeholder="Search for elegant dresses, jewelry and more..."
-                    className="w-full pl-12 pr-4 py-3 bg-white/5 border border-[#571089]/30 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] focus:bg-white/10 transition-all"
+                    className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#ea698b] focus:bg-white transition-all"
                   />
                 </div>
               </div>
 
               {/* Right Actions */}
               <div className="flex items-center gap-4">
-                <button className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                <button className="hidden md:flex items-center gap-2 text-gray-700 hover:text-[#ea698b] transition-colors">
                   <Heart className="w-5 h-5" />
                   <span className="text-sm">Wishlist</span>
                 </button>
                 {user ? (
-                  <div className="hidden md:flex items-center gap-2 text-gray-300">
+                  <div className="hidden md:flex items-center gap-2 text-gray-700">
                     <User className="w-5 h-5" />
                     <span className="text-sm">Hello, {user.username}</span>
                     <button onClick={handleLogout} className="text-sm hover:text-[#ea698b] ml-2">
@@ -132,12 +132,12 @@ function App() {
                     </button>
                   </div>
                 ) : (
-                  <Link to="/login" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                  <Link to="/login" className="hidden md:flex items-center gap-2 text-gray-700 hover:text-[#ea698b] transition-colors">
                     <User className="w-5 h-5" />
                     <span className="text-sm">Account</span>
                   </Link>
                 )}
-                <Link to="/cart" className="relative p-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                <Link to="/cart" className="relative p-2 text-gray-700 hover:text-[#ea698b] transition-colors">
                   <ShoppingBag className="w-6 h-6" />
                   {cartCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
@@ -145,22 +145,22 @@ function App() {
                     </span>
                   )}
                 </Link>
-                <Link to="/admin" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                <Link to="/admin" className="hidden md:flex items-center gap-2 text-gray-700 hover:text-[#ea698b] transition-colors">
                   <span className="text-sm">Sell</span>
                 </Link>
-                <button className="lg:hidden text-gray-300" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                <button className="lg:hidden text-gray-700" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                   {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
               </div>
             </div>
 
             {/* Category Navigation */}
-            <nav className="hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-[#571089]/20">
+            <nav className="hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-gray-200">
               {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'New Arrivals'].map((item) => (
                 <Link
                   key={item}
                   to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase()}`}
-                  className="text-sm text-gray-300 hover:text-[#ea698b] transition-colors font-medium relative group"
+                  className="text-sm text-gray-700 hover:text-[#ea698b] transition-colors font-medium relative group"
                 >
                   {item}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ea698b] to-[#d55d92] group-hover:w-full transition-all duration-300"></span>
