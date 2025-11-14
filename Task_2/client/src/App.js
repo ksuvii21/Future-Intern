@@ -174,13 +174,13 @@ function App() {
         {mobileMenuOpen && (
           <div className="fixed inset-0 z-40 lg:hidden">
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
-            <div className="absolute right-0 top-0 h-full w-64 bg-[#0a0015] border-l border-[#571089]/30 p-6">
+            <div className="absolute right-0 top-0 h-full w-64 bg-white border-l border-gray-200 p-6">
               <nav className="flex flex-col gap-4 mt-16">
                 {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'Login', 'Sell'].map((item) => (
                   <Link
                     key={item}
                     to={item === 'All Categories' ? '/' : item === 'Login' ? '/login' : item === 'Sell' ? '/admin' : `/category/${item.toLowerCase()}`}
-                    className="text-left text-gray-300 hover:text-[#ea698b] transition-colors py-2"
+                    className="text-left text-gray-700 hover:text-[#ea698b] transition-colors py-2"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item}
