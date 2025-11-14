@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Star, Heart, ShoppingBag, Truck, Shield, RotateCcw } from 'lucide-react';
+import { ArrowLeft, Star, Heart, ShoppingBag, Truck, Shield, RotateCcw, MapPin, Calendar, Ruler, Info, MessageCircle, Award } from 'lucide-react';
 import axios from 'axios';
 
 const ProductDetail = () => {
