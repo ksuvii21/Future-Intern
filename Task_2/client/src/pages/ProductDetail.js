@@ -36,6 +36,17 @@ const ProductDetail = () => {
         ).slice(0, 4);
         setSimilarProducts(similar);
 
+        // Add to recently viewed
+        const viewedItems = JSON.parse(localStorage.getItem('viewedItems') || '[]');
+        // Remove if already exists to move it to the front
+        const newViewedItems = viewedItems.filter(item => item._id !== response.data._id);
+        // Add to the beginning of the array
+        newViewedItems.unshift(response.data);
+        // Keep only the last 10 viewed items
+        localStorage.setItem('viewedItems', JSON.stringify(newViewedItems.slice(0, 10)));
+        // Dispatch a storage event to notify other components like the wishlist page
+        window.dispatchEvent(new Event('storage'));
+
         setLoading(false);
       } catch (error) {
         setError('Error fetching product details');
@@ -174,12 +185,12 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Image */}
           <div className="space-y-4">
-            <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden">
+            <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden relative">
               {product.imageUrl ? (
                 <img
                   src={product.imageUrl}
                   alt={product.name}
-                  className="w-full h-96 object-cover"
+                  className="w-full h-auto max-h-[500px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-125"
                   onError={(e) => {
                     e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDYwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM5Y2E0YjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
                   }}
