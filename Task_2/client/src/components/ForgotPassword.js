@@ -115,8 +115,7 @@ const ForgotPassword = () => {
             {/* Logo and Greeting */}
             <div className="space-y-2">
               <div className="flex items-center transform hover:scale-105 transition-transform duration-300">
-                <img src={LOGO_PATH} alt="Fansee Rebel" className="w-10 h-10 rounded-lg mr-2" />
-                <span className="text-xl font-semibold text-gray-300">Fansee Rebel</span>
+                <img src={LOGO_PATH} alt="Fansee Rebel" className="w-25 h-24 rounded-lg mr-2" />
               </div>
               <h1 className="text-4xl font-bold text-white mt-4">
                 Reset Your <br />
