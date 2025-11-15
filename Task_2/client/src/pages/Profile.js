@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { User, Mail, Lock, Edit, Save, X, ShoppingBag, Heart, Calendar, Eye, EyeOff, Store } from 'lucide-react';
+import { User, Mail, Lock, Edit, Save, X, ShoppingBag, Heart, Calendar, Eye, EyeOff, Store, MapPin, Trash2, PlusCircle } from 'lucide-react';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
+  const [activeTab, setActiveTab] = useState('profile');
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -14,6 +15,16 @@ const Profile = () => {
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
+  });
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  const [newAddress, setNewAddress] = useState({
+    name: '',
+    phone: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    isDefault: false
   });
   const [orders, setOrders] = useState([]);
   const [stats, setStats] = useState({
@@ -138,6 +149,49 @@ const Profile = () => {
     setError('');
     setSuccess('');
   };
+  
+  const handleAddressInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setNewAddress(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleAddAddress = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const response = await axios.post('http://localhost:5000/api/auth/address', newAddress, config);
+
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      setUser(response.data.user);
+      setSuccess('Address added successfully!');
+      setShowAddressModal(false);
+    } catch (error) {
+      setError(error.response?.data?.message || 'Failed to add address');
+    }
+  };
+
+  const handleDeleteAddress = async (addressId) => {
+    if (!window.confirm('Are you sure you want to delete this address?')) return;
+    setError('');
+    setSuccess('');
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const response = await axios.delete(`http://localhost:5000/api/auth/address/${addressId}`, config);
+
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      setUser(response.data.user);
+      setSuccess('Address deleted successfully!');
+    } catch (error) {
+      setError(error.response?.data?.message || 'Failed to delete address');
+    }
+  };
 
   if (loading) {
     return (
@@ -153,11 +207,20 @@ const Profile = () => {
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent mb-2">
-            My Profile
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent mb-2 capitalize">
+            {user?.username}'s Dashboard
           </h1>
           <p className="text-gray-400">Manage your account settings and view your activity</p>
         </div>
+
+        {/* Tabs */}
+        <div className="flex space-x-2 border-b border-[#571089]/30 mb-8">
+          <button onClick={() => setActiveTab('profile')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'profile' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Profile</button>
+          <button onClick={() => setActiveTab('orders')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'orders' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Orders</button>
+          <button onClick={() => setActiveTab('addresses')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'addresses' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Addresses</button>
+        </div>
+
+
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
@@ -181,10 +244,10 @@ const Profile = () => {
           <div className="lg:col-span-2 space-y-6">
 
             {/* Personal Information Card */}
-            <div className="bg-[#1a0a2e] border border-[#571089]/30 rounded-2xl p-6">
+            {activeTab === 'profile' && <div className="bg-[#1a0a2e] border border-[#571089]/30 rounded-2xl p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-white flex items-center gap-3">
-                  <User className="w-6 h-6 text-[#ea698b]" />
+                  <User className="w-6 h-6 text-[#ea698b]" /> 
                   Personal Information
                 </h2>
                 {!editing ? (
@@ -314,11 +377,11 @@ const Profile = () => {
                   </>
                 )}
               </form>
-            </div>
+            </div>}
 
             {/* Recent Orders */}
-            <div className="bg-[#1a0a2e] border border-[#571089]/30 rounded-2xl p-6">
-              <h2 className="text-2xl font-bold text-white flex items-center gap-3 mb-6">
+            {activeTab === 'orders' && <div className="bg-[#1a0a2e] border border-[#571089]/30 rounded-2xl p-6">
+              <h2 className="text-2xl font-bold text-white flex items-center gap-3 mb-4">
                 <ShoppingBag className="w-6 h-6 text-[#ea698b]" />
                 Recent Orders
               </h2>
@@ -326,7 +389,7 @@ const Profile = () => {
               {orders.length > 0 ? (
                 <div className="space-y-4">
                   {orders.map(order => (
-                    <div key={order._id} className="border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
+                    <Link to={`/orders/${order._id}`} key={order._id} className="block border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="text-white font-semibold">Order #{order._id.slice(-8)}</p>
@@ -341,14 +404,81 @@ const Profile = () => {
                           {order.status}
                         </span>
                       </div>
-                    </div>
+                    </Link>
                   ))}
+                  <Link to="/orders" className="block text-center text-[#ea698b] hover:underline mt-4">View All Orders</Link>
                 </div>
               ) : (
                 <p className="text-gray-400 text-center py-8">No orders yet</p>
               )}
-            </div>
+            </div>}
+
+            {/* Address Management */}
+            {activeTab === 'addresses' && <div className="bg-[#1a0a2e] border border-[#571089]/30 rounded-2xl p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-white flex items-center gap-3">
+                  <MapPin className="w-6 h-6 text-[#ea698b]" />
+                  Address Book
+                </h2>
+                <button onClick={() => setShowAddressModal(true)} className="flex items-center gap-2 px-4 py-2 bg-[#ea698b] hover:bg-[#d55d92] text-white rounded-lg transition-colors">
+                  <PlusCircle className="w-4 h-4" />
+                  Add Address
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {user.addresses && user.addresses.length > 0 ? (
+                  user.addresses.map(addr => (
+                    <div key={addr._id} className="border border-[#571089]/30 rounded-lg p-4 flex justify-between items-start">
+                      <div>
+                        <p className="text-white font-semibold">{addr.name} {addr.isDefault && <span className="text-xs text-green-400 bg-green-900/50 px-2 py-1 rounded-full ml-2">Default</span>}</p>
+                        <p className="text-gray-400 text-sm">{addr.address}, {addr.city}, {addr.state} - {addr.zipCode}</p>
+                        <p className="text-gray-400 text-sm">Phone: {addr.phone}</p>
+                      </div>
+                      <button onClick={() => handleDeleteAddress(addr._id)} className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-all">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-400 text-center py-8">No saved addresses.</p>
+                )}
+              </div>
+            </div>}
+
           </div>
+
+          {/* Address Modal */}
+          {showAddressModal && (
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-8 max-w-lg w-full">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-2xl font-bold text-white">Add New Address</h3>
+                  <button onClick={() => setShowAddressModal(false)} className="text-gray-400 hover:text-white text-2xl">×</button>
+                </div>
+                <form onSubmit={handleAddAddress} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <input type="text" name="name" placeholder="Full Name" value={newAddress.name} onChange={handleAddressInputChange} className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+                    <input type="tel" name="phone" placeholder="Phone Number" value={newAddress.phone} onChange={handleAddressInputChange} className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+                  </div>
+                  <input type="text" name="address" placeholder="Address (House No, Street)" value={newAddress.address} onChange={handleAddressInputChange} className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+                  <div className="grid grid-cols-3 gap-4">
+                    <input type="text" name="city" placeholder="City" value={newAddress.city} onChange={handleAddressInputChange} className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+                    <input type="text" name="state" placeholder="State" value={newAddress.state} onChange={handleAddressInputChange} className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+                    <input type="text" name="zipCode" placeholder="ZIP Code" value={newAddress.zipCode} onChange={handleAddressInputChange} className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+                  </div>
+                  <div className="flex items-center">
+                    <input type="checkbox" id="isDefault" name="isDefault" checked={newAddress.isDefault} onChange={handleAddressInputChange} className="w-4 h-4 text-[#ea698b] bg-gray-700 border-gray-600 rounded focus:ring-[#ea698b]" />
+                    <label htmlFor="isDefault" className="ml-2 text-sm font-medium text-gray-300">Set as default address</label>
+                  </div>
+                  <div className="flex justify-end gap-4 pt-4">
+                    <button type="button" onClick={() => setShowAddressModal(false)} className="px-6 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors">Cancel</button>
+                    <button type="submit" className="px-6 py-2 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">Save Address</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
 
           {/* Sidebar */}
           <div className="space-y-6">
