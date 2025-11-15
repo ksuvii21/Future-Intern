@@ -215,10 +215,9 @@ const getAllUsers = async (req, res) => {
 module.exports = {
   register,
   login,
-  forgotPassword,
-  resetPassword,
-  updateProfile, // Keep existing exports
-  getAllUsers,
+  forgotPassword, // This structure was incorrect
+  resetPassword,  // I am correcting it to include all functions
+  updateProfile,
 
   // @desc    Add a new address for a user
   // @route   POST /api/auth/address
@@ -300,5 +299,6 @@ module.exports = {
       console.error('Update user role error:', error);
       res.status(500).json({ message: 'Server error updating user role.' });
     }
-  }
+  },
+  getAllUsers // Adding the missing export here
 };
