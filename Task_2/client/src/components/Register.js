@@ -464,19 +464,19 @@ const Register = () => {
               </div>
               <div className="text-gray-300 space-y-4">
                 <p>
-                  At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.
+                  At Fansee Rebel, we are committed to protecting your privacy and personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our website and services.
                 </p>
                 <p>
-                  Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
+                  We collect information you provide directly, such as your name, email address, and payment details when you register or make a purchase. We also gather data through cookies and analytics tools to improve your browsing experience.
                 </p>
                 <p>
-                  Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
+                  Your personal information is used to process orders, provide customer support, send marketing communications (with your consent), and enhance our services. We do not sell your data to third parties without your explicit permission.
                 </p>
                 <p>
-                  Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.
+                  We implement industry-standard security measures to protect your data from unauthorized access. However, no online transmission is 100% secure, and we cannot guarantee absolute security.
                 </p>
                 <p>
-                  Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+                  You have the right to access, update, or delete your personal information at any time. Contact our support team if you have questions about your privacy or wish to exercise these rights.
                 </p>
               </div>
             </div>
