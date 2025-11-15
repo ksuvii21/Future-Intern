@@ -9,10 +9,20 @@ const OrderDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isCancelling, setIsCancelling] = useState(false);
+  const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
 
   useEffect(() => {
     fetchOrderDetail();
   }, [id]);
+
+  useEffect(() => {
+    if (notification.show) {
+      const timer = setTimeout(() => {
+        setNotification({ show: false, message: '', type: 'success' });
+      }, 5000); // Auto-hide after 5 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
 
   const fetchOrderDetail = async () => {
     const token = localStorage.getItem('token');
@@ -62,14 +72,14 @@ const OrderDetail = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert('Order cancelled successfully!');
+        setNotification({ show: true, message: 'Order cancelled successfully!', type: 'success' });
         // Update the order status in the local state to immediately reflect the change
         setOrder(prevOrder => ({ ...prevOrder, status: 'cancelled' }));
       } else {
-        alert(`Cancellation failed: ${data.message}`);
+        setNotification({ show: true, message: `Cancellation failed: ${data.message}`, type: 'error' });
       }
     } catch (err) {
-      alert('An error occurred while cancelling the order.');
+      setNotification({ show: true, message: 'An error occurred while cancelling the order.', type: 'error' });
     } finally {
       setIsCancelling(false);
     }
@@ -147,6 +157,22 @@ const OrderDetail = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
+      {/* Notification Toast */}
+      {notification.show && (
+        <div
+          className={`fixed top-28 right-6 z-50 p-4 rounded-lg shadow-2xl text-white transition-all duration-300 animate-fade-in-right ${
+            notification.type === 'success'
+              ? 'bg-gradient-to-r from-green-500 to-green-600'
+              : 'bg-gradient-to-r from-red-500 to-red-600'
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            {notification.type === 'success' ? <CheckCircle className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
+            <span className="font-medium">{notification.message}</span>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div className="bg-black/20 backdrop-blur-sm border-b border-[#571089]/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
