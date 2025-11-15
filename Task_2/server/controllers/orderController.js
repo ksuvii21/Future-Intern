@@ -2,7 +2,7 @@ const Order = require('../models/Order');
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const { sendOrderConfirmationEmail, sendLowStockAlert } = require('../utils/emailService');
+const { sendOrderConfirmationEmail, sendLowStockAlert } = require('./emailService');
 
 const LOW_STOCK_THRESHOLD = 10;
 
