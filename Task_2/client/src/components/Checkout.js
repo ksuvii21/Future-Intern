@@ -32,12 +32,70 @@ const Checkout = () => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    // Here you would typically send the order to your backend
-    alert('Order placed successfully!');
-    localStorage.removeItem('cart');
-    setCartItems([]);
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Please login to place an order');
+      return;
+    }
+
+    const orderData = {
+      products: cartItems.map(item => ({
+        product: item._id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        selectedColor: item.selectedColor,
+        selectedSize: item.selectedSize,
+        imageUrl: item.imageUrl
+      })),
+      totalAmount: totalPrice + totalPrice * 0.08, // Including tax
+      shippingAddress: {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        zipCode: formData.zipCode
+      },
+      paymentMethod,
+      paymentDetails: paymentMethod === 'card' ? {
+        cardNumber: formData.cardNumber,
+        expiryDate: formData.expiryDate,
+        cvv: formData.cvv
+      } : paymentMethod === 'upi' ? {
+        upiId: formData.upiId
+      } : {}
+    };
+
+    try {
+      const response = await fetch('http://localhost:5000/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(orderData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Order placed successfully!');
+        localStorage.removeItem('cart');
+        setCartItems([]);
+        // Redirect to order history or order detail page
+        window.location.href = '/orders';
+      } else {
+        alert(data.message || 'Failed to place order');
+      }
+    } catch (error) {
+      console.error('Order submission error:', error);
+      alert('Failed to place order. Please try again.');
+    }
   };
 
   const totalPrice = cartItems.reduce(

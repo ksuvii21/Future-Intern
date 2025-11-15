@@ -8,6 +8,8 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import WishlistPage from './pages/WishlistPage';
 import CategoryPage from './pages/CategoryPage';
+import OrderHistory from './pages/OrderHistory';
+import OrderDetail from './pages/OrderDetail';
 import Login from './components/Login';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
@@ -234,6 +236,8 @@ function AppLayout({
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/orders" element={<OrderHistory />} />
+          <Route path="/orders/:id" element={<OrderDetail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
