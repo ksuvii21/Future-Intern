@@ -157,9 +157,53 @@ const resetPassword = async (req, res) => {
   }
 };
 
+// @desc    Update user profile
+// @route   PUT /api/auth/profile
+// @access  Private
+const updateProfile = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const { username, email, currentPassword, newPassword } = req.body;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update username and email if provided
+    if (username) user.username = username;
+    if (email) user.email = email;
+
+    // Update password if requested
+    if (newPassword) {
+      if (!currentPassword) {
+        return res.status(400).json({ message: 'Current password is required to change password' });
+      }
+
+      const isPasswordValid = await user.comparePassword(currentPassword);
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: 'Invalid current password' });
+      }
+
+      user.password = newPassword;
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      message: 'Profile updated successfully',
+      user: { id: updatedUser._id, username: updatedUser.username, email: updatedUser.email, role: updatedUser.role, createdAt: updatedUser.createdAt }
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error updating profile' });
+  }
+};
+
 module.exports = {
   register,
   login,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  updateProfile
 };
