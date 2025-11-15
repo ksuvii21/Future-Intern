@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { User, Mail, Lock, Edit, Save, X, ShoppingBag, Heart, Calendar, Eye, EyeOff } from 'lucide-react';
+import { User, Mail, Lock, Edit, Save, X, ShoppingBag, Heart, Calendar, Eye, EyeOff, Store } from 'lucide-react';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -160,6 +160,22 @@ const Profile = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+          {/* Become a Seller Banner (for users only) */}
+          {user && user.role === 'user' && (
+            <div className="lg:col-span-3">
+              <div className="bg-gradient-to-r from-[#ea698b]/20 to-[#822faf]/20 border border-[#ea698b]/30 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex items-center gap-4">
+                  <Store className="w-10 h-10 text-[#ea698b]" />
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Start Selling on Fansee Rebel</h3>
+                    <p className="text-gray-400">Join our marketplace and reach thousands of fashion lovers.</p>
+                  </div>
+                </div>
+                <Link to="/become-seller" className="px-6 py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all whitespace-nowrap">Become a Seller</Link>
+              </div>
+            </div>
+          )}
 
           {/* Profile Information */}
           <div className="lg:col-span-2 space-y-6">

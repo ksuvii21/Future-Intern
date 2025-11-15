@@ -15,6 +15,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import Admin from './components/Admin';
+import BecomeSellerPage from './pages/BecomeSellerPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import SellerDashboard from './pages/SellerDashboard';
 import './App.css';
@@ -31,7 +32,7 @@ function App() {
   const [scrolled, setScrolled] = useState(false);
 
   // Define auth pages where header/footer should be hidden
-  const authPages = ['/login', '/register', '/forgot-password', '/admin', '/profile', '/seller-dashboard'];
+  const authPages = ['/login', '/register', '/forgot-password', '/admin', '/profile', '/seller-dashboard', '/become-seller'];
 
   useEffect(() => {
     // Check for user in localStorage on app load
@@ -278,6 +279,11 @@ function AppLayout({
           <Route path="/admin" element={
             <ProtectedRoute user={user} allowedRoles={['admin']}>
               <Admin />
+            </ProtectedRoute>
+          } />
+          <Route path="/become-seller" element={
+            <ProtectedRoute user={user} allowedRoles={['user']}>
+              <BecomeSellerPage />
             </ProtectedRoute>
           } />
           <Route path="/seller-dashboard" element={
