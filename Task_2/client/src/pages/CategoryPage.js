@@ -38,8 +38,8 @@ const CategoryPage = () => {
         // Fetch all unique categories for the filter bar
         if (allCategories.length === 0) {
           const allProdsResponse = await axios.get('http://localhost:5000/api/products');
-          const uniqueCategories = ['All Categories', ...new Set(allProdsResponse.data.products.map(p => p.category))];
-          setAllCategories(uniqueCategories);
+          const productList = allProdsResponse.data.products || [];
+          setAllCategories(['All Categories', ...new Set(productList.map(p => p.category))]);
         }
       } catch (error) {
         console.error('Error fetching products:', error);
