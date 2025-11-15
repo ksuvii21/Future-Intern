@@ -277,5 +277,33 @@ module.exports = {
       console.error('Delete address error:', error);
       res.status(500).json({ message: 'Server error deleting address' });
     }
+  },
+
+  // @desc    Update user role (admin only)
+  // @route   PUT /api/auth/users/:id/role
+  // @access  Private/Admin
+  updateUserRole: async (req, res) => {
+    try {
+      const { role } = req.body;
+      const userId = req.params.id;
+
+      const allowedRoles = ['user', 'seller', 'admin'];
+      if (!allowedRoles.includes(role)) {
+        return res.status(400).json({ message: 'Invalid role specified.' });
+      }
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found.' });
+      }
+
+      user.role = role;
+      await user.save();
+
+      res.json({ message: 'User role updated successfully.', user: await User.findById(userId).select('-password') });
+    } catch (error) {
+      console.error('Update user role error:', error);
+      res.status(500).json({ message: 'Server error updating user role.' });
+    }
   }
 };
