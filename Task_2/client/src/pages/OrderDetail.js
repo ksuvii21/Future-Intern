@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Package, Truck, CheckCircle, Clock, XCircle, MapPin, CreditCard, User, Calendar, DollarSign } from 'lucide-react';
 
 const OrderDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isCancelling, setIsCancelling] = useState(false);
 
   useEffect(() => {
     fetchOrderDetail();
@@ -38,6 +40,38 @@ const OrderDetail = () => {
       setError('Failed to fetch order details');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleCancelOrder = async () => {
+    if (!window.confirm('Are you sure you want to cancel this order? This action cannot be undone.')) {
+      return;
+    }
+
+    setIsCancelling(true);
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/orders/${id}/cancel`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Order cancelled successfully!');
+        // Update the order status in the local state to immediately reflect the change
+        setOrder(prevOrder => ({ ...prevOrder, status: 'cancelled' }));
+      } else {
+        alert(`Cancellation failed: ${data.message}`);
+      }
+    } catch (err) {
+      alert('An error occurred while cancelling the order.');
+    } finally {
+      setIsCancelling(false);
     }
   };
 
@@ -175,6 +209,20 @@ const OrderDetail = () => {
                   </div>
                 ))}
               </div>
+
+              {/* Cancel Order Button */}
+              {order.status === 'pending' && (
+                <div className="mt-6">
+                  <button
+                    onClick={handleCancelOrder}
+                    disabled={isCancelling}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 hover:bg-red-500/30 hover:text-red-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <XCircle className="w-5 h-5" />
+                    {isCancelling ? 'Cancelling...' : 'Cancel Order'}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
