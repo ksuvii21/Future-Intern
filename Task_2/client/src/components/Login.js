@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Mail, Lock, User, CheckCircle, Fingerprint, Shield, Zap, Eye, EyeOff, Sparkles } from 'lucide-react';
+import { Mail, Lock, CheckCircle, Fingerprint, Shield, Zap, Eye, EyeOff, Sparkles } from 'lucide-react';
 
 const Login = () => {
   const [formData, setFormData] = useState({

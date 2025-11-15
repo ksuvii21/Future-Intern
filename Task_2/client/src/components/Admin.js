@@ -127,139 +127,192 @@ const Admin = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-100 py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8">Admin Panel</h1>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">
-              {editingProduct ? 'Edit Product' : 'Add New Product'}
-            </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={newProduct.name}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Description</label>
-                <textarea
-                  name="description"
-                  value={newProduct.description}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  rows="3"
-                  required
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block text-gray-700 mb-2">Price</label>
-                  <input
-                    type="number"
-                    name="price"
-                    value={newProduct.price}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    step="0.01"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 mb-2">Stock</label>
-                  <input
-                    type="number"
-                    name="stock"
-                    value={newProduct.stock}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border rounded-lg"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Category</label>
-                <input
-                  type="text"
-                  name="category"
-                  value={newProduct.category}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Image URL</label>
-                <input
-                  type="url"
-                  name="imageUrl"
-                  value={newProduct.imageUrl}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 border rounded-lg"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                {editingProduct ? 'Update Product' : 'Add Product'}
-              </button>
-              {editingProduct && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEditingProduct(null);
-                    setNewProduct({
-                      name: '',
-                      description: '',
-                      price: '',
-                      category: '',
-                      stock: '',
-                      imageUrl: '',
-                    });
-                  }}
-                  className="w-full mt-2 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Cancel Edit
-                </button>
-              )}
-            </form>
+  const renderDashboard = () => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-gray-400 text-sm">Total Revenue</p>
+            <p className="text-3xl font-bold">${stats.totalRevenue}</p>
           </div>
+          <div className="p-3 bg-[#ea698b]/20 rounded-lg">
+            <DollarSign className="w-6 h-6 text-[#ea698b]" />
+          </div>
+        </div>
+      </div>
+      <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-gray-400 text-sm">Total Orders</p>
+            <p className="text-3xl font-bold">{stats.totalOrders}</p>
+          </div>
+          <div className="p-3 bg-[#ea698b]/20 rounded-lg">
+            <ShoppingBag className="w-6 h-6 text-[#ea698b]" />
+          </div>
+        </div>
+      </div>
+      <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-gray-400 text-sm">Total Users</p>
+            <p className="text-3xl font-bold">{stats.totalUsers}</p>
+          </div>
+          <div className="p-3 bg-[#ea698b]/20 rounded-lg">
+            <Users className="w-6 h-6 text-[#ea698b]" />
+          </div>
+        </div>
+      </div>
+      <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 text-white">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-gray-400 text-sm">Total Products</p>
+            <p className="text-3xl font-bold">{stats.totalProducts}</p>
+          </div>
+          <div className="p-3 bg-[#ea698b]/20 rounded-lg">
+            <Package className="w-6 h-6 text-[#ea698b]" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold mb-4">Product List</h2>
-            <div className="space-y-4 max-h-96 overflow-y-auto">
-              {products.map(product => (
-                <div key={product._id} className="border rounded-lg p-4">
-                  <h3 className="font-semibold">{product.name}</h3>
-                  <p className="text-gray-600 text-sm">{product.description}</p>
-                  <p className="text-green-600 font-bold">${product.price}</p>
-                  <div className="mt-2 flex space-x-2">
-                    <button
-                      onClick={() => handleEdit(product)}
-                      className="bg-yellow-500 hover:bg-yellow-700 text-white px-3 py-1 rounded text-sm"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(product._id)}
-                      className="bg-red-500 hover:bg-red-700 text-white px-3 py-1 rounded text-sm"
-                    >
-                      Delete
-                    </button>
-                  </div>
+  const renderProducts = () => (
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="lg:col-span-1 bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-fit">
+        <h2 className="text-xl font-bold mb-4 text-white">
+          {editingProduct ? 'Edit Product' : 'Add New Product'}
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input type="text" name="name" value={newProduct.name} onChange={handleInputChange} placeholder="Name" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+          <textarea name="description" value={newProduct.description} onChange={handleInputChange} placeholder="Description" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" rows="3" required />
+          <div className="grid grid-cols-2 gap-4">
+            <input type="number" name="price" value={newProduct.price} onChange={handleInputChange} placeholder="Price" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" step="0.01" required />
+            <input type="number" name="stock" value={newProduct.stock} onChange={handleInputChange} placeholder="Stock" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+          </div>
+          <input type="text" name="category" value={newProduct.category} onChange={handleInputChange} placeholder="Category" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+          <input type="url" name="imageUrl" value={newProduct.imageUrl} onChange={handleInputChange} placeholder="Image URL" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" />
+          <button type="submit" className="w-full bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold py-3 px-4 rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
+            {editingProduct ? 'Update Product' : 'Add Product'}
+          </button>
+          {editingProduct && (
+            <button type="button" onClick={() => { setEditingProduct(null); setNewProduct({ name: '', description: '', price: '', category: '', stock: '', imageUrl: '' }); }} className="w-full mt-2 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg">
+              Cancel Edit
+            </button>
+          )}
+        </form>
+      </div>
+      <div className="lg:col-span-2 bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
+        <h2 className="text-xl font-bold mb-4 text-white">Product List</h2>
+        <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
+          {products.map(product => (
+            <div key={product._id} className="border border-[#571089]/30 rounded-lg p-4 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <img src={product.imageUrl || 'https://via.placeholder.com/60'} alt={product.name} className="w-16 h-16 object-cover rounded-md" />
+                <div>
+                  <h3 className="font-semibold text-white">{product.name}</h3>
+                  <p className="text-green-400 font-bold">${product.price}</p>
+                  <p className="text-gray-400 text-sm">Stock: {product.stock}</p>
                 </div>
-              ))}
+              </div>
+              <div className="flex space-x-2">
+                <button onClick={() => handleEdit(product)} className="p-2 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30 transition-colors"><Edit className="w-4 h-4" /></button>
+                <button onClick={() => handleDelete(product._id)} className="p-2 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30 transition-colors"><Trash2 className="w-4 h-4" /></button>
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderUsers = () => (
+    <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
+      <h2 className="text-xl font-bold mb-4 text-white">User List</h2>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-gray-300">
+          <thead className="border-b border-[#571089]/30">
+            <tr>
+              <th className="p-3">Username</th>
+              <th className="p-3">Email</th>
+              <th className="p-3">Role</th>
+              <th className="p-3">Joined</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map(user => (
+              <tr key={user._id} className="border-b border-[#571089]/20 hover:bg-white/5">
+                <td className="p-3">{user.username}</td>
+                <td className="p-3">{user.email}</td>
+                <td className="p-3 capitalize">{user.role}</td>
+                <td className="p-3">{new Date(user.createdAt).toLocaleDateString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  const renderOrders = () => (
+    <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
+      <h2 className="text-xl font-bold mb-4 text-white">Order List</h2>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-gray-300">
+          <thead className="border-b border-[#571089]/30">
+            <tr>
+              <th className="p-3">Order ID</th>
+              <th className="p-3">User</th>
+              <th className="p-3">Date</th>
+              <th className="p-3">Amount</th>
+              <th className="p-3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map(order => (
+              <tr key={order._id} className="border-b border-[#571089]/20 hover:bg-white/5">
+                <td className="p-3 font-mono text-sm">#{order._id.slice(-8)}</td>
+                <td className="p-3">{order.user?.username || 'N/A'}</td>
+                <td className="p-3">{new Date(order.createdAt).toLocaleDateString()}</td>
+                <td className="p-3 font-semibold text-green-400">${order.totalAmount.toFixed(2)}</td>
+                <td className="p-3 capitalize">{order.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ea698b]"></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] py-8 text-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent mb-2">
+            Admin Dashboard
+          </h1>
+          <p className="text-gray-400">Welcome, Admin! Manage your store from here.</p>
+        </div>
+
+        <div className="flex space-x-2 border-b border-[#571089]/30 mb-8">
+          <button onClick={() => setActiveTab('dashboard')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'dashboard' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Dashboard</button>
+          <button onClick={() => setActiveTab('products')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'products' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Products</button>
+          <button onClick={() => setActiveTab('users')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'users' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Users</button>
+          <button onClick={() => setActiveTab('orders')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'orders' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Orders</button>
+        </div>
+
+        <div>
+          {activeTab === 'dashboard' && renderDashboard()}
+          {activeTab === 'products' && renderProducts()}
+          {activeTab === 'users' && renderUsers()}
+          {activeTab === 'orders' && renderOrders()}
         </div>
       </div>
     </div>
