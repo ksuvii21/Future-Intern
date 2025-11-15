@@ -114,44 +114,6 @@ function AppContent({
   const location = useLocation();
   const isAuthPage = authPages.includes(location.pathname);
 
-  useEffect(() => {
-    // Check for user in localStorage on app load
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-
-    const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const count = cart.reduce((total, item) => total + item.quantity, 0);
-      setCartCount(count);
-    };
-
-    updateCartCount();
-    window.addEventListener('storage', updateCartCount);
-
-    // Handle scroll effect
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('storage', updateCartCount);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [setCartCount, setScrolled, setUser]);
-
-  useEffect(() => {
-    // Apply dark mode to document
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode]);
-
   return (
     <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
       {/* Elegant Header - Only show if not on auth pages */}
