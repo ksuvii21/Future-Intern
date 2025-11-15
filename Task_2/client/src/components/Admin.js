@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Users, ShoppingBag, Package, TrendingUp, BarChart3, UserCheck, UserX, DollarSign, Activity } from 'lucide-react';
 
 const Admin = () => {
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [stats, setStats] = useState({
+    totalProducts: 0,
+    totalUsers: 0,
+    totalOrders: 0,
+    totalRevenue: 0
+  });
   const [newProduct, setNewProduct] = useState({
     name: '',
     description: '',
@@ -12,15 +22,47 @@ const Admin = () => {
     imageUrl: '',
   });
   const [editingProduct, setEditingProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProducts();
+    fetchDashboardData();
   }, []);
+
+  const fetchDashboardData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
+      const [productsRes, usersRes, ordersRes] = await Promise.all([
+        axios.get('http://localhost:5000/api/products'),
+        axios.get('http://localhost:5000/api/auth/users', config),
+        axios.get('http://localhost:5000/api/orders', config)
+      ]);
+
+      setProducts(productsRes.data);
+      setUsers(usersRes.data);
+      setOrders(ordersRes.data);
+
+      // Calculate stats
+      const totalRevenue = ordersRes.data.reduce((sum, order) => sum + order.totalAmount, 0);
+      setStats({
+        totalProducts: productsRes.data.length,
+        totalUsers: usersRes.data.length,
+        totalOrders: ordersRes.data.length,
+        totalRevenue: totalRevenue.toFixed(2)
+      });
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchProducts = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/products');
       setProducts(response.data);
+      setStats(prev => ({ ...prev, totalProducts: response.data.length }));
     } catch (error) {
       console.error('Error fetching products:', error);
     }
