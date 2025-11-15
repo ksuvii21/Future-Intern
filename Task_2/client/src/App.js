@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import { ShoppingBag, Search, User, Heart, Menu, X, ChevronRight, Star, TrendingUp, Shield, Truck, RotateCcw } from 'lucide-react';
+import { ShoppingBag, Search, User, Heart, Menu, X, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
@@ -298,9 +298,7 @@ function AppLayout({
                 <h4 className="text-white font-semibold mb-4">Customer Care</h4>
                 <ul className="space-y-2 text-sm text-gray-400">
                   {['Contact Us', 'Track Order', 'Returns', 'Shipping Info', 'Size Guide'].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
-                    </li>
+                    <li key={item}><Link to="/" className="hover:text-[#ea698b] transition-colors">{item}</Link></li>
                   ))}
                 </ul>
               </div>
@@ -308,9 +306,7 @@ function AppLayout({
                 <h4 className="text-white font-semibold mb-4">Company</h4>
                 <ul className="space-y-2 text-sm text-gray-400">
                   {['About Us', 'Careers', 'Press', 'Blog', 'Affiliate Program'].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
-                    </li>
+                    <li key={item}><Link to="/" className="hover:text-[#ea698b] transition-colors">{item}</Link></li>
                   ))}
                 </ul>
               </div>

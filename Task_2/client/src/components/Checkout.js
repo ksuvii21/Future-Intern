@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CreditCard, Smartphone, Truck, MapPin, User, Mail, Home, Calendar, Award } from 'lucide-react';
+import { CreditCard, Smartphone, Truck, MapPin, User, Mail, Home, Award } from 'lucide-react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 const Checkout = () => {

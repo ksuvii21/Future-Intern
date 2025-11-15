@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useSearchParams } from 'react-router-dom';
-import { ChevronRight, Star, Heart, ShoppingBag } from 'lucide-react';
+import { Star, Heart, ShoppingBag } from 'lucide-react';
 import axios from 'axios';
 
 const CategoryPage = () => {
@@ -49,7 +49,7 @@ const CategoryPage = () => {
       }
     };
     fetchProducts();
-  }, [selectedCategory, sortBy, sortOrder, priceRange, searchQuery, maxPrice]);
+  }, [selectedCategory, sortBy, sortOrder, priceRange, searchQuery, maxPrice, allCategories.length]);
   
   const handleFilterChange = (key, value) => {
     const newParams = new URLSearchParams(searchParams);
@@ -185,8 +185,13 @@ const CategoryPage = () => {
             </div>
           </div>
           {/* Collection View */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product) => (
+          {loading ? (
+            <div className="flex justify-center items-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ea698b]"></div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.map((product) => (
               <div
                 key={product._id}
                 className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#ea698b]/20 hover:-translate-y-2"
@@ -274,8 +279,9 @@ const CategoryPage = () => {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

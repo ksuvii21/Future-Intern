@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { User, Mail, Lock, Edit, Save, X, ShoppingBag, Heart, MapPin, Phone, Calendar, Eye, EyeOff } from 'lucide-react';
+import { User, Mail, Lock, Edit, Save, X, ShoppingBag, Heart, Calendar, Eye, EyeOff } from 'lucide-react';
 
 const Profile = () => {
   const [user, setUser] = useState(null);

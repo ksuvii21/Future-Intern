@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Package, Truck, CheckCircle, Clock, XCircle, MapPin, CreditCard, User, Calendar, DollarSign } from 'lucide-react';
 
 const OrderDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isCancelling, setIsCancelling] = useState(false);
   const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
-
-  useEffect(() => {
-    fetchOrderDetail();
-  }, [id]);
 
   useEffect(() => {
     if (notification.show) {
@@ -24,7 +19,7 @@ const OrderDetail = () => {
     }
   }, [notification]);
 
-  const fetchOrderDetail = async () => {
+  const fetchOrderDetail = useCallback(async () => {
     const token = localStorage.getItem('token');
     if (!token) {
       setError('Please login to view order details');
@@ -51,7 +46,11 @@ const OrderDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchOrderDetail();
+  }, [fetchOrderDetail]);
 
   const handleCancelOrder = async () => {
     if (!window.confirm('Are you sure you want to cancel this order? This action cannot be undone.')) {
