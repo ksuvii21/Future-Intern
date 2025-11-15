@@ -176,6 +176,11 @@ exports.getOrderById = async (req, res) => {
     const userId = req.user.userId;
     const userRole = req.user.role;
 
+    // Add a check for a valid ObjectId to prevent CastError
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: 'Invalid Order ID format' });
+    }
+
     const order = await Order.findById(id)
       .populate('user', 'username email')
       .populate('products.product');
