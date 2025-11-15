@@ -12,7 +12,7 @@ const auth = require('../middleware/auth');
 // @route   POST /api/orders
 // @desc    Create a new order
 // @access  Private
-router.post('/', auth, createOrder);
+router.post('/create', auth, createOrder);
 
 // @route   GET /api/orders
 // @desc    Get user's orders
