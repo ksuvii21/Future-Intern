@@ -1,6 +1,11 @@
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { sendOrderConfirmationEmail, sendLowStockAlert } = require('../utils/emailService');
+
+const LOW_STOCK_THRESHOLD = 10;
+
 
 // Create a new order
 exports.createOrder = async (req, res) => {
@@ -17,7 +22,9 @@ exports.createOrder = async (req, res) => {
         return res.status(404).json({ message: `Product ${item.product} not found` });
       }
       if (product.stock < item.quantity) {
-        return res.status(400).json({ message: `Insufficient stock for ${product.name}` });
+        await session.abortTransaction();
+        session.endSession();
+        return res.status(400).json({ message: `Insufficient stock for '${product.name}'. Only ${product.stock} left.` });
       }
     }
 
@@ -35,15 +42,28 @@ exports.createOrder = async (req, res) => {
 
     // Update product stock
     for (const item of products) {
-      await Product.findByIdAndUpdate(item.product, {
+      const updatedProduct = await Product.findByIdAndUpdate(item.product, {
         $inc: { stock: -item.quantity }
-      }, { session });
+      }, { new: true, session });
+
+      // Check for low stock
+      if (updatedProduct.stock < LOW_STOCK_THRESHOLD) {
+        sendLowStockAlert(updatedProduct);
+      }
     }
 
     await session.commitTransaction();
 
     // Populate product details
     const populatedOrder = await Order.findById(savedOrder._id).populate('products.product');
+
+    // Send order confirmation email
+    try {
+      await sendOrderConfirmationEmail(populatedOrder);
+    } catch (emailError) {
+      console.error("Failed to send confirmation email:", emailError);
+      // Do not fail the whole request if email fails, just log it.
+    }
 
     res.status(201).json({
       message: 'Order created successfully',
@@ -55,6 +75,36 @@ exports.createOrder = async (req, res) => {
     res.status(500).json({ message: 'Server error during order creation' });
   } finally {
     session.endSession();
+  }
+};
+
+// Create a Stripe Payment Intent
+exports.createPaymentIntent = async (req, res) => {
+  try {
+    const { products } = req.body;
+
+    if (!products || products.length === 0) {
+      return res.status(400).json({ message: 'No products provided' });
+    }
+
+    let totalAmount = 0;
+    for (const item of products) {
+      const product = await Product.findById(item.product);
+      if (product) {
+        totalAmount += product.price * item.quantity;
+      }
+    }
+
+    const totalWithTax = totalAmount + totalAmount * 0.08;
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(totalWithTax * 100), // Amount in cents
+      currency: 'usd',
+    });
+
+    res.send({ clientSecret: paymentIntent.client_secret });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error creating payment intent', error: error.message });
   }
 };
 

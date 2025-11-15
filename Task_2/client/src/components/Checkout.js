@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CreditCard, Smartphone, Truck, MapPin, User, Mail, Home, Calendar, Award } from 'lucide-react';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -11,12 +13,14 @@ const Checkout = () => {
     address: '',
     city: '',
     state: '',
-    zipCode: '',
-    cardNumber: '',
-    expiryDate: '',
-    cvv: '',
+    zipCode: '' ,
     upiId: '',
   });
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState(null);
+  const stripe = useStripe();
+  const elements = useElements();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
@@ -35,14 +39,24 @@ const Checkout = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      return;
+    }
+
+    setIsProcessing(true);
+    setError(null);
+
     const token = localStorage.getItem('token');
     if (!token) {
-      alert('Please login to place an order');
+      setError('Please login to place an order.');
+      setIsProcessing(false);
       return;
     }
 
     if (cartItems.length === 0) {
-      alert('Your cart is empty. Please add items before checking out.');
+      setError('Your cart is empty.');
+      setIsProcessing(false);
       return;
     }
 
@@ -50,24 +64,11 @@ const Checkout = () => {
     const shippingAddressFields = ['name', 'email', 'phone', 'address', 'city', 'state', 'zipCode'];
     for (const field of shippingAddressFields) {
       if (!formData[field]) {
-        alert(`Please fill in the shipping address field: ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
+        setError(`Please fill in the shipping address field: ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
+        setIsProcessing(false);
         return;
       }
     }
-
-    // Client-side validation for payment details based on selected method
-    if (paymentMethod === 'card') {
-      if (!formData.cardNumber || !formData.expiryDate || !formData.cvv) {
-        alert('Please fill in all credit card details.');
-        return;
-      }
-    } else if (paymentMethod === 'upi') {
-      if (!formData.upiId) {
-        alert('Please enter your UPI ID.');
-        return;
-      }
-    }
-
 
     const orderData = {
       products: cartItems.map(item => ({
@@ -90,39 +91,75 @@ const Checkout = () => {
         zipCode: formData.zipCode
       },
       paymentMethod,
-      paymentDetails: paymentMethod === 'card' ? {
-        cardNumber: formData.cardNumber,
-        expiryDate: formData.expiryDate,
-        cvv: formData.cvv
-      } : paymentMethod === 'upi' ? {
-        upiId: formData.upiId
-      } : {}
+      paymentDetails: {} // Will be populated by Stripe info if needed
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/orders/create', {
+      // 1. Create Payment Intent on the server
+      const paymentIntentRes = await fetch('http://localhost:5000/api/orders/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(orderData)
+        body: JSON.stringify({ products: orderData.products })
       });
 
-      const data = await response.json();
+      if (!paymentIntentRes.ok) {
+        const errorData = await paymentIntentRes.json();
+        throw new Error(errorData.message || 'Failed to create payment intent.');
+      }
 
-      if (response.ok) {
-        alert('Order placed successfully!');
+      const { clientSecret } = await paymentIntentRes.json();
+
+      // 2. Confirm the payment on the client side
+      const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+          billing_details: {
+            name: formData.name,
+            email: formData.email,
+            address: {
+              line1: formData.address,
+              city: formData.city,
+              state: formData.state,
+              postal_code: formData.zipCode,
+            },
+          },
+        },
+      });
+
+      if (paymentResult.error) {
+        throw new Error(paymentResult.error.message);
+      }
+
+      // 3. If payment is successful, create the order in our database
+      if (paymentResult.paymentIntent.status === 'succeeded') {
+        orderData.paymentDetails.stripePaymentIntentId = paymentResult.paymentIntent.id;
+
+        const orderCreationRes = await fetch('http://localhost:5000/api/orders/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(orderData)
+        });
+
+        if (!orderCreationRes.ok) {
+          const errorData = await orderCreationRes.json();
+          throw new Error(errorData.message || 'Payment succeeded, but failed to save order.');
+        }
+
         localStorage.removeItem('cart');
         setCartItems([]);
-        // Redirect to order history or order detail page
-        window.location.href = '/orders';
-      } else {
-        alert(data.message || 'Failed to place order');
+        navigate('/orders');
       }
     } catch (error) {
       console.error('Order submission error:', error);
-      alert('Failed to place order. Please try again.');
+      setError(error.message);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -132,7 +169,7 @@ const Checkout = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] relative">
       {/* Header */}
       <div className="bg-black/20 backdrop-blur-sm border-b border-[#571089]/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -377,48 +414,26 @@ const Checkout = () => {
 
               {/* Payment Forms */}
               {paymentMethod === 'card' && (
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-gray-300 mb-2">Card Number</label>
-                    <input
-                      type="text"
-                      name="cardNumber"
-                      value={formData.cardNumber}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
-                      placeholder="1234 5678 9012 3456"
-                      required
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-gray-300 mb-2 flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        Expiry Date
-                      </label>
-                      <input
-                        type="text"
-                        name="expiryDate"
-                        value={formData.expiryDate}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
-                        placeholder="MM/YY"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-gray-300 mb-2">CVV</label>
-                      <input
-                        type="text"
-                        name="cvv"
-                        value={formData.cvv}
-                        onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
-                        placeholder="123"
-                        required
-                      />
-                    </div>
-                  </div>
+                <div className="p-4 bg-white/5 border border-[#571089]/30 rounded-lg">
+                  <CardElement
+                    options={{
+                      style: {
+                        base: {
+                          color: '#ffffff',
+                          fontFamily: 'Arial, sans-serif',
+                          fontSmoothing: 'antialiased',
+                          fontSize: '16px',
+                          '::placeholder': {
+                            color: '#a0aec0',
+                          },
+                        },
+                        invalid: {
+                          color: '#f56565',
+                          iconColor: '#f56565',
+                        },
+                      },
+                    }}
+                  />
                 </div>
               )}
 
@@ -453,14 +468,21 @@ const Checkout = () => {
               )}
             </div>
 
+            {/* Error Display */}
+            {error && (
+              <div className="bg-red-500/20 border border-red-500/30 text-red-400 p-4 rounded-lg text-center">
+                {error}
+              </div>
+            )}
+
             {/* Place Order Button */}
             <div className="flex justify-end">
               <button
                 onClick={handleSubmit}
-                className="px-12 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                disabled={isProcessing || !stripe}
+                className="px-12 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105 transition-all duration-300 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Award className="w-5 h-5" />
-                Place Order - ${(totalPrice + totalPrice * 0.08).toFixed(2)}
+                {isProcessing ? 'Processing...' : `Place Order - $${(totalPrice + totalPrice * 0.08).toFixed(2)}`}
               </button>
             </div>
           </div>
