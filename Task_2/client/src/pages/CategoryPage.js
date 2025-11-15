@@ -30,7 +30,8 @@ const CategoryPage = () => {
         params.append('sortOrder', sortOrder);
   
         const response = await axios.get(`http://localhost:5000/api/products?${params.toString()}`);
-        setProducts(response.data.products);
+        // Ensure products is always an array, even if the response is unexpected
+        setProducts(response.data.products || []);
         if (response.data.maxProductPrice > maxPrice) {
           setMaxPrice(response.data.maxProductPrice);
           setPriceRange(response.data.maxProductPrice);
