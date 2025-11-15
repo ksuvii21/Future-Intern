@@ -20,12 +20,6 @@ router.post('/create-payment-intent', auth, createPaymentIntent);
 // @desc    Create a new order
 // @access  Private
 router.post('/create', auth, createOrder);
-router.get('/all', auth, (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ message: 'Access denied. Admin only.' });
-  }
-  next();
-}, getAllOrders);
 
 // @route   GET /api/orders
 // @desc    Get user's orders
@@ -45,6 +39,7 @@ router.put('/:id/cancel', auth, cancelOrder);
 // @route   GET /api/orders/all
 // @desc    Get all orders (admin only)
 // @access  Private/Admin
+router.get('/all', auth, getAllOrders);
 
 // @route   PUT /api/orders/:id/status
 // @desc    Update order status (admin only)
