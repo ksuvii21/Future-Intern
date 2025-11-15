@@ -3,8 +3,41 @@ const Product = require('../models/Product');
 // Get all products
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find();
-    res.json(products);
+    const { search, category, minPrice, maxPrice, sortBy, sortOrder } = req.query;
+
+    let query = {};
+
+    // Search functionality (name and description)
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    // Category filtering
+    if (category && category.toLowerCase() !== 'all' && category.toLowerCase() !== 'all categories') {
+      query.category = { $regex: `^${category}$`, $options: 'i' };
+    }
+
+    // Price range filtering
+    if (minPrice || maxPrice) {
+      query.price = {};
+      if (minPrice) query.price.$gte = Number(minPrice);
+      if (maxPrice) query.price.$lte = Number(maxPrice);
+    }
+
+    let sort = {};
+    if (sortBy) {
+      sort[sortBy] = sortOrder === 'desc' ? -1 : 1;
+    } else {
+      // Default sort
+      sort.createdAt = -1;
+    }
+
+    const products = await Product.find(query).sort(sort);
+
+    res.json({ products, maxProductPrice: await Product.find().sort({ price: -1 }).limit(1).then(p => p[0]?.price || 1000) });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

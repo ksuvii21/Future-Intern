@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { ShoppingBag, Search, User, Heart, Menu, X, ChevronRight, Star, TrendingUp, Shield, Truck, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Home from './pages/Home';
@@ -10,6 +10,7 @@ import WishlistPage from './pages/WishlistPage';
 import CategoryPage from './pages/CategoryPage';
 import OrderHistory from './pages/OrderHistory';
 import OrderDetail from './pages/OrderDetail';
+import Profile from './pages/Profile';
 import Login from './components/Login';
 import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
@@ -111,8 +112,17 @@ function AppLayout({
   handleLogout,
   authPages
 }) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
   const location = useLocation();
   const isAuthPage = authPages.includes(location.pathname);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/category/all-categories?search=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   return (
     <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
@@ -142,14 +152,16 @@ function AppLayout({
 
               {/* Search Bar - Desktop */}
               <div className="hidden lg:flex flex-1 max-w-2xl mx-8">
-                <div className="relative w-full">
+                <form onSubmit={handleSearchSubmit} className="relative w-full">
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
                     placeholder="Search for elegant dresses, jewelry and more..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-12 pr-4 py-3 bg-white/5 border border-[#571089]/30 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] focus:bg-white/10 transition-all"
                   />
-                </div>
+                </form>
               </div>
 
               {/* Right Actions */}
