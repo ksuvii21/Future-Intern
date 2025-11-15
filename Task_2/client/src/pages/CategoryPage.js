@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Linktar, Heart, ShoppingBag } from 'lucide-react';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
+import { ChevronRight, Star, Heart, ShoppingBag } from 'lucide-react';
 import axios from 'axios';
 
 const CategoryPage = () => {
@@ -8,21 +9,31 @@ const CategoryPage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [allCategories, setAllCategories] = useState([]);
-  const [ state derived from URL search params
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const [priceRange, setPriceRange] = useState(1000);
+
+  // Filters state derived from URL search params
   const selectedCategory = category || 'All';
-  const sortBy = searchParams.get('sortBy') || 'name'  const sortOrder = searchParams.get('sortOrder') || 'asc';
- = searchParams.get('search') || '';
-    try {
+  const sortBy = searchParams.get('sortBy') || 'name';
+  const sortOrder = searchParams.get('sortOrder') || 'asc';
+  const searchQuery = searchParams.get('search') || '';
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
         const params = new URLSearchParams();
         if (searchQuery) params.append('search', searchQuery);
         if (selectedCategory && selectedCategory.toLowerCase() !== 'all categories') params.append('category', selectedCategory);
         if (priceRange < maxPrice) params.append('maxPrice', priceRange);
         params.append('sortBy', sortBy);
         params.append('sortOrder', sortOrder);
-
+  
         const response = await axios.get(`http://localhost:5000/api/products?${params.toString()}`);
         setProducts(response.data.products);
-        if (renotaRange(response.data.maxProductPrice);
+        if (response.data.maxProductPrice > maxPrice) {
+          setMaxPrice(response.data.maxProductPrice);
+          setPriceRange(response.data.maxProductPrice);
         }
         // Fetch all unique categories for the filter bar
         if (allCategories.length === 0) {
@@ -38,24 +49,61 @@ const CategoryPage = () => {
     };
     fetchProducts();
   }, [selectedCategory, sortBy, sortOrder, priceRange, searchQuery, maxPrice]);
-
+  
   const handleFilterChange = (key, value) => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set(key, value);
     setSearchParams(newParams);
   };
-
+  
   const getCategoryTitle = cat => {
     switch (cat.toLowerCase()) {
+      case 'dresses':
         return 'Elegant Dresses';
+      case 'jewelry':
         return 'Exquisite Jewelry';
-  case 'all categories':
+      case 'accessories':
+        return 'Chic Accessories';
+      case 'collections':
+        return 'Curated Collections';
+      case 'new arrivals':
+        return 'New Arrivals';
+      case 'all categories':
         return 'All Categories';
       case 'all':
         return 'All Categories';
-      default:ep
-  )
-ssName="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
+      default:
+        return 'All Categories';
+    }
+  };
+
+  const getCategoryDescription = cat => {
+    switch (cat.toLowerCase()) {
+      case 'dresses':
+        return 'Explore a stunning collection of dresses for every occasion, from casual daywear to breathtaking evening gowns.';
+      case 'jewelry':
+        return 'Adorn yourself with our exquisite jewelry collection, featuring timeless pieces and modern designs.';
+      case 'accessories':
+        return 'Complete your look with our range of chic accessories, including handbags, scarves, and more.';
+      case 'collections':
+        return 'Discover our specially curated collections, bringing together the best of style and elegance.';
+      case 'new arrivals':
+        return 'Discover the latest additions to our collection. Fresh styles, innovative designs, and timeless pieces that define modern elegance.';
+      case 'all categories':
+        return 'Browse our complete collection of elegant womens fashion, jewelry, and accessories.';
+      case 'all':
+        return 'Browse our complete collection of elegant womens fashion, jewelry, and accessories.';
+      default:
+        return 'Browse our complete collection of elegant womens fashion, jewelry, and accessories.';
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
+      {/* Hero Banner */}
+      <section className="pt-32 pb-20 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="text-center">
             <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#ea698b]/20 to-[#822faf]/20 border border-[#ea698b]/30 rounded-full mb-6">
               <span className="text-[#ea698b] text-sm font-medium">✨ {searchQuery ? 'Search Results' : getCategoryTitle(category)}</span>
             </div>
@@ -70,7 +118,7 @@ ssName="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]
             <nav className="text-sm text-gray-400">
               <Link to="/" className="hover:text-[#ea698b] transition-colors">
                 Home
-              </Link>
+              </Link> 
               / <span className="text-[#ea698b]">{getCategoryTitle(category)}</span>
             </nav>
           </div>
@@ -84,7 +132,7 @@ ssName="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]
             {allCategories.map(cat => (
               <Link
                 key={cat}
-                to={`/category/${cat.toLowerCase().replace(/\s/g, '-')}`}
+                to={`/category/${cat.toLowerCase().replace(/\s+/g, '-')}`}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 block ${
                   selectedCategory === cat
                     ? 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white shadow-lg shadow-[#ea698b]/30'
@@ -136,10 +184,14 @@ ssName="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]
             {products.map((product) => (
               <div
                 key={product._id}
-                className="group bg-gradient-to-br from-[#1a0a2e] tclassName="relative overflow-hidden bg-gradient-to-br from-[#571089]/20 to-[#47126b]/20 aspect-square">
+                className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#ea698b]/20 hover:-translate-y-2"
+              >
+                <div className="relative overflow-hidden bg-gradient-to-br from-[#571089]/20 to-[#47126b]/20 aspect-square">
                   <img
                     src={product.imageUrl}
-                    alt={
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    onError={(e) => {
                       e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5Y2E0YjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
                     }}
                   />
@@ -173,7 +225,8 @@ ssName="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]
                   </div>
                 </div>
                 <div className="p-6">
-                  <div cl=xt-xsfont-medium px-3 py-1 bg-[#ea698b]/10 rounded-full">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs text-[#ea698b] font-medium px-3 py-1 bg-[#ea698b]/10 rounded-full">
                       {product.category}
                     </span>
                     <div className="flex items-center gap-1">
@@ -184,15 +237,17 @@ ssName="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#ea698b] transition-colors">
                     {product.name}
-                  </h3>e="flex items-center justify-between">
+                  </h3>
+                  <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
                       ${product.price}
                     </span>
-                  <button
+                    <button
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      const cart = JSON.parse(localStorage.getItem('cart') || '[t.find(item => item._id === product._id);
+                      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                      const existingItem = cart.find(item => item._id === product._id);
 
                       if (existingItem) {
                         existingItem.quantity += 1;
@@ -206,7 +261,7 @@ ssName="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]
                     className="p-2 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all"
                   >
                     <ShoppingBag className="w-5 h-5" />
-                  </button>
+                    </button>
                   </div>
                 </div>
               </div>
