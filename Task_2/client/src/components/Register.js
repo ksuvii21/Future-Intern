@@ -428,19 +428,19 @@ const Register = () => {
               </div>
               <div className="text-gray-300 space-y-4">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  Welcome to Fansee Rebel, your premier destination for luxury fashion. By accessing and using our website, you agree to comply with and be bound by the following terms and conditions of use.
                 </p>
                 <p>
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  All content on this site, including text, graphics, logos, and images, is the property of Fansee Rebel and is protected by international copyright laws. You may not reproduce, distribute, or create derivative works without prior written consent.
                 </p>
                 <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                  Our products are sold "as is" with no warranties expressed or implied. We reserve the right to modify or discontinue any product at any time without notice. Prices are subject to change without prior notice.
                 </p>
                 <p>
-                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                  Fansee Rebel is not responsible for any damages arising from the use of our website or products. Your use of this site is at your own risk. We recommend consulting with professionals for fashion advice.
                 </p>
                 <p>
-                  Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                  By registering an account, you agree to provide accurate information and maintain the confidentiality of your login credentials. We reserve the right to terminate accounts that violate these terms.
                 </p>
               </div>
             </div>
