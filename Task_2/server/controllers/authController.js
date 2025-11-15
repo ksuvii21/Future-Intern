@@ -1,13 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-// Generate JWT token
-const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET || 'your-secret-key', {
-    expiresIn: '7d'
-  });
-};
-
 // @desc    Register user
 // @route   POST /api/auth/register
 // @access  Public
@@ -39,7 +32,9 @@ const register = async (req, res) => {
     });
 
     // Generate token
-    const token = generateToken(user._id);
+    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET || 'your-secret-key', {
+      expiresIn: '7d'
+    });
 
     res.status(201).json({
       message: 'User registered successfully',
@@ -83,7 +78,9 @@ const login = async (req, res) => {
     }
 
     // Generate token
-    const token = generateToken(user._id);
+    const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET || 'your-secret-key', {
+      expiresIn: '7d'
+    });
 
     res.json({
       message: 'Login successful',
