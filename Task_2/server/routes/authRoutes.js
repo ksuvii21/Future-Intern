@@ -5,7 +5,8 @@ const {
   login,
   forgotPassword,
   resetPassword,
-  updateProfile
+  updateProfile,
+  getAllUsers
 } = require('../controllers/authController');
 const auth = require('../middleware/auth');
 
@@ -33,5 +34,15 @@ router.post('/reset-password', resetPassword);
 // @desc    Update user profile
 // @access  Private
 router.put('/profile', auth, updateProfile);
+
+// @route   GET /api/auth/users
+// @desc    Get all users (admin only)
+// @access  Private/Admin
+router.get('/users', auth, (req, res, next) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Access denied. Admin only.' });
+  }
+  next();
+}, getAllUsers);
 
 module.exports = router;

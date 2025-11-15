@@ -200,10 +200,29 @@ const updateProfile = async (req, res) => {
   }
 };
 
+// @desc    Get all users (admin only)
+// @route   GET /api/auth/users
+// @access  Private/Admin
+const getAllUsers = async (req, res) => {
+  try {
+    // This check is redundant if middleware handles it, but good for safety
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Access denied. Admin only.' });
+    }
+
+    const users = await User.find().select('-password').sort({ createdAt: -1 });
+    res.json(users);
+  } catch (error) {
+    console.error('Get all users error:', error);
+    res.status(500).json({ message: 'Server error retrieving users' });
+  }
+};
+
 module.exports = {
   register,
   login,
   forgotPassword,
   resetPassword,
-  updateProfile
+  updateProfile,
+  getAllUsers
 };
