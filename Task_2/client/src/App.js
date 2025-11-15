@@ -244,7 +244,7 @@ function AppContent({
         </header>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
+        {!isAuthPage && mobileMenuOpen && (
           <div className="fixed inset-0 z-40 lg:hidden">
             <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
             <div className="absolute right-0 top-0 h-full w-64 bg-[#0a0015] border-l border-[#571089]/30 p-6">
@@ -264,7 +264,7 @@ function AppContent({
           </div>
         )}
 
-        <main className="flex-1 pt-32">
+        <main className={`flex-1 ${isAuthPage ? '' : 'pt-32'}`}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/category/:category" element={<CategoryPage />} />
