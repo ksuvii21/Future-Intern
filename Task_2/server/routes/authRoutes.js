@@ -4,8 +4,10 @@ const {
   register,
   login,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  updateProfile
 } = require('../controllers/authController');
+const auth = require('../middleware/auth');
 
 // @route   POST /api/auth/register
 // @desc    Register a new user
@@ -26,5 +28,10 @@ router.post('/forgot-password', forgotPassword);
 // @desc    Reset password with token
 // @access  Public
 router.post('/reset-password', resetPassword);
+
+// @route   PUT /api/auth/profile
+// @desc    Update user profile
+// @access  Private
+router.put('/profile', auth, updateProfile);
 
 module.exports = router;
