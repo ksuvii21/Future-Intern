@@ -279,7 +279,8 @@ function AppContent({
           </Routes>
         </main>
 
-        {/* Footer */}
+      {/* Footer - Only show if not on auth pages */}
+      {!isAuthPage && (
         <footer className="border-t border-[#571089]/30 bg-[#0a0015]">
           <div className="max-w-7xl mx-auto px-4 py-12">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -349,6 +350,7 @@ function AppContent({
             </div>
           </div>
         </footer>
+      )}
       </div>
     </Router>
   );
