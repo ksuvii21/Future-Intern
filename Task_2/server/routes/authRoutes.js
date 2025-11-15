@@ -56,12 +56,7 @@ const adminAuth = (req, res, next) => {
 // @route   GET /api/auth/users
 // @desc    Get all users (admin only)
 // @access  Private/Admin
-router.get('/users', auth, (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ message: 'Access denied. Admin only.' });
-  }
-  next();
-}, getAllUsers);
+router.get('/users', auth, adminAuth, getAllUsers);
 
 // @route   PUT /api/auth/users/:id/role
 // @desc    Update a user's role (admin only)
