@@ -8,31 +8,29 @@ const WishlistPage = () => {
   const [viewedItems, setViewedItems] = useState([]);
   const [activeTab, setActiveTab] = useState('collection');
 
-  useEffect(() => {
-    // Load wishlist from localStorage
+  const loadItemsFromStorage = () => {
     const savedWishlist = localStorage.getItem('wishlist');
     if (savedWishlist) {
       setWishlistItems(JSON.parse(savedWishlist));
     }
-
-    // Load shared items (mock data for now)
-    setSharedItems([
-      {
-        id: 1,
-        name: 'Diamond Earrings',
-        price: 299,
-        imageUrl: 'https://via.placeholder.com/300x300?text=Diamond+Earrings',
-        category: 'Jewelry',
-        sharedBy: 'Sarah M.',
-        sharedDate: '2024-01-15'
-      }
-    ]);
-
-    // Load viewed items from localStorage
     const savedViewed = localStorage.getItem('viewedItems');
     if (savedViewed) {
       setViewedItems(JSON.parse(savedViewed));
     }
+  };
+
+  useEffect(() => {
+    loadItemsFromStorage();
+
+    // Listen for storage changes to update the UI in real-time
+    window.addEventListener('storage', loadItemsFromStorage);
+
+    // Mock data for shared items
+    setSharedItems([]); // Clearing mock data for now
+
+    return () => {
+      window.removeEventListener('storage', loadItemsFromStorage);
+    };
   }, []);
 
   const removeFromWishlist = (productId) => {
