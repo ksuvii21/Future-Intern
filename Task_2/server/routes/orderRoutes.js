@@ -30,6 +30,11 @@ router.get('/', auth, getUserOrders);
 // @access  Private (user or admin)
 router.get('/:id', auth, getOrderById);
 
+// @route   PUT /api/orders/:id/cancel
+// @desc    Cancel an order by user
+// @access  Private
+router.put('/:id/cancel', auth, cancelOrder);
+
 // @route   GET /api/orders/all
 // @desc    Get all orders (admin only)
 // @access  Private/Admin

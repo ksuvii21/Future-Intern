@@ -1,15 +1,18 @@
 const Order = require('../models/Order');
 const Product = require('../models/Product');
+const mongoose = require('mongoose');
 
 // Create a new order
 exports.createOrder = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
     const { products, totalAmount, shippingAddress, paymentMethod, paymentDetails } = req.body;
     const userId = req.user.userId;
 
     // Validate products and check stock
     for (const item of products) {
-      const product = await Product.findById(item.product);
+      const product = await Product.findById(item.product).session(session);
       if (!product) {
         return res.status(404).json({ message: `Product ${item.product} not found` });
       }
@@ -28,25 +31,30 @@ exports.createOrder = async (req, res) => {
       paymentDetails
     });
 
-    const savedOrder = await order.save();
+    const savedOrder = await order.save({ session });
 
     // Update product stock
     for (const item of products) {
       await Product.findByIdAndUpdate(item.product, {
         $inc: { stock: -item.quantity }
-      });
+      }, { session });
     }
 
+    await session.commitTransaction();
+
     // Populate product details
-    await savedOrder.populate('products.product');
+    const populatedOrder = await Order.findById(savedOrder._id).populate('products.product');
 
     res.status(201).json({
       message: 'Order created successfully',
-      order: savedOrder
+      order: populatedOrder
     });
   } catch (error) {
+    await session.abortTransaction();
     console.error('Create order error:', error);
     res.status(500).json({ message: 'Server error during order creation' });
+  } finally {
+    session.endSession();
   }
 };
 
