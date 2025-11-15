@@ -197,9 +197,18 @@ function AppLayout({
                     </span>
                   )}
                 </Link>
-                <Link to="/admin" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
-                  <span className="text-sm">Sell</span>
-                </Link>
+                {/* Conditional Admin/Seller Links */}
+                {user && user.role === 'admin' && (
+                  <Link to="/admin" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                    <span className="text-sm">Admin</span>
+                  </Link>
+                )}
+                {user && user.role === 'seller' && (
+                  <Link to="/seller-dashboard" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                    <span className="text-sm">Seller Dashboard</span>
+                  </Link>
+                )}
+
                 <button className="lg:hidden text-gray-300" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                   {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
@@ -228,17 +237,24 @@ function AppLayout({
         <div className="fixed inset-0 z-40 lg:hidden">
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
           <div className="absolute right-0 top-0 h-full w-64 bg-[#0a0015] border-l border-[#571089]/30 p-6">
-            <nav className="flex flex-col gap-4 mt-16">
-              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'Login', 'Sell'].map((item) => (
+            <nav className="flex flex-col gap-4 mt-16 text-left">
+              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections'].map((item) => (
                 <Link
                   key={item}
-                  to={item === 'All Categories' ? '/' : item === 'Login' ? '/login' : item === 'Sell' ? '/admin' : `/category/${item.toLowerCase().replace(/\s/g, '-')}`}
-                  className="text-left text-gray-300 hover:text-[#ea698b] transition-colors py-2"
+                  to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase().replace(/\s/g, '-')}`}
+                  className="text-gray-300 hover:text-[#ea698b] transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item}
                 </Link>
               ))}
+              {/* Conditional Admin/Seller Links for Mobile */}
+              {user && user.role === 'admin' && (
+                <Link to="/admin" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-[#ea698b] transition-colors py-2">Admin Dashboard</Link>
+              )}
+              {user && user.role === 'seller' && (
+                <Link to="/seller-dashboard" onClick={() => setMobileMenuOpen(false)} className="text-gray-300 hover:text-[#ea698b] transition-colors py-2">Seller Dashboard</Link>
+              )}
             </nav>
           </div>
         </div>
