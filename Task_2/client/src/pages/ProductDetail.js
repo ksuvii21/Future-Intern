@@ -27,11 +27,11 @@ const ProductDetail = () => {
         const response = await axios.get(
           `http://localhost:5000/api/products/${id}`
         );
-        setProduct(response.data.product);
+        setProduct(response.data);
 
         // Fetch similar products
         const allProductsResponse = await axios.get('http://localhost:5000/api/products');
-        const similar = allProductsResponse.data.products.filter(p =>
+        const similar = allProductsResponse.data.products.filter(p => p && 
           p.category === response.data.category && p._id !== response.data._id
         ).slice(0, 4);
         setSimilarProducts(similar);
