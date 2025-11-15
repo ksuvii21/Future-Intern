@@ -41,6 +41,34 @@ const Checkout = () => {
       return;
     }
 
+    if (cartItems.length === 0) {
+      alert('Your cart is empty. Please add items before checking out.');
+      return;
+    }
+
+    // Client-side validation for shipping address fields
+    const shippingAddressFields = ['name', 'email', 'phone', 'address', 'city', 'state', 'zipCode'];
+    for (const field of shippingAddressFields) {
+      if (!formData[field]) {
+        alert(`Please fill in the shipping address field: ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
+        return;
+      }
+    }
+
+    // Client-side validation for payment details based on selected method
+    if (paymentMethod === 'card') {
+      if (!formData.cardNumber || !formData.expiryDate || !formData.cvv) {
+        alert('Please fill in all credit card details.');
+        return;
+      }
+    } else if (paymentMethod === 'upi') {
+      if (!formData.upiId) {
+        alert('Please enter your UPI ID.');
+        return;
+      }
+    }
+
+
     const orderData = {
       products: cartItems.map(item => ({
         product: item._id,
