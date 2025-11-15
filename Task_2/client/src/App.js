@@ -279,7 +279,7 @@ function AppContent({
           </Routes>
         </main>
 
-      {/* Footer - Only show if not on auth pages */}
+        {/* Footer - Only show if not on auth pages */}
       {!isAuthPage && (
         <footer className="border-t border-[#571089]/30 bg-[#0a0015]">
           <div className="max-w-7xl mx-auto px-4 py-12">
