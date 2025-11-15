@@ -6,7 +6,9 @@ const {
   forgotPassword,
   resetPassword,
   updateProfile,
-  getAllUsers
+  getAllUsers,
+  addAddress,
+  deleteAddress
 } = require('../controllers/authController');
 const auth = require('../middleware/auth');
 
@@ -34,6 +36,16 @@ router.post('/reset-password', resetPassword);
 // @desc    Update user profile
 // @access  Private
 router.put('/profile', auth, updateProfile);
+
+// @route   POST /api/auth/address
+// @desc    Add a new address for a user
+// @access  Private
+router.post('/address', auth, addAddress);
+
+// @route   DELETE /api/auth/address/:id
+// @desc    Delete a user's address
+// @access  Private
+router.delete('/address/:id', auth, deleteAddress);
 
 // @route   GET /api/auth/users
 // @desc    Get all users (admin only)
