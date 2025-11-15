@@ -11,6 +11,11 @@ const {
 } = require('../controllers/orderController');
 const auth = require('../middleware/auth');
 
+const adminAuth = (req, res, next) => {
+  if (req.user.role !== 'admin') return res.status(403).json({ message: 'Access denied. Admin only.' });
+  next();
+};
+
 // @route   POST /api/orders/create-payment-intent
 // @desc    Create a stripe payment intent
 // @access  Private
@@ -39,16 +44,11 @@ router.put('/:id/cancel', auth, cancelOrder);
 // @route   GET /api/orders/all
 // @desc    Get all orders (admin only)
 // @access  Private/Admin
-router.get('/all', auth, getAllOrders);
+router.get('/all', auth, adminAuth, getAllOrders);
 
 // @route   PUT /api/orders/:id/status
 // @desc    Update order status (admin only)
 // @access  Private/Admin
-router.put('/:id/status', auth, (req, res, next) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ message: 'Access denied. Admin only.' });
-  }
-  next();
-}, updateOrderStatus);
+router.put('/:id/status', auth, adminAuth, updateOrderStatus);
 
 module.exports = router;
