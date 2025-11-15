@@ -192,7 +192,7 @@ const updateProfile = async (req, res) => {
 
     res.json({
       message: 'Profile updated successfully',
-      user: { id: updatedUser._id, username: updatedUser.username, email: updatedUser.email, role: updatedUser.role, createdAt: updatedUser.createdAt }
+      user: await User.findById(userId).select('-password')
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error updating profile' });
@@ -222,6 +222,60 @@ module.exports = {
   login,
   forgotPassword,
   resetPassword,
-  updateProfile,
-  getAllUsers
+  updateProfile, // Keep existing exports
+  getAllUsers,
+
+  // @desc    Add a new address for a user
+  // @route   POST /api/auth/address
+  // @access  Private
+  addAddress: async (req, res) => {
+    try {
+      const userId = req.user.userId;
+      const { name, phone, address, city, state, zipCode, isDefault } = req.body;
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      const newAddress = { name, phone, address, city, state, zipCode, isDefault };
+
+      // If setting a new default, unset the old one
+      if (isDefault) {
+        user.addresses.forEach(addr => addr.isDefault = false);
+      }
+
+      user.addresses.push(newAddress);
+      await user.save();
+
+      res.status(201).json({ message: 'Address added successfully', user: await User.findById(userId).select('-password') });
+    } catch (error) {
+      console.error('Add address error:', error);
+      res.status(500).json({ message: 'Server error adding address' });
+    }
+  },
+
+  // @desc    Delete a user's address
+  // @route   DELETE /api/auth/address/:id
+  // @access  Private
+  deleteAddress: async (req, res) => {
+    try {
+      const userId = req.user.userId;
+      const addressId = req.params.id;
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      // Find and remove the address
+      user.addresses = user.addresses.filter(addr => addr._id.toString() !== addressId);
+      await user.save();
+
+      res.json({ message: 'Address deleted successfully', user: await User.findById(userId).select('-password') });
+    } catch (error) {
+      console.error('Delete address error:', error);
+      res.status(500).json({ message: 'Server error deleting address' });
+    }
+  }
 };
