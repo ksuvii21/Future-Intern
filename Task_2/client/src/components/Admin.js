@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Users, ShoppingBag, Package, TrendingUp, BarChart3, UserCheck, UserX, DollarSign, Activity } from 'lucide-react';
+import { Users, ShoppingBag, Package, DollarSign, Activity } from 'lucide-react';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
