@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ShoppingBag, Search, User, Heart, Menu, X, ChevronRight, Star, TrendingUp, Shield, Truck, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+// Import your pages and components
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import CartPage from './pages/CartPage';
@@ -14,308 +16,309 @@ import ForgotPassword from './components/ForgotPassword';
 import Admin from './components/Admin';
 import './App.css';
 
-function App() {
-  const [cartCount, setCartCount] = useState(0);
-  const [user, setUser] = useState(null);
-  const [darkMode, setDarkMode] = useState(() => {
-    const stored = localStorage.getItem('darkMode');
-    return stored ? JSON.parse(stored) : true;
-  });
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+// --- Layout Component where Hooks are used ---
+// This component must be rendered *inside* the <Router> to use useLocation()
+function AppLayout({
+  cartCount,
+  user,
+  mobileMenuOpen,
+  setMobileMenuOpen,
+  scrolled,
+  handleLogout,
+  authPages // Passed down from App
+}) {
+  const location = useLocation(); // Hook used correctly here
+  const isAuthPage = authPages.includes(location.pathname);
 
-  // Define auth pages where header/footer should be hidden
-  const authPages = ['/login', '/register', '/forgot-password'];
+  return (
+    <div className={`App min-h-screen dark:bg-gradient-to-br dark:from-[#0a0015] dark:via-[#1a0a2e] dark:to-[#0a0015] bg-gradient-to-br from-gray-50 to-gray-100`}>
+      {/* Elegant Header - Only show if not on auth pages */}
+      {!isAuthPage && (
+        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30'
+        }`}>
+          {/* Top Announcement Bar */}
+          <div className="bg-gradient-to-r from-[#ea698b] via-[#ac46a1] to-[#822faf] text-white text-sm py-2">
+            <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+              <span className="flex items-center gap-2">
+                <TrendingUp className="w-4 h-4" />
+                Exclusive: Up to 70% OFF on Premium Collections
+              </span>
+              <span className="hidden md:block">Free Shipping on Orders Over $50</span>
+            </div>
+          </div>
 
-  useEffect(() => {
-    // Check for user in localStorage on app load
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+          {/* Main Header */}
+          <div className="max-w-7xl mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              {/* Logo */}
+              <Link to="/" className="flex items-center">
+                <img src="/logo.png" alt="Fansee Rebel" className="w-28 h-25 rounded-lg" />
+              </Link>
 
-    const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const count = cart.reduce((total, item) => total + item.quantity, 0);
-      setCartCount(count);
-    };
+              {/* Search Bar - Desktop */}
+              <div className="hidden lg:flex flex-1 max-w-2xl mx-8">
+                <div className="relative w-full">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search for elegant dresses, jewelry and more..."
+                    className="w-full pl-12 pr-4 py-3 bg-white/5 border border-[#571089]/30 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] focus:bg-white/10 transition-all"
+                  />
+                </div>
+              </div>
 
-    updateCartCount();
-    window.addEventListener('storage', updateCartCount);
+              {/* Right Actions */}
+              <div className="flex items-center gap-4">
+                <Link to="/wishlist" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                  <Heart className="w-5 h-5" />
+                  <span className="text-sm">Wishlist</span>
+                </Link>
+                {user ? (
+                  <div className="hidden md:flex items-center gap-2 text-gray-300">
+                    <User className="w-5 h-5" />
+                    <span className="text-sm">Hello, {user.username}</span>
+                    <button onClick={handleLogout} className="text-sm hover:text-[#ea698b] ml-2">
+                      Logout
+                    </button>
+                  </div>
+                ) : (
+                  <Link to="/login" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                    <User className="w-5 h-5" />
+                    <span className="text-sm">Account</span>
+                  </Link>
+                )}
+                <Link to="/cart" className="relative p-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                  <ShoppingBag className="w-6 h-6" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
+                <Link to="/admin" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
+                  <span className="text-sm">Sell</span>
+                </Link>
+                <button className="lg:hidden text-gray-300" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                  {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+              </div>
+            </div>
 
-    // Handle scroll effect
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
+            {/* Category Navigation */}
+            <nav className="hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-[#571089]/20">
+              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'New Arrivals'].map((item) => (
+                <Link
+                  key={item}
+                  to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase().replace(/\s/g, '-')}`}
+                  className="text-sm text-gray-300 hover:text-[#ea698b] transition-colors font-medium relative group"
+                >
+                  {item}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ea698b] to-[#d55d92] group-hover:w-full transition-all duration-300"></span>
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </header>
+      )}
 
-    return () => {
-      window.removeEventListener('storage', updateCartCount);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+      {/* Mobile Menu */}
+      {!isAuthPage && mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden">
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
+          <div className="absolute right-0 top-0 h-full w-64 bg-[#0a0015] border-l border-[#571089]/30 p-6">
+            <nav className="flex flex-col gap-4 mt-16">
+              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'Login', 'Sell'].map((item) => (
+                <Link
+                  key={item}
+                  to={item === 'All Categories' ? '/' : item === 'Login' ? '/login' : item === 'Sell' ? '/admin' : `/category/${item.toLowerCase().replace(/\s/g, '-')}`}
+                  className="text-left text-gray-300 hover:text-[#ea698b] transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
 
-  useEffect(() => {
-    // Apply dark mode to document
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode]);
+      <main className={`flex-1 ${isAuthPage ? '' : 'pt-[170px] md:pt-[130px] lg:pt-[190px]'}`}> {/* Adjusted padding for header height */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/category/:category" element={<CategoryPage />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
+      </main>
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser(null);
-  };
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
-  return (
-    <Router>
-      <AppContent
-        cartCount={cartCount}
-        setCartCount={setCartCount}
-        user={user}
-        setUser={setUser}
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-        mobileMenuOpen={mobileMenuOpen}
-        setMobileMenuOpen={setMobileMenuOpen}
-        scrolled={scrolled}
-        setScrolled={setScrolled}
-        handleLogout={handleLogout}
-        toggleDarkMode={toggleDarkMode}
-        authPages={authPages}
-      />
-    </Router>
-  );
+      {/* Footer - Only show if not on auth pages */}
+      {!isAuthPage && (
+        <footer className="border-t border-[#571089]/30 bg-[#0a0015]">
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <img src="/logo.png" alt="Fansee Rebel" className="w-25 h-20 rounded-lg" />
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                      Fansee Rebel
+                    </h3>
+                  </div>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Your premier destination for luxury fashion, exquisite jewelry, and timeless elegance.
+                  </p>
+                  <div className="flex gap-3">
+                    {['💎', '👗', '💄', '👠'].map((icon, i) => (
+                      <span key={i} className="text-2xl opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+                        {icon}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-4">Shop</h4>
+                  <ul className="space-y-2 text-sm text-gray-400">
+                    {['New Arrivals', 'Dresses', 'Jewelry', 'Accessories', 'Sale'].map((item) => (
+                      <li key={item}>
+                        <Link to={`/category/${item.toLowerCase().replace(/\s/g, '-')}`} className="hover:text-[#ea698b] transition-colors">{item}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-4">Customer Care</h4>
+                  <ul className="space-y-2 text-sm text-gray-400">
+                    {['Contact Us', 'Track Order', 'Returns', 'Shipping Info', 'Size Guide'].map((item) => (
+                      <li key={item}>
+                        <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-4">Company</h4>
+                  <ul className="space-y-2 text-sm text-gray-400">
+                    {['About Us', 'Careers', 'Press', 'Blog', 'Affiliate Program'].map((item) => (
+                      <li key={item}>
+                        <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="border-t border-[#571089]/30 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p className="text-gray-400 text-sm mb-4 md:mb-0">
+                  © 2025 Fansee Rebel. All rights reserved.
+                </p>
+                <div className="flex items-center gap-4">
+                  <span className="text-gray-400 text-sm">Secure payments via</span>
+                  <div className="flex gap-2">
+                    {['VISA', 'MC', 'AMEX', 'PayPal'].map((payment) => (
+                      <span key={payment} className="px-3 py-1 bg-white/5 border border-[#571089]/30 rounded text-xs text-gray-400 font-medium">
+                        {payment}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+      )}
+    </div>
+  );
 }
 
-function AppContent({
-  cartCount,
-  setCartCount,
-  user,
-  setUser,
-  darkMode,
-  setDarkMode,
-  mobileMenuOpen,
-  setMobileMenuOpen,
-  scrolled,
-  setScrolled,
-  handleLogout,
-  toggleDarkMode,
-  authPages
-}) {
-  const location = useLocation();
-  const isAuthPage = authPages.includes(location.pathname);
+// --- Main App Component (Keeps the state and Router) ---
+function App() {
+  // State definitions
+  const [cartCount, setCartCount] = useState(0);
+  const [user, setUser] = useState(null);
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem('darkMode');
+    return stored ? JSON.parse(stored) : true;
+  });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  return (
-    <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
-      {/* Elegant Header - Only show if not on auth pages */}
-      {!isAuthPage && (
-        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30'
-        }`}>
-          {/* Top Announcement Bar */}
-          <div className="bg-gradient-to-r from-[#ea698b] via-[#ac46a1] to-[#822faf] text-white text-sm py-2">
-            <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-              <span className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4" />
-                Exclusive: Up to 70% OFF on Premium Collections
-              </span>
-              <span className="hidden md:block">Free Shipping on Orders Over $50</span>
-            </div>
-          </div>
+  // Define auth pages where header/footer should be hidden
+  const authPages = ['/login', '/register', '/forgot-password', '/admin'];
 
-          {/* Main Header */}
-          <div className="max-w-7xl mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              {/* Logo */}
-              <Link to="/" className="flex items-center">
-                <img src="/logo.png" alt="Fansee Rebel" className="w-28 h-25 rounded-lg" />
-              </Link>
+  // Effects (remain unchanged)
+  useEffect(() => {
+    // Check for user in localStorage on app load
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
 
-              {/* Search Bar - Desktop */}
-              <div className="hidden lg:flex flex-1 max-w-2xl mx-8">
-                <div className="relative w-full">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="Search for elegant dresses, jewelry and more..."
-                    className="w-full pl-12 pr-4 py-3 bg-white/5 border border-[#571089]/30 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] focus:bg-white/10 transition-all"
-                  />
-                </div>
-              </div>
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      setCartCount(count);
+    };
 
-              {/* Right Actions */}
-              <div className="flex items-center gap-4">
-                <Link to="/wishlist" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
-                  <Heart className="w-5 h-5" />
-                  <span className="text-sm">Wishlist</span>
-                </Link>
-                {user ? (
-                  <div className="hidden md:flex items-center gap-2 text-gray-300">
-                    <User className="w-5 h-5" />
-                    <span className="text-sm">Hello, {user.username}</span>
-                    <button onClick={handleLogout} className="text-sm hover:text-[#ea698b] ml-2">
-                      Logout
-                    </button>
-                  </div>
-                ) : (
-                  <Link to="/login" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
-                    <User className="w-5 h-5" />
-                    <span className="text-sm">Account</span>
-                  </Link>
-                )}
-                <Link to="/cart" className="relative p-2 text-gray-300 hover:text-[#ea698b] transition-colors">
-                  <ShoppingBag className="w-6 h-6" />
-                  {cartCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
-                <Link to="/admin" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
-                  <span className="text-sm">Sell</span>
-                </Link>
-                <button className="lg:hidden text-gray-300" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                  {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                </button>
-              </div>
-            </div>
+    updateCartCount();
+    window.addEventListener('storage', updateCartCount);
 
-            {/* Category Navigation */}
-            <nav className="hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-[#571089]/20">
-              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'New Arrivals'].map((item) => (
-                <Link
-                  key={item}
-                  to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase()}`}
-                  className="text-sm text-gray-300 hover:text-[#ea698b] transition-colors font-medium relative group"
-                >
-                  {item}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ea698b] to-[#d55d92] group-hover:w-full transition-all duration-300"></span>
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </header>
+    // Handle scroll effect
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
 
-        {/* Mobile Menu */}
-        {!isAuthPage && mobileMenuOpen && (
-          <div className="fixed inset-0 z-40 lg:hidden">
-            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
-            <div className="absolute right-0 top-0 h-full w-64 bg-[#0a0015] border-l border-[#571089]/30 p-6">
-              <nav className="flex flex-col gap-4 mt-16">
-                {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'Login', 'Sell'].map((item) => (
-                  <Link
-                    key={item}
-                    to={item === 'All Categories' ? '/' : item === 'Login' ? '/login' : item === 'Sell' ? '/admin' : `/category/${item.toLowerCase()}`}
-                    className="text-left text-gray-300 hover:text-[#ea698b] transition-colors py-2"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-          </div>
-        )}
+    return () => {
+      window.removeEventListener('storage', updateCartCount);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-        <main className={`flex-1 ${isAuthPage ? '' : 'pt-32'}`}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/category/:category" element={<CategoryPage />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/wishlist" element={<WishlistPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
-        </main>
+  useEffect(() => {
+    // Apply dark mode to document
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
 
-        {/* Footer - Only show if not on auth pages */}
-        {!isAuthPage && (
-          <footer className="border-t border-[#571089]/30 bg-[#0a0015]">
-            <div className="max-w-7xl mx-auto px-4 py-12">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <img src="/logo.png" alt="Fansee Rebel" className="w-25 h-20 rounded-lg" />
-                    <h3 className="text-3xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                      Fansee Rebel
-                    </h3>
-                  </div>
-                  <p className="text-gray-400 text-sm mb-4">
-                    Your premier destination for luxury fashion, exquisite jewelry, and timeless elegance.
-                  </p>
-                  <div className="flex gap-3">
-                    {['💎', '👗', '💄', '👠'].map((icon, i) => (
-                      <span key={i} className="text-2xl opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
-                        {icon}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold mb-4">Shop</h4>
-                  <ul className="space-y-2 text-sm text-gray-400">
-                    {['New Arrivals', 'Dresses', 'Jewelry', 'Accessories', 'Sale'].map((item) => (
-                      <li key={item}>
-                        <Link to={`/category/${item.toLowerCase()}`} className="hover:text-[#ea698b] transition-colors">{item}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold mb-4">Customer Care</h4>
-                  <ul className="space-y-2 text-sm text-gray-400">
-                    {['Contact Us', 'Track Order', 'Returns', 'Shipping Info', 'Size Guide'].map((item) => (
-                      <li key={item}>
-                        <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold mb-4">Company</h4>
-                  <ul className="space-y-2 text-sm text-gray-400">
-                    {['About Us', 'Careers', 'Press', 'Blog', 'Affiliate Program'].map((item) => (
-                      <li key={item}>
-                        <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="border-t border-[#571089]/30 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p className="text-gray-400 text-sm mb-4 md:mb-0">
-                  © 2025 Fansee Rebel. All rights reserved.
-                </p>
-                <div className="flex items-center gap-4">
-                  <span className="text-gray-400 text-sm">Secure payments via</span>
-                  <div className="flex gap-2">
-                    {['VISA', 'MC', 'AMEX', 'PayPal'].map((payment) => (
-                      <span key={payment} className="px-3 py-1 bg-white/5 border border-[#571089]/30 rounded text-xs text-gray-400 font-medium">
-                        {payment}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
-        )}
-      </div>
-    </Router>
-  );
+  // Handlers (remain unchanged)
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+  };
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  // Render the Router and the Layout component
+  return (
+    <Router>
+      {/* AppLayout is now a descendant of Router and can use useLocation() */}
+      <AppLayout
+        cartCount={cartCount}
+        setCartCount={setCartCount}
+        user={user}
+        setUser={setUser}
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+        scrolled={scrolled}
+        handleLogout={handleLogout}
+        toggleDarkMode={toggleDarkMode}
+        authPages={authPages}
+      />
+    </Router>
+  );
 }
 
 export default App;
