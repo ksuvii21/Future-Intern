@@ -100,7 +100,7 @@ const WishlistPage = () => {
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 fill-[#ea698b] text-[#ea698b]" />
             <span className="text-sm text-gray-400">{product.rating || 4.5}</span>
-            <span className="text-xs text-gray-500">({product.reviews || 12})</span>
+            <span className="text-xs text-gray-500">({product.numReviews || 0})</span>
           </div>
         </div>
         <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#ea698b] transition-colors">
