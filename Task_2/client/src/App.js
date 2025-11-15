@@ -72,6 +72,12 @@ function App() {
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
+  const handleLogin = (userData, token) => {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(userData));
+    setUser(userData);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -97,6 +103,7 @@ function App() {
         scrolled={scrolled}
         setScrolled={setScrolled}
         handleLogout={handleLogout}
+        handleLogin={handleLogin}
         toggleDarkMode={toggleDarkMode}
         authPages={authPages}
       />
@@ -113,6 +120,7 @@ function AppLayout({
   setMobileMenuOpen,
   scrolled,
   handleLogout,
+  handleLogin,
   authPages
 }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -273,8 +281,8 @@ function AppLayout({
           <Route path="/orders" element={<OrderHistory />} />
           <Route path="/orders/:id" element={<OrderDetail />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/register" element={<Register onLogin={handleLogin} />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/admin" element={
             <ProtectedRoute user={user} allowedRoles={['admin']}>

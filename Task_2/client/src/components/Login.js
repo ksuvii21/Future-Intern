@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Mail, Lock, CheckCircle, Fingerprint, Shield, Zap, Eye, EyeOff, Sparkles } from 'lucide-react';
-
-const Login = () => {
+ 
+const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -71,8 +71,7 @@ const Login = () => {
         localStorage.removeItem('savedEmail');
       }
       
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      onLogin(response.data.user, response.data.token);
       
       // Success animation before navigation
       setTimeout(() => {

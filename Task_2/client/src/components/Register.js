@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Mail, Lock, User, CheckCircle, Eye, EyeOff, Sparkles, Shield, Zap, Fingerprint } from 'lucide-react';
-
-const Register = () => {
+ 
+const Register = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -91,8 +91,7 @@ const Register = () => {
         }
       );
 
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      onLogin(response.data.user, response.data.token);
       setSuccess(true);
 
       // Redirect after showing success message
