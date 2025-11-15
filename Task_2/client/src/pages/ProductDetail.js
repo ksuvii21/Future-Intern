@@ -593,7 +593,6 @@ const ProductDetail = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {similarProducts.map(p => (
               <div key={p._id} className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 transform hover:-translate-y-2">
-                <div className="flex items-center gap-2 mb-2">
                 <div className="relative">
                   <img
                     src={p.imageUrl || 'https://via.placeholder.com/300x300?text=No+Image'}
@@ -625,7 +624,6 @@ const ProductDetail = () => {
                   </div>
                 </div>
               </div>
-            ))}
           </div>
         </div>
       )}
