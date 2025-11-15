@@ -13,7 +13,7 @@ const generateToken = (userId) => {
 // @access  Public
 const register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({
@@ -26,11 +26,16 @@ const register = async (req, res) => {
       });
     }
 
+    // Ensure role is either 'user' or 'seller' for security
+    const allowedRoles = ['user', 'seller'];
+    const userRole = allowedRoles.includes(role) ? role : 'user';
+
     // Create user
     const user = await User.create({
       username,
       email,
-      password
+      password,
+      role: userRole
     });
 
     // Generate token
