@@ -174,6 +174,9 @@ function AppLayout({
                   <div className="hidden md:flex items-center gap-2 text-gray-300">
                     <User className="w-5 h-5" />
                     <span className="text-sm">Hello, {user.username}</span>
+                    <Link to="/profile" className="text-sm hover:text-[#ea698b] ml-2">
+                      Profile
+                    </Link>
                     <button onClick={handleLogout} className="text-sm hover:text-[#ea698b] ml-2">
                       Logout
                     </button>
