@@ -56,6 +56,50 @@ exports.getProductById = async (req, res) => {
   }
 };
 
+// @desc    Create new review
+// @route   POST /api/products/:id/reviews
+// @access  Private
+exports.createProductReview = async (req, res) => {
+  const { rating, comment } = req.body;
+
+  try {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Check if the user has already reviewed this product
+    const alreadyReviewed = product.reviews.find(
+      (r) => r.user.toString() === req.user.userId.toString()
+    );
+
+    if (alreadyReviewed) {
+      return res.status(400).json({ message: 'You have already reviewed this product' });
+    }
+
+    const review = {
+      name: req.user.username, // Assuming username is on req.user from auth middleware
+      rating: Number(rating),
+      comment,
+      user: req.user.userId,
+    };
+
+    product.reviews.push(review);
+
+    product.numReviews = product.reviews.length;
+    product.rating =
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      product.reviews.length;
+
+    await product.save();
+    res.status(201).json({ message: 'Review added successfully' });
+  } catch (error) {
+    console.error('Create review error:', error);
+    res.status(500).json({ message: 'Server error while adding review' });
+  }
+};
+
 // Create product
 exports.createProduct = async (req, res) => {
   const product = new Product(req.body);
