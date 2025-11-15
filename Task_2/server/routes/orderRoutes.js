@@ -5,7 +5,8 @@ const {
   getUserOrders,
   getAllOrders,
   updateOrderStatus,
-  getOrderById
+  getOrderById,
+  cancelOrder
 } = require('../controllers/orderController');
 const auth = require('../middleware/auth');
 

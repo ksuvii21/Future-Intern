@@ -145,3 +145,54 @@ exports.getOrderById = async (req, res) => {
     res.status(500).json({ message: 'Server error retrieving order' });
   }
 };
+
+// Cancel an order (user)
+exports.cancelOrder = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  try {
+    const { id } = req.params;
+    const userId = req.user.userId;
+
+    const order = await Order.findById(id).session(session);
+
+    if (!order) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    // Ensure the user owns the order
+    if (order.user.toString() !== userId) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    // Only allow cancellation if the order is pending
+    if (order.status !== 'pending') {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(400).json({ message: `Cannot cancel order with status: ${order.status}` });
+    }
+
+    order.status = 'cancelled';
+    await order.save({ session });
+
+    // Replenish product stock
+    for (const item of order.products) {
+      await Product.findByIdAndUpdate(item.product, {
+        $inc: { stock: item.quantity }
+      }, { session });
+    }
+
+    await session.commitTransaction();
+    res.json({ message: 'Order cancelled successfully', order });
+  } catch (error) {
+    await session.abortTransaction();
+    console.error('Cancel order error:', error);
+    res.status(500).json({ message: 'Server error cancelling order' });
+  } finally {
+    session.endSession();
+  }
+};
