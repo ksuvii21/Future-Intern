@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Users, ShoppingBag, Package, DollarSign, Activity } from 'lucide-react';
+import { Users, ShoppingBag, Package, DollarSign, Edit, Trash2 } from 'lucide-react';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -29,6 +29,7 @@ const Admin = () => {
   }, []);
 
   const fetchDashboardData = async () => {
+    setLoading(true);
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
@@ -36,17 +37,17 @@ const Admin = () => {
       const [productsRes, usersRes, ordersRes] = await Promise.all([
         axios.get('http://localhost:5000/api/products'),
         axios.get('http://localhost:5000/api/auth/users', config),
-        axios.get('http://localhost:5000/api/orders', config)
+        axios.get('http://localhost:5000/api/orders/all', config)
       ]);
 
-      setProducts(productsRes.data);
+      setProducts(productsRes.data.products);
       setUsers(usersRes.data);
       setOrders(ordersRes.data);
 
       // Calculate stats
       const totalRevenue = ordersRes.data.reduce((sum, order) => sum + order.totalAmount, 0);
       setStats({
-        totalProducts: productsRes.data.length,
+        totalProducts: productsRes.data.products.length,
         totalUsers: usersRes.data.length,
         totalOrders: ordersRes.data.length,
         totalRevenue: totalRevenue.toFixed(2)
@@ -61,8 +62,8 @@ const Admin = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/products');
-      setProducts(response.data);
-      setStats(prev => ({ ...prev, totalProducts: response.data.length }));
+      setProducts(response.data.products);
+      setStats(prev => ({ ...prev, totalProducts: response.data.products.length }));
     } catch (error) {
       console.error('Error fetching products:', error);
     }
