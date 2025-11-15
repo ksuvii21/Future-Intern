@@ -157,15 +157,18 @@ const CategoryPage = () => {
                   type="range"
                   min="0"
                   max={maxPrice}
-                  value={priceRange}neRange(e.target.value)}
+                  value={priceRange}
+                  onChange={(e) => setPriceRange(Number(e.target.value))}
                   className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#ea698b]"
                 />
               </div>
-              <div className="flex items-center gap-2">l=>
+              <div className="flex items-center gap-2">
+                <label className="text-gray-300 text-sm">Sort by:</label>
                 <select
                   value={sortBy}
                   onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                 
+                  className="px-4 py-2 bg-white/5 border border-[#571089]/30 rounded-lg text-white focus:outline-none focus:border-[#ea698b] transition-all"
+                >
                   <option value="name">Name</option>
                   <option value="price">Price</option>
                   <option value="rating">Rating</option>
@@ -174,7 +177,8 @@ const CategoryPage = () => {
               </div>
               <button
                 onClick={() => handleFilterChange('sortOrder', sortOrder === 'asc' ? 'desc' : 'asc')}
-                class
+                className="px-4 py-2 bg-white/5 border border-[#571089]/30 rounded-lg text-white hover:bg-white/10 hover:border-[#ea698b]/50 transition-all"
+              >
                 {sortOrder === 'asc' ? '↑' : '↓'}
               </button>
             </div>
@@ -199,18 +203,22 @@ const CategoryPage = () => {
                     <div className="absolute top-4 left-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-xs font-bold px-3 py-1 rounded-full">
                       NEW
                     </div>
-                  )}on
+                  )}
+                  <button
                     onClick={(e) => {
                       e.preventDefault();
-               
+                      e.stopPropagation();
+                      const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
                       const existingItem = wishlist.find(item => item._id === product._id);
-
+  
                       if (!existingItem) {
                         wishlist.push(product);
                         localStorage.setItem('wishlist', JSON.stringify(wishlist));
-                        alert('Added to wish 
+                        alert('Added to wishlist!');
+                      } else {
                         alert('Already in wishlist!');
-                      } 
+                      }
+                    }}
                     className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#ea698b]"
                   >
                     <Heart className="w-5 h-5" />
