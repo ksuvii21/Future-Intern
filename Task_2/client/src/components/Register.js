@@ -149,7 +149,7 @@ const Register = () => {
             {/* Logo and Greeting */}
             <div className="space-y-2">
               <div className="flex items-center transform hover:scale-105 transition-transform duration-300">
-                <img src={LOGO_PATH} alt="Fansee Rebel" className="w-25 h-14 rounded-full mr-2" />
+                <img src={LOGO_PATH} alt="Fansee Rebel" className="w-25 h-24 rounded-full mr-2" />
               </div>
               <h1 className="text-4xl font-bold text-white mt-4">
                 Join The <br />
