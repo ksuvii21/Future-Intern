@@ -8,7 +8,8 @@ const {
   updateProfile,
   getAllUsers,
   addAddress,
-  deleteAddress
+  deleteAddress,
+  updateUserRole
 } = require('../controllers/authController');
 const auth = require('../middleware/auth');
 
@@ -47,6 +48,11 @@ router.post('/address', auth, addAddress);
 // @access  Private
 router.delete('/address/:id', auth, deleteAddress);
 
+const adminAuth = (req, res, next) => {
+  if (req.user.role !== 'admin') return res.status(403).json({ message: 'Access denied. Admin only.' });
+  next();
+};
+
 // @route   GET /api/auth/users
 // @desc    Get all users (admin only)
 // @access  Private/Admin
@@ -56,5 +62,10 @@ router.get('/users', auth, (req, res, next) => {
   }
   next();
 }, getAllUsers);
+
+// @route   PUT /api/auth/users/:id/role
+// @desc    Update a user's role (admin only)
+// @access  Private/Admin
+router.put('/users/:id/role', auth, adminAuth, updateUserRole);
 
 module.exports = router;
