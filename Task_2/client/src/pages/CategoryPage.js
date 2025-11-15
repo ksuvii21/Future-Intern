@@ -11,6 +11,7 @@ const CategoryPage = () => {
   const [allCategories, setAllCategories] = useState([]);
   const [maxPrice, setMaxPrice] = useState(1000);
   const [priceRange, setPriceRange] = useState(1000);
+  const navigate = useNavigate();
 
   // Filters state derived from URL search params
   const selectedCategory = category || 'All';
@@ -55,6 +56,22 @@ const CategoryPage = () => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set(key, value);
     setSearchParams(newParams);
+  };
+
+  const handleBuyNow = (product) => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existingItem = cart.find(item => item._id === product._id);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      // Add with default size/color, assuming 'M' and 'Black' are safe defaults
+      cart.push({ ...product, quantity: 1, selectedSize: 'M', selectedColor: 'Black' });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.dispatchEvent(new Event('storage'));
+    navigate('/checkout');
   };
   
   const getCategoryTitle = cat => {
@@ -229,13 +246,20 @@ const CategoryPage = () => {
                   >
                     <Heart className="w-5 h-5" />
                   </button>
-                  <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
+                  <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                     <Link
                       to={`/product/${product._id}`}
-                      className="block w-full py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all text-center"
+                      className="flex-1 py-3 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/30 transition-all text-center"
                     >
                       Quick View
                     </Link>
+                    <button
+                      onClick={() => handleBuyNow(product)}
+                      disabled={product.stock === 0}
+                      className="flex-1 py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all text-center disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Buy Now
+                    </button>
                   </div>
                 </div>
                 <div className="p-6">
