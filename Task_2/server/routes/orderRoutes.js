@@ -6,11 +6,17 @@ const {
   getAllOrders,
   updateOrderStatus,
   getOrderById,
-  cancelOrder
+  cancelOrder,
+  createPaymentIntent
 } = require('../controllers/orderController');
 const auth = require('../middleware/auth');
 
-// @route   POST /api/orders
+// @route   POST /api/orders/create-payment-intent
+// @desc    Create a stripe payment intent
+// @access  Private
+router.post('/create-payment-intent', auth, createPaymentIntent);
+
+// @route   POST /api/orders/create
 // @desc    Create a new order
 // @access  Private
 router.post('/create', auth, createOrder);
