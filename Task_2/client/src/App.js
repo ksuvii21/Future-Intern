@@ -29,7 +29,7 @@ function App() {
   const [scrolled, setScrolled] = useState(false);
 
   // Define auth pages where header/footer should be hidden
-  const authPages = ['/login', '/register', '/forgot-password', '/admin'];
+  const authPages = ['/login', '/register', '/forgot-password', '/admin', '/profile'];
 
   useEffect(() => {
     // Check for user in localStorage on app load
