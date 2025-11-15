@@ -9,6 +9,7 @@ const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    role: 'user',
     agreeToTerms: false,
   });
   const [loading, setLoading] = useState(false);
@@ -86,6 +87,7 @@ const Register = () => {
           username: formData.username,
           email: formData.email,
           password: formData.password,
+          role: formData.role,
         }
       );
 
@@ -271,6 +273,27 @@ const Register = () => {
                   >
                     {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
+                </div>
+              </div>
+
+              {/* Role Selection */}
+              <div>
+                <div className="relative group">
+                  <User className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+                    isFocused.role ? 'text-[#ea698b]' : 'text-gray-500'
+                  }`} />
+                  <select
+                    id="role"
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('role')}
+                    onBlur={() => handleBlur('role')}
+                    className="w-full px-4 py-3 pl-12 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b] focus:border-[#ea698b] transition-all duration-300 group-hover:border-[#571089]/70 appearance-none"
+                  >
+                    <option value="user">I am a Customer</option>
+                    <option value="seller">I want to be a Seller</option>
+                  </select>
                 </div>
               </div>
 
