@@ -280,77 +280,77 @@ function AppContent({
         </main>
 
         {/* Footer - Only show if not on auth pages */}
-      {!isAuthPage && (
-        <footer className="border-t border-[#571089]/30 bg-[#0a0015]">
-          <div className="max-w-7xl mx-auto px-4 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <img src="/logo.png" alt="Fansee Rebel" className="w-25 h-20 rounded-lg" />
-                  <h3 className="text-3xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                    Fansee Rebel
-                  </h3>
+        {!isAuthPage && (
+          <footer className="border-t border-[#571089]/30 bg-[#0a0015]">
+            <div className="max-w-7xl mx-auto px-4 py-12">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <img src="/logo.png" alt="Fansee Rebel" className="w-25 h-20 rounded-lg" />
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                      Fansee Rebel
+                    </h3>
+                  </div>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Your premier destination for luxury fashion, exquisite jewelry, and timeless elegance.
+                  </p>
+                  <div className="flex gap-3">
+                    {['💎', '👗', '💄', '👠'].map((icon, i) => (
+                      <span key={i} className="text-2xl opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+                        {icon}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <p className="text-gray-400 text-sm mb-4">
-                  Your premier destination for luxury fashion, exquisite jewelry, and timeless elegance.
+                <div>
+                  <h4 className="text-white font-semibold mb-4">Shop</h4>
+                  <ul className="space-y-2 text-sm text-gray-400">
+                    {['New Arrivals', 'Dresses', 'Jewelry', 'Accessories', 'Sale'].map((item) => (
+                      <li key={item}>
+                        <Link to={`/category/${item.toLowerCase()}`} className="hover:text-[#ea698b] transition-colors">{item}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-4">Customer Care</h4>
+                  <ul className="space-y-2 text-sm text-gray-400">
+                    {['Contact Us', 'Track Order', 'Returns', 'Shipping Info', 'Size Guide'].map((item) => (
+                      <li key={item}>
+                        <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-4">Company</h4>
+                  <ul className="space-y-2 text-sm text-gray-400">
+                    {['About Us', 'Careers', 'Press', 'Blog', 'Affiliate Program'].map((item) => (
+                      <li key={item}>
+                        <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="border-t border-[#571089]/30 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p className="text-gray-400 text-sm mb-4 md:mb-0">
+                  © 2025 Fansee Rebel. All rights reserved.
                 </p>
-                <div className="flex gap-3">
-                  {['💎', '👗', '💄', '👠'].map((icon, i) => (
-                    <span key={i} className="text-2xl opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
-                      {icon}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-4">Shop</h4>
-                <ul className="space-y-2 text-sm text-gray-400">
-                  {['New Arrivals', 'Dresses', 'Jewelry', 'Accessories', 'Sale'].map((item) => (
-                    <li key={item}>
-                      <Link to={`/category/${item.toLowerCase()}`} className="hover:text-[#ea698b] transition-colors">{item}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-4">Customer Care</h4>
-                <ul className="space-y-2 text-sm text-gray-400">
-                  {['Contact Us', 'Track Order', 'Returns', 'Shipping Info', 'Size Guide'].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-4">Company</h4>
-                <ul className="space-y-2 text-sm text-gray-400">
-                  {['About Us', 'Careers', 'Press', 'Blog', 'Affiliate Program'].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="hover:text-[#ea698b] transition-colors">{item}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="border-t border-[#571089]/30 pt-8 flex flex-col md:flex-row justify-between items-center">
-              <p className="text-gray-400 text-sm mb-4 md:mb-0">
-                © 2025 Fansee Rebel. All rights reserved.
-              </p>
-              <div className="flex items-center gap-4">
-                <span className="text-gray-400 text-sm">Secure payments via</span>
-                <div className="flex gap-2">
-                  {['VISA', 'MC', 'AMEX', 'PayPal'].map((payment) => (
-                    <span key={payment} className="px-3 py-1 bg-white/5 border border-[#571089]/30 rounded text-xs text-gray-400 font-medium">
-                      {payment}
-                    </span>
-                  ))}
+                <div className="flex items-center gap-4">
+                  <span className="text-gray-400 text-sm">Secure payments via</span>
+                  <div className="flex gap-2">
+                    {['VISA', 'MC', 'AMEX', 'PayPal'].map((payment) => (
+                      <span key={payment} className="px-3 py-1 bg-white/5 border border-[#571089]/30 rounded text-xs text-gray-400 font-medium">
+                        {payment}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </footer>
-      )}
+          </footer>
+        )}
       </div>
     </Router>
   );
