@@ -23,6 +23,8 @@ const Register = () => {
     confirmPassword: false 
   });
   const [shake, setShake] = useState(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const navigate = useNavigate();
 
   const LOGO_PATH = '/logo.png';
@@ -293,13 +295,21 @@ const Register = () => {
                 </div>
                 <label htmlFor="agreeToTerms" className="ml-2 text-gray-400 cursor-pointer group-hover:text-gray-300 transition-colors">
                   I agree to the{' '}
-                  <Link to="/terms" className="text-[#ea698b] hover:text-[#d55d92] hover:underline">
+                  <button
+                    type="button"
+                    onClick={() => setShowTermsModal(true)}
+                    className="text-[#ea698b] hover:text-[#d55d92] hover:underline bg-transparent border-none cursor-pointer"
+                  >
                     Terms of Service
-                  </Link>{' '}
+                  </button>{' '}
                   and{' '}
-                  <Link to="/privacy" className="text-[#ea698b] hover:text-[#d55d92] hover:underline">
+                  <button
+                    type="button"
+                    onClick={() => setShowPrivacyModal(true)}
+                    className="text-[#ea698b] hover:text-[#d55d92] hover:underline bg-transparent border-none cursor-pointer"
+                  >
                     Privacy Policy
-                  </Link>
+                  </button>
                 </label>
               </div>
 
