@@ -150,7 +150,7 @@ const CategoryPage = () => {
             {allCategories.map(cat => (
               <Link
                 key={cat}
-                to={`/category/₹{cat.toLowerCase().replace(/\s+/g, '-')}`}
+                to={`/category/${cat.toLowerCase().replace(/ /g, '-')}`}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 block ₹{
                   selectedCategory === cat
                     ? 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white shadow-lg shadow-[#ea698b]/30'
