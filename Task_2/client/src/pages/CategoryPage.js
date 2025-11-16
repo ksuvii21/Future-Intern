@@ -248,7 +248,7 @@ const CategoryPage = () => {
                   </button>
                   <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                     <Link
-                      to={`/product/₹{product._id}`}
+                      to={`/product/${product._id}`}
                       className="flex-1 py-3 bg-white/20 backdrop-blur-sm text-white font-semibold rounded-lg hover:bg-white/30 transition-all text-center"
                     >
                       Quick View
