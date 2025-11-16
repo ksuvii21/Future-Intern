@@ -206,7 +206,7 @@ const Checkout = () => {
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">Qty: {item.quantity}</span>
-                        <span className="text-[#ea698b] font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                        <span className="text-[#ea698b] font-semibold">₹{(item.price * item.quantity).toLocaleString('en-IN')}</span>
                       </div>
                     </div>
                   </div>
@@ -216,7 +216,7 @@ const Checkout = () => {
               <div className="border-t border-[#571089]/30 pt-4 space-y-2">
                 <div className="flex justify-between text-gray-400">
                   <span>Subtotal:</span>
-                  <span>${totalPrice.toFixed(2)}</span>
+                  <span>₹{totalPrice.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-gray-400">
                   <span>Shipping:</span>
@@ -224,13 +224,13 @@ const Checkout = () => {
                 </div>
                 <div className="flex justify-between text-gray-400">
                   <span>Tax:</span>
-                  <span>${(totalPrice * 0.08).toFixed(2)}</span>
+                  <span>₹{(totalPrice * 0.08).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="border-t border-[#571089]/30 pt-2 mt-4">
                   <div className="flex justify-between text-xl font-bold text-white">
                     <span>Total:</span>
                     <span className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                      ${(totalPrice + totalPrice * 0.08).toFixed(2)}
+                      ₹{(totalPrice + totalPrice * 0.08).toLocaleString('en-IN')}
                     </span>
                   </div>
                 </div>
