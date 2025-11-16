@@ -201,8 +201,8 @@ const Checkout = () => {
                     <div className="flex-1">
                       <h3 className="text-white font-medium mb-1">{item.name}</h3>
                       <p className="text-gray-400 text-sm mb-2">
-                        {item.selectedColor && `Color: ₹{item.selectedColor} | `}
-                        {item.selectedSize && `Size: ₹{item.selectedSize}`}
+                        {item.selectedColor && `Color: ${item.selectedColor} | `}
+                        {item.selectedSize && `Size: ${item.selectedSize}`}
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">Qty: {item.quantity}</span>
