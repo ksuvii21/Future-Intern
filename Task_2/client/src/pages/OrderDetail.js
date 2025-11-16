@@ -348,7 +348,7 @@ const OrderDetail = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <DollarSign className="w-4 h-4" />
-                  <span>Total: ${order.totalAmount.toFixed(2)}</span>
+                  <span>Total: ₹{order.totalAmount.toLocaleString('en-IN')}</span>
                 </div>
               </div>
             </div>
