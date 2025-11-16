@@ -286,7 +286,7 @@ const OrderDetail = () => {
                 <div className="flex justify-between text-xl font-bold text-white">
                   <span>Total:</span>
                   <span className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                    ${order.totalAmount.toFixed(2)}
+                    ₹{order.totalAmount.toLocaleString('en-IN')}
                   </span>
                 </div>
               </div>
