@@ -368,11 +368,11 @@ const Checkout = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <button
                   onClick={() => setPaymentMethod('card')}
-                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ₹{
-                    paymentMethod === 'card'
-                      ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
-                      : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
-                  }`}
+                className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                  paymentMethod === 'card'
+                    ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
+                    : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
+                }`}
                 >
                   <CreditCard className="w-6 h-6" />
                   <div className="text-left">
@@ -383,7 +383,7 @@ const Checkout = () => {
 
                 <button
                   onClick={() => setPaymentMethod('upi')}
-                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ₹{
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
                     paymentMethod === 'upi'
                       ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
                       : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
@@ -398,7 +398,7 @@ const Checkout = () => {
 
                 <button
                   onClick={() => setPaymentMethod('cod')}
-                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ₹{
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
                     paymentMethod === 'cod'
                       ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
                       : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
