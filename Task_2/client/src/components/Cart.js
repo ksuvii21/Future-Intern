@@ -35,7 +35,7 @@ const Cart = () => {
     0
   );
 
-  const shipping = totalPrice > 50 ? 0 : 9.99;
+  const shipping = totalPrice > 4250 ? 0 : 849.15;
   const tax = totalPrice * 0.08;
   const finalTotal = totalPrice + shipping + tax;
 
