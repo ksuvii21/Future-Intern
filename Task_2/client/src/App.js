@@ -131,15 +131,15 @@ function AppLayout({
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/category/all-categories?search=₹{encodeURIComponent(searchQuery)}`);
+      navigate(`/category/all-categories?search=${encodeURIComponent(searchQuery)}`);
     }
   };
 
   return (
-    <div className={`App min-h-screen ₹{darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
+    <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
       {/* Elegant Header - Only show if not on auth pages */}
       {!isAuthPage && (
-        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ₹{
+        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30'
         }`}>
           {/* Top Announcement Bar */}
@@ -229,7 +229,7 @@ function AppLayout({
               {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'New Arrivals'].map((item) => (
                 <Link
                   key={item}
-                  to={item === 'All Categories' ? '/' : `/category/₹{item.toLowerCase().replace(/\s/g, '-')}`}
+                  to={item === 'All Categories' ? '/' : `/category/₹{item.toLowerCase().replace(/ /g, '-')}`}
                   className="text-sm text-gray-300 hover:text-[#ea698b] transition-colors font-medium relative group"
                 >
                   {item}
@@ -250,7 +250,7 @@ function AppLayout({
               {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections'].map((item) => (
                 <Link
                   key={item}
-                  to={item === 'All Categories' ? '/' : `/category/₹{item.toLowerCase().replace(/\s/g, '-')}`}
+                  to={item === 'All Categories' ? '/' : `/category/₹{item.toLowerCase().replace(/ /g, '-')}`}
                   className="text-gray-300 hover:text-[#ea698b] transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -270,7 +270,7 @@ function AppLayout({
       )}
 
       {/* Main Content Area */}
-      <main className={`flex-1 ₹{isAuthPage ? '' : 'pt-[170px] md:pt-[130px] lg:pt-[190px]'}`}>
+      <main className={`flex-1 ${isAuthPage ? '' : 'pt-[170px] md:pt-[130px] lg:pt-[190px]'}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category/:category" element={<CategoryPage />} />
@@ -330,7 +330,7 @@ function AppLayout({
                 <ul className="space-y-2 text-sm text-gray-400">
                   {['New Arrivals', 'Dresses', 'Jewelry', 'Accessories', 'Sale'].map((item) => (
                     <li key={item}>
-                      <Link to={`/category/₹{item.toLowerCase().replace(/\s/g, '-')}`} className="hover:text-[#ea698b] transition-colors">{item}</Link>
+                      <Link to={`/category/₹{item.toLowerCase().replace(/ /g, '-')}`} className="hover:text-[#ea698b] transition-colors">{item}</Link>
                     </li>
                   ))}
                 </ul>
