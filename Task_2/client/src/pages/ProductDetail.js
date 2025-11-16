@@ -228,7 +228,7 @@ const ProductDetail = () => {
 
             <div className="flex items-center gap-4">
               <span className="text-5xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                ${product.price}
+                ₹{product.price.toLocaleString('en-IN')}
               </span>
               <span className={`text-sm px-3 py-1 rounded-full font-medium ${
                 product.stock > 10
