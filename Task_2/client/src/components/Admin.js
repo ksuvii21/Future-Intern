@@ -273,7 +273,7 @@ const Admin = () => {
                 <td className="p-3 font-mono text-sm">#{order._id.slice(-8)}</td>
                 <td className="p-3">{order.user?.username || 'N/A'}</td>
                 <td className="p-3">{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td className="p-3 font-semibold text-green-400">${order.totalAmount.toFixed(2)}</td>
+                <td className="p-3 font-semibold text-green-400">₹{order.totalAmount.toLocaleString('en-IN')}</td>
                 <td className="p-3 capitalize">{order.status}</td>
               </tr>
             ))}
