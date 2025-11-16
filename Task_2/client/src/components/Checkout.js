@@ -482,7 +482,7 @@ const Checkout = () => {
                 disabled={isProcessing || !stripe}
                 className="px-12 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105 transition-all duration-300 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isProcessing ? 'Processing...' : `Place Order - ₹₹{(totalPrice + totalPrice * 0.08).toLocaleString('en-IN')}`}
+                {isProcessing ? 'Processing...' : `Place Order - ₹${(totalPrice + totalPrice * 0.08).toLocaleString('en-IN')}`}
               </button>
             </div>
           </div>
