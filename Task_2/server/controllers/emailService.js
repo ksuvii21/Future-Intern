@@ -42,7 +42,7 @@ const sendOrderConfirmationEmail = async (order) => {
         <h3 style="border-bottom: 2px solid #eee; padding-bottom: 5px;">Order Summary</h3>
         ${productListHtml}
         <div style="text-align: right; margin-top: 20px;">
-          <p style="font-size: 18px; font-weight: bold;">Total: $${totalAmount.toFixed(2)}</p>
+          <p style="font-size: 18px; font-weight: bold;">Total: ₹{totalAmount.toLocaleString('en-IN')}</p>
         </div>
         <h3 style="border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 30px;">Shipping To</h3>
         <p>
