@@ -275,7 +275,7 @@ const OrderDetail = () => {
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">Qty: {item.quantity}</span>
-                        <span className="text-[#ea698b] font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                        <span className="text-[#ea698b] font-semibold">₹{(item.price * item.quantity).toLocaleString('en-IN')}</span>
                       </div>
                     </div>
                   </div>
