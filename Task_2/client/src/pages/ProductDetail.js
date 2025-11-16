@@ -624,7 +624,7 @@ const ProductDetail = () => {
                   <p className="text-gray-400 text-sm mb-3 line-clamp-2">{p.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                      ${p.price}
+                      ₹{p.price.toLocaleString('en-IN')}
                     </span>
                     <Link
                       to={`/product/${p._id}`}
