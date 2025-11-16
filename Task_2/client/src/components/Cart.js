@@ -96,7 +96,7 @@ const Cart = () => {
                       <p className="text-gray-400 mb-4">{item.category}</p>
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                          ${item.price}
+                          ₹{item.price.toLocaleString('en-IN')}
                         </span>
                         <div className="flex items-center gap-3">
                           <div className="flex items-center bg-white/5 border border-[#571089]/30 rounded-lg">
