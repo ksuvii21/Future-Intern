@@ -170,7 +170,7 @@ const Cart = () => {
               <div className="space-y-3 text-sm text-gray-400">
                 <div className="flex items-center gap-2">
                   <Truck className="w-4 h-4 text-green-400" />
-                  <span>Free shipping on orders over $50</span>
+                  <span>Free shipping on orders over ₹4250</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Shield className="w-4 h-4 text-blue-400" />
