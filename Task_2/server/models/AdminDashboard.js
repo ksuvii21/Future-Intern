@@ -18,7 +18,7 @@ const AdminDashboard = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const config = { headers: { Authorization: `Bearer ₹{token}` } };
 
       const [statsRes, productsRes, ordersRes, usersRes] = await Promise.all([
         axios.get('http://localhost:5000/api/admin/stats', config),
@@ -52,11 +52,11 @@ const AdminDashboard = () => {
     productData.isNewArrival = productData.isNewArrival === 'on';
 
     const token = localStorage.getItem('token');
-    const config = { headers: { Authorization: `Bearer ${token}` } };
+    const config = { headers: { Authorization: `Bearer ₹{token}` } };
 
     try {
       if (editingProduct) {
-        await axios.put(`http://localhost:5000/api/products/${editingProduct._id}`, productData, config);
+        await axios.put(`http://localhost:5000/api/products/₹{editingProduct._id}`, productData, config);
       } else {
         await axios.post('http://localhost:5000/api/products', productData, config);
       }
@@ -72,8 +72,8 @@ const AdminDashboard = () => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
         const token = localStorage.getItem('token');
-        const config = { headers: { Authorization: `Bearer ${token}` } };
-        await axios.delete(`http://localhost:5000/api/products/${productId}`, config);
+        const config = { headers: { Authorization: `Bearer ₹{token}` } };
+        await axios.delete(`http://localhost:5000/api/products/₹{productId}`, config);
         fetchAllData();
       } catch (error) {
         console.error("Failed to delete product", error);
@@ -84,8 +84,8 @@ const AdminDashboard = () => {
   const handleUpdateOrderStatus = async (orderId, status) => {
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.put(`http://localhost:5000/api/orders/${orderId}/status`, { status }, config);
+      const config = { headers: { Authorization: `Bearer ₹{token}` } };
+      await axios.put(`http://localhost:5000/api/orders/₹{orderId}/status`, { status }, config);
       fetchAllData();
     } catch (error) {
       console.error("Failed to update order status", error);
@@ -95,8 +95,8 @@ const AdminDashboard = () => {
   const handleUpdateUserRole = async (userId, role) => {
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.put(`http://localhost:5000/api/auth/users/${userId}/role`, { role }, config);
+      const config = { headers: { Authorization: `Bearer ₹{token}` } };
+      await axios.put(`http://localhost:5000/api/auth/users/₹{userId}/role`, { role }, config);
       fetchAllData();
     } catch (error) {
       console.error("Failed to update user role", error);
@@ -110,7 +110,7 @@ const AdminDashboard = () => {
 
   const StatCard = ({ icon, title, value, color }) => (
     <div className={`bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 flex items-center gap-4`}>
-      <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br ${color}`}>
+      <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br ₹{color}`}>
         {icon}
       </div>
       <div>
@@ -123,7 +123,7 @@ const AdminDashboard = () => {
   const renderDashboard = () => (
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard icon={<DollarSign />} title="Total Revenue" value={`$${stats?.totalRevenue?.toFixed(2) || 0}`} color="from-green-500/30 to-green-600/30" />
+        <StatCard icon={<DollarSign />} title="Total Revenue" value={`₹₹{stats?.totalRevenue?.toFixed(2) || 0}`} color="from-green-500/30 to-green-600/30" />
         <StatCard icon={<ShoppingCart />} title="Total Orders" value={stats?.totalOrders || 0} color="from-blue-500/30 to-blue-600/30" />
         <StatCard icon={<Users />} title="Total Users" value={stats?.totalUsers || 0} color="from-purple-500/30 to-purple-600/30" />
         <StatCard icon={<Package />} title="Total Products" value={stats?.totalProducts || 0} color="from-yellow-500/30 to-yellow-600/30" />
@@ -137,7 +137,7 @@ const AdminDashboard = () => {
             <YAxis tick={{ fill: '#9ca3af' }} />
             <Tooltip contentStyle={{ backgroundColor: '#1a0a2e', border: '1px solid #571089' }} />
             <Legend />
-            <Bar dataKey="total" fill="#ea698b" name="Sales ($)" />
+            <Bar dataKey="total" fill="#ea698b" name="Sales (₹)" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -168,7 +168,7 @@ const AdminDashboard = () => {
               <tr key={p._id} className="border-b border-[#571089]/30 hover:bg-white/5">
                 <td className="px-6 py-4 font-medium text-white">{p.name}</td>
                 <td className="px-6 py-4">{p.category}</td>
-                <td className="px-6 py-4">${p.price}</td>
+                <td className="px-6 py-4">₹{p.price}</td>
                 <td className="px-6 py-4">{p.stock}</td>
                 <td className="px-6 py-4 flex gap-2">
                   <button onClick={() => openProductModal(p)} className="p-2 text-blue-400 hover:text-blue-300"><Edit className="w-4 h-4" /></button>
@@ -282,7 +282,7 @@ const AdminDashboard = () => {
   const TabButton = ({ id, icon, label }) => (
     <button
       onClick={() => setActiveTab(id)}
-      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors w-full text-left ${activeTab === id ? 'bg-[#ea698b]/20 text-[#ea698b]' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors w-full text-left ₹{activeTab === id ? 'bg-[#ea698b]/20 text-[#ea698b]' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
     >
       {icon}
       <span className="font-medium">{label}</span>
@@ -336,7 +336,7 @@ const AdminDashboard = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-gray-300 mb-2">Price ($)</label>
+                  <label className="block text-gray-300 mb-2">Price (₹)</label>
                   <input type="number" name="price" step="0.01" defaultValue={editingProduct?.price} className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white" required />
                 </div>
                 <div>

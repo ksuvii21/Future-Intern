@@ -25,7 +25,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/${id}`
+          `http://localhost:5000/api/products/₹{id}`
         );
         setProduct(response.data);
 
@@ -116,9 +116,9 @@ const ProductDetail = () => {
     }
 
     try {
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const config = { headers: { Authorization: `Bearer ₹{token}` } };
       const reviewData = { rating: reviewRating, comment: reviewComment };
-      await axios.post(`http://localhost:5000/api/products/${id}/reviews`, reviewData, config);
+      await axios.post(`http://localhost:5000/api/products/₹{id}/reviews`, reviewData, config);
 
       setReviewSuccess('Review submitted successfully! It will be visible after refreshing.');
       setReviewRating(0);
@@ -230,7 +230,7 @@ const ProductDetail = () => {
               <span className="text-5xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
                 ₹{product.price.toLocaleString('en-IN')}
               </span>
-              <span className={`text-sm px-3 py-1 rounded-full font-medium ${
+              <span className={`text-sm px-3 py-1 rounded-full font-medium ₹{
                 product.stock > 10
                   ? 'bg-green-500/20 text-green-400'
                   : product.stock > 0
@@ -240,7 +240,7 @@ const ProductDetail = () => {
                 {product.stock > 10
                   ? 'In Stock'
                   : product.stock > 0
-                    ? `Only ${product.stock} left`
+                    ? `Only ₹{product.stock} left`
                     : 'Out of Stock'}
               </span>
             </div>
@@ -253,7 +253,7 @@ const ProductDetail = () => {
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`px-4 py-2 rounded-lg border-2 transition-all ${
+                    className={`px-4 py-2 rounded-lg border-2 transition-all ₹{
                       selectedColor === color
                         ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
                         : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
@@ -281,7 +281,7 @@ const ProductDetail = () => {
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`w-12 h-12 rounded-lg border-2 transition-all ${
+                    className={`w-12 h-12 rounded-lg border-2 transition-all ₹{
                       selectedSize === size
                         ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
                         : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
@@ -371,7 +371,7 @@ const ProductDetail = () => {
               <button
                 onClick={buyNow}
                 disabled={product.stock === 0}
-                className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+                className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ₹{
                   product.stock === 0
                     ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-green-500 to-green-600 text-white hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105'
@@ -383,7 +383,7 @@ const ProductDetail = () => {
               <button
                 onClick={addToCart}
                 disabled={product.stock === 0}
-                className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+                className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ₹{
                   product.stock === 0
                     ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105'
@@ -498,7 +498,7 @@ const ProductDetail = () => {
               <div className="flex items-center gap-4">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`w-6 h-6 ${i < Math.round(product.rating) ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
+                    <Star key={i} className={`w-6 h-6 ₹{i < Math.round(product.rating) ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
                   ))}
                 </div>
                 <span className="text-white font-medium text-lg">{product.rating.toFixed(1)} out of 5</span>
@@ -514,7 +514,7 @@ const ProductDetail = () => {
                       <div className="flex-1 bg-white/10 rounded-full h-2">
                         <div
                           className="bg-[#ea698b] h-2 rounded-full"
-                          style={{ width: `${percentage}%` }}
+                          style={{ width: `₹{percentage}%` }}
                         ></div>
                       </div>
                       <span className="text-sm text-gray-400 w-12 text-right">{percentage.toFixed(0)}%</span>
@@ -534,7 +534,7 @@ const ProductDetail = () => {
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className={`w-7 h-7 cursor-pointer transition-colors ${i < reviewRating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600 hover:text-gray-400'}`}
+                        className={`w-7 h-7 cursor-pointer transition-colors ₹{i < reviewRating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600 hover:text-gray-400'}`}
                         onClick={() => setReviewRating(i + 1)}
                       />
                     ))}
@@ -580,7 +580,7 @@ const ProductDetail = () => {
                         <span className="text-white font-medium">{review.name}</span>
                         <div className="flex">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
+                            <Star key={i} className={`w-4 h-4 ₹{i < review.rating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
                           ))}
                         </div>
                       </div>
@@ -627,7 +627,7 @@ const ProductDetail = () => {
                       ₹{p.price.toLocaleString('en-IN')}
                     </span>
                     <Link
-                      to={`/product/${p._id}`}
+                      to={`/product/₹{p._id}`}
                       className="px-4 py-2 bg-[#ea698b] text-white text-sm rounded-lg hover:bg-[#d55d92] transition-all"
                     >
                       View

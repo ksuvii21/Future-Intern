@@ -28,9 +28,9 @@ const OrderDetail = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/orders/₹{id}`, {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ₹{token}`
         }
       });
 
@@ -61,10 +61,10 @@ const OrderDetail = () => {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/${id}/cancel`, {
+      const response = await fetch(`http://localhost:5000/api/orders/₹{id}/cancel`, {
         method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ₹{token}`
         }
       });
 
@@ -75,7 +75,7 @@ const OrderDetail = () => {
         // Update the order status in the local state to immediately reflect the change
         setOrder(prevOrder => ({ ...prevOrder, status: 'cancelled' }));
       } else {
-        setNotification({ show: true, message: `Cancellation failed: ${data.message}`, type: 'error' });
+        setNotification({ show: true, message: `Cancellation failed: ₹{data.message}`, type: 'error' });
       }
     } catch (err) {
       setNotification({ show: true, message: 'An error occurred while cancelling the order.', type: 'error' });
@@ -159,7 +159,7 @@ const OrderDetail = () => {
       {/* Notification Toast */}
       {notification.show && (
         <div
-          className={`fixed top-28 right-6 z-50 p-4 rounded-lg shadow-2xl text-white transition-all duration-300 animate-fade-in-right ${
+          className={`fixed top-28 right-6 z-50 p-4 rounded-lg shadow-2xl text-white transition-all duration-300 animate-fade-in-right ₹{
             notification.type === 'success'
               ? 'bg-gradient-to-r from-green-500 to-green-600'
               : 'bg-gradient-to-r from-red-500 to-red-600'
@@ -198,7 +198,7 @@ const OrderDetail = () => {
                 Order Status
               </h2>
 
-              <div className={`p-4 rounded-xl border-2 mb-6 ${getStatusColor(order.status)} bg-white/5`}>
+              <div className={`p-4 rounded-xl border-2 mb-6 ₹{getStatusColor(order.status)} bg-white/5`}>
                 <div className="flex items-center gap-3">
                   {getStatusIcon(order.status)}
                   <div>
@@ -212,7 +212,7 @@ const OrderDetail = () => {
               <div className="space-y-4">
                 {statusSteps.map((stepInfo, index) => (
                   <div key={stepInfo.step} className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ₹{
                       stepInfo.completed ? 'bg-[#ea698b]' : 'bg-gray-600'
                     }`}>
                       {stepInfo.completed ? (
@@ -222,7 +222,7 @@ const OrderDetail = () => {
                       )}
                     </div>
                     <div>
-                      <p className={`font-medium capitalize ${
+                      <p className={`font-medium capitalize ₹{
                         stepInfo.completed ? 'text-white' : 'text-gray-400'
                       }`}>
                         {stepInfo.step}
@@ -270,8 +270,8 @@ const OrderDetail = () => {
                     <div className="flex-1">
                       <h3 className="text-white font-medium mb-1">{item.name}</h3>
                       <p className="text-gray-400 text-sm mb-2">
-                        {item.selectedColor && `Color: ${item.selectedColor} | `}
-                        {item.selectedSize && `Size: ${item.selectedSize}`}
+                        {item.selectedColor && `Color: ₹{item.selectedColor} | `}
+                        {item.selectedSize && `Size: ₹{item.selectedSize}`}
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">Qty: {item.quantity}</span>

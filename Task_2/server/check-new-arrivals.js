@@ -13,7 +13,7 @@ async function checkNewArrivals() {
 
     const products = await Product.find({isNewArrival: true}, 'name category isNewArrival');
     console.log('New arrivals:');
-    products.forEach(p => console.log(`- ${p.name} (${p.category}) - isNewArrival: ${p.isNewArrival}`));
+    products.forEach(p => console.log(`- ₹{p.name} (₹{p.category}) - isNewArrival: ₹{p.isNewArrival}`));
 
     mongoose.connection.close();
   } catch (error) {

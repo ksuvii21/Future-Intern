@@ -64,7 +64,7 @@ const Checkout = () => {
     const shippingAddressFields = ['name', 'email', 'phone', 'address', 'city', 'state', 'zipCode'];
     for (const field of shippingAddressFields) {
       if (!formData[field]) {
-        setError(`Please fill in the shipping address field: ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
+        setError(`Please fill in the shipping address field: ₹{field.replace(/([A-Z])/g, ' ₹1').toLowerCase()}`);
         setIsProcessing(false);
         return;
       }
@@ -100,7 +100,7 @@ const Checkout = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ₹{token}`
         },
         body: JSON.stringify({ products: orderData.products })
       });
@@ -141,7 +141,7 @@ const Checkout = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ₹{token}`
           },
           body: JSON.stringify(orderData)
         });
@@ -201,8 +201,8 @@ const Checkout = () => {
                     <div className="flex-1">
                       <h3 className="text-white font-medium mb-1">{item.name}</h3>
                       <p className="text-gray-400 text-sm mb-2">
-                        {item.selectedColor && `Color: ${item.selectedColor} | `}
-                        {item.selectedSize && `Size: ${item.selectedSize}`}
+                        {item.selectedColor && `Color: ₹{item.selectedColor} | `}
+                        {item.selectedSize && `Size: ₹{item.selectedSize}`}
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">Qty: {item.quantity}</span>
@@ -368,7 +368,7 @@ const Checkout = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <button
                   onClick={() => setPaymentMethod('card')}
-                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ₹{
                     paymentMethod === 'card'
                       ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
                       : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
@@ -383,7 +383,7 @@ const Checkout = () => {
 
                 <button
                   onClick={() => setPaymentMethod('upi')}
-                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ₹{
                     paymentMethod === 'upi'
                       ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
                       : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
@@ -398,7 +398,7 @@ const Checkout = () => {
 
                 <button
                   onClick={() => setPaymentMethod('cod')}
-                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ₹{
                     paymentMethod === 'cod'
                       ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
                       : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
@@ -482,7 +482,7 @@ const Checkout = () => {
                 disabled={isProcessing || !stripe}
                 className="px-12 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105 transition-all duration-300 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isProcessing ? 'Processing...' : `Place Order - ₹${(totalPrice + totalPrice * 0.08).toLocaleString('en-IN')}`}
+                {isProcessing ? 'Processing...' : `Place Order - ₹₹{(totalPrice + totalPrice * 0.08).toLocaleString('en-IN')}`}
               </button>
             </div>
           </div>

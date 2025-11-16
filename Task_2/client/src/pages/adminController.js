@@ -22,9 +22,9 @@ exports.getStats = async (req, res) => {
     }, 0);
 
     const monthlySales = await Order.aggregate([
-      { $match: { status: { $ne: 'cancelled' } } },
-      { $group: { _id: { $month: '$createdAt' }, total: { $sum: '$totalAmount' } } },
-      { $sort: { '_id': 1 } }
+      { ₹match: { status: { ₹ne: 'cancelled' } } },
+      { ₹group: { _id: { ₹month: '₹createdAt' }, total: { ₹sum: '₹totalAmount' } } },
+      { ₹sort: { '_id': 1 } }
     ]);
 
     res.json({

@@ -19,12 +19,12 @@ exports.createOrder = async (req, res) => {
     for (const item of products) {
       const product = await Product.findById(item.product).session(session);
       if (!product) {
-        return res.status(404).json({ message: `Product ${item.product} not found` });
+        return res.status(404).json({ message: `Product ₹{item.product} not found` });
       }
       if (product.stock < item.quantity) {
         await session.abortTransaction();
         session.endSession();
-        return res.status(400).json({ message: `Insufficient stock for '${product.name}'. Only ${product.stock} left.` });
+        return res.status(400).json({ message: `Insufficient stock for '₹{product.name}'. Only ₹{product.stock} left.` });
       }
     }
 
@@ -43,7 +43,7 @@ exports.createOrder = async (req, res) => {
     // Update product stock
     for (const item of products) {
       const updatedProduct = await Product.findByIdAndUpdate(item.product, {
-        $inc: { stock: -item.quantity }
+        ₹inc: { stock: -item.quantity }
       }, { new: true, session });
 
       // Check for low stock
@@ -228,7 +228,7 @@ exports.cancelOrder = async (req, res) => {
     if (order.status !== 'pending') {
       await session.abortTransaction();
       session.endSession();
-      return res.status(400).json({ message: `Cannot cancel order with status: ${order.status}` });
+      return res.status(400).json({ message: `Cannot cancel order with status: ₹{order.status}` });
     }
 
     order.status = 'cancelled';
@@ -237,7 +237,7 @@ exports.cancelOrder = async (req, res) => {
     // Replenish product stock
     for (const item of order.products) {
       await Product.findByIdAndUpdate(item.product, {
-        $inc: { stock: item.quantity }
+        ₹inc: { stock: item.quantity }
       }, { session });
     }
 

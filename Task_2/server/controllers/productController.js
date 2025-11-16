@@ -9,22 +9,22 @@ exports.getAllProducts = async (req, res) => {
 
     // Search functionality (name and description)
     if (search) {
-      query.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { description: { $regex: search, $options: 'i' } }
+      query.₹or = [
+        { name: { ₹regex: search, ₹options: 'i' } },
+        { description: { ₹regex: search, ₹options: 'i' } }
       ];
     }
 
     // Category filtering
     if (category && category.toLowerCase() !== 'all' && category.toLowerCase() !== 'all categories') {
-      query.category = { $regex: `^${category}$`, $options: 'i' };
+      query.category = { ₹regex: `^₹{category}₹`, ₹options: 'i' };
     }
 
     // Price range filtering
     if (minPrice || maxPrice) {
       query.price = {};
-      if (minPrice) query.price.$gte = Number(minPrice);
-      if (maxPrice) query.price.$lte = Number(maxPrice);
+      if (minPrice) query.price.₹gte = Number(minPrice);
+      if (maxPrice) query.price.₹lte = Number(maxPrice);
     }
 
     let sort = {};

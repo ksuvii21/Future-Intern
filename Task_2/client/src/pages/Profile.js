@@ -57,7 +57,7 @@ const Profile = () => {
   const fetchUserData = async () => {
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const config = { headers: { Authorization: `Bearer ₹{token}` } };
 
       // Fetch orders
       const ordersResponse = await axios.get('http://localhost:5000/api/orders', config);
@@ -94,7 +94,7 @@ const Profile = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const config = { headers: { Authorization: `Bearer ₹{token}` } };
 
       const updateData = {
         username: formData.username,
@@ -164,7 +164,7 @@ const Profile = () => {
     setSuccess('');
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const config = { headers: { Authorization: `Bearer ₹{token}` } };
       const response = await axios.post('http://localhost:5000/api/auth/address', newAddress, config);
 
       localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -182,8 +182,8 @@ const Profile = () => {
     setSuccess('');
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.delete(`http://localhost:5000/api/auth/address/${addressId}`, config);
+      const config = { headers: { Authorization: `Bearer ₹{token}` } };
+      const response = await axios.delete(`http://localhost:5000/api/auth/address/₹{addressId}`, config);
 
       localStorage.setItem('user', JSON.stringify(response.data.user));
       setUser(response.data.user);
@@ -215,9 +215,9 @@ const Profile = () => {
 
         {/* Tabs */}
         <div className="flex space-x-2 border-b border-[#571089]/30 mb-8">
-          <button onClick={() => setActiveTab('profile')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'profile' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Profile</button>
-          <button onClick={() => setActiveTab('orders')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'orders' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Orders</button>
-          <button onClick={() => setActiveTab('addresses')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'addresses' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Addresses</button>
+          <button onClick={() => setActiveTab('profile')} className={`px-4 py-2 font-medium transition-colors ₹{activeTab === 'profile' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Profile</button>
+          <button onClick={() => setActiveTab('orders')} className={`px-4 py-2 font-medium transition-colors ₹{activeTab === 'orders' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Orders</button>
+          <button onClick={() => setActiveTab('addresses')} className={`px-4 py-2 font-medium transition-colors ₹{activeTab === 'addresses' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Addresses</button>
         </div>
 
 
@@ -389,14 +389,14 @@ const Profile = () => {
               {orders.length > 0 ? (
                 <div className="space-y-4">
                   {orders.map(order => (
-                    <Link to={`/orders/${order._id}`} key={order._id} className="block border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
+                    <Link to={`/orders/₹{order._id}`} key={order._id} className="block border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="text-white font-semibold">Order #{order._id.slice(-8)}</p>
                           <p className="text-gray-400 text-sm">{new Date(order.createdAt).toLocaleDateString()}</p>
-                          <p className="text-[#ea698b] font-bold">${order.totalAmount}</p>
+                          <p className="text-[#ea698b] font-bold">₹{order.totalAmount}</p>
                         </div>
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ₹{
                           order.status === 'completed' ? 'bg-green-900/50 text-green-300' :
                           order.status === 'pending' ? 'bg-yellow-900/50 text-yellow-300' :
                           'bg-gray-900/50 text-gray-300'
@@ -503,10 +503,10 @@ const Profile = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="text-[#ea698b]">$</span>
+                    <span className="text-[#ea698b]">₹</span>
                     <span className="text-gray-300">Total Spent</span>
                   </div>
-                  <span className="text-white font-bold">${stats.totalSpent}</span>
+                  <span className="text-white font-bold">₹{stats.totalSpent}</span>
                 </div>
               </div>
             </div>

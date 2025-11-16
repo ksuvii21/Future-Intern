@@ -142,7 +142,7 @@ const Cart = () => {
                 <div className="flex justify-between text-gray-300">
                   <span>Shipping</span>
                   <span className={shipping === 0 ? 'text-green-400' : ''}>
-                    {shipping === 0 ? 'FREE' : `₹${(shipping * 85).toLocaleString('en-IN')}`}
+                    {shipping === 0 ? 'FREE' : `₹₹{(shipping * 85).toLocaleString('en-IN')}`}
                   </span>
                 </div>
                 <div className="flex justify-between text-gray-300">

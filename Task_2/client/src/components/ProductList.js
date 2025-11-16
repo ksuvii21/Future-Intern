@@ -23,7 +23,7 @@ const ProductList = ({ products }) => {
           <div
             key={product._id}
             className="animate-fade-in-up"
-            style={{ animationDelay: `${index * 0.1}s` }}
+            style={{ animationDelay: `₹{index * 0.1}s` }}
           >
             <ProductCard product={product} />
           </div>
