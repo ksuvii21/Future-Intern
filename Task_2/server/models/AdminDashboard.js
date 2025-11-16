@@ -203,7 +203,7 @@ const AdminDashboard = () => {
                 <td className="px-6 py-4 font-medium text-white">...{o._id.slice(-6)}</td>
                 <td className="px-6 py-4">{o.user?.username || 'N/A'}</td>
                 <td className="px-6 py-4">{new Date(o.createdAt).toLocaleDateString()}</td>
-                <td className="px-6 py-4">${o.totalAmount.toFixed(2)}</td>
+                <td className="px-6 py-4">₹{o.totalAmount.toLocaleString('en-IN')}</td>
                 <td className="px-6 py-4 capitalize">{o.status}</td>
                 <td className="px-6 py-4">
                   <select
