@@ -24,7 +24,7 @@ const sendOrderConfirmationEmail = async (order) => {
       <div>
         <h4 style="margin: 0; font-size: 16px;">${item.product.name}</h4>
         <p style="margin: 5px 0 0; color: #555;">Quantity: ${item.quantity}</p>
-        <p style="margin: 5px 0 0; color: #555; font-weight: bold;">$${(item.price * item.quantity).toFixed(2)}</p>
+        <p style="margin: 5px 0 0; color: #555; font-weight: bold;">₹{(item.price * item.quantity).toLocaleString('en-IN')}</p>
       </div>
     </div>
   `
