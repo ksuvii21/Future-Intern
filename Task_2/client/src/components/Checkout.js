@@ -64,7 +64,7 @@ const Checkout = () => {
     const shippingAddressFields = ['name', 'email', 'phone', 'address', 'city', 'state', 'zipCode'];
     for (const field of shippingAddressFields) {
       if (!formData[field]) {
-        setError(`Please fill in the shipping address field: ₹{field.replace(/([A-Z])/g, ' ₹1').toLowerCase()}`);
+        setError(`Please fill in the shipping address field: ${field.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
         setIsProcessing(false);
         return;
       }
@@ -100,7 +100,7 @@ const Checkout = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ₹{token}`
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ products: orderData.products })
       });
