@@ -30,7 +30,7 @@ const CategoryPage = () => {
         params.append('sortBy', sortBy);
         params.append('sortOrder', sortOrder);
   
-        const response = await axios.get(`http://localhost:5000/api/products?₹{params.toString()}`);
+        const response = await axios.get(`http://localhost:5000/api/products?${params.toString()}`);
         // Ensure products is always an array, even if the response is unexpected
         setProducts(response.data.products || []);
         if (response.data.maxProductPrice > maxPrice) {
@@ -127,7 +127,7 @@ const CategoryPage = () => {
             </div>
             <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
               <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-                {searchQuery ? `Results for "₹{searchQuery}"` : getCategoryTitle(category)}
+                {searchQuery ? `Results for "${searchQuery}"` : getCategoryTitle(category)}
               </span>
             </h1>
             <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto mb-8">
@@ -151,7 +151,7 @@ const CategoryPage = () => {
               <Link
                 key={cat}
                 to={`/category/${cat.toLowerCase().replace(/ /g, '-')}`}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 block ₹{
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 block ${
                   selectedCategory === cat
                     ? 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white shadow-lg shadow-[#ea698b]/30'
                     : 'bg-white/5 backdrop-blur-sm border border-[#571089]/30 text-gray-300 hover:bg-white/10 hover:border-[#ea698b]/50'
