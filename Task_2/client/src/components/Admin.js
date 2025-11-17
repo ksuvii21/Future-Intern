@@ -398,18 +398,30 @@ const Admin = () => {
       <div className="lg:col-span-2 bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
         <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-white">Product List</h2>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input type="text" placeholder="Search products..." onChange={e => setSearchTerm(e.target.value)} className="pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
             </div>
-            <select onChange={e => setFilters(f => ({ ...f, products: { category: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
+            <select onChange={e => setFilters(f => ({ ...f, products: { ...f.products, category: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
               <option value="All">All Categories</option>
               {[...new Set(products.map(p => p.category))].map(c => <option key={c} value={c}>{c}</option>)}
             </select>
+            <select onChange={e => setFilters(f => ({ ...f, products: { ...f.products, stockLevel: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
+              <option value="All">All Stock Levels</option>
+              <option value="Low">Low (<10)</option>
+              <option value="Medium">Medium (10-49)</option>
+              <option value="High">High (≥50)</option>
+            </select>
+            <div className="flex gap-1">
+              <input type="number" placeholder="Min Price" onChange={e => setFilters(f => ({ ...f, products: { ...f.products, minPrice: e.target.value } }))} className="w-20 py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+              <input type="number" placeholder="Max Price" onChange={e => setFilters(f => ({ ...f, products: { ...f.products, maxPrice: e.target.value } }))} className="w-20 py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+            </div>
             <div className="flex items-center gap-1">
               <button onClick={() => handleSort('name')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Name</button>
-              <button onClick={() => handleSort('price')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+              <button onClick={() => handleSort('price')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Price</button>
+              <button onClick={() => handleSort('stock')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Stock</button>
+              <button onClick={() => handleSort('createdAt')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Date</button>
             </div>
           </div>
         </div>
