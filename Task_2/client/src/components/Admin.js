@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Users, ShoppingBag, Package, DollarSign, Edit, Trash2 } from 'lucide-react';
+import { Users, ShoppingBag, Package, DollarSign, Edit, Trash2, Search, Filter, ArrowUpDown } from 'lucide-react';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -24,6 +24,20 @@ const Admin = () => {
   });
   const [editingProduct, setEditingProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filters, setFilters] = useState({
+    products: { category: 'All' },
+    users: { role: 'All' },
+    orders: { status: 'All' },
+  });
+  const [sortConfig, setSortConfig] = useState({
+    key: 'createdAt',
+    direction: 'descending',
+  });
+
+  const handleSort = (key) => {
+    setSortConfig({ key, direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' });
+  };
 
   useEffect(() => {
     fetchDashboardData();
@@ -153,6 +167,60 @@ const Admin = () => {
     }
   };
 
+  const handleStatusUpdate = async (orderId, newStatus) => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      await axios.put(`http://localhost:5000/api/orders/${orderId}/status`, { status: newStatus }, config);
+      fetchDashboardData(); // Refetch to show updated status
+    } catch (error) {
+      console.error('Error updating order status:', error);
+    }
+  };
+
+  const handleRoleUpdate = async (userId, newRole) => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      await axios.put(`http://localhost:5000/api/auth/users/${userId}/role`, { role: newRole }, config);
+      fetchDashboardData(); // Refetch to show updated role
+    } catch (error) {
+      console.error('Error updating user role:', error);
+    }
+  };
+
+  const filteredAndSortedData = (data, type) => {
+    let filtered = [...data];
+
+    // Filtering
+    if (searchTerm) {
+      filtered = filtered.filter(item =>
+        (item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (item.username && item.username.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (item.email && item.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (item._id && item._id.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+    }
+
+    if (type === 'products' && filters.products.category !== 'All') {
+      filtered = filtered.filter(p => p.category === filters.products.category);
+    }
+    if (type === 'users' && filters.users.role !== 'All') {
+      filtered = filtered.filter(u => u.role === filters.users.role);
+    }
+    if (type === 'orders' && filters.orders.status !== 'All') {
+      filtered = filtered.filter(o => o.status === filters.orders.status);
+    }
+
+    // Sorting
+    filtered.sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'ascending' ? -1 : 1;
+      if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'ascending' ? 1 : -1;
+      return 0;
+    });
+    return filtered;
+  };
+
   const renderDashboard = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 text-white">
@@ -229,9 +297,28 @@ const Admin = () => {
         </form>
       </div>
       <div className="lg:col-span-2 bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
-        <h2 className="text-xl font-bold mb-4 text-white">Product List</h2>
+        <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-white">Product List</h2>
+          <div className="flex gap-2">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input type="text" placeholder="Search products..." onChange={e => setSearchTerm(e.target.value)} className="pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+            </div>
+            <select onChange={e => setFilters(f => ({ ...f, products: { category: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
+              <option value="All">All Categories</option>
+              {[...new Set(products.map(p => p.category))].map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+            <button onClick={() => handleSort('price')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+          </div>
+        </div>
         <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-          {products.map(product => (
+          {filteredAndSortedData(products, 'products').length === 0 ? (
+            <div className="text-center py-10 text-gray-400">
+              <Package className="w-12 h-12 mx-auto mb-2" />
+              No products found.
+            </div>
+          ) : (
+            filteredAndSortedData(products, 'products').map(product => (
             <div key={product._id} className="border border-[#571089]/30 rounded-lg p-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <img
@@ -253,13 +340,30 @@ const Admin = () => {
             </div>
           ))}
         </div>
+          ))
+        }
       </div>
     </div>
   );
 
   const renderUsers = () => (
     <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
-      <h2 className="text-xl font-bold mb-4 text-white">User List</h2>
+      <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
+        <h2 className="text-xl font-bold text-white">User List</h2>
+        <div className="flex gap-2">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input type="text" placeholder="Search users..." onChange={e => setSearchTerm(e.target.value)} className="pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+          </div>
+          <select onChange={e => setFilters(f => ({ ...f, users: { role: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
+            <option value="All">All Roles</option>
+            <option value="user">User</option>
+            <option value="seller">Seller</option>
+            <option value="admin">Admin</option>
+          </select>
+          <button onClick={() => handleSort('username')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+        </div>
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-gray-300">
           <thead className="border-b border-[#571089]/30">
@@ -268,15 +372,27 @@ const Admin = () => {
               <th className="p-3">Email</th>
               <th className="p-3">Role</th>
               <th className="p-3">Joined</th>
+              <th className="p-3 text-right">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {users.map(user => (
+            {filteredAndSortedData(users, 'users').map(user => (
               <tr key={user._id} className="border-b border-[#571089]/20 hover:bg-white/5">
                 <td className="p-3">{user.username}</td>
                 <td className="p-3">{user.email}</td>
                 <td className="p-3 capitalize">{user.role}</td>
                 <td className="p-3">{new Date(user.createdAt).toLocaleDateString()}</td>
+                <td className="p-3 text-right">
+                  <select
+                    value={user.role}
+                    onChange={(e) => handleRoleUpdate(user._id, e.target.value)}
+                    className="py-1 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm"
+                  >
+                    <option value="user">User</option>
+                    <option value="seller">Seller</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -287,7 +403,20 @@ const Admin = () => {
 
   const renderOrders = () => (
     <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
-      <h2 className="text-xl font-bold mb-4 text-white">Order List</h2>
+      <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
+        <h2 className="text-xl font-bold text-white">Order List</h2>
+        <div className="flex gap-2">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input type="text" placeholder="Search orders..." onChange={e => setSearchTerm(e.target.value)} className="pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+          </div>
+          <select onChange={e => setFilters(f => ({ ...f, orders: { status: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
+            <option value="All">All Statuses</option>
+            {['pending', 'processing', 'shipped', 'delivered', 'cancelled'].map(s => <option key={s} value={s} className="capitalize">{s}</option>)}
+          </select>
+          <button onClick={() => handleSort('totalAmount')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+        </div>
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-gray-300">
           <thead className="border-b border-[#571089]/30">
@@ -297,16 +426,28 @@ const Admin = () => {
               <th className="p-3">Date</th>
               <th className="p-3">Amount</th>
               <th className="p-3">Status</th>
+              <th className="p-3 text-right">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {orders.map(order => (
+            {filteredAndSortedData(orders, 'orders').map(order => (
               <tr key={order._id} className="border-b border-[#571089]/20 hover:bg-white/5">
                 <td className="p-3 font-mono text-sm">#{order._id.slice(-8)}</td>
                 <td className="p-3">{order.user?.username || 'N/A'}</td>
                 <td className="p-3">{new Date(order.createdAt).toLocaleDateString()}</td>
                 <td className="p-3 font-semibold text-green-400">₹{order.totalAmount.toLocaleString('en-IN')}</td>
                 <td className="p-3 capitalize">{order.status}</td>
+                <td className="p-3 text-right">
+                  <select
+                    value={order.status}
+                    onChange={(e) => handleStatusUpdate(order._id, e.target.value)}
+                    className="py-1 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm capitalize"
+                  >
+                    {['pending', 'processing', 'shipped', 'delivered', 'cancelled'].map(s => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
+                </td>
               </tr>
             ))}
           </tbody>
