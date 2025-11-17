@@ -229,7 +229,7 @@ function AppLayout({
               {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'New Arrivals'].map((item) => (
                 <Link
                   key={item}
-                  to={item === 'All Categories' ? '/' : `/category/₹{item.toLowerCase().replace(/ /g, '-')}`}
+                  to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase().replace(/ /g, '-')}`}
                   className="text-sm text-gray-300 hover:text-[#ea698b] transition-colors font-medium relative group"
                 >
                   {item}
