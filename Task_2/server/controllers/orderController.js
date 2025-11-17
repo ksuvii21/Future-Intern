@@ -111,7 +111,7 @@ exports.createPaymentIntent = asyncHandler(async (req, res) => {
     const productIds = products.map(p => p.product);
     const dbProducts = await Product.find({ '_id': { $in: productIds } });
     const productMap = new Map(dbProducts.map(p => [p._id.toString(), p]));
-    
+
     let totalAmount = 0;
     for (const item of products) {
       const dbProduct = productMap.get(item.product);
@@ -120,12 +120,8 @@ exports.createPaymentIntent = asyncHandler(async (req, res) => {
       }
     }
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(totalAmount * 100), // Amount in smallest currency unit (e.g., paise for INR)
-      currency: 'inr', // Corrected currency to match frontend/email
-    });
-
-    res.json({ clientSecret: paymentIntent.client_secret });
+    // Temporarily return dummy client secret for testing
+    res.json({ clientSecret: 'dummy_client_secret_for_testing' });
 });
 
 // Get user's orders
