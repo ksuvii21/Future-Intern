@@ -61,6 +61,25 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
     });
 });
 
+// @desc    Get product suggestions for search
+// @route   GET /api/products/suggestions
+// @access  Public
+exports.getProductSuggestions = asyncHandler(async (req, res) => {
+  const { q } = req.query;
+
+  if (!q) {
+    return res.json([]);
+  }
+
+  const suggestions = await Product.find({
+    name: { $regex: q, $options: 'i' }
+  })
+  .limit(7) // Limit to 7 suggestions
+  .select('name imageUrl _id'); // Select only necessary fields
+
+  res.json(suggestions);
+});
+
 // Get single product
 exports.getProductById = asyncHandler(async (req, res) => {
   // Add a check for a valid ObjectId to prevent CastError
