@@ -84,22 +84,30 @@ const ProductDetail = () => {
   // Get the image to display (variant image or default)
   const displayImage = currentVariant ? currentVariant.imageUrl : product?.imageUrl;
 
-  // Get all images for the lightbox (variant images + default if no variants)
-  const allImages = product?.variants && product.variants.length > 0
-    ? product.variants.map(v => v.imageUrl)
-    : [product?.imageUrl].filter(Boolean);
+    // Get all images for the lightbox (variant images + default if no variants)
+    const allImages = product?.variants && product.variants.length > 0
+    ? product.variants.map(v => ({ src: v.imageUrl }))
+    : (product?.imageUrl ? [{ src: product.imageUrl }] : []);
 
-  const addToCart = () => {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const existingItem = cart.find(item => item._id === product._id && item.selectedColor === selectedColor);
-
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      cart.push({ ...product, quantity, selectedColor, selectedSize });
+  const addToCart = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Please log in to add items to your cart.');
+      return;
     }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
+    try {
+      await axios.post('http://localhost:5000/api/cart', {
+        productId: product._id,
+        quantity: quantity,
+        selectedColor: selectedColor,
+        selectedSize: selectedSize
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+    } catch (error) {
+      console.error("Error adding to cart", error);
+      alert('Failed to add item to cart.');
+    }
     alert('Product added to cart!');
   };
 

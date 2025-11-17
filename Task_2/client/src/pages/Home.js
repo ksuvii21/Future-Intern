@@ -305,17 +305,23 @@ const Home = () => {
                         <button
                           onClick={(e) => {
                             e.preventDefault();
-                            e.stopPropagation();
-                            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-                            const existingItem = cart.find(item => item._id === product._id);
-
-                            if (existingItem) {
-                              existingItem.quantity += 1;
-                            } else {
-                              cart.push({ ...product, quantity: 1 });
+                            e.stopPropagation(); // Prevent link navigation
+                            const token = localStorage.getItem('token');
+                            if (!token) {
+                              alert('Please log in to add items to your cart.');
+                              return;
                             }
-
-                            localStorage.setItem('cart', JSON.stringify(cart));
+                            axios.post('http://localhost:5000/api/cart', {
+                              productId: product._id,
+                              quantity: 1,
+                              selectedColor: product.variants?.[0]?.color || 'Default',
+                              selectedSize: 'M' // Default size
+                            }, {
+                              headers: { Authorization: `Bearer ${token}` }
+                            }).catch(err => {
+                              console.error("Error adding to cart", err);
+                              alert('Failed to add to cart.');
+                            });
                             alert('Added to cart!');
                           }}
                           className="p-2 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all"
