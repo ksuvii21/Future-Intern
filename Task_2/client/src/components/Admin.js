@@ -135,7 +135,7 @@ const Admin = () => {
         }
 
         await axios.post(
-          'http://localhost:5000/api/products',
+          'http://localhost:5000/api/products/admin',
           dataToSend,
           { headers }
         );
