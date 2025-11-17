@@ -234,7 +234,21 @@ async function seedDatabase() {
     await Product.deleteMany({});
     console.log('Cleared existing products');
 
-    await Product.insertMany(sampleProducts);
+    // Convert Google Drive URLs before inserting
+    const processedProducts = sampleProducts.map(product => {
+      if (product.imageUrl && product.imageUrl.includes('drive.google.com')) {
+        const fileIdMatch = product.imageUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (fileIdMatch) {
+          return {
+            ...product,
+            imageUrl: `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`
+          };
+        }
+      }
+      return product;
+    });
+
+    await Product.insertMany(processedProducts);
     console.log('Sample products added successfully');
 
     mongoose.connection.close();
