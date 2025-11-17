@@ -146,7 +146,7 @@ exports.createProduct = asyncHandler(async (req, res) => {
       } else {
         imageUrl = providedUrl; // For other URLs
       }
-    }
+    } else if (req.user.role === 'seller') {
       // Sellers upload images to Cloudinary
       if (req.file) {
         const result = await cloudinary.uploader.upload_stream(
