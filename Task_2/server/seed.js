@@ -97,7 +97,7 @@ const sampleProducts = [
     price: 2804.15,
     category: 'Dresses',
     stock: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500',
+    imageUrl: 'https://drive.google.com/file/d/13MOz-x3T9KXR4yrXzuNF9kyDOLJz28Co/view',
     isNewArrival: false,
     rating: 4.9,
     numReviews: 12
