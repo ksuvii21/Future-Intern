@@ -50,7 +50,7 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
     const count = await Product.countDocuments(query);
 
     const topProduct = await Product.findOne().sort({ price: -1 }); // More efficient than find().limit(1)
-    const maxProductPrice = topProduct.length > 0 ? topProduct[0].price : 1000;
+    const maxProductPrice = topProduct ? topProduct.price : 1000;
 
     res.json({
       products,
@@ -126,6 +126,7 @@ exports.createProduct = asyncHandler(async (req, res) => {
   }
 
     let imageUrl;
+    let variants = [];
 
     if (req.user.role === 'admin') {
       // Admins provide Google Drive shareable URLs - convert to direct link
@@ -145,6 +146,17 @@ exports.createProduct = asyncHandler(async (req, res) => {
         }
       } else {
         imageUrl = providedUrl; // For other URLs
+      }
+
+      // Handle variants for admin
+      if (req.body.variants && Array.isArray(req.body.variants)) {
+        variants = req.body.variants.map(variant => ({
+          color: variant.color,
+          imageUrl: variant.imageUrl.includes('drive.google.com')
+            ? `https://drive.google.com/uc?export=view&id=${variant.imageUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)?.[1] || variant.imageUrl}`
+            : variant.imageUrl,
+          stock: variant.stock || 0
+        }));
       }
     } else if (req.user.role === 'seller') {
       // Sellers upload images to Cloudinary
@@ -169,6 +181,28 @@ exports.createProduct = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error('Image file is required for seller products.');
       }
+
+      // Handle variants for seller (if they provide multiple files)
+      if (req.files && req.files.length > 1) {
+        const variantColors = req.body.variantColors ? JSON.parse(req.body.variantColors) : [];
+        for (let i = 1; i < req.files.length; i++) {
+          const result = await new Promise((resolve, reject) => {
+            const stream = cloudinary.uploader.upload_stream(
+              { folder: 'seller-products' },
+              (error, result) => {
+                if (error) reject(error);
+                else resolve(result);
+              }
+            );
+            stream.end(req.files[i].buffer);
+          });
+          variants.push({
+            color: variantColors[i-1] || `Variant ${i}`,
+            imageUrl: result.secure_url,
+            stock: req.body[`variantStock${i}`] || 0
+          });
+        }
+      }
     }
 
     const { name, price, description, category, stock } = req.body;
@@ -179,6 +213,7 @@ exports.createProduct = asyncHandler(async (req, res) => {
       category,
       stock,
       imageUrl,
+      variants,
       user: req.user.userId, // Associate product with the creator
     });
 
@@ -207,9 +242,9 @@ exports.updateProduct = asyncHandler(async (req, res) => {
     throw new Error('Access denied. You do not own this product.');
   }
   // Explicitly define updatable fields to prevent mass assignment
-  const { name, price, description, category, stock, imageUrl } = req.body;
+  const { name, price, description, category, stock, imageUrl, variants } = req.body;
   const updatedFields = {
-    name, price, description, category, stock, imageUrl,
+    name, price, description, category, stock, imageUrl, variants,
   };
   const product = await Product.findByIdAndUpdate(req.params.id, updatedFields, { new: true, runValidators: true });
 
