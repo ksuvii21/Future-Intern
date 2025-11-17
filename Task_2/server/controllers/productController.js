@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 // Get all products
 exports.getAllProducts = async (req, res) => {
   try {
-    const { search, category, minPrice, maxPrice, sortBy, sortOrder } = req.query;
+    const { search, category, minPrice, maxPrice, sortBy, sortOrder, page = 1, limit = 12 } = req.query;
 
     let query = {};
 
@@ -36,12 +36,22 @@ exports.getAllProducts = async (req, res) => {
       sort.createdAt = -1;
     }
 
-    const products = await Product.find(query).sort(sort);
+    const products = await Product.find(query)
+      .sort(sort)
+      .limit(limit * 1)
+      .skip((page - 1) * limit);
+
+    const count = await Product.countDocuments(query);
 
     const topProduct = await Product.find().sort({ price: -1 }).limit(1);
     const maxProductPrice = topProduct.length > 0 ? topProduct[0].price : 1000;
 
-    res.json({ products, maxProductPrice });
+    res.json({
+      products,
+      maxProductPrice,
+      totalPages: Math.ceil(count / limit),
+      currentPage: Number(page),
+    });
   } catch (error) {
     res.status(500).json({ message: 'Server error retrieving products', error: error.message });
   }
@@ -112,6 +122,11 @@ exports.createProductReview = async (req, res) => {
 // Create product
 exports.createProduct = async (req, res) => {
   try {
+    // Ensure the user creating the product is a seller or admin
+    if (!['seller', 'admin'].includes(req.user.role)) {
+      return res.status(403).json({ message: 'Access denied. Only sellers can create products.' });
+    }
+
     const { name, price, description, category, stock, imageUrl } = req.body;
     const product = new Product({
       name,
@@ -138,6 +153,16 @@ exports.updateProduct = async (req, res) => {
       return res.status(400).json({ message: 'Invalid Product ID format' });
     }
 
+    const productToUpdate = await Product.findById(req.params.id);
+
+    if (!productToUpdate) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    // Ensure only the owner of the product or an admin can update it
+    if (productToUpdate.user.toString() !== req.user.userId && req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Access denied. You do not own this product.' });
+    }
     // Explicitly define updatable fields to prevent mass assignment
     const { name, price, description, category, stock, imageUrl } = req.body;
     const updatedFields = {
@@ -149,9 +174,7 @@ exports.updateProduct = async (req, res) => {
       imageUrl,
     };
     const product = await Product.findByIdAndUpdate(req.params.id, updatedFields, { new: true, runValidators: true });
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
+
     res.json(product);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -165,10 +188,17 @@ exports.deleteProduct = async (req, res) => {
       return res.status(400).json({ message: 'Invalid Product ID format' });
     }
 
-    const product = await Product.findByIdAndDelete(req.params.id);
-    if (!product) {
+    const productToDelete = await Product.findById(req.params.id);
+
+    if (!productToDelete) {
       return res.status(404).json({ message: 'Product not found' });
     }
+
+    // Ensure only the owner of the product or an admin can delete it
+    if (productToDelete.user.toString() !== req.user.userId && req.user.role !== 'admin') {
+      return res.status(403).json({ message: 'Access denied. You do not own this product.' });
+    }
+    await Product.findByIdAndDelete(req.params.id);
     res.json({ message: 'Product deleted' });
   } catch (error) {
     res.status(500).json({ message: error.message });
