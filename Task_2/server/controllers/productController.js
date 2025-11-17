@@ -125,7 +125,24 @@ exports.createProduct = asyncHandler(async (req, res) => {
     throw new Error('Access denied. Only sellers can create products.');
   }
 
-    const { name, price, description, category, stock, imageUrl } = req.body;
+    let imageUrl = req.body.imageUrl; // Default to provided URL
+
+    // If an image file is uploaded, upload to Cloudinary
+    if (req.file) {
+      const result = await cloudinary.uploader.upload_stream(
+        { folder: 'products' },
+        (error, result) => {
+          if (error) {
+            res.status(500);
+            throw new Error('Image upload failed');
+          }
+          imageUrl = result.secure_url;
+        }
+      );
+      result.end(req.file.buffer);
+    }
+
+    const { name, price, description, category, stock } = req.body;
     const product = new Product({
       name,
       price,
