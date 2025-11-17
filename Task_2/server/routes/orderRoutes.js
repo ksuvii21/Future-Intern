@@ -31,6 +31,11 @@ router.post('/create', auth, createOrder);
 // @access  Private
 router.get('/', auth, getUserOrders);
 
+// @route   GET /api/orders/all
+// @desc    Get all orders (admin only)
+// @access  Private/Admin
+router.get('/all', auth, adminAuth, getAllOrders);
+
 // @route   GET /api/orders/:id
 // @desc    Get single order by ID
 // @access  Private (user or admin)
@@ -40,11 +45,6 @@ router.get('/:id', auth, getOrderById);
 // @desc    Cancel an order by user
 // @access  Private
 router.put('/:id/cancel', auth, cancelOrder);
-
-// @route   GET /api/orders/all
-// @desc    Get all orders (admin only)
-// @access  Private/Admin
-router.get('/all', auth, adminAuth, getAllOrders);
 
 // @route   PUT /api/orders/:id/status
 // @desc    Update order status (admin only)
