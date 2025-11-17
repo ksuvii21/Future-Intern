@@ -138,7 +138,7 @@ const Register = ({ onLogin }) => {
       </div>
 
       {/* Main Register Card */}
-      <div className={`max-w-6xl w-full bg-[#1a0a2e] border border-[#571089]/30 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 ₹{shake ? 'animate-shake' : ''}`}>
+      <div className={`max-w-6xl w-full bg-[#1a0a2e] border border-[#571089]/30 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 ${shake ? 'animate-shake' : ''}`}>
         <div className="grid grid-cols-1 lg:grid-cols-2">
 
           {/* Left Column: Register Form */}
@@ -175,7 +175,9 @@ const Register = ({ onLogin }) => {
 
               {/* Username Input */}
               <div>
-                <div className="relative group">
+                <div className="relative group">                  <User className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+                    isFocused.username ? 'text-[#ea698b]' : 'text-gray-500'
+                  }`} />
                   <User className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ₹{
                     isFocused.username ? 'text-[#ea698b]' : 'text-gray-500'
                   }`} />
@@ -197,7 +199,9 @@ const Register = ({ onLogin }) => {
 
               {/* Email Input */}
               <div>
-                <div className="relative group">
+                <div className="relative group">                  <Mail className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+                    isFocused.email ? 'text-[#ea698b]' : 'text-gray-500'
+                  }`} />
                   <Mail className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ₹{
                     isFocused.email ? 'text-[#ea698b]' : 'text-gray-500'
                   }`} />
@@ -219,7 +223,9 @@ const Register = ({ onLogin }) => {
 
               {/* Password Input */}
               <div>
-                <div className="relative group">
+                <div className="relative group">                  <Lock className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+                    isFocused.password ? 'text-[#ea698b]' : 'text-gray-500'
+                  }`} />
                   <Lock className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ₹{
                     isFocused.password ? 'text-[#ea698b]' : 'text-gray-500'
                   }`} />
@@ -248,7 +254,9 @@ const Register = ({ onLogin }) => {
 
               {/* Confirm Password Input */}
               <div>
-                <div className="relative group">
+                <div className="relative group">                  <Lock className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+                    isFocused.confirmPassword ? 'text-[#ea698b]' : 'text-gray-500'
+                  }`} />
                   <Lock className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ₹{
                     isFocused.confirmPassword ? 'text-[#ea698b]' : 'text-gray-500'
                   }`} />
@@ -277,7 +285,9 @@ const Register = ({ onLogin }) => {
 
               {/* Role Selection */}
               <div>
-                <div className="relative group">
+                <div className="relative group">                  <User className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+                    isFocused.role ? 'text-[#ea698b]' : 'text-gray-500'
+                  }`} />
                   <User className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ₹{
                     isFocused.role ? 'text-[#ea698b]' : 'text-gray-500'
                   }`} />
@@ -298,7 +308,7 @@ const Register = ({ onLogin }) => {
 
               {/* Terms Agreement */}
               <div className="flex items-start text-sm">
-                <div className="flex items-center h-5 group">
+                <div className="flex items-center h-5 group" onClick={() => handleChange({ target: { name: 'agreeToTerms', type: 'checkbox', checked: !formData.agreeToTerms } })}>
                   <div className={`relative w-4 h-4 rounded border ₹{
                     formData.agreeToTerms ? 'bg-[#ea698b] border-[#ea698b]' : 'border-gray-600 bg-[#2a1a3e]'
                   } transition-all duration-300 group-hover:border-[#ea698b]`}>
@@ -384,10 +394,10 @@ const Register = ({ onLogin }) => {
                   key={i}
                   className="absolute w-2 h-2 bg-white/30 rounded-full animate-float"
                   style={{
-                    left: `₹{Math.random() * 100}%`,
-                    top: `₹{Math.random() * 100}%`,
-                    animationDelay: `₹{i * 2}s`,
-                    animationDuration: `₹{15 + i * 5}s`
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${i * 2}s`,
+                    animationDuration: `${15 + i * 5}s`
                   }}
                 />
               ))}
