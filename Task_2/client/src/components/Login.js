@@ -194,7 +194,7 @@ const Login = ({ onLogin }) => {
 
               {/* Checkbox and Forgot Password */}
               <div className="flex items-center justify-between text-sm">
-                <div className="flex items-center group">
+                <div className="flex items-center group" onClick={() => handleChange({ target: { name: 'rememberMe', type: 'checkbox', checked: !formData.rememberMe } })}>
                   <div className={`relative w-4 h-4 rounded border ₹{
                     formData.rememberMe ? 'bg-[#ea698b] border-[#ea698b]' : 'border-gray-600 bg-[#2a1a3e]'
                   } transition-all duration-300 group-hover:border-[#ea698b]`}>
@@ -281,10 +281,10 @@ const Login = ({ onLogin }) => {
                   key={i}
                   className="absolute w-2 h-2 bg-white/30 rounded-full animate-float"
                   style={{
-                    left: `₹{Math.random() * 100}%`,
-                    top: `₹{Math.random() * 100}%`,
-                    animationDelay: `₹{i * 2}s`,
-                    animationDuration: `₹{15 + i * 5}s`
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${i * 2}s`,
+                    animationDuration: `${15 + i * 5}s`
                   }}
                 />
               ))}
