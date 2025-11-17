@@ -90,7 +90,7 @@ const ForgotPassword = () => {
       </div>
 
       {/* Main Forgot Password Card */}
-      <div className={`max-w-6xl w-full bg-[#1a0a2e] border border-[#571089]/30 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 ₹{shake ? 'animate-shake' : ''}`}>
+      <div className={`max-w-6xl w-full bg-[#1a0a2e] border border-[#571089]/30 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 ${shake ? 'animate-shake' : ''}`}>
         <div className="grid grid-cols-1 lg:grid-cols-2">
 
           {/* Left Column: Forgot Password Form */}
@@ -138,7 +138,9 @@ const ForgotPassword = () => {
 
               {/* Email Input */}
               <div>
-                <div className="relative group">
+                <div className="relative group">                  <Mail className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
+                    isFocused.email ? 'text-[#ea698b]' : 'text-gray-500'
+                  }`} />
                   <Mail className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ₹{
                     isFocused.email ? 'text-[#ea698b]' : 'text-gray-500'
                   }`} />
@@ -220,10 +222,10 @@ const ForgotPassword = () => {
                   key={i}
                   className="absolute w-2 h-2 bg-white/30 rounded-full animate-float"
                   style={{
-                    left: `₹{Math.random() * 100}%`,
-                    top: `₹{Math.random() * 100}%`,
-                    animationDelay: `₹{i * 2}s`,
-                    animationDuration: `₹{15 + i * 5}s`
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${i * 2}s`,
+                    animationDuration: `${15 + i * 5}s`
                   }}
                 />
               ))}
