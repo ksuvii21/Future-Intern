@@ -33,7 +33,7 @@ const Admin = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ₹{token}` } };
+      const config = { headers: { Authorization: `Bearer ${token}` } };
 
       const [productsRes, usersRes, ordersRes] = await Promise.all([
         axios.get('http://localhost:5000/api/products'),
@@ -41,12 +41,12 @@ const Admin = () => {
         axios.get('http://localhost:5000/api/orders/all', config)
       ]);
 
-      setProducts(productsRes.data.products);
+      setProducts(productsRes.data.products || []);
       setUsers(usersRes.data);
       setOrders(ordersRes.data);
 
       // Calculate stats
-      const totalRevenue = ordersRes.data.reduce((sum, order) => sum + order.totalAmount, 0);
+      const totalRevenue = ordersRes.data.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
       setStats({
         totalProducts: productsRes.data.products.length,
         totalUsers: usersRes.data.length,
@@ -57,16 +57,6 @@ const Admin = () => {
       console.error('Error fetching dashboard data:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/products');
-      setProducts(response.data.products);
-      setStats(prev => ({ ...prev, totalProducts: response.data.products.length }));
-    } catch (error) {
-      console.error('Error fetching products:', error);
     }
   };
 
@@ -89,7 +79,7 @@ const Admin = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ₹{token}` } };
+      const config = { headers: { Authorization: `Bearer ${token}` } };
 
       let dataToSend;
       let headers = { ...config.headers };
@@ -119,7 +109,7 @@ const Admin = () => {
 
       if (editingProduct) {
         await axios.put(
-          `http://localhost:5000/api/products/₹{editingProduct._id}`,
+          `http://localhost:5000/api/products/${editingProduct._id}`,
           dataToSend,
           { headers }
         );
@@ -141,7 +131,7 @@ const Admin = () => {
         imageUrl: '',
         imageFile: null,
       });
-      fetchProducts();
+      fetchDashboardData(); // Refetch all data to keep dashboard consistent
     } catch (error) {
       console.error('Error saving product:', error);
     }
@@ -155,9 +145,9 @@ const Admin = () => {
   const handleDelete = async id => {
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ₹{token}` } };
-      await axios.delete(`http://localhost:5000/api/products/₹{id}`, config);
-      fetchProducts();
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      await axios.delete(`http://localhost:5000/api/products/${id}`, config);
+      fetchDashboardData(); // Refetch all data to keep dashboard consistent
     } catch (error) {
       console.error('Error deleting product:', error);
     }
@@ -244,7 +234,12 @@ const Admin = () => {
           {products.map(product => (
             <div key={product._id} className="border border-[#571089]/30 rounded-lg p-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <img src={product.imageUrl || 'https://via.placeholder.com/60'} alt={product.name} className="w-16 h-16 object-cover rounded-md" />
+                <img
+                  src={product.imageUrl || 'https://via.placeholder.com/60'}
+                  alt={product.name}
+                  className="w-16 h-16 object-cover rounded-md"
+                  onError={(e) => { e.target.src = 'https://via.placeholder.com/60'; }}
+                />
                 <div>
                   <h3 className="font-semibold text-white">{product.name}</h3>
                   <p className="text-green-400 font-bold">₹{product.price}</p>
@@ -339,10 +334,10 @@ const Admin = () => {
         </div>
 
         <div className="flex space-x-2 border-b border-[#571089]/30 mb-8">
-          <button onClick={() => setActiveTab('dashboard')} className={`px-4 py-2 font-medium transition-colors ₹{activeTab === 'dashboard' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Dashboard</button>
-          <button onClick={() => setActiveTab('products')} className={`px-4 py-2 font-medium transition-colors ₹{activeTab === 'products' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Products</button>
-          <button onClick={() => setActiveTab('users')} className={`px-4 py-2 font-medium transition-colors ₹{activeTab === 'users' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Users</button>
-          <button onClick={() => setActiveTab('orders')} className={`px-4 py-2 font-medium transition-colors ₹{activeTab === 'orders' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Orders</button>
+          <button onClick={() => setActiveTab('dashboard')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'dashboard' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Dashboard</button>
+          <button onClick={() => setActiveTab('products')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'products' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Products</button>
+          <button onClick={() => setActiveTab('users')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'users' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Users</button>
+          <button onClick={() => setActiveTab('orders')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'orders' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Orders</button>
         </div>
 
         <div>
