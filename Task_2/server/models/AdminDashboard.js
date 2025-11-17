@@ -95,8 +95,8 @@ const AdminDashboard = () => {
   const handleUpdateUserRole = async (userId, role) => {
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ₹{token}` } };
-      await axios.put(`http://localhost:5000/api/auth/users/₹{userId}/role`, { role }, config);
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      await axios.put(`http://localhost:5000/api/auth/users/${userId}/role`, { role }, config);
       fetchAllData();
     } catch (error) {
       console.error("Failed to update user role", error);
