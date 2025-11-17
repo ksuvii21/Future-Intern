@@ -63,37 +63,44 @@ const Admin = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      // Build query parameters for products
-      const productParams = new URLSearchParams({
-        limit: '1000',
-        page: '1',
-        ...(filters.products.category !== 'All' && { category: filters.products.category }),
-        ...(filters.products.minPrice && { minPrice: filters.products.minPrice }),
-        ...(filters.products.maxPrice && { maxPrice: filters.products.maxPrice }),
-        ...(searchTerm && { search: searchTerm }),
-        ...(sortConfig.key && { sortBy: sortConfig.key, sortOrder: sortConfig.direction === 'ascending' ? 'asc' : 'desc' })
-      });
+      console.log('Fetching dashboard data...');
 
-      const [productsRes, usersRes, ordersRes] = await Promise.all([
-        axios.get(`http://localhost:5000/api/products?${productParams}`),
-        axios.get('http://localhost:5000/api/auth/users', config),
-        axios.get('http://localhost:5000/api/orders/all', config)
-      ]);
+      // Fetch products (simplified for now)
+      const productsRes = await axios.get('http://localhost:5000/api/products?limit=1000');
+      console.log('Products response:', productsRes.data);
+
+      // Fetch users
+      const usersRes = await axios.get('http://localhost:5000/api/auth/users', config);
+      console.log('Users response:', usersRes.data);
+
+      // Fetch orders
+      const ordersRes = await axios.get('http://localhost:5000/api/orders/all', config);
+      console.log('Orders response:', ordersRes.data);
 
       setProducts(productsRes.data.products || []);
-      setUsers(usersRes.data);
-      setOrders(ordersRes.data);
+      setUsers(usersRes.data || []);
+      setOrders(ordersRes.data || []);
 
       // Calculate stats
-      const totalRevenue = ordersRes.data.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
+      const totalRevenue = (ordersRes.data || []).reduce((sum, order) => sum + (order.totalAmount || 0), 0);
       setStats({
-        totalProducts: productsRes.data.totalPages ? productsRes.data.totalPages * productsRes.data.products.length : productsRes.data.products.length,
-        totalUsers: usersRes.data.length,
-        totalOrders: ordersRes.data.length,
+        totalProducts: (productsRes.data.products || []).length,
+        totalUsers: (usersRes.data || []).length,
+        totalOrders: (ordersRes.data || []).length,
         totalRevenue: totalRevenue.toFixed(2)
       });
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
+      // Set empty arrays on error to prevent crashes
+      setProducts([]);
+      setUsers([]);
+      setOrders([]);
+      setStats({
+        totalProducts: 0,
+        totalUsers: 0,
+        totalOrders: 0,
+        totalRevenue: '0.00'
+      });
     } finally {
       setLoading(false);
     }
