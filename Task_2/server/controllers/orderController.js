@@ -15,26 +15,37 @@ exports.createOrder = asyncHandler(async (req, res) => {
     const { products, totalAmount, shippingAddress, paymentMethod, paymentDetails } = req.body;
     const userId = req.user.userId;
 
-    // Validate products and check stock
+    // --- Optimization & Security ---
+    // Fetch all products at once and calculate total amount on the backend
+    const productIds = products.map(p => p.product);
+    const dbProducts = await Product.find({ '_id': { $in: productIds } }).session(session);
+
+    let calculatedTotal = 0;
+    const productMap = new Map(dbProducts.map(p => [p._id.toString(), p]));
+
     for (const item of products) {
-      const product = await Product.findById(item.product).session(session);
-      if (!product) {
-        res.status(404);
-        throw new Error(`Product ${item.product} not found`);
+      const dbProduct = productMap.get(item.product);
+      if (!dbProduct) {
+        throw new Error(`Product with ID ${item.product} not found`);
       }
-      if (product.stock < item.quantity) {
-        await session.abortTransaction();
-        session.endSession();
-        res.status(400);
-        throw new Error(`Insufficient stock for '${product.name}'. Only ${product.stock} left.`);
+      if (dbProduct.stock < item.quantity) {
+        throw new Error(`Insufficient stock for '${dbProduct.name}'. Only ${dbProduct.stock} left.`);
       }
+      // Use the price from the database, not the client
+      calculatedTotal += dbProduct.price * item.quantity;
     }
 
-    // Create order
+    // Optional: You can compare the client-side totalAmount with the server-calculated one
+    // if (Math.abs(calculatedTotal - totalAmount) > 0.01) { // Using a small tolerance for floating point math
+    //   throw new Error('Total amount mismatch. Please try again.');
+    // }
+    // --- End Optimization & Security ---
+
+    // Create order with the server-calculated total
     const order = new Order({
       user: userId,
       products,
-      totalAmount,
+      totalAmount: calculatedTotal, // Use server-calculated total
       shippingAddress,
       paymentMethod,
       paymentDetails
@@ -42,22 +53,29 @@ exports.createOrder = asyncHandler(async (req, res) => {
 
     const savedOrder = await order.save({ session });
 
-    // Update product stock
-    for (const item of products) {
-      const updatedProduct = await Product.findByIdAndUpdate(item.product, {
-        $inc: { stock: -item.quantity }
-      }, { new: true, session });
+    // Update product stock in bulk for better performance
+    const bulkStockUpdates = products.map(item => ({
+      updateOne: {
+        filter: { _id: item.product },
+        update: { $inc: { stock: -item.quantity } }
+      }
+    }));
 
-      // Check for low stock
-      if (updatedProduct.stock < LOW_STOCK_THRESHOLD) {
-        sendLowStockAlert(updatedProduct);
+    await Product.bulkWrite(bulkStockUpdates, { session });
+
+    // Check for low stock on updated products
+    const updatedDbProducts = await Product.find({ '_id': { $in: productIds } }).session(session);
+    for (const product of updatedDbProducts) {
+      if (product.stock > 0 && product.stock < LOW_STOCK_THRESHOLD) {
+        // No need to await, let it run in the background
+        sendLowStockAlert(product).catch(err => console.error("Failed to send low stock alert:", err));
       }
     }
 
     await session.commitTransaction();
 
     // Populate product details
-    const populatedOrder = await Order.findById(savedOrder._id).populate('products.product');
+    const populatedOrder = await Order.findById(savedOrder._id).populate('user', 'username email').populate('products.product');
 
     // Send order confirmation email
     try {
@@ -83,22 +101,27 @@ exports.createPaymentIntent = asyncHandler(async (req, res) => {
     const { products } = req.body;
 
     if (!products || products.length === 0) {
-      return res.status(400).json({ message: 'No products provided' });
+      res.status(400);
+      throw new Error('No products provided for payment.');
     }
 
+    // --- Optimization ---
+    // Fetch all products at once to calculate the total amount securely on the backend
+    const productIds = products.map(p => p.product);
+    const dbProducts = await Product.find({ '_id': { $in: productIds } });
+    const productMap = new Map(dbProducts.map(p => [p._id.toString(), p]));
+    
     let totalAmount = 0;
     for (const item of products) {
-      const product = await Product.findById(item.product);
-      if (product) {
-        totalAmount += product.price * item.quantity;
+      const dbProduct = productMap.get(item.product);
+      if (dbProduct) {
+        totalAmount += dbProduct.price * item.quantity;
       }
     }
 
-    const totalWithTax = totalAmount + totalAmount * 0.08;
-
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(totalWithTax * 100), // Amount in cents
-      currency: 'usd',
+      amount: Math.round(totalAmount * 100), // Amount in smallest currency unit (e.g., paise for INR)
+      currency: 'inr', // Corrected currency to match frontend/email
     });
 
     res.json({ clientSecret: paymentIntent.client_secret });
@@ -112,9 +135,6 @@ exports.getUserOrders = asyncHandler(async (req, res) => {
       .sort({ createdAt: -1 });
 
     res.json(orders);
-  } catch (error) {
-    throw error; // Let asyncHandler handle it
-  }
 });
 
 // Get all orders (admin only)
@@ -125,9 +145,6 @@ exports.getAllOrders = asyncHandler(async (req, res) => {
       .sort({ createdAt: -1 });
 
     res.json(orders);
-  } catch (error) {
-    throw error; // Let asyncHandler handle it
-  }
 });
 
 // Update order status (admin only)
@@ -137,7 +154,8 @@ exports.updateOrderStatus = asyncHandler(async (req, res) => {
 
     const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
     if (!validStatuses.includes(status)) {
-      return res.status(400).json({ message: 'Invalid status' });
+      res.status(400);
+      throw new Error('Invalid status provided.');
     }
     
     const order = await Order.findByIdAndUpdate(
@@ -185,8 +203,7 @@ exports.getOrderById = asyncHandler(async (req, res) => {
 });
 
 // Cancel an order (user)
-exports.cancelOrder = async (req, res) => {
-  const session = await mongoose.startSession();
+exports.cancelOrder = asyncHandler(async (req, res) => {  const session = await mongoose.startSession();
   session.startTransaction();
   try {
     const { id } = req.params;
@@ -195,21 +212,18 @@ exports.cancelOrder = async (req, res) => {
     const order = await Order.findById(id).session(session);
 
     if (!order) {
-      await session.abortTransaction();
       res.status(404);
       throw new Error('Order not found');
     }
 
     // Ensure the user owns the order
     if (order.user.toString() !== userId) {
-      await session.abortTransaction();
       res.status(403);
       throw new Error('Access denied');
     }
 
     // Only allow cancellation if the order is pending
     if (order.status !== 'pending') {
-      await session.abortTransaction();
       res.status(400);
       throw new Error(`Cannot cancel order with status: ${order.status}`);
     }
@@ -225,7 +239,7 @@ exports.cancelOrder = async (req, res) => {
     await session.commitTransaction();
     res.json({ message: 'Order cancelled successfully', order });
   } catch (e) {
-    await session.abortTransaction();
+    await session.abortTransaction(); // Abort transaction on any error
     throw e; // Rethrow for the global error handler
   } finally {
     session.endSession();
