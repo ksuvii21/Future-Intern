@@ -346,29 +346,28 @@ const Admin = () => {
             </div>
           ) : (
             filteredAndSortedData(products, 'products').map(product => (
-            <div key={product._id} className="border border-[#571089]/30 rounded-lg p-4 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <img
-                  src={product.imageUrl || 'https://via.placeholder.com/60'}
-                  alt={product.name}
-                  className="w-16 h-16 object-cover rounded-md"
-                  onError={(e) => { e.target.src = 'https://via.placeholder.com/60'; }}
-                />
-                <div>
-                  <h3 className="font-semibold text-white">{product.name}</h3>
-                  <p className="text-green-400 font-bold">₹{product.price}</p>
-                  <p className="text-gray-400 text-sm">Stock: {product.stock}</p>
+              <div key={product._id} className="border border-[#571089]/30 rounded-lg p-4 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <img
+                    src={product.imageUrl || 'https://via.placeholder.com/60'}
+                    alt={product.name}
+                    className="w-16 h-16 object-cover rounded-md"
+                    onError={(e) => { e.target.src = 'https://via.placeholder.com/60'; }}
+                  />
+                  <div>
+                    <h3 className="font-semibold text-white">{product.name}</h3>
+                    <p className="text-green-400 font-bold">₹{product.price}</p>
+                    <p className="text-gray-400 text-sm">Stock: {product.stock}</p>
+                  </div>
+                </div>
+                <div className="flex space-x-2">
+                  <button onClick={() => handleEdit(product)} className="p-2 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30 transition-colors"><Edit className="w-4 h-4" /></button>
+                  <button onClick={() => handleDelete(product._id)} className="p-2 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30 transition-colors"><Trash2 className="w-4 h-4" /></button>
                 </div>
               </div>
-              <div className="flex space-x-2">
-                <button onClick={() => handleEdit(product)} className="p-2 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30 transition-colors"><Edit className="w-4 h-4" /></button>
-                <button onClick={() => handleDelete(product._id)} className="p-2 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30 transition-colors"><Trash2 className="w-4 h-4" /></button>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
-          ))
-        }
       </div>
     </div>
   );
