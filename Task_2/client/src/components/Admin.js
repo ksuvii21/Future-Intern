@@ -91,18 +91,44 @@ const Admin = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ₹{token}` } };
 
+      let dataToSend;
+      let headers = { ...config.headers };
+
+      if (newProduct.imageFile) {
+        // For file uploads (sellers), use FormData
+        dataToSend = new FormData();
+        dataToSend.append('name', newProduct.name);
+        dataToSend.append('description', newProduct.description);
+        dataToSend.append('price', newProduct.price);
+        dataToSend.append('category', newProduct.category);
+        dataToSend.append('stock', newProduct.stock);
+        dataToSend.append('image', newProduct.imageFile);
+        headers['Content-Type'] = 'multipart/form-data';
+      } else {
+        // For URL-based uploads (admins), use JSON
+        dataToSend = {
+          name: newProduct.name,
+          description: newProduct.description,
+          price: newProduct.price,
+          category: newProduct.category,
+          stock: newProduct.stock,
+          imageUrl: newProduct.imageUrl,
+        };
+        headers['Content-Type'] = 'application/json';
+      }
+
       if (editingProduct) {
         await axios.put(
           `http://localhost:5000/api/products/₹{editingProduct._id}`,
-          newProduct,
-          config
+          dataToSend,
+          { headers }
         );
         setEditingProduct(null);
       } else {
         await axios.post(
           'http://localhost:5000/api/products',
-          newProduct,
-          config
+          dataToSend,
+          { headers }
         );
       }
 
@@ -113,6 +139,7 @@ const Admin = () => {
         category: '',
         stock: '',
         imageUrl: '',
+        imageFile: null,
       });
       fetchProducts();
     } catch (error) {
