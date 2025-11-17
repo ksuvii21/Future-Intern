@@ -76,7 +76,7 @@ exports.createOrder = asyncHandler(async (req, res) => {
   } finally {
     session.endSession();
   }
-};
+});
 
 // Create a Stripe Payment Intent
 exports.createPaymentIntent = asyncHandler(async (req, res) => {
