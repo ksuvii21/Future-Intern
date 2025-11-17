@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "@react-three/fiber": "^9.4.0",
     "http-proxy-middleware": "^3.0.5",
-    "lucide-react": "^0.553.0"
+    "lucide-react": "^0.553.0",
+    "three": "^0.181.1"
   }
 }

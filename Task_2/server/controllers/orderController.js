@@ -2,13 +2,13 @@ const Order = require('../models/Order');
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const asyncHandler = require('./asyncHandler');
 const { sendOrderConfirmationEmail, sendLowStockAlert } = require('./emailService');
 
 const LOW_STOCK_THRESHOLD = 10;
 
-
 // Create a new order
-exports.createOrder = async (req, res) => {
+exports.createOrder = asyncHandler(async (req, res) => {
   const session = await mongoose.startSession();
   session.startTransaction();
   try {
@@ -19,12 +19,14 @@ exports.createOrder = async (req, res) => {
     for (const item of products) {
       const product = await Product.findById(item.product).session(session);
       if (!product) {
-        return res.status(404).json({ message: `Product ${item.product} not found` });
+        res.status(404);
+        throw new Error(`Product ${item.product} not found`);
       }
       if (product.stock < item.quantity) {
         await session.abortTransaction();
         session.endSession();
-        return res.status(400).json({ message: `Insufficient stock for '${product.name}'. Only ${product.stock} left.` });
+        res.status(400);
+        throw new Error(`Insufficient stock for '${product.name}'. Only ${product.stock} left.`);
       }
     }
 
@@ -213,22 +215,22 @@ exports.cancelOrder = async (req, res) => {
 
     if (!order) {
       await session.abortTransaction();
-      session.endSession();
-      return res.status(404).json({ message: 'Order not found' });
+      res.status(404);
+      throw new Error('Order not found');
     }
 
     // Ensure the user owns the order
     if (order.user.toString() !== userId) {
       await session.abortTransaction();
-      session.endSession();
-      return res.status(403).json({ message: 'Access denied' });
+      res.status(403);
+      throw new Error('Access denied');
     }
 
     // Only allow cancellation if the order is pending
     if (order.status !== 'pending') {
       await session.abortTransaction();
-      session.endSession();
-      return res.status(400).json({ message: `Cannot cancel order with status: ${order.status}` });
+      res.status(400);
+      throw new Error(`Cannot cancel order with status: ${order.status}`);
     }
 
     order.status = 'cancelled';
@@ -241,11 +243,10 @@ exports.cancelOrder = async (req, res) => {
 
     await session.commitTransaction();
     res.json({ message: 'Order cancelled successfully', order });
-  } catch (error) {
+  } catch (e) {
     await session.abortTransaction();
-    console.error('Cancel order error:', error);
-    res.status(500).json({ message: 'Server error cancelling order' });
+    throw e; // Rethrow for the global error handler
   } finally {
     session.endSession();
   }
-};
+});
