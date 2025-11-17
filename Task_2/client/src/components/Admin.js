@@ -20,6 +20,7 @@ const Admin = () => {
     category: '',
     stock: '',
     imageUrl: '',
+    imageFile: null,
   });
   const [editingProduct, setEditingProduct] = useState(null);
   const [loading, setLoading] = useState(true);
