@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { ShoppingBag, Search, User, Heart, Menu, X, TrendingUp } from 'lucide-react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
@@ -124,15 +125,47 @@ function AppLayout({
   authPages
 }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [isSuggestionsVisible, setIsSuggestionsVisible] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const isAuthPage = authPages.includes(location.pathname);
+
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      if (searchQuery.trim().length > 1) {
+        try {
+          const response = await axios.get(`/api/products/suggestions?q=${searchQuery}`);
+          setSuggestions(response.data);
+          setIsSuggestionsVisible(true);
+        } catch (error) {
+          console.error('Error fetching search suggestions:', error);
+        }
+      } else {
+        setSuggestions([]);
+        setIsSuggestionsVisible(false);
+      }
+    };
+
+    const debounceFetch = setTimeout(() => {
+      fetchSuggestions();
+    }, 300); // Debounce to avoid rapid API calls
+
+    return () => clearTimeout(debounceFetch);
+  }, [searchQuery]);
+
+  const handleSuggestionClick = () => {
+    setSearchQuery('');
+    setSuggestions([]);
+    setIsSuggestionsVisible(false);
+  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/category/all-categories?search=${encodeURIComponent(searchQuery)}`);
       setSearchQuery(''); // Clear search bar after submission
+      setIsSuggestionsVisible(false);
     }
   };
 
@@ -163,7 +196,7 @@ function AppLayout({
               </Link>
 
               {/* Search Bar - Desktop */}
-              <div className="hidden lg:flex flex-1 max-w-2xl mx-8">
+              <div className="hidden lg:flex flex-1 max-w-2xl mx-8 relative">
                 <form onSubmit={handleSearchSubmit} className="relative w-full">
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
@@ -171,9 +204,29 @@ function AppLayout({
                     placeholder="Search for elegant dresses, jewelry and more..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => searchQuery.length > 1 && setIsSuggestionsVisible(true)}
+                    onBlur={() => setTimeout(() => setIsSuggestionsVisible(false), 200)} // Delay to allow click on suggestion
                     className="w-full pl-12 pr-4 py-3 bg-white/5 border border-[#571089]/30 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] focus:bg-white/10 transition-all"
                   />
                 </form>
+                {isSuggestionsVisible && suggestions.length > 0 && (
+                  <div className="absolute top-full mt-2 w-full bg-[#1a0a2e] border border-[#571089]/30 rounded-2xl shadow-lg overflow-hidden z-10">
+                    <ul className="max-h-96 overflow-y-auto">
+                      {suggestions.map(suggestion => (
+                        <li key={suggestion._id}>
+                          <Link
+                            to={`/product/${suggestion._id}`}
+                            onClick={handleSuggestionClick}
+                            className="flex items-center gap-4 p-3 hover:bg-[#571089]/20 transition-colors"
+                          >
+                            <img src={suggestion.imageUrl} alt={suggestion.name} className="w-12 h-12 object-cover rounded-md" />
+                            <span className="text-white">{suggestion.name}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
 
               {/* Right Actions */}
