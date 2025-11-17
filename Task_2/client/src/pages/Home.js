@@ -60,8 +60,11 @@ const Home = () => {
       {/* Main Content */}
       <div>
         {/* Hero Section */}
-        <section className="pt-32 pb-20 px-4">
-          <div className="max-w-7xl mx-auto">
+        <section className="relative pt-32 pb-20 px-4">
+          <div className="absolute inset-0">
+            <Silk speed={3} scale={1.2} color="#A084CF" noiseIntensity={1.0} rotation={0.2} />
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#ea698b]/20 to-[#822faf]/20 border border-[#ea698b]/30 rounded-full">
@@ -108,9 +111,6 @@ const Home = () => {
                 </div>
               </div>
               <div className="relative">
-                <div className="absolute inset-0">
-                  <Silk speed={3} scale={1.2} color="#A084CF" noiseIntensity={1.0} rotation={0.2} />
-                </div>
                 <div className="relative">
                   {/* Rotating Offers */}
                   <div className="bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm transition-all duration-500">
