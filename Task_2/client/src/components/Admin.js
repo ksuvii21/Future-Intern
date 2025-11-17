@@ -156,7 +156,16 @@ const Admin = () => {
   };
 
   const handleEdit = product => {
-    setNewProduct(product);
+    // Ensure all fields from the initial state are present
+    setNewProduct({
+      name: product.name || '',
+      description: product.description || '',
+      price: product.price || '',
+      category: product.category || '',
+      stock: product.stock || '',
+      imageUrl: product.imageUrl || '',
+      imageFile: null,
+    });
     setEditingProduct(product);
   };
 
@@ -193,6 +202,11 @@ const Admin = () => {
     }
   };
 
+  // Helper to get nested property values for sorting
+  const getNestedValue = (obj, path) => {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  };
+
   const filteredAndSortedData = (data, type) => {
     let filtered = [...data];
 
@@ -219,8 +233,10 @@ const Admin = () => {
     // Sorting
     if (sortConfig.key) {
       filtered.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'ascending' ? -1 : 1;
-        if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'ascending' ? 1 : -1;
+        const valA = getNestedValue(a, sortConfig.key);
+        const valB = getNestedValue(b, sortConfig.key);
+        if (valA < valB) return sortConfig.direction === 'ascending' ? -1 : 1;
+        if (valA > valB) return sortConfig.direction === 'ascending' ? 1 : -1;
         return 0;
       });
     }

@@ -158,18 +158,18 @@ exports.updateOrderStatus = asyncHandler(async (req, res) => {
       throw new Error('Invalid status provided.');
     }
     
-    const order = await Order.findByIdAndUpdate(
+    const updatedOrder = await Order.findByIdAndUpdate(
       id,
       { status },
       { new: true }
     ).populate('user', 'username email').populate('products.product');
 
-    if (!order) { // Set status before throwing
+    if (!updatedOrder) {
       res.status(404);
       throw new Error('Order not found');
     }
 
-    res.json({ message: 'Order status updated successfully', order });
+    res.json({ message: 'Order status updated successfully', order: updatedOrder });
 });
 
 // Get single order by ID
