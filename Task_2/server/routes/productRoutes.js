@@ -17,6 +17,7 @@ const adminAuth = (req, res, next) => {
 
 // Routes
 router.get('/', productController.getAllProducts);
+router.get('/suggestions', productController.getProductSuggestions); // Add this before /:id
 router.get('/:id', productController.getProductById);
 router.post('/:id/reviews', auth, productController.createProductReview);
 router.post('/', auth, sellerAuth, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'variantImages', maxCount: 10 }]), productController.createProduct);
