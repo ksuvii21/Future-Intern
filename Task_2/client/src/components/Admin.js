@@ -404,33 +404,27 @@ const Admin = () => {
       </div>
       <div className="lg:col-span-2 bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
         <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-white">Product List</h2>
-          <div className="flex flex-wrap gap-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" placeholder="Search products..." onChange={e => setSearchTerm(e.target.value)} className="pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
-            </div>
-            <select onChange={e => setFilters(f => ({ ...f, products: { ...f.products, category: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
-              <option value="All">All Categories</option>
-              {[...new Set(products.map(p => p.category))].map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <select onChange={e => setFilters(f => ({ ...f, products: { ...f.products, stockLevel: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
-              <option value="All">All Stock Levels</option>
-              <option value="Low">Low (&lt;10)</option>
-              <option value="Medium">Medium (10-49)</option>
-              <option value="High">High (≥50)</option>
-            </select>
-            <div className="flex gap-1">
-              <input type="number" placeholder="Min Price" onChange={e => setFilters(f => ({ ...f, products: { ...f.products, minPrice: e.target.value } }))} className="w-20 py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
-              <input type="number" placeholder="Max Price" onChange={e => setFilters(f => ({ ...f, products: { ...f.products, maxPrice: e.target.value } }))} className="w-20 py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
-            </div>
-            <div className="flex items-center gap-1">
-              <button onClick={() => handleSort('name')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Name</button>
-              <button onClick={() => handleSort('price')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Price</button>
-              <button onClick={() => handleSort('stock')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Stock</button>
-              <button onClick={() => handleSort('createdAt')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Date</button>
+          <h2 className="text-2xl font-bold text-white">Product List</h2>
+          <div className="flex items-center gap-2">
+            <div className="relative w-full max-w-xs">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input type="text" placeholder="Search products..." onChange={e => setSearchTerm(e.target.value)} className="w-full pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
             </div>
           </div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 p-4 bg-white/5 rounded-lg">
+            <select onChange={e => setFilters(f => ({ ...f, products: { ...f.products, category: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
+                <option value="All">All Categories</option>
+                {[...new Set(products.map(p => p.category))].map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+            <select onChange={e => setFilters(f => ({ ...f, products: { ...f.products, stockLevel: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
+                <option value="All">All Stock Levels</option>
+                <option value="Low">Low (&lt;10)</option>
+                <option value="Medium">Medium (10-49)</option>
+                <option value="High">High (≥50)</option>
+            </select>
+            <input type="number" placeholder="Min Price" onChange={e => setFilters(f => ({ ...f, products: { ...f.products, minPrice: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+            <input type="number" placeholder="Max Price" onChange={e => setFilters(f => ({ ...f, products: { ...f.products, maxPrice: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-gray-300">
@@ -496,65 +490,32 @@ const Admin = () => {
 
   const renderUsers = () => (
     <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold text-white">User Management</h2>
-        <div className="text-sm text-gray-400">
-          Total Users: {filteredAndSortedData(users, 'users').length}
-        </div>
+      <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold text-white">User Management</h2>
+        <span className="text-sm text-gray-400">Total Users: {filteredAndSortedData(users, 'users').length}</span>
       </div>
-
-      {/* Filters Row */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="relative">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 bg-white/5 rounded-lg">
+        <div className="relative lg:col-span-2">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search users..."
-            onChange={e => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm"
-          />
+          <input type="text" placeholder="Search by name, email..." onChange={e => setSearchTerm(e.target.value)} className="w-full pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
         </div>
-        <select
-          onChange={e => setFilters(f => ({ ...f, users: { ...f.users, role: e.target.value } }))}
-          className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm"
-        >
+        <select onChange={e => setFilters(f => ({ ...f, users: { ...f.users, role: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
           <option value="All">All Roles</option>
           <option value="user">User</option>
           <option value="seller">Seller</option>
           <option value="admin">Admin</option>
         </select>
-        <input
-          type="date"
-          placeholder="From Date"
-          onChange={e => setFilters(f => ({ ...f, users: { ...f.users, dateFrom: e.target.value } }))}
-          className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm"
-        />
-        <input
-          type="date"
-          placeholder="To Date"
-          onChange={e => setFilters(f => ({ ...f, users: { ...f.users, dateTo: e.target.value } }))}
-          className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm"
-        />
+        <input type="date" placeholder="Joined After" onChange={e => setFilters(f => ({ ...f, users: { ...f.users, dateFrom: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm" />
       </div>
-
-      {/* Sort Buttons */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        <span className="text-sm text-gray-400 mr-2">Sort by:</span>
-        <button onClick={() => handleSort('username')} className="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 text-xs transition-colors">Username</button>
-        <button onClick={() => handleSort('email')} className="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 text-xs transition-colors">Email</button>
-        <button onClick={() => handleSort('role')} className="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 text-xs transition-colors">Role</button>
-        <button onClick={() => handleSort('createdAt')} className="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 text-xs transition-colors">Joined</button>
-      </div>
-
       {/* Users Table */}
       <div className="overflow-x-auto">
         <table className="w-full text-left text-gray-300">
           <thead className="border-b border-[#571089]/30 text-xs uppercase text-gray-400">
             <tr>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('username')}>User</th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('username')}>Username <ArrowUpDown className="w-3 h-3" /></th>
               <th className="p-3 cursor-pointer" onClick={() => handleSort('email')}>Email</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('role')}>Role</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('createdAt')}>Joined</th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('role')}>Role <ArrowUpDown className="w-3 h-3" /></th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('createdAt')}>Joined <ArrowUpDown className="w-3 h-3" /></th>
               <th className="p-3 text-right">Actions</th>
             </tr>
           </thead>
@@ -601,42 +562,30 @@ const Admin = () => {
 
   const renderOrders = () => (
     <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
-        <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-white">Order List</h2>
-          <div className="flex flex-wrap gap-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" placeholder="Search orders..." onChange={e => setSearchTerm(e.target.value)} className="pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
-            </div>
-            <select onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, status: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
-              <option value="All">All Statuses</option>
-              {['pending', 'processing', 'shipped', 'delivered', 'cancelled'].map(s => <option key={s} value={s} className="capitalize">{s}</option>)}
-            </select>
-            <div className="flex gap-1">
-              <input type="number" placeholder="Min Amount" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, minAmount: e.target.value } }))} className="w-24 py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
-              <input type="number" placeholder="Max Amount" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, maxAmount: e.target.value } }))} className="w-24 py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
-            </div>
-            <div className="flex gap-1">
-              <input type="date" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, dateFrom: e.target.value } }))} className="py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm" />
-              <input type="date" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, dateTo: e.target.value } }))} className="py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm" />
-            </div>
-            <div className="flex items-center gap-1">
-              <button onClick={() => handleSort('totalAmount')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Amount</button>
-              <button onClick={() => handleSort('status')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Status</button>
-              <button onClick={() => handleSort('createdAt')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Date</button>
-              <button onClick={() => handleSort('user.username')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">User</button>
-            </div>
-          </div>
+      <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold text-white">Order List</h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6 p-4 bg-white/5 rounded-lg">
+        <div className="relative lg:col-span-2">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <input type="text" placeholder="Search by Order ID, User..." onChange={e => setSearchTerm(e.target.value)} className="w-full pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
         </div>
+        <select onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, status: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
+          <option value="All">All Statuses</option>
+          {['pending', 'processing', 'shipped', 'delivered', 'cancelled'].map(s => <option key={s} value={s} className="capitalize">{s}</option>)}
+        </select>
+        <input type="number" placeholder="Min Amount" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, minAmount: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+        <input type="date" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, dateFrom: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm" />
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-gray-300">
-          <thead className="border-b border-[#571089]/30">
+          <thead className="border-b border-[#571089]/30 text-xs uppercase text-gray-400">
             <tr>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('_id')}>Order ID</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('user.username')}>User</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('createdAt')}>Date</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('totalAmount')}>Amount</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('status')}>Status</th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('_id')}>Order ID <ArrowUpDown className="w-3 h-3" /></th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('user.username')}>User <ArrowUpDown className="w-3 h-3" /></th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('createdAt')}>Date <ArrowUpDown className="w-3 h-3" /></th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('totalAmount')}>Amount <ArrowUpDown className="w-3 h-3" /></th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('status')}>Status <ArrowUpDown className="w-3 h-3" /></th>
               <th className="p-3 text-right">Actions</th>
             </tr>
           </thead>
