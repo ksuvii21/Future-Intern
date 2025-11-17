@@ -280,7 +280,7 @@ function AppLayout({
 
             {/* Category Navigation */}
             <nav className="hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-[#571089]/20">
-              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections', 'New Arrivals'].map((item) => (
+              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'New Arrivals', 'Girlies <3'].map((item) => (
                 <Link
                   key={item}
                   to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase().replace(/ /g, '-')}`}
@@ -301,7 +301,7 @@ function AppLayout({
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
           <div className="absolute right-0 top-0 h-full w-64 bg-[#0a0015] border-l border-[#571089]/30 p-6">
             <nav className="flex flex-col gap-4 mt-16 text-left">
-              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections'].map((item) => (
+              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Girlies <3', 'New Arrivals'].map((item) => (
                 <Link
                   key={item}
                   to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase().replace(/ /g, '-')}`}
