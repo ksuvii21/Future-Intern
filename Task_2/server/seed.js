@@ -2,6 +2,32 @@ const mongoose = require('mongoose');
 const Product = require('./models/Product');
 require('dotenv').config();
 
+/* List of dresses, jewelry, and accessories by me-
+A) Dresses-
+  1. Elegant Evening Gown- Red, Blue-Black, Red-Black. 
+  2. Velvet Maxi Dress- Red, Green, Black, Purple, Navy Blue.
+  3. Silk Cocktail Dress- Red, Black, Navy Blue.
+  4. Satin Wrap Dress- Red, Light Green, Dark Green, Blue.
+  5. Chiffon Blouse- Black, Blue, Burgundy, White, Green
+  6. Cashmere Sweater- white, Blue, Black, Green, Red.
+  7.Tulle Shirt- White, Cream, Light brown, Blue, Red. 
+  8.Tulle Skirt- Red, Pink, Black, White.
+B) Jewelry-
+  1. Diamond Stud Earrings- White Gold, Yellow Gold, White.
+  2. Emerald Drop Earrings- Emerald, gold-emerald, butterfly. 
+  3. Pearl Necklace Set- Emerald, White, Gold.
+  4. Gold Bangle Bracelet- Gold, Silver, Flower.
+  5. Silver Hoop Earrings- White, Silver, Flower.
+  6. Diamond Tennis Bracelet- Silver, White.
+C) Accessories-
+  1. Designer Handbag- Brown, Burgundy, Blue, White.
+  2. Crystal Hair Accessories- Purple, Silver, Black, White, Butterfly.
+  3. Embroidered Clutch- Black, Blue, White.
+  4. Designer Sunglasses- Pink, Black, Brown.
+  5. Rose Gold Watch-
+  6. Leather Ankle Boots- 
+  7. Silk Scarf */
+
 const sampleProducts = [
   {
     name: 'Elegant Evening Gown',
