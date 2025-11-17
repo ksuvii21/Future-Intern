@@ -84,8 +84,8 @@ const AdminDashboard = () => {
   const handleUpdateOrderStatus = async (orderId, status) => {
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ₹{token}` } };
-      await axios.put(`http://localhost:5000/api/orders/₹{orderId}/status`, { status }, config);
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      await axios.put(`http://localhost:5000/api/orders/${orderId}/status`, { status }, config);
       fetchAllData();
     } catch (error) {
       console.error("Failed to update order status", error);
