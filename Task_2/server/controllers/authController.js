@@ -176,82 +176,76 @@ const getAllUsers = asyncHandler(async (req, res) => {
     res.json(users);
 });
 
+const addAddress = asyncHandler(async (req, res) => {
+  const userId = req.user.userId;
+  const { name, phone, address, city, state, zipCode, isDefault } = req.body;
+
+  const user = await User.findById(userId);
+  if (!user) {
+    res.status(404);
+    throw new Error('User not found');
+  }
+
+  const newAddress = { name, phone, address, city, state, zipCode, isDefault };
+
+  // If setting a new default, unset the old one
+  if (isDefault) {
+    user.addresses.forEach(addr => addr.isDefault = false);
+  }
+
+  user.addresses.push(newAddress);
+  await user.save();
+
+  res.status(201).json({ message: 'Address added successfully', user: await User.findById(userId).select('-password') });
+});
+
+const deleteAddress = asyncHandler(async (req, res) => {
+  const userId = req.user.userId;
+  const addressId = req.params.id;
+
+  const user = await User.findById(userId);
+  if (!user) {
+    res.status(404);
+    throw new Error('User not found');
+  }
+
+  // Find and remove the address
+  user.addresses = user.addresses.filter(addr => addr._id.toString() !== addressId);
+  await user.save();
+
+  res.json({ message: 'Address deleted successfully', user: await User.findById(userId).select('-password') });
+});
+
+const updateUserRole = asyncHandler(async (req, res) => {
+  const { role } = req.body;
+  const userId = req.params.id;
+
+  const allowedRoles = ['user', 'seller', 'admin'];
+  if (!allowedRoles.includes(role)) {
+    res.status(400);
+    throw new Error('Invalid role specified.');
+  }
+
+  const user = await User.findById(userId);
+  if (!user) {
+    res.status(404);
+    throw new Error('User not found.');
+  }
+
+  user.role = role;
+  await user.save();
+
+  res.json({ message: 'User role updated successfully.', user: await User.findById(userId).select('-password') });
+});
+
 module.exports = {
   register,
   login,
-  forgotPassword, // This structure was incorrect
-  resetPassword,  // I am correcting it to include all functions
+  forgotPassword,
+  resetPassword,
   updateProfile,
-
-  // @desc    Add a new address for a user
-  // @route   POST /api/auth/address
-  // @access  Private
-  addAddress: asyncHandler(async (req, res) => {
-    const userId = req.user.userId;
-      const { name, phone, address, city, state, zipCode, isDefault } = req.body;
-
-      const user = await User.findById(userId);
-      if (!user) {
-        res.status(404);
-        throw new Error('User not found');
-      }
-
-      const newAddress = { name, phone, address, city, state, zipCode, isDefault };
-
-      // If setting a new default, unset the old one
-      if (isDefault) {
-        user.addresses.forEach(addr => addr.isDefault = false);
-      }
-
-      user.addresses.push(newAddress);
-      await user.save();
-
-      res.status(201).json({ message: 'Address added successfully', user: await User.findById(userId).select('-password') });
-  }),
-
-  // @desc    Delete a user's address
-  // @route   DELETE /api/auth/address/:id
-  // @access  Private
-  deleteAddress: asyncHandler(async (req, res) => {
-    const userId = req.user.userId;
-      const addressId = req.params.id;
-
-      const user = await User.findById(userId);
-      if (!user) {
-        res.status(404);
-        throw new Error('User not found');
-      }
-
-      // Find and remove the address
-      user.addresses = user.addresses.filter(addr => addr._id.toString() !== addressId);
-      await user.save();
-
-      res.json({ message: 'Address deleted successfully', user: await User.findById(userId).select('-password') });
-  }),
-
-  // @desc    Update user role (admin only)
-  // @route   PUT /api/auth/users/:id/role
-  // @access  Private/Admin
-  updateUserRole: asyncHandler(async (req, res) => {
-    const { role } = req.body;
-      const userId = req.params.id;
-
-      const allowedRoles = ['user', 'seller', 'admin'];
-      if (!allowedRoles.includes(role)) {
-        res.status(400);
-        throw new Error('Invalid role specified.');
-      }
-
-      const user = await User.findById(userId);
-      if (!user) {
-        res.status(404);
-        throw new Error('User not found.');
-      }
-
-      user.role = role;
-      await user.save();
-
-      res.json({ message: 'User role updated successfully.', user: await User.findById(userId).select('-password') });
-  }),
-  getAllUsers // Adding the missing export here
+  addAddress,
+  deleteAddress,
+  updateUserRole,
+  getAllUsers
 };
