@@ -1,6 +1,12 @@
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
 const asyncHandler = require('./asyncHandler');
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+
+// Configure multer for memory storage
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 // Get all products
 exports.getAllProducts = asyncHandler(async (req, res) => {
