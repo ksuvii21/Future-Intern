@@ -250,7 +250,7 @@ function AppLayout({
               {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'Collections'].map((item) => (
                 <Link
                   key={item}
-                  to={item === 'All Categories' ? '/' : `/category/₹{item.toLowerCase().replace(/ /g, '-')}`}
+                  to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase().replace(/ /g, '-')}`}
                   className="text-gray-300 hover:text-[#ea698b] transition-colors py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
