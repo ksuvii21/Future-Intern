@@ -468,64 +468,97 @@ const Admin = () => {
 
   const renderUsers = () => (
     <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
-        <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-white">User List</h2>
-          <div className="flex flex-wrap gap-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" placeholder="Search users..." onChange={e => setSearchTerm(e.target.value)} className="pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
-            </div>
-            <select onChange={e => setFilters(f => ({ ...f, users: { ...f.users, role: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
-              <option value="All">All Roles</option>
-              <option value="user">User</option>
-              <option value="seller">Seller</option>
-              <option value="admin">Admin</option>
-            </select>
-            <div className="flex gap-1">
-              <input type="date" onChange={e => setFilters(f => ({ ...f, users: { ...f.users, dateFrom: e.target.value } }))} className="py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm" />
-              <input type="date" onChange={e => setFilters(f => ({ ...f, users: { ...f.users, dateTo: e.target.value } }))} className="py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm" />
-            </div>
-            <div className="flex items-center gap-1">
-              <button onClick={() => handleSort('username')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Username</button>
-              <button onClick={() => handleSort('email')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Email</button>
-              <button onClick={() => handleSort('role')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Role</button>
-              <button onClick={() => handleSort('createdAt')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Joined</button>
-            </div>
-          </div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-bold text-white">User Management</h2>
+        <div className="text-sm text-gray-400">
+          Total Users: {filteredAndSortedData(users, 'users').length}
         </div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-gray-300">
-          <thead className="border-b border-[#571089]/30">
-            <tr>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('username')}>Username</th>
-              <th className="p-3">Email</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('role')}>Role</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('createdAt')}>Joined</th>
-              <th className="p-3 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredAndSortedData(users, 'users').map(user => (
-              <tr key={user._id} className="border-b border-[#571089]/20 hover:bg-white/5">
-                <td className="p-3">{user.username}</td>
-                <td className="p-3">{user.email}</td>
-                <td className="p-3 capitalize">{user.role}</td>
-                <td className="p-3">{new Date(user.createdAt).toLocaleDateString()}</td>
-                <td className="p-3 text-right">
-                  <select
-                    value={user.role}
-                    onChange={(e) => handleRoleUpdate(user._id, e.target.value)}
-                    className="py-1 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm"
-                  >
-                    <option value="user">User</option>
-                    <option value="seller">Seller</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      </div>
+
+      {/* Filters Row */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search users..."
+            onChange={e => setSearchTerm(e.target.value)}
+            className="w-full pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm"
+          />
+        </div>
+        <select
+          onChange={e => setFilters(f => ({ ...f, users: { ...f.users, role: e.target.value } }))}
+          className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm"
+        >
+          <option value="All">All Roles</option>
+          <option value="user">User</option>
+          <option value="seller">Seller</option>
+          <option value="admin">Admin</option>
+        </select>
+        <input
+          type="date"
+          placeholder="From Date"
+          onChange={e => setFilters(f => ({ ...f, users: { ...f.users, dateFrom: e.target.value } }))}
+          className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm"
+        />
+        <input
+          type="date"
+          placeholder="To Date"
+          onChange={e => setFilters(f => ({ ...f, users: { ...f.users, dateTo: e.target.value } }))}
+          className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm"
+        />
+      </div>
+
+      {/* Sort Buttons */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        <span className="text-sm text-gray-400 mr-2">Sort by:</span>
+        <button onClick={() => handleSort('username')} className="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 text-xs transition-colors">Username</button>
+        <button onClick={() => handleSort('email')} className="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 text-xs transition-colors">Email</button>
+        <button onClick={() => handleSort('role')} className="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 text-xs transition-colors">Role</button>
+        <button onClick={() => handleSort('createdAt')} className="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 text-xs transition-colors">Joined</button>
+      </div>
+
+      {/* Users Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filteredAndSortedData(users, 'users').length === 0 ? (
+          <div className="col-span-full text-center py-10 text-gray-400">
+            <Users className="w-12 h-12 mx-auto mb-2" />
+            No users found.
+          </div>
+        ) : (
+          filteredAndSortedData(users, 'users').map(user => (
+            <div key={user._id} className="bg-[#2a1a3e]/50 border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <h3 className="font-semibold text-white">{user.username}</h3>
+                  <p className="text-gray-400 text-sm">{user.email}</p>
+                </div>
+                <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${
+                  user.role === 'admin' ? 'bg-red-500/20 text-red-400' :
+                  user.role === 'seller' ? 'bg-blue-500/20 text-blue-400' :
+                  'bg-green-500/20 text-green-400'
+                }`}>
+                  {user.role}
+                </span>
+              </div>
+              <div className="text-xs text-gray-500 mb-3">
+                Joined: {new Date(user.createdAt).toLocaleDateString()}
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-400">Change Role:</span>
+                <select
+                  value={user.role}
+                  onChange={(e) => handleRoleUpdate(user._id, e.target.value)}
+                  className="py-1 px-2 bg-[#1a0a2e] border border-[#571089]/50 rounded text-white text-xs"
+                >
+                  <option value="user">User</option>
+                  <option value="seller">Seller</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
