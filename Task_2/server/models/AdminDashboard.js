@@ -18,7 +18,7 @@ const AdminDashboard = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ₹{token}` } };
+      const config = { headers: { Authorization: `Bearer ${token}` } };
 
       const [statsRes, productsRes, ordersRes, usersRes] = await Promise.all([
         axios.get('http://localhost:5000/api/admin/stats', config),
@@ -52,7 +52,7 @@ const AdminDashboard = () => {
     productData.isNewArrival = productData.isNewArrival === 'on';
 
     const token = localStorage.getItem('token');
-    const config = { headers: { Authorization: `Bearer ₹{token}` } };
+    const config = { headers: { Authorization: `Bearer ${token}` } };
 
     try {
       if (editingProduct) {
