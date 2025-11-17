@@ -43,7 +43,7 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
 
     const count = await Product.countDocuments(query);
 
-    const topProduct = await Product.find().sort({ price: -1 }).limit(1);
+    const topProduct = await Product.findOne().sort({ price: -1 }); // More efficient than find().limit(1)
     const maxProductPrice = topProduct.length > 0 ? topProduct[0].price : 1000;
 
     res.json({
