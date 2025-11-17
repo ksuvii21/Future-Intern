@@ -35,9 +35,16 @@ const ProductDetail = () => {
         );
         setProduct(response.data);
 
-        // Set default selected color to first variant if available
+        // Check URL parameters for color selection
+        const urlParams = new URLSearchParams(location.search);
+        const colorParam = urlParams.get('color');
+
+        // Set default selected color to first variant if available, or from URL param
         if (response.data.variants && response.data.variants.length > 0) {
-          setSelectedColor(response.data.variants[0].color);
+          const defaultColor = colorParam && response.data.variants.find(v => v.color === colorParam)
+            ? colorParam
+            : response.data.variants[0].color;
+          setSelectedColor(defaultColor);
         }
 
         // Fetch similar products
@@ -66,7 +73,7 @@ const ProductDetail = () => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id, location.search]);
 
   // Get the current variant based on selected color
   const currentVariant = product?.variants?.find(v => v.color === selectedColor);
@@ -271,23 +278,26 @@ const ProductDetail = () => {
             </div>
             
             {/* Color Selection */}
-            <div className="space-y-3">
-              <label className="text-gray-300 font-medium">Color:</label>
-              <div className="flex gap-3">
-                {['Black', 'White', 'Red', 'Blue', 'Green'].map(color => (
-                  <button
-                    key={color}
-                    onClick={() => setSelectedColor(color)}className={`px-4 py-2 rounded-lg border-2 transition-all ${
-                      selectedColor === color
-                        ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
-                        : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
-                    }`}
-                  >
-                    {color}
-                  </button>
-                ))}
+            {product?.variants && product.variants.length > 0 && (
+              <div className="space-y-3">
+                <label className="text-gray-300 font-medium">Color:</label>
+                <div className="flex gap-3 flex-wrap">
+                  {product.variants.map(variant => (
+                    <button
+                      key={variant.color}
+                      onClick={() => setSelectedColor(variant.color)}
+                      className={`px-4 py-2 rounded-lg border-2 transition-all ${
+                        selectedColor === variant.color
+                          ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
+                          : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
+                      }`}
+                    >
+                      {variant.color}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Size Selection */}
             <div className="space-y-3">
