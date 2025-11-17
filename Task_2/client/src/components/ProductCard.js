@@ -42,7 +42,7 @@ const ProductCard = ({ product }) => {
         )}
         <div className="absolute top-3 right-3">
           <span
-            className={`px-3 py-1 rounded-full text-xs font-semibold shadow-md ₹{
+            className={`px-3 py-1 rounded-full text-xs font-semibold shadow-md ${
               product.stock > 10
                 ? 'bg-green-500 text-white'
                 : product.stock > 0
@@ -80,7 +80,7 @@ const ProductCard = ({ product }) => {
         </div>
         <div className="flex space-x-3">
           <Link
-            to={`/product/₹{product._id}`}
+            to={`/product/${product._id}`}
             className="flex-1 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 py-3 px-4 rounded-xl hover:from-gray-200 hover:to-gray-300 transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg"
           >
             View Details
