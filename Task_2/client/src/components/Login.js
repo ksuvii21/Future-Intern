@@ -166,7 +166,7 @@ const Login = ({ onLogin }) => {
               {/* Password Input */}
               <div>
                 <div className="relative group">
-                  <Lock className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ₹{
+                  <Lock className={`absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
                     isFocused.password ? 'text-[#ea698b]' : 'text-gray-500'
                   }`} />
                   <input
