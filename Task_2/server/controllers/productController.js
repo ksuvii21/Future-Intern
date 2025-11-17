@@ -128,13 +128,25 @@ exports.createProduct = asyncHandler(async (req, res) => {
     let imageUrl;
 
     if (req.user.role === 'admin') {
-      // Admins provide direct Google Drive URLs
-      imageUrl = req.body.imageUrl;
-      if (!imageUrl) {
+      // Admins provide Google Drive shareable URLs - convert to direct link
+      let providedUrl = req.body.imageUrl;
+      if (!providedUrl) {
         res.status(400);
         throw new Error('Image URL is required for admin products.');
       }
-    } else if (req.user.role === 'seller') {
+
+      // Convert Google Drive shareable link to direct image link
+      if (providedUrl.includes('drive.google.com')) {
+        const fileIdMatch = providedUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (fileIdMatch) {
+          imageUrl = `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
+        } else {
+          imageUrl = providedUrl; // Fallback if not a standard shareable link
+        }
+      } else {
+        imageUrl = providedUrl; // For other URLs
+      }
+    }
       // Sellers upload images to Cloudinary
       if (req.file) {
         const result = await cloudinary.uploader.upload_stream(
