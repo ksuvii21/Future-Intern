@@ -137,20 +137,24 @@ const Home = () => {
                           transformOrigin: 'bottom right',
                         }}
                       >
-                        <div className="grid grid-cols-2 gap-6 items-center h-full">
-                          <div className="text-center">
-                            {offer.logo ? (
-                              <img src="/logo.png" alt="Fansee Rebel" className="w-48 h-48 rounded-lg mx-auto" />
-                            ) : (
-                              <div className="text-8xl">{offer.emoji}</div>
-                            )}
-                          </div>
-                          <div className="text-left">
+                        {offer.logo ? (
+                          <div className="flex flex-col items-center justify-center h-full text-center">
+                            <img src="/logo.png" alt="Fansee Rebel" className="w-48 h-48 rounded-lg mx-auto mb-4" />
                             <p className="text-3xl font-bold text-white mb-2">{offer.title}</p>
-                            <p className="text-[#ea698b] text-5xl font-bold mb-4">{offer.discount}</p>
                             <p className="text-gray-300">{offer.description}</p>
                           </div>
-                        </div>
+                        ) : (
+                          <div className="grid grid-cols-2 gap-6 items-center h-full">
+                            <div className="text-center">
+                              <div className="text-8xl">{offer.emoji}</div>
+                            </div>
+                            <div className="text-left">
+                              <p className="text-3xl font-bold text-white mb-2">{offer.title}</p>
+                              <p className="text-[#ea698b] text-5xl font-bold mb-4">{offer.discount}</p>
+                              <p className="text-gray-300">{offer.description}</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
