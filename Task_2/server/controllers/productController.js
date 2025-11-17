@@ -23,8 +23,14 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
     }
 
     // Category filtering
-    if (category && category.toLowerCase() !== 'all' && category.toLowerCase() !== 'all categories') {
-      query.category = { $regex: `^${category}$`, $options: 'i' };
+    const lowerCaseCategory = category?.toLowerCase();
+    if (lowerCaseCategory && lowerCaseCategory !== 'all' && lowerCaseCategory !== 'all-categories') {
+      if (lowerCaseCategory === 'new-arrivals') {
+        query.isNewArrival = true;
+      } else if (lowerCaseCategory !== 'collections') {
+        // 'collections' will show all products by not adding a category filter
+        query.category = { $regex: `^${category}$`, $options: 'i' };
+      }
     }
 
     // Price range filtering
