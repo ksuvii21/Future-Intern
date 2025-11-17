@@ -31,12 +31,16 @@ const Admin = () => {
     orders: { status: 'All' },
   });
   const [sortConfig, setSortConfig] = useState({
-    key: 'createdAt',
+    key: null,
     direction: 'descending',
   });
 
   const handleSort = (key) => {
-    setSortConfig({ key, direction: sortConfig.direction === 'ascending' ? 'descending' : 'ascending' });
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
   };
 
   useEffect(() => {
@@ -50,7 +54,7 @@ const Admin = () => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
       const [productsRes, usersRes, ordersRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/products'),
+        axios.get('http://localhost:5000/api/products?limit=1000'), // Fetch all products
         axios.get('http://localhost:5000/api/auth/users', config),
         axios.get('http://localhost:5000/api/orders/all', config)
       ]);
@@ -213,11 +217,13 @@ const Admin = () => {
     }
 
     // Sorting
-    filtered.sort((a, b) => {
-      if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'ascending' ? -1 : 1;
-      if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'ascending' ? 1 : -1;
-      return 0;
-    });
+    if (sortConfig.key) {
+      filtered.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'ascending' ? -1 : 1;
+        if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'ascending' ? 1 : -1;
+        return 0;
+      });
+    }
     return filtered;
   };
 
@@ -308,7 +314,10 @@ const Admin = () => {
               <option value="All">All Categories</option>
               {[...new Set(products.map(p => p.category))].map(c => <option key={c} value={c}>{c}</option>)}
             </select>
-            <button onClick={() => handleSort('price')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+            <div className="flex items-center gap-1">
+              <button onClick={() => handleSort('name')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Name</button>
+              <button onClick={() => handleSort('price')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+            </div>
           </div>
         </div>
         <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
@@ -361,17 +370,21 @@ const Admin = () => {
             <option value="seller">Seller</option>
             <option value="admin">Admin</option>
           </select>
-          <button onClick={() => handleSort('username')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+          <div className="flex items-center gap-1">
+            <button onClick={() => handleSort('username')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Username</button>
+            <button onClick={() => handleSort('createdAt')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Joined</button>
+            <button onClick={() => handleSort('username')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+          </div>
         </div>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-gray-300">
           <thead className="border-b border-[#571089]/30">
             <tr>
-              <th className="p-3">Username</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('username')}>Username</th>
               <th className="p-3">Email</th>
-              <th className="p-3">Role</th>
-              <th className="p-3">Joined</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('role')}>Role</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('createdAt')}>Joined</th>
               <th className="p-3 text-right">Actions</th>
             </tr>
           </thead>
@@ -414,18 +427,21 @@ const Admin = () => {
             <option value="All">All Statuses</option>
             {['pending', 'processing', 'shipped', 'delivered', 'cancelled'].map(s => <option key={s} value={s} className="capitalize">{s}</option>)}
           </select>
-          <button onClick={() => handleSort('totalAmount')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+          <div className="flex items-center gap-1">
+            <button onClick={() => handleSort('totalAmount')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Amount</button>
+            <button onClick={() => handleSort('totalAmount')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+          </div>
         </div>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-gray-300">
           <thead className="border-b border-[#571089]/30">
             <tr>
-              <th className="p-3">Order ID</th>
-              <th className="p-3">User</th>
-              <th className="p-3">Date</th>
-              <th className="p-3">Amount</th>
-              <th className="p-3">Status</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('_id')}>Order ID</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('user.username')}>User</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('createdAt')}>Date</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('totalAmount')}>Amount</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('status')}>Status</th>
               <th className="p-3 text-right">Actions</th>
             </tr>
           </thead>
