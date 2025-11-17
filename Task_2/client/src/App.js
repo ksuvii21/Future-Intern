@@ -83,6 +83,7 @@ function App() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
+    window.location.href = '/'; // Redirect to home and force a full page reload
   };
 
   const toggleDarkMode = () => {
