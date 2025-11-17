@@ -111,9 +111,20 @@ exports.createProductReview = async (req, res) => {
 
 // Create product
 exports.createProduct = async (req, res) => {
-  const product = new Product(req.body);
   try {
+    const { name, price, description, category, stock, imageUrl } = req.body;
+    const product = new Product({
+      name,
+      price,
+      description,
+      category,
+      stock,
+      imageUrl,
+      user: req.user.userId, // Associate product with the seller
+    });
+
     const newProduct = await product.save();
+
     res.status(201).json(newProduct);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -127,7 +138,17 @@ exports.updateProduct = async (req, res) => {
       return res.status(400).json({ message: 'Invalid Product ID format' });
     }
 
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    // Explicitly define updatable fields to prevent mass assignment
+    const { name, price, description, category, stock, imageUrl } = req.body;
+    const updatedFields = {
+      name,
+      price,
+      description,
+      category,
+      stock,
+      imageUrl,
+    };
+    const product = await Product.findByIdAndUpdate(req.params.id, updatedFields, { new: true, runValidators: true });
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
