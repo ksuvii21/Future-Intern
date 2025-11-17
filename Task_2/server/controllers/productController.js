@@ -46,6 +46,12 @@ exports.getAllProducts = async (req, res) => {
 // Get single product
 exports.getProductById = async (req, res) => {
   try {
+    // Add a check for a valid ObjectId to prevent CastError
+    const { default: mongoose } = require('mongoose');
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: 'Invalid Product ID format' });
+    }
+
     const product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
