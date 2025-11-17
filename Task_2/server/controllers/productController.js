@@ -45,7 +45,8 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
     const products = await Product.find(query)
       .sort(sort)
       .limit(limit * 1)
-      .skip((page - 1) * limit);
+      .skip((page - 1) * limit)
+      .populate('user', 'username'); // Optional: populate user info
 
     const count = await Product.countDocuments(query);
 
