@@ -310,9 +310,19 @@ const ProductDetail = () => {
                           : 'border-[#571089]/30 hover:border-[#571089]/50'
                       }`}
                       onClick={() => {
-                        // Navigate to the same product with different color parameter
-                        const newUrl = `/product/${id}?color=${encodeURIComponent(variant.color)}`;
-                        window.location.href = newUrl;
+                        // Find a different product that has this color variant
+                        const otherProduct = similarProducts.find(p =>
+                          p.variants && p.variants.some(v => v.color === variant.color) && p._id !== product._id
+                        );
+                        if (otherProduct) {
+                          // Navigate to the other product's detail page with the color selected
+                          const newUrl = `/product/${otherProduct._id}?color=${encodeURIComponent(variant.color)}`;
+                          window.location.href = newUrl;
+                        } else {
+                          // Fallback: navigate to category page with search for this color
+                          const searchUrl = `/category/${product.category}?search=${encodeURIComponent(variant.color)}`;
+                          window.location.href = searchUrl;
+                        }
                       }}
                     >
                       <img
