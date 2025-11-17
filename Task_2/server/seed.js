@@ -36,11 +36,11 @@ const sampleProducts = [
     price: 2549.15,
     category: 'Dresses',
     stock: 15,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/736x/17/7d/8e/177d8e9da528eca0433fdbd694d9cf65.jpg',
     variants: [
-      { color: 'Red', imageUrl: '', stock: 5 },
-      { color: 'Blue-Black', imageUrl: '', stock: 5 },
-      { color: 'Red-Black', imageUrl: '', stock: 5 }
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/736x/17/7d/8e/177d8e9da528eca0433fdbd694d9cf65.jpg', stock: 5 },
+      { color: 'Blue-Black', imageUrl: 'https://i.pinimg.com/1200x/84/33/84/8433843541b3bcfdc279a9430678e333.jpg', stock: 5 },
+      { color: 'Red-Black', imageUrl: 'https://i.pinimg.com/1200x/be/37/68/be3768f7c25a393ffbc1cc1a74da7204.jpg', stock: 5 }
     ],
     isNewArrival: false,
     rating: 4.8,
@@ -52,13 +52,13 @@ const sampleProducts = [
     price: 2804.15,
     category: 'Dresses',
     stock: 10,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/2f/3e/a7/2f3ea7bd7bdc9c7d655cef6d4d4c6ba0.jpg',
     variants: [
-      { color: 'Red', imageUrl: '', stock: 4 },
-      { color: 'Green', imageUrl: '', stock: 3 },
-      { color: 'Black', imageUrl: '', stock: 3 },
-      { color: 'Purple', imageUrl: '', stock: 2 },
-      { color: 'Navy Blue', imageUrl: '', stock: 2 }
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/2f/3e/a7/2f3ea7bd7bdc9c7d655cef6d4d4c6ba0.jpg', stock: 4 },
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/1200x/02/c5/0e/02c50e8bc313d06a833f3ee672933260.jpg', stock: 3 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/ab/04/77/ab04778495e2a60595faef8874c0b9fd.jpg', stock: 3 },
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/99/b2/a5/99b2a5a1c000e051d7c7c9aaceb34cdd.jpg', stock: 2 },
+      { color: 'Navy Blue', imageUrl: 'https://i.pinimg.com/736x/3e/f8/61/3ef86150cff14188c3b5957393d7ad41.jpg', stock: 2 }
     ],
     isNewArrival: false,
     rating: 4.9,
@@ -70,11 +70,11 @@ const sampleProducts = [
     price: 2124.15,
     category: 'Dresses',
     stock: 18,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/ea/02/2b/ea022b104a901fbc73d40fbbdd4aad95.jpg',
     variants: [
-      { color: 'Red', imageUrl: '', stock: 6 },
-      { color: 'Navy Blue', imageUrl: '', stock: 6 },
-      { color: 'Black', imageUrl: '', stock: 6 }
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/ea/02/2b/ea022b104a901fbc73d40fbbdd4aad95.jpg', stock: 6 },
+      { color: 'Navy Blue', imageUrl: 'https://i.pinimg.com/1200x/96/9b/93/969b939280a6ef1fee231781eb7fc372.jpg', stock: 6 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/f7/36/02/f7360267ab6dc116f9670b2166b40879.jpg', stock: 6 }
     ],
     isNewArrival: true,
     rating: 4.8,
@@ -86,12 +86,12 @@ const sampleProducts = [
     price: 1529.15,
     category: 'Dresses',
     stock: 22,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/7e/31/0b/7e310b8bf8b2019c6c66fa83b3922516.jpg',
     variants: [
-      { color: 'Red', imageUrl: '', stock: 8 },
-      { color: 'Light Green', imageUrl: '', stock: 7 },
-      { color: 'Dark Green', imageUrl: '', stock: 7 },
-      { color: 'Blue', imageUrl: '', stock: 7 }
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/7e/31/0b/7e310b8bf8b2019c6c66fa83b3922516.jpg', stock: 8 },
+      { color: 'Light Green', imageUrl: 'https://i.pinimg.com/1200x/cb/67/25/cb6725d31d435bd4cbe401dee953ada9.jpg', stock: 7 },
+      { color: 'Dark Green', imageUrl: 'https://i.pinimg.com/1200x/18/0a/eb/180aeb0dd7df42ee573df18619430811.jpg', stock: 7 },
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/1200x/01/76/6a/01766a8afb7ff81bb53ea3d50320a51f.jpg', stock: 7 }
     ],
     isNewArrival: true,
     rating: 4.7,
@@ -103,13 +103,13 @@ const sampleProducts = [
     price: 1019.15,
     category: 'Dresses',
     stock: 28,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/95/97/30/9597308035ebd87a5e11c5b3d6c50376.jpg',
     variants: [
-      { color: 'Black', imageUrl: '', stock: 10 },
-      { color: 'Blue', imageUrl: '', stock: 9 },
-      { color: 'Burgundy', imageUrl: '', stock: 9 },
-      { color: 'White', imageUrl: '', stock: 9 },
-      { color: 'Green', imageUrl: '', stock: 10 }
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/95/97/30/9597308035ebd87a5e11c5b3d6c50376.jpg', stock: 10 },
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/1200x/4a/3a/bf/4a3abfb4aa790b2a173fba7e5577a8ea.jpg', stock: 9 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/76/63/f3/7663f3bb566d3b2a243b22cacbe53d09.jpg', stock: 9 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/6f/cc/2e/6fcc2e7995a0c7ffff020c7a315068ef.jpg', stock: 9 },
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/736x/1c/a4/6a/1ca46a357251cf715d9dd3fec3cf2f1c.jpg', stock: 10 }
     ],
     isNewArrival: true,
     rating: 4.5,
@@ -121,13 +121,13 @@ const sampleProducts = [
     price: 1614.15,
     category: 'Dresses',
     stock: 20,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/a2/01/15/a201158baeb4fd979e200b01fefa4b0b.jpg',
     variants: [
-      { color: 'White', imageUrl: '', stock: 7 },
-      { color: 'Blue', imageUrl: '', stock: 7 },
-      { color: 'Black', imageUrl: '', stock: 6 },
-      { color: 'Green', imageUrl: '', stock: 5 },
-      { color: 'Red', imageUrl: '', stock: 5 }
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/a2/01/15/a201158baeb4fd979e200b01fefa4b0b.jpg', stock: 7 },
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/39/17/b4/3917b46f3bcd9c6a12d1a015aa185c82.jpg', stock: 7 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/35/4a/44/354a4406601ef03badf7c2f69582003b.jpg', stock: 6 },
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/736x/92/93/f5/9293f5bb151897edf16913a81eecc8e6.jpg', stock: 5 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/736x/eb/94/a3/eb94a338256803a15a553a079925e465.jpg', stock: 5 }
     ],
     isNewArrival: true,
     rating: 4.8,
@@ -139,11 +139,13 @@ const sampleProducts = [
     price: 1359.15,
     category: 'Dresses',
     stock: 24,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/17/59/14/175914e3fb75944c5c1760189bfc5fd8.jpg',
     variants: [
-      { color: 'White', imageUrl: '', stock: 8 },
-      { color: 'Cream', imageUrl: '', stock: 8 },
-      { color: 'Light Brown', imageUrl: '', stock: 8 }
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/c8/35/35/c83535e6210ad6c13371315e9c36a9e2.jpg', stock: 8 },
+      { color: 'Cream', imageUrl: 'https://i.pinimg.com/1200x/17/59/14/175914e3fb75944c5c1760189bfc5fd8.jpg', stock: 8 },
+      { color: 'Light Brown', imageUrl: 'https://i.pinimg.com/736x/ef/fa/5e/effa5ee311c44c4fdef858f7cb17fdde.jpg', stock: 8 },
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/1200x/ef/9d/ac/ef9dac25b0086913d41f7734fd40abc8.jpg', stock: 8 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/3b/14/33/3b14339bb34b6fa9c2c6259e9d124b17.jpg', stock: 8 }
     ],
     isNewArrival: true,
     rating: 4.7,
@@ -155,12 +157,12 @@ const sampleProducts = [
     price: 1359.15,
     category: 'Dresses',
     stock: 24,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/7e/24/79/7e2479621324efcc0497a93339457122.jpg',
     variants: [
-      { color: 'Red', imageUrl: '', stock: 8 },
-      { color: 'Pink', imageUrl: '', stock: 8 },
-      { color: 'Black', imageUrl: '', stock: 8 },
-      { color: 'White', imageUrl: '', stock: 8 }
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/7e/24/79/7e2479621324efcc0497a93339457122.jpg', stock: 8 },
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/1200x/71/0c/ce/710cceb17f4cbdccf2ec982338e52d7e.jpg', stock: 8 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/a9/0b/bc/a90bbcffa3510b6704ec2a89f542b604.jpg', stock: 8 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/91/91/71/9191711700631689e229a45790707d07.jpg', stock: 8 }
     ],
     isNewArrival: true,
     rating: 4.7,
@@ -172,11 +174,11 @@ const sampleProducts = [
     price: 7649.15,
     category: 'Jewelry',
     stock: 8,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/b9/2a/a3/b92aa39aac6056f81b9a6681b922ea89.jpg',
     variants: [
-      { color: 'White Gold', imageUrl: '', stock: 4 },
-      { color: 'Yellow Gold', imageUrl: '', stock: 4 },
-      { color: 'White', imageUrl: '', stock: 4 }
+      { color: 'White Gold', imageUrl: 'https://i.pinimg.com/1200x/b9/2a/a3/b92aa39aac6056f81b9a6681b922ea89.jpg', stock: 4 },
+      { color: 'Black Gold', imageUrl: 'https://i.pinimg.com/736x/bc/eb/dc/bcebdcf475c8564dd2e9953c42ba6bd3.jpg', stock: 4 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/40/62/a4/4062a46d409c992ab041d003e8fce319.jpg', stock: 4 }
     ],
     isNewArrival: false,
     rating: 4.9,
@@ -188,11 +190,11 @@ const sampleProducts = [
     price: 2974.15,
     category: 'Jewelry',
     stock: 20,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/66/d9/b7/66d9b763cc9064a3f03ab1e459146092.jpg',
     variants: [
-      { color: 'Emerald', imageUrl: '', stock: 10 },
-      { color: 'Gold', imageUrl: '', stock: 10 },
-      { color: 'Butterfly', imageUrl: '', stock: 10 }
+      { color: 'Emerald', imageUrl: 'https://i.pinimg.com/1200x/c9/f6/1a/c9f61af97627380595c8e816b02ff2b7.jpg', stock: 10 },
+      { color: 'Gold', imageUrl: 'https://i.pinimg.com/1200x/66/d9/b7/66d9b763cc9064a3f03ab1e459146092.jpg', stock: 10 },
+      { color: 'Butterfly', imageUrl: 'https://i.pinimg.com/1200x/af/7f/c9/af7fc907f5f26ef64b8ecc56be9a08e0.jpg', stock: 10 }
     ],
     isNewArrival: false,
     rating: 4.6,
@@ -204,11 +206,11 @@ const sampleProducts = [
     price: 2974.15,
     category: 'Jewelry',
     stock: 20,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/00/91/a5/0091a5c38cd9e4169cb3e5b9aac3d032.jpg',
     variants: [
-      { color: 'White', imageUrl: '', stock: 10 },
-      { color: 'Gold', imageUrl: '', stock: 10 },
-      { color: 'Emerald', imageUrl: '', stock: 10 }
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/00/91/a5/0091a5c38cd9e4169cb3e5b9aac3d032.jpg', stock: 10 },
+      { color: 'Gold', imageUrl: 'https://i.pinimg.com/1200x/15/69/da/1569da9d9af7dc3c2d2045da56e1766b.jpg', stock: 10 },
+      { color: 'Emerald', imageUrl: 'https://i.pinimg.com/736x/96/fd/01/96fd013bf8bb1f36ded49b0d990422b6.jpg', stock: 10 }
     ],
     isNewArrival: false,
     rating: 4.6,
@@ -220,11 +222,11 @@ const sampleProducts = [
     price: 1699.15,
     category: 'Jewelry',
     stock: 25,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/0b/b1/b3/0bb1b33706dbc5daa5101c0a03a77c9c.jpg',
     variants: [
-      { color: 'Yellow Gold', imageUrl: '', stock: 13 },
-      { color: 'Rose Gold', imageUrl: '', stock: 12 },
-      { color: 'Flower', imageUrl: '', stock: 12 }
+      { color: 'Yellow Gold', imageUrl: 'https://i.pinimg.com/1200x/0b/b1/b3/0bb1b33706dbc5daa5101c0a03a77c9c.jpg', stock: 13 },
+      { color: 'Rose Gold', imageUrl: 'https://i.pinimg.com/1200x/a3/17/82/a317829ddbba3c7a7ef33afc5d23aff0.jpg', stock: 12 },
+      { color: 'Flower', imageUrl: 'https://i.pinimg.com/1200x/64/38/c7/6438c7c5faca2c8925f17da104c97a3f.jpg', stock: 12 }
     ],
     isNewArrival: false,
     rating: 4.5,
