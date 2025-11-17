@@ -132,6 +132,7 @@ function AppLayout({
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/category/all-categories?search=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery(''); // Clear search bar after submission
     }
   };
 
