@@ -88,7 +88,7 @@ const ProductDetail = () => {
 
   const addToCart = () => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const existingItem = cart.find(item => item._id === product._id);
+    const existingItem = cart.find(item => item._id === product._id && item.selectedColor === selectedColor);
 
     if (existingItem) {
       existingItem.quantity += quantity;
