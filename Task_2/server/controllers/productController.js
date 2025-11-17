@@ -64,7 +64,8 @@ exports.getProductById = asyncHandler(async (req, res) => {
 
     const product = await Product.findById(req.params.id);
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+      res.status(404);
+      throw new Error('Product not found');
     }
     res.json(product);
 });
@@ -132,66 +133,56 @@ exports.createProduct = asyncHandler(async (req, res) => {
     const newProduct = await product.save();
 
     res.status(201).json(newProduct);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
+});
 
 // Update product
-exports.updateProduct = async (req, res) => {
-  try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ message: 'Invalid Product ID format' });
-    }
-
-    const productToUpdate = await Product.findById(req.params.id);
-
-    if (!productToUpdate) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-
-    // Ensure only the owner of the product or an admin can update it
-    if (productToUpdate.user.toString() !== req.user.userId && req.user.role !== 'admin') {
-      return res.status(403).json({ message: 'Access denied. You do not own this product.' });
-    }
-    // Explicitly define updatable fields to prevent mass assignment
-    const { name, price, description, category, stock, imageUrl } = req.body;
-    const updatedFields = {
-      name,
-      price,
-      description,
-      category,
-      stock,
-      imageUrl,
-    };
-    const product = await Product.findByIdAndUpdate(req.params.id, updatedFields, { new: true, runValidators: true });
-
-    res.json(product);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+exports.updateProduct = asyncHandler(async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400);
+    throw new Error('Invalid Product ID format');
   }
-};
+
+  const productToUpdate = await Product.findById(req.params.id);
+
+  if (!productToUpdate) {
+    res.status(404);
+    throw new Error('Product not found');
+  }
+
+  // Ensure only the owner of the product or an admin can update it
+  if (productToUpdate.user.toString() !== req.user.userId && req.user.role !== 'admin') {
+    res.status(403);
+    throw new Error('Access denied. You do not own this product.');
+  }
+  // Explicitly define updatable fields to prevent mass assignment
+  const { name, price, description, category, stock, imageUrl } = req.body;
+  const updatedFields = {
+    name, price, description, category, stock, imageUrl,
+  };
+  const product = await Product.findByIdAndUpdate(req.params.id, updatedFields, { new: true, runValidators: true });
+
+  res.json(product);
+});
 
 // Delete product
-exports.deleteProduct = async (req, res) => {
-  try {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ message: 'Invalid Product ID format' });
-    }
-
-    const productToDelete = await Product.findById(req.params.id);
-
-    if (!productToDelete) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-
-    // Ensure only the owner of the product or an admin can delete it
-    if (productToDelete.user.toString() !== req.user.userId && req.user.role !== 'admin') {
-      return res.status(403).json({ message: 'Access denied. You do not own this product.' });
-    }
-    await Product.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Product deleted' });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+exports.deleteProduct = asyncHandler(async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400);
+    throw new Error('Invalid Product ID format');
   }
-};
+
+  const productToDelete = await Product.findById(req.params.id);
+
+  if (!productToDelete) {
+    res.status(404);
+    throw new Error('Product not found');
+  }
+
+  // Ensure only the owner of the product or an admin can delete it
+  if (productToDelete.user.toString() !== req.user.userId && req.user.role !== 'admin') {
+    res.status(403);
+    throw new Error('Access denied. You do not own this product.');
+  }
+  await Product.findByIdAndDelete(req.params.id);
+  res.json({ message: 'Product deleted' });
+});
