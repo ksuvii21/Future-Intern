@@ -26,16 +26,19 @@ const ProductCard = ({ product }) => {
     }, 1000);
   };
 
+  // Get the main image (first variant or default image)
+  const mainImage = product.variants && product.variants.length > 0 ? product.variants[0].imageUrl : product.imageUrl;
+
   return (
     <div className="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 border border-gray-100">
       <div className="relative group">
-        {product.imageUrl ? (
+        {mainImage ? (
           <img
-            src={product.imageUrl}
+            src={mainImage}
             alt={product.name}
             className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
             onError={(e) => {
-              e.target.onerror = null; 
+              e.target.onerror = null;
               e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZWNlZmYxIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjY2FkNmU0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg==';
             }}
           />
@@ -66,6 +69,24 @@ const ProductCard = ({ product }) => {
             {product.category}
           </span>
         </div>
+        {/* Color variants indicator */}
+        {product.variants && product.variants.length > 1 && (
+          <div className="absolute bottom-3 left-3 flex gap-1">
+            {product.variants.slice(0, 3).map((variant, index) => (
+              <div
+                key={index}
+                className="w-3 h-3 rounded-full border border-white shadow-sm"
+                style={{ backgroundColor: variant.color.toLowerCase() }}
+                title={variant.color}
+              ></div>
+            ))}
+            {product.variants.length > 3 && (
+              <div className="w-3 h-3 rounded-full bg-gray-400 border border-white shadow-sm flex items-center justify-center text-xs text-white font-bold">
+                +
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 hover:text-orange-600 transition-colors">
