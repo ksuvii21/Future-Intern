@@ -99,40 +99,41 @@ const Admin = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      let dataToSend;
-      let headers = { ...config.headers };
-
-      if (newProduct.imageFile) {
-        // For file uploads (sellers), use FormData
-        dataToSend = new FormData();
-        dataToSend.append('name', newProduct.name);
-        dataToSend.append('description', newProduct.description);
-        dataToSend.append('price', newProduct.price);
-        dataToSend.append('category', newProduct.category);
-        dataToSend.append('stock', newProduct.stock);
-        dataToSend.append('image', newProduct.imageFile);
-        headers['Content-Type'] = 'multipart/form-data';
-      } else {
-        // For URL-based uploads (admins), use JSON
-        dataToSend = {
+      if (editingProduct) {
+        // Updates are always sent as JSON, as the backend update route expects it.
+        const updateData = {
           name: newProduct.name,
           description: newProduct.description,
           price: newProduct.price,
           category: newProduct.category,
           stock: newProduct.stock,
           imageUrl: newProduct.imageUrl,
+          // Note: File uploads on edit are not supported by the current backend.
+          // If a new image is needed, the URL should be updated.
         };
-        headers['Content-Type'] = 'application/json';
-      }
-
-      if (editingProduct) {
         await axios.put(
           `http://localhost:5000/api/products/${editingProduct._id}`,
-          dataToSend,
-          { headers }
+          updateData,
+          config
         );
-        setEditingProduct(null);
       } else {
+        // Creating a new product can handle both JSON (for admin with URL)
+        // and FormData (for seller with file upload).
+        let dataToSend;
+        let headers = { ...config.headers };
+
+        if (newProduct.imageFile) {
+          dataToSend = new FormData();
+          Object.keys(newProduct).forEach(key => {
+            if (key === 'imageFile') dataToSend.append('image', newProduct[key]);
+            else dataToSend.append(key, newProduct[key]);
+          });
+          headers['Content-Type'] = 'multipart/form-data';
+        } else {
+          dataToSend = { ...newProduct };
+          headers['Content-Type'] = 'application/json';
+        }
+
         await axios.post(
           'http://localhost:5000/api/products',
           dataToSend,
@@ -140,6 +141,7 @@ const Admin = () => {
         );
       }
 
+      setEditingProduct(null); // Reset editing state after any submission
       setNewProduct({
         name: '',
         description: '',
