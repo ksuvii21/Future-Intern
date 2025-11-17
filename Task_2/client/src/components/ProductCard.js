@@ -88,7 +88,7 @@ const ProductCard = ({ product }) => {
           <button
             onClick={addToCart}
             disabled={product.stock === 0}
-            className={`flex-1 py-3 px-4 rounded-xl transition-all duration-300 font-semibold shadow-md hover:shadow-lg ₹{
+            className={`flex-1 py-3 px-4 rounded-xl transition-all duration-300 font-semibold shadow-md hover:shadow-lg ${
               product.stock === 0
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700 transform hover:scale-105'
