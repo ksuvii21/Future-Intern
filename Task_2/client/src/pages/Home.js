@@ -138,7 +138,7 @@ const Home = () => {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ₹{
+                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                     selectedCategory === category
                       ? 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white shadow-lg shadow-[#ea698b]/30'
                       : 'bg-white/5 backdrop-blur-sm border border-[#571089]/30 text-gray-300 hover:bg-white/10 hover:border-[#ea698b]/50'
@@ -208,7 +208,7 @@ const Home = () => {
                       </button>
                       <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
                         <Link
-                          to={`/product/₹{product._id}`}
+                          to={`/product/${product._id}`}
                           className="block w-full py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all text-center"
                         >
                           Quick View
