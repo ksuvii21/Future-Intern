@@ -432,31 +432,42 @@ const Admin = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredAndSortedData(products, 'products').length === 0 ? (
-            <div className="text-center py-10 text-gray-400">
+            <div className="col-span-full text-center py-10 text-gray-400">
               <Package className="w-12 h-12 mx-auto mb-2" />
               No products found.
             </div>
           ) : (
             filteredAndSortedData(products, 'products').map(product => (
-              <div key={product._id} className="border border-[#571089]/30 rounded-lg p-4 flex items-center justify-between">
-                <div className="flex items-center gap-4">
+              <div key={product._id} className="bg-[#2a1a3e]/50 border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
+                <div className="flex items-start gap-4 mb-4">
                   <img
-                    src={product.imageUrl || 'https://via.placeholder.com/60'}
+                    src={product.imageUrl || 'https://via.placeholder.com/80'}
                     alt={product.name}
-                    className="w-16 h-16 object-cover rounded-md"
-                    onError={(e) => { e.target.src = 'https://via.placeholder.com/60'; }}
+                    className="w-20 h-20 object-cover rounded-md flex-shrink-0"
+                    onError={(e) => { e.target.src = 'https://via.placeholder.com/80'; }}
                   />
-                  <div>
-                    <h3 className="font-semibold text-white">{product.name}</h3>
-                    <p className="text-green-400 font-bold">₹{product.price}</p>
-                    <p className="text-gray-400 text-sm">Stock: {product.stock}</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-white text-sm mb-1 truncate">{product.name}</h3>
+                    <p className="text-green-400 font-bold text-lg">₹{product.price}</p>
+                    <p className="text-gray-400 text-xs">Stock: {product.stock}</p>
+                    <p className="text-gray-500 text-xs capitalize">{product.category}</p>
                   </div>
                 </div>
-                <div className="flex space-x-2">
-                  <button onClick={() => handleEdit(product)} className="p-2 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30 transition-colors"><Edit className="w-4 h-4" /></button>
-                  <button onClick={() => handleDelete(product._id)} className="p-2 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30 transition-colors"><Trash2 className="w-4 h-4" /></button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleEdit(product)}
+                    className="flex-1 py-2 px-3 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30 transition-colors text-xs font-medium"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    className="flex-1 py-2 px-3 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30 transition-colors text-xs font-medium"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             ))
