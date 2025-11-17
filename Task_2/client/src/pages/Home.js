@@ -139,7 +139,7 @@ const Home = () => {
                       >
                         {offer.logo ? (
                           <div className="flex flex-col items-center justify-center h-full text-center">
-                            <img src="/logo.png" alt="Fansee Rebel" className="w-48 h-48 rounded-lg mx-auto mb-4" />
+                            <img src="/logo.png" alt="Fansee Rebel" className="w-50 h-48 rounded-lg mx-auto mb-4" />
                             <p className="text-3xl font-bold text-white mb-2">{offer.title}</p>
                             <p className="text-gray-300">{offer.description}</p>
                           </div>
