@@ -9,7 +9,7 @@ A) Dresses-
   3. Silk Cocktail Dress- Red, Black, Navy Blue.
   4. Satin Wrap Dress- Red, Light Green, Dark Green, Blue.
   5. Chiffon Blouse- Black, Blue, Burgundy, White, Green
-  6. Cashmere Sweater- white, Blue, Black, Green, Red.
+  6. Cashmere Sweater- White, Blue, Black, Green, Red.
   7.Tulle Shirt- White, Cream, Light brown, Blue, Red. 
   8.Tulle Skirt- Red, Pink, Black, White.
 B) Jewelry-
@@ -24,9 +24,10 @@ C) Accessories-
   2. Crystal Hair Accessories- Purple, Silver, Black, White, Butterfly.
   3. Embroidered Clutch- Black, Blue, White.
   4. Designer Sunglasses- Pink, Black, Brown.
-  5. Rose Gold Watch-
-  6. Leather Ankle Boots- 
-  7. Silk Scarf */
+  5. Rose Gold Watch- 3 variants with company.
+  6. Leather Ankle Boots- Black, Brown, White, Cream.
+  7. Silk Scarf- Pink blue Green 
+*/
 
 const sampleProducts = [
   {
@@ -35,60 +36,33 @@ const sampleProducts = [
     price: 2549.15,
     category: 'Dresses',
     stock: 15,
-    imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500',
+    imageUrl: '',
     variants: [
-      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500', stock: 5 },
-      { color: 'Red', imageUrl: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500', stock: 5 },
-      { color: 'Navy Blue', imageUrl: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500', stock: 5 }
+      { color: 'Red', imageUrl: '', stock: 5 },
+      { color: 'Blue-Black', imageUrl: '', stock: 5 },
+      { color: 'Red-Black', imageUrl: '', stock: 5 }
     ],
     isNewArrival: false,
     rating: 4.8,
     numReviews: 24
   },
   {
-    name: 'Diamond Stud Earrings',
-    description: 'Classic 1-carat diamond stud earrings in 18k white gold setting. Timeless elegance for any occasion.',
-    price: 7649.15,
-    category: 'Jewelry',
-    stock: 8,
-    imageUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500',
+    name: 'Velvet Maxi Dress',
+    description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
+    price: 2804.15,
+    category: 'Dresses',
+    stock: 10,
+    imageUrl: '',
     variants: [
-      { color: 'White Gold', imageUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500', stock: 4 },
-      { color: 'Yellow Gold', imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500', stock: 4 }
+      { color: 'Red', imageUrl: '', stock: 4 },
+      { color: 'Green', imageUrl: '', stock: 3 },
+      { color: 'Black', imageUrl: '', stock: 3 },
+      { color: 'Purple', imageUrl: '', stock: 2 },
+      { color: 'Navy Blue', imageUrl: '', stock: 2 }
     ],
     isNewArrival: false,
     rating: 4.9,
-    numReviews: 18
-  },
-  {
-    name: 'Designer Handbag',
-    description: 'Luxury leather handbag with gold hardware and structured silhouette. Spacious interior with multiple compartments.',
-    price: 5099.15,
-    category: 'Accessories',
-    stock: 12,
-    imageUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500',
-    variants: [
-      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500', stock: 6 },
-      { color: 'Brown', imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500', stock: 6 }
-    ],
-    isNewArrival: false,
-    rating: 4.7,
-    numReviews: 31
-  },
-  {
-    name: 'Pearl Necklace Set',
-    description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
-    price: 2974.15,
-    category: 'Jewelry',
-    stock: 20,
-    imageUrl: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=500',
-    variants: [
-      { color: 'White', imageUrl: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=500', stock: 10 },
-      { color: 'Cream', imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500', stock: 10 }
-    ],
-    isNewArrival: false,
-    rating: 4.6,
-    numReviews: 27
+    numReviews: 12
   },
   {
     name: 'Silk Cocktail Dress',
@@ -96,30 +70,15 @@ const sampleProducts = [
     price: 2124.15,
     category: 'Dresses',
     stock: 18,
-    imageUrl: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500',
+    imageUrl: '',
     variants: [
-      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500', stock: 6 },
-      { color: 'Emerald Green', imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500', stock: 6 },
-      { color: 'Burgundy', imageUrl: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500', stock: 6 }
+      { color: 'Red', imageUrl: '', stock: 6 },
+      { color: 'Navy Blue', imageUrl: '', stock: 6 },
+      { color: 'Black', imageUrl: '', stock: 6 }
     ],
     isNewArrival: true,
     rating: 4.8,
     numReviews: 15
-  },
-  {
-    name: 'Gold Bangle Bracelet',
-    description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
-    price: 1699.15,
-    category: 'Jewelry',
-    stock: 25,
-    imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500',
-    variants: [
-      { color: 'Yellow Gold', imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500', stock: 13 },
-      { color: 'Rose Gold', imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500', stock: 12 }
-    ],
-    isNewArrival: false,
-    rating: 4.5,
-    numReviews: 22
   },
   {
     name: 'Satin Wrap Dress',
@@ -127,16 +86,200 @@ const sampleProducts = [
     price: 1529.15,
     category: 'Dresses',
     stock: 22,
-    imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500',
+    imageUrl: '',
     variants: [
-      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500', stock: 8 },
-      { color: 'Navy Blue', imageUrl: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500', stock: 7 },
-      { color: 'Burgundy', imageUrl: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500', stock: 7 }
+      { color: 'Red', imageUrl: '', stock: 8 },
+      { color: 'Light Green', imageUrl: '', stock: 7 },
+      { color: 'Dark Green', imageUrl: '', stock: 7 },
+      { color: 'Blue', imageUrl: '', stock: 7 }
     ],
     isNewArrival: true,
     rating: 4.7,
     numReviews: 19
   },
+  {
+    name: 'Chiffon Blouse',
+    description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
+    price: 1019.15,
+    category: 'Dresses',
+    stock: 28,
+    imageUrl: '',
+    variants: [
+      { color: 'Black', imageUrl: '', stock: 10 },
+      { color: 'Blue', imageUrl: '', stock: 9 },
+      { color: 'Burgundy', imageUrl: '', stock: 9 },
+      { color: 'White', imageUrl: '', stock: 9 },
+      { color: 'Green', imageUrl: '', stock: 10 }
+    ],
+    isNewArrival: true,
+    rating: 4.5,
+    numReviews: 21
+  },
+  {
+    name: 'Cashmere Sweater',
+    description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
+    price: 1614.15,
+    category: 'Dresses',
+    stock: 20,
+    imageUrl: '',
+    variants: [
+      { color: 'White', imageUrl: '', stock: 7 },
+      { color: 'Blue', imageUrl: '', stock: 7 },
+      { color: 'Black', imageUrl: '', stock: 6 },
+      { color: 'Green', imageUrl: '', stock: 5 },
+      { color: 'Red', imageUrl: '', stock: 5 }
+    ],
+    isNewArrival: true,
+    rating: 4.8,
+    numReviews: 17
+  },
+  {
+    name: 'Tulle Shirt',
+    description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
+    price: 1359.15,
+    category: 'Dresses',
+    stock: 24,
+    imageUrl: '',
+    variants: [
+      { color: 'White', imageUrl: '', stock: 8 },
+      { color: 'Cream', imageUrl: '', stock: 8 },
+      { color: 'Light Brown', imageUrl: '', stock: 8 }
+    ],
+    isNewArrival: true,
+    rating: 4.7,
+    numReviews: 20
+  },
+  {
+    name: 'Tulle Skirt',
+    description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
+    price: 1359.15,
+    category: 'Dresses',
+    stock: 24,
+    imageUrl: '',
+    variants: [
+      { color: 'Red', imageUrl: '', stock: 8 },
+      { color: 'Pink', imageUrl: '', stock: 8 },
+      { color: 'Black', imageUrl: '', stock: 8 },
+      { color: 'White', imageUrl: '', stock: 8 }
+    ],
+    isNewArrival: true,
+    rating: 4.7,
+    numReviews: 20
+  },
+  {
+    name: 'Diamond Stud Earrings',
+    description: 'Classic 1-carat diamond stud earrings in 18k white gold setting. Timeless elegance for any occasion.',
+    price: 7649.15,
+    category: 'Jewelry',
+    stock: 8,
+    imageUrl: '',
+    variants: [
+      { color: 'White Gold', imageUrl: '', stock: 4 },
+      { color: 'Yellow Gold', imageUrl: '', stock: 4 },
+      { color: 'White', imageUrl: '', stock: 4 }
+    ],
+    isNewArrival: false,
+    rating: 4.9,
+    numReviews: 18
+  },
+  {
+    name: 'Emerald Drop Earrings',
+    description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
+    price: 2974.15,
+    category: 'Jewelry',
+    stock: 20,
+    imageUrl: '',
+    variants: [
+      { color: 'Emerald', imageUrl: '', stock: 10 },
+      { color: 'Gold', imageUrl: '', stock: 10 },
+      { color: 'Butterfly', imageUrl: '', stock: 10 }
+    ],
+    isNewArrival: false,
+    rating: 4.6,
+    numReviews: 27
+  },
+  {
+    name: 'Pearl Necklace Set',
+    description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
+    price: 2974.15,
+    category: 'Jewelry',
+    stock: 20,
+    imageUrl: '',
+    variants: [
+      { color: 'White', imageUrl: '', stock: 10 },
+      { color: 'Gold', imageUrl: '', stock: 10 },
+      { color: 'Emerald', imageUrl: '', stock: 10 }
+    ],
+    isNewArrival: false,
+    rating: 4.6,
+    numReviews: 27
+  },
+  {
+    name: 'Gold Bangle Bracelet',
+    description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
+    price: 1699.15,
+    category: 'Jewelry',
+    stock: 25,
+    imageUrl: '',
+    variants: [
+      { color: 'Yellow Gold', imageUrl: '', stock: 13 },
+      { color: 'Rose Gold', imageUrl: '', stock: 12 },
+      { color: 'Flower', imageUrl: '', stock: 12 }
+    ],
+    isNewArrival: false,
+    rating: 4.5,
+    numReviews: 22
+  },
+  {
+    name: 'Silver Hoop Earrings',
+    description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
+    price: 1104.15,
+    category: 'Jewelry',
+    stock: 35,
+    imageUrl: '',
+    variants: [
+      { color: 'Silver', imageUrl: '', stock: 18 },
+      { color: 'Gold', imageUrl: '', stock: 17 },
+      { color: 'White', imageUrl: '', stock: 17 }
+    ],
+    isNewArrival: true,
+    rating: 4.6,
+    numReviews: 28
+  },
+  {
+    name: 'Diamond Tennis Bracelet',
+    description: 'Sparkling diamond tennis bracelet in platinum setting. Dazzling elegance for special occasions.',
+    price: 11049.15,
+    category: 'Jewelry',
+    stock: 5,
+    imageUrl: '',
+    variants: [
+      { color: 'Platinum', imageUrl: '', stock: 3 },
+      { color: 'White Gold', imageUrl: '', stock: 2 }
+    ],
+    isNewArrival: false,
+    rating: 5.0,
+    numReviews: 8
+  },
+  {
+    name: 'Designer Handbag',
+    description: 'Luxury leather handbag with gold hardware and structured silhouette. Spacious interior with multiple compartments.',
+    price: 5099.15,
+    category: 'Accessories',
+    stock: 12,
+    imageUrl: '',
+    variants: [
+      { color: 'Blue', imageUrl: '', stock: 6 },
+      { color: 'Brown', imageUrl: '', stock: 6 },
+      { color: 'Burgundy', imageUrl: '', stock: 6 },
+      { color: 'White', imageUrl: '', stock: 6 }
+    ],
+    isNewArrival: false,
+    rating: 4.7,
+    numReviews: 31
+  },
+
+  
   {
     name: 'Crystal Hair Accessories',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
@@ -152,37 +295,7 @@ const sampleProducts = [
     rating: 4.4,
     numReviews: 33
   },
-  {
-    name: 'Velvet Maxi Dress',
-    description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
-    price: 2804.15,
-    category: 'Dresses',
-    stock: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500',
-    variants: [
-      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500', stock: 4 },
-      { color: 'Emerald Green', imageUrl: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500', stock: 3 },
-      { color: 'Burgundy', imageUrl: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500', stock: 3 }
-    ],
-    isNewArrival: false,
-    rating: 4.9,
-    numReviews: 12
-  },
-  {
-    name: 'Silver Hoop Earrings',
-    description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
-    price: 1104.15,
-    category: 'Jewelry',
-    stock: 35,
-    imageUrl: 'https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?w=500',
-    variants: [
-      { color: 'Silver', imageUrl: 'https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?w=500', stock: 18 },
-      { color: 'Gold', imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500', stock: 17 }
-    ],
-    isNewArrival: true,
-    rating: 4.6,
-    numReviews: 28
-  },
+  
   {
     name: 'Embroidered Clutch',
     description: 'Hand-embroidered silk clutch with beaded detailing. Perfect complement to evening wear.',
@@ -197,22 +310,6 @@ const sampleProducts = [
     isNewArrival: false,
     rating: 4.8,
     numReviews: 16
-  },
-  {
-    name: 'Chiffon Blouse',
-    description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
-    price: 1019.15,
-    category: 'Dresses',
-    stock: 28,
-    imageUrl: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500',
-    variants: [
-      { color: 'White', imageUrl: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500', stock: 10 },
-      { color: 'Pastel Pink', imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500', stock: 9 },
-      { color: 'Light Blue', imageUrl: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500', stock: 9 }
-    ],
-    isNewArrival: true,
-    rating: 4.5,
-    numReviews: 21
   },
   {
     name: 'Designer Sunglasses',
@@ -245,37 +342,6 @@ const sampleProducts = [
     numReviews: 14
   },
   {
-    name: 'Cashmere Sweater',
-    description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
-    price: 1614.15,
-    category: 'Dresses',
-    stock: 20,
-    imageUrl: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500',
-    variants: [
-      { color: 'Cream', imageUrl: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500', stock: 7 },
-      { color: 'Gray', imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500', stock: 7 },
-      { color: 'Navy Blue', imageUrl: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500', stock: 6 }
-    ],
-    isNewArrival: true,
-    rating: 4.8,
-    numReviews: 17
-  },
-  {
-    name: 'Diamond Tennis Bracelet',
-    description: 'Sparkling diamond tennis bracelet in platinum setting. Dazzling elegance for special occasions.',
-    price: 11049.15,
-    category: 'Jewelry',
-    stock: 5,
-    imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500',
-    variants: [
-      { color: 'Platinum', imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500', stock: 3 },
-      { color: 'White Gold', imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500', stock: 2 }
-    ],
-    isNewArrival: false,
-    rating: 5.0,
-    numReviews: 8
-  },
-  {
     name: 'Leather Ankle Boots',
     description: 'Premium leather ankle boots with block heel and side zipper. Versatile style for any season.',
     price: 2974.15,
@@ -304,39 +370,47 @@ const sampleProducts = [
     isNewArrival: true,
     rating: 4.4,
     numReviews: 29
-  },
-  {
-    name: 'Emerald Drop Earrings',
-    description: 'Stunning emerald drop earrings with diamond accents. Nature\'s beauty captured in exquisite jewelry.',
-    price: 5949.15,
-    category: 'Jewelry',
-    stock: 7,
-    imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500',
-    variants: [
-      { color: 'Emerald', imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500', stock: 4 },
-      { color: 'Ruby', imageUrl: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500', stock: 3 }
-    ],
-    isNewArrival: false,
-    rating: 4.9,
-    numReviews: 11
-  },
-  {
-    name: 'Tulle Shirt',
-    description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
-    price: 1359.15,
-    category: 'Dresses',
-    stock: 24,
-    imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500',
-    variants: [
-      { color: 'White', imageUrl: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500', stock: 8 },
-      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500', stock: 8 },
-      { color: 'Champagne', imageUrl: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500', stock: 8 }
-    ],
-    isNewArrival: true,
-    rating: 4.7,
-    numReviews: 20
   }
 ];
+
+async function seedDatabase() {
+  try {
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/shophub';
+    await mongoose.connect(mongoURI);
+    console.log('Connected to MongoDB');
+
+    await Product.deleteMany({});
+    console.log('Cleared existing products');
+
+    // Convert Google Drive URLs before inserting
+    const processedProducts = sampleProducts.map(product => {
+      if (product.imageUrls && product.imageUrls[0] && product.imageUrls[0].includes('drive.google.com')) {
+        const fileIdMatch = product.imageUrls[0].match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (fileIdMatch) {
+          return {
+            ...product,
+            imageUrls: [`https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`]
+          };
+        }
+      }
+      return product;
+    });
+
+    await Product.insertMany(processedProducts);
+    console.log('Sample products added successfully');
+
+    mongoose.connection.close();
+    console.log('Database connection closed');
+  } catch (error) {
+    console.error('Error seeding database:', error);
+    process.exit(1);
+  }
+}
+
+seedDatabase();
+
+
+
 /* const sampleProducts = [
   {
     name: 'Elegant Evening Gown',
@@ -602,39 +676,3 @@ const sampleProducts = [
     numReviews: 20
   }
 ]; */
-
-async function seedDatabase() {
-  try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/shophub';
-    await mongoose.connect(mongoURI);
-    console.log('Connected to MongoDB');
-
-    await Product.deleteMany({});
-    console.log('Cleared existing products');
-
-    // Convert Google Drive URLs before inserting
-    const processedProducts = sampleProducts.map(product => {
-      if (product.imageUrls && product.imageUrls[0] && product.imageUrls[0].includes('drive.google.com')) {
-        const fileIdMatch = product.imageUrls[0].match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-        if (fileIdMatch) {
-          return {
-            ...product,
-            imageUrls: [`https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`]
-          };
-        }
-      }
-      return product;
-    });
-
-    await Product.insertMany(processedProducts);
-    console.log('Sample products added successfully');
-
-    mongoose.connection.close();
-    console.log('Database connection closed');
-  } catch (error) {
-    console.error('Error seeding database:', error);
-    process.exit(1);
-  }
-}
-
-seedDatabase();
