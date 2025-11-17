@@ -110,7 +110,7 @@ const AdminDashboard = () => {
 
   const StatCard = ({ icon, title, value, color }) => (
     <div className={`bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 flex items-center gap-4`}>
-      <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br ₹{color}`}>
+      <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br ${color}`}>
         {icon}
       </div>
       <div>
