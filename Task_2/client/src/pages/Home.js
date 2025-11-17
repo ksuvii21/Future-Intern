@@ -24,6 +24,30 @@ const offers = [
   }
 ];
 
+const features = [
+  {
+    icon: Truck,
+    title: 'Free Shipping',
+    description: 'On all orders over ₹5000',
+    colors: 'from-[#ea698b]/10 to-[#d55d92]/10 border-[#ea698b]/30 hover:border-[#ea698b]/50',
+    iconColors: 'from-[#ea698b] to-[#d55d92]'
+  },
+  {
+    icon: Shield,
+    title: 'Secure Payment',
+    description: '100% protected transactions',
+    colors: 'from-[#c05299]/10 to-[#ac46a1]/10 border-[#c05299]/30 hover:border-[#c05299]/50',
+    iconColors: 'from-[#c05299] to-[#ac46a1]'
+  },
+  {
+    icon: RotateCcw,
+    title: 'Easy Returns',
+    description: '30-day hassle-free returns',
+    colors: 'from-[#822faf]/10 to-[#6d23b6]/10 border-[#822faf]/30 hover:border-[#822faf]/50',
+    iconColors: 'from-[#822faf] to-[#6d23b6]'
+  }
+];
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -298,29 +322,22 @@ const Home = () => {
 
         {/* Features Section */}
         <section className="py-16 px-4">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-white mb-4">Why Choose Fansee Rebel?</h2>
+            <p className="text-gray-400 mb-12 max-w-2xl mx-auto">We provide a seamless luxury shopping experience with benefits tailored for you.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-gradient-to-br from-[#ea698b]/10 to-[#d55d92]/10 border border-[#ea698b]/30 rounded-2xl p-8 text-center hover:border-[#ea698b]/50 transition-all duration-300">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#ea698b] to-[#d55d92] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Truck className="w-8 h-8 text-white" />
+              {features.map((feature, index) => (
+                <div
+                  key={index}
+                  className={`group bg-gradient-to-br ${feature.colors} rounded-2xl p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#c05299]/20`}
+                >
+                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.iconColors} rounded-2xl flex items-center justify-center mx-auto mb-6 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-6`}>
+                    <feature.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                  <p className="text-gray-400">{feature.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Free Shipping</h3>
-                <p className="text-gray-400">On all orders over ₹50</p>
-              </div>
-              <div className="bg-gradient-to-br from-[#c05299]/10 to-[#ac46a1]/10 border border-[#c05299]/30 rounded-2xl p-8 text-center hover:border-[#c05299]/50 transition-all duration-300">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#c05299] to-[#ac46a1] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Secure Payment</h3>
-                <p className="text-gray-400">100% protected transactions</p>
-              </div>
-              <div className="bg-gradient-to-br from-[#822faf]/10 to-[#6d23b6]/10 border border-[#822faf]/30 rounded-2xl p-8 text-center hover:border-[#822faf]/50 transition-all duration-300">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#822faf] to-[#6d23b6] rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <RotateCcw className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Easy Returns</h3>
-                <p className="text-gray-400">30-day hassle-free returns</p>
-              </div>
+              ))}
             </div>
           </div>
         </section>
