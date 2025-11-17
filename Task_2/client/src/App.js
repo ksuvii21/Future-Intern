@@ -330,7 +330,7 @@ function AppLayout({
                 <ul className="space-y-2 text-sm text-gray-400">
                   {['New Arrivals', 'Dresses', 'Jewelry', 'Accessories', 'Sale'].map((item) => (
                     <li key={item}>
-                      <Link to={`/category/₹{item.toLowerCase().replace(/ /g, '-')}`} className="hover:text-[#ea698b] transition-colors">{item}</Link>
+                      <Link to={`/category/${item.toLowerCase().replace(/ /g, '-')}`} className="hover:text-[#ea698b] transition-colors">{item}</Link>
                     </li>
                   ))}
                 </ul>
