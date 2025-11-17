@@ -1,7 +1,8 @@
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'dummy_key');
+const stripe = null; // Temporarily disable stripe for testing
 const asyncHandler = require('./asyncHandler');
 const { sendOrderConfirmationEmail, sendLowStockAlert } = require('./emailService');
 
