@@ -27,7 +27,7 @@ const Home = () => {
       try {
         setLoading(true);
         // Fetch all products without pagination for proper category filtering
-        const response = await axios.get('http://localhost:5000/api/products?limit=1000');
+        const response = await axios.get('http://localhost:5000/api/products?limit=100');
         // Ensure that products is always an array
         setProducts(response.data.products || []);
       } catch (error) {
