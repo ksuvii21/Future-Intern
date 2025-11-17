@@ -9,9 +9,9 @@ exports.getAllProducts = async (req, res) => {
 
     // Search functionality (name and description)
     if (search) {
-      query.₹or = [
-        { name: { ₹regex: search, ₹options: 'i' } },
-        { description: { ₹regex: search, ₹options: 'i' } }
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } }
       ];
     }
 
