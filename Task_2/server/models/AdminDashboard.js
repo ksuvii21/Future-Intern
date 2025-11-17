@@ -56,7 +56,7 @@ const AdminDashboard = () => {
 
     try {
       if (editingProduct) {
-        await axios.put(`http://localhost:5000/api/products/₹{editingProduct._id}`, productData, config);
+        await axios.put(`http://localhost:5000/api/products/${editingProduct._id}`, productData, config);
       } else {
         await axios.post('http://localhost:5000/api/products', productData, config);
       }
