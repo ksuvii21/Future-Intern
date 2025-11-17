@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const { notFound, errorHandler } = require('./controllers/errorHandler');
 const cloudinary = require('cloudinary').v2;
 
 const dotenv = require('dotenv');
@@ -33,6 +34,11 @@ app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/seller', require('./routes/sellerRoutes'));
+app.use('/api/cart', require('./routes/cartRoutes'));
+
+// Error Handling Middleware
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
