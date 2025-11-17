@@ -409,7 +409,7 @@ const Admin = () => {
             </select>
             <select onChange={e => setFilters(f => ({ ...f, products: { ...f.products, stockLevel: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
               <option value="All">All Stock Levels</option>
-              <option value="Low">Low (<10)</option>
+              <option value="Low">Low (&lt;10)</option>
               <option value="Medium">Medium (10-49)</option>
               <option value="High">High (≥50)</option>
             </select>
