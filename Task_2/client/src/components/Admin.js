@@ -112,7 +112,7 @@ const Admin = () => {
           // If a new image is needed, the URL should be updated.
         };
         await axios.put(
-          `http://localhost:5000/api/products/${editingProduct._id}`,
+          `http://localhost:5000/api/products/admin/${editingProduct._id}`,
           updateData,
           config
         );
