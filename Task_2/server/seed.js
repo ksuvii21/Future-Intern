@@ -26,7 +26,7 @@ C) Accessories-
   4. Designer Sunglasses- Pink, Black, Brown.
   5. Rose Gold Watch- 3 variants with company.
   6. Leather Ankle Boots- Black, Brown, White, Cream.
-  7. Silk Scarf- Pink blue Green 
+  7. Silk Scarf- Pink, Blue, Green. 
 */
 
 const sampleProducts = [
@@ -286,10 +286,13 @@ const sampleProducts = [
     price: 764.15,
     category: 'Accessories',
     stock: 30,
-    imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500',
+    imageUrl: '',
     variants: [
-      { color: 'Clear Crystal', imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500', stock: 15 },
-      { color: 'Rose Gold', imageUrl: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500', stock: 15 }
+      { color: 'Purple', imageUrl: '', stock: 15 },
+      { color: 'Silver', imageUrl: '', stock: 15 },
+      { color: 'Black', imageUrl: '', stock: 15 },
+      { color: 'White', imageUrl: '', stock: 15 },
+      { color: 'Butterfly', imageUrl: '', stock: 15 } 
     ],
     isNewArrival: true,
     rating: 4.4,
@@ -302,10 +305,11 @@ const sampleProducts = [
     price: 1359.15,
     category: 'Accessories',
     stock: 16,
-    imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500',
+    imageUrl: '',
     variants: [
-      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500', stock: 8 },
-      { color: 'Gold', imageUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500', stock: 8 }
+      { color: 'Black', imageUrl: '', stock: 8 },
+      { color: 'Blue', imageUrl: '', stock: 8 },
+      { color: 'White', imageUrl: '', stock: 8 }
     ],
     isNewArrival: false,
     rating: 4.8,
@@ -317,10 +321,11 @@ const sampleProducts = [
     price: 2379.15,
     category: 'Accessories',
     stock: 14,
-    imageUrl: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500',
+    imageUrl: '',
     variants: [
-      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500', stock: 7 },
-      { color: 'Tortoise', imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500', stock: 7 }
+      { color: 'Black', imageUrl: '', stock: 7 },
+      { color: 'Brown', imageUrl: '', stock: 7 },
+      { color: 'Pink', imageUrl: '', stock: 7 }
     ],
     isNewArrival: true,
     rating: 4.7,
@@ -332,10 +337,10 @@ const sampleProducts = [
     price: 3824.15,
     category: 'Accessories',
     stock: 9,
-    imageUrl: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=500',
+    imageUrl: '',
     variants: [
-      { color: 'Rose Gold', imageUrl: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=500', stock: 5 },
-      { color: 'Silver', imageUrl: 'https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?w=500', stock: 4 }
+      { color: '', imageUrl: '', stock: 5 },
+      { color: '', imageUrl: '', stock: 4 }
     ],
     isNewArrival: false,
     rating: 4.9,
@@ -347,10 +352,12 @@ const sampleProducts = [
     price: 2974.15,
     category: 'Accessories',
     stock: 18,
-    imageUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500',
+    imageUrl: '',
     variants: [
-      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500', stock: 9 },
-      { color: 'Brown', imageUrl: 'https://images.unsplash.com/photo-1601762603339-fd61e28b698a?w=500', stock: 9 }
+      { color: 'Black', imageUrl: '', stock: 9 },
+      { color: 'Brown', imageUrl: '', stock: 9 },
+      { color: 'White', imageUrl: '', stock: 9 },
+      { color: 'Cream', imageUrl: '', stock: 9 }
     ],
     isNewArrival: true,
     rating: 4.6,
@@ -362,10 +369,11 @@ const sampleProducts = [
     price: 764.15,
     category: 'Accessories',
     stock: 32,
-    imageUrl: 'https://images.unsplash.com/photo-1601762603339-fd61e28b698a?w=500',
+    imageUrl: '',
     variants: [
-      { color: 'Multi-Color', imageUrl: 'https://images.unsplash.com/photo-1601762603339-fd61e28b698a?w=500', stock: 16 },
-      { color: 'Black & White', imageUrl: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500', stock: 16 }
+      { color: 'Pink', imageUrl: '', stock: 16 },
+      { color: 'Blue', imageUrl: '', stock: 16 },
+      { color: 'Green', imageUrl: '', stock: 16 }
     ],
     isNewArrival: true,
     rating: 4.4,
