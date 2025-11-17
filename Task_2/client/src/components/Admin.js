@@ -233,7 +233,7 @@ const Admin = () => {
   const filteredAndSortedData = (data, type) => {
     let filtered = [...data];
 
-    // Filtering
+    // Advanced Filtering
     if (searchTerm) {
       filtered = filtered.filter(item =>
         (item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
@@ -243,14 +243,68 @@ const Admin = () => {
       );
     }
 
-    if (type === 'products' && filters.products.category !== 'All') {
-      filtered = filtered.filter(p => p.category === filters.products.category);
+    // Product filters
+    if (type === 'products') {
+      if (filters.products.category !== 'All') {
+        filtered = filtered.filter(p => p.category === filters.products.category);
+      }
+      if (filters.products.minPrice) {
+        filtered = filtered.filter(p => p.price >= Number(filters.products.minPrice));
+      }
+      if (filters.products.maxPrice) {
+        filtered = filtered.filter(p => p.price <= Number(filters.products.maxPrice));
+      }
+      if (filters.products.stockLevel !== 'All') {
+        switch (filters.products.stockLevel) {
+          case 'Low':
+            filtered = filtered.filter(p => p.stock < 10);
+            break;
+          case 'Medium':
+            filtered = filtered.filter(p => p.stock >= 10 && p.stock < 50);
+            break;
+          case 'High':
+            filtered = filtered.filter(p => p.stock >= 50);
+            break;
+        }
+      }
     }
-    if (type === 'users' && filters.users.role !== 'All') {
-      filtered = filtered.filter(u => u.role === filters.users.role);
+
+    // User filters
+    if (type === 'users') {
+      if (filters.users.role !== 'All') {
+        filtered = filtered.filter(u => u.role === filters.users.role);
+      }
+      if (filters.users.dateFrom) {
+        const fromDate = new Date(filters.users.dateFrom);
+        filtered = filtered.filter(u => new Date(u.createdAt) >= fromDate);
+      }
+      if (filters.users.dateTo) {
+        const toDate = new Date(filters.users.dateTo);
+        toDate.setHours(23, 59, 59, 999);
+        filtered = filtered.filter(u => new Date(u.createdAt) <= toDate);
+      }
     }
-    if (type === 'orders' && filters.orders.status !== 'All') {
-      filtered = filtered.filter(o => o.status === filters.orders.status);
+
+    // Order filters
+    if (type === 'orders') {
+      if (filters.orders.status !== 'All') {
+        filtered = filtered.filter(o => o.status === filters.orders.status);
+      }
+      if (filters.orders.minAmount) {
+        filtered = filtered.filter(o => o.totalAmount >= Number(filters.orders.minAmount));
+      }
+      if (filters.orders.maxAmount) {
+        filtered = filtered.filter(o => o.totalAmount <= Number(filters.orders.maxAmount));
+      }
+      if (filters.orders.dateFrom) {
+        const fromDate = new Date(filters.orders.dateFrom);
+        filtered = filtered.filter(o => new Date(o.createdAt) >= fromDate);
+      }
+      if (filters.orders.dateTo) {
+        const toDate = new Date(filters.orders.dateTo);
+        toDate.setHours(23, 59, 59, 999);
+        filtered = filtered.filter(o => new Date(o.createdAt) <= toDate);
+      }
     }
 
     // Sorting
