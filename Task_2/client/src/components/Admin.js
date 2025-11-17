@@ -432,46 +432,63 @@ const Admin = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredAndSortedData(products, 'products').length === 0 ? (
-            <div className="col-span-full text-center py-10 text-gray-400">
-              <Package className="w-12 h-12 mx-auto mb-2" />
-              No products found.
-            </div>
-          ) : (
-            filteredAndSortedData(products, 'products').map(product => (
-              <div key={product._id} className="bg-[#2a1a3e]/50 border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
-                <div className="flex items-start gap-4 mb-4">
-                  <img
-                    src={product.imageUrl || 'https://via.placeholder.com/80'}
-                    alt={product.name}
-                    className="w-20 h-20 object-cover rounded-md flex-shrink-0"
-                    onError={(e) => { e.target.src = 'https://via.placeholder.com/80'; }}
-                  />
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-white text-sm mb-1 truncate">{product.name}</h3>
-                    <p className="text-green-400 font-bold text-lg">₹{product.price}</p>
-                    <p className="text-gray-400 text-xs">Stock: {product.stock}</p>
-                    <p className="text-gray-500 text-xs capitalize">{product.category}</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => handleEdit(product)}
-                    className="flex-1 py-2 px-3 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30 transition-colors text-xs font-medium"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(product._id)}
-                    className="flex-1 py-2 px-3 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30 transition-colors text-xs font-medium"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-gray-300">
+            <thead className="border-b border-[#571089]/30 text-xs uppercase text-gray-400">
+              <tr>
+                <th className="p-3 cursor-pointer" onClick={() => handleSort('name')}>Product</th>
+                <th className="p-3 cursor-pointer" onClick={() => handleSort('category')}>Category</th>
+                <th className="p-3 cursor-pointer" onClick={() => handleSort('price')}>Price</th>
+                <th className="p-3 cursor-pointer" onClick={() => handleSort('stock')}>Stock</th>
+                <th className="p-3 cursor-pointer" onClick={() => handleSort('createdAt')}>Date Added</th>
+                <th className="p-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredAndSortedData(products, 'products').length === 0 ? (
+                <tr>
+                  <td colSpan="6" className="text-center py-10 text-gray-400">
+                    <Package className="w-12 h-12 mx-auto mb-2" />
+                    No products found.
+                  </td>
+                </tr>
+              ) : (
+                filteredAndSortedData(products, 'products').map(product => (
+                  <tr key={product._id} className="border-b border-[#571089]/20 hover:bg-white/5">
+                    <td className="p-3 flex items-center gap-3">
+                      <img
+                        src={product.imageUrl || 'https://via.placeholder.com/40'}
+                        alt={product.name}
+                        className="w-10 h-10 object-cover rounded-md flex-shrink-0"
+                        onError={(e) => { e.target.src = 'https://via.placeholder.com/40'; }}
+                      />
+                      <span className="font-medium text-white truncate max-w-xs">{product.name}</span>
+                    </td>
+                    <td className="p-3 capitalize">{product.category}</td>
+                    <td className="p-3 font-semibold text-green-400">₹{product.price.toLocaleString('en-IN')}</td>
+                    <td className="p-3">{product.stock}</td>
+                    <td className="p-3 text-sm text-gray-400">{new Date(product.createdAt).toLocaleDateString()}</td>
+                    <td className="p-3 text-right">
+                      <div className="flex gap-2 justify-end">
+                        <button
+                          onClick={() => handleEdit(product)}
+                          className="p-2 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30 transition-colors"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(product._id)}
+                          className="p-2 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30 transition-colors"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -529,47 +546,55 @@ const Admin = () => {
         <button onClick={() => handleSort('createdAt')} className="px-3 py-1 bg-white/5 rounded-lg hover:bg-white/10 text-xs transition-colors">Joined</button>
       </div>
 
-      {/* Users Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredAndSortedData(users, 'users').length === 0 ? (
-          <div className="col-span-full text-center py-10 text-gray-400">
-            <Users className="w-12 h-12 mx-auto mb-2" />
-            No users found.
-          </div>
-        ) : (
-          filteredAndSortedData(users, 'users').map(user => (
-            <div key={user._id} className="bg-[#2a1a3e]/50 border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
-              <div className="flex items-start justify-between mb-3">
-                <div>
-                  <h3 className="font-semibold text-white">{user.username}</h3>
-                  <p className="text-gray-400 text-sm">{user.email}</p>
-                </div>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${
-                  user.role === 'admin' ? 'bg-red-500/20 text-red-400' :
-                  user.role === 'seller' ? 'bg-blue-500/20 text-blue-400' :
-                  'bg-green-500/20 text-green-400'
-                }`}>
-                  {user.role}
-                </span>
-              </div>
-              <div className="text-xs text-gray-500 mb-3">
-                Joined: {new Date(user.createdAt).toLocaleDateString()}
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-400">Change Role:</span>
-                <select
-                  value={user.role}
-                  onChange={(e) => handleRoleUpdate(user._id, e.target.value)}
-                  className="py-1 px-2 bg-[#1a0a2e] border border-[#571089]/50 rounded text-white text-xs"
-                >
-                  <option value="user">User</option>
-                  <option value="seller">Seller</option>
-                  <option value="admin">Admin</option>
-                </select>
-              </div>
-            </div>
-          ))
-        )}
+      {/* Users Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-gray-300">
+          <thead className="border-b border-[#571089]/30 text-xs uppercase text-gray-400">
+            <tr>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('username')}>User</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('email')}>Email</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('role')}>Role</th>
+              <th className="p-3 cursor-pointer" onClick={() => handleSort('createdAt')}>Joined</th>
+              <th className="p-3 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredAndSortedData(users, 'users').length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center py-10 text-gray-400">
+                  <Users className="w-12 h-12 mx-auto mb-2" />
+                  No users found.
+                </td>
+              </tr>
+            ) : (
+              filteredAndSortedData(users, 'users').map(user => (
+                <tr key={user._id} className="border-b border-[#571089]/20 hover:bg-white/5">
+                  <td className="p-3 font-medium text-white">{user.username}</td>
+                  <td className="p-3">{user.email}</td>
+                  <td className="p-3">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium capitalize ${
+                      user.role === 'admin' ? 'bg-red-500/20 text-red-400' :
+                      user.role === 'seller' ? 'bg-blue-500/20 text-blue-400' :
+                      'bg-green-500/20 text-green-400'
+                    }`}>{user.role}</span>
+                  </td>
+                  <td className="p-3">{new Date(user.createdAt).toLocaleDateString()}</td>
+                  <td className="p-3 text-right">
+                    <select
+                      value={user.role}
+                      onChange={(e) => handleRoleUpdate(user._id, e.target.value)}
+                      className="py-1 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm"
+                    >
+                      <option value="user">User</option>
+                      <option value="seller">Seller</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );
