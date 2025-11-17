@@ -13,8 +13,8 @@ const upload = multer({ storage: storage });
 router.get('/', productController.getAllProducts);
 router.get('/:id', productController.getProductById);
 router.post('/:id/reviews', auth, productController.createProductReview);
-router.post('/', auth, sellerAuth, upload.single('image'), productController.createProduct);
-router.put('/:id', auth, sellerAuth, productController.updateProduct);
+router.post('/', auth, sellerAuth, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'variantImages', maxCount: 10 }]), productController.createProduct);
+router.put('/:id', auth, sellerAuth, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'variantImages', maxCount: 10 }]), productController.updateProduct);
 router.delete('/:id', auth, sellerAuth, productController.deleteProduct);
 
 module.exports = router;
