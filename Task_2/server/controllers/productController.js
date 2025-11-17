@@ -1,10 +1,10 @@
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
+const asyncHandler = require('../middleware/asyncHandler');
 
 // Get all products
-exports.getAllProducts = async (req, res) => {
-  try {
-    const { search, category, minPrice, maxPrice, sortBy, sortOrder, page = 1, limit = 12 } = req.query;
+exports.getAllProducts = asyncHandler(async (req, res) => {
+  const { search, category, minPrice, maxPrice, sortBy, sortOrder, page = 1, limit = 12 } = req.query;
 
     let query = {};
 
@@ -52,40 +52,34 @@ exports.getAllProducts = async (req, res) => {
       totalPages: Math.ceil(count / limit),
       currentPage: Number(page),
     });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error retrieving products', error: error.message });
-  }
-};
+});
 
 // Get single product
-exports.getProductById = async (req, res) => {
-  try {
-    // Add a check for a valid ObjectId to prevent CastError
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({ message: 'Invalid Product ID format' });
-    }
+exports.getProductById = asyncHandler(async (req, res) => {
+  // Add a check for a valid ObjectId to prevent CastError
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    res.status(400);
+    throw new Error('Invalid Product ID format');
+  }
 
     const product = await Product.findById(req.params.id);
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
     res.json(product);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+});
 
 // @desc    Create new review
 // @route   POST /api/products/:id/reviews
 // @access  Private
-exports.createProductReview = async (req, res) => {
+exports.createProductReview = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body;
 
-  try {
-    const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id);
 
     if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+    res.status(404);
+    throw new Error('Product not found');
     }
 
     // Check if the user has already reviewed this product
@@ -94,7 +88,8 @@ exports.createProductReview = async (req, res) => {
     );
 
     if (alreadyReviewed) {
-      return res.status(400).json({ message: 'You have already reviewed this product' });
+      res.status(400);
+      throw new Error('You have already reviewed this product');
     }
 
     const review = {
@@ -113,19 +108,15 @@ exports.createProductReview = async (req, res) => {
 
     await product.save();
     res.status(201).json({ message: 'Review added successfully' });
-  } catch (error) {
-    console.error('Create review error:', error);
-    res.status(500).json({ message: 'Server error while adding review' });
-  }
-};
+});
 
 // Create product
-exports.createProduct = async (req, res) => {
-  try {
-    // Ensure the user creating the product is a seller or admin
-    if (!['seller', 'admin'].includes(req.user.role)) {
-      return res.status(403).json({ message: 'Access denied. Only sellers can create products.' });
-    }
+exports.createProduct = asyncHandler(async (req, res) => {
+  // Ensure the user creating the product is a seller or admin
+  if (!['seller', 'admin'].includes(req.user.role)) {
+    res.status(403);
+    throw new Error('Access denied. Only sellers can create products.');
+  }
 
     const { name, price, description, category, stock, imageUrl } = req.body;
     const product = new Product({
