@@ -135,7 +135,7 @@ const OrderHistory = () => {
                       <span className="font-bold">₹{order.totalAmount.toLocaleString('en-IN')}</span>
                     </div>
                     <Link
-                      to={`/orders/${order._id}`}
+                      to={`/order/${order._id}`}
                       className="flex items-center gap-2 px-4 py-2 bg-[#571089]/20 border border-[#571089]/30 rounded-lg text-[#ea698b] hover:bg-[#571089]/30 transition-all"
                     >
                       <Eye className="w-4 h-4" />
@@ -147,18 +147,18 @@ const OrderHistory = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {order.products.slice(0, 3).map((item, index) => (
                     <div key={index} className="flex gap-3 p-3 bg-white/5 rounded-lg">
-                      <img
-                        src={item.imageUrl || 'https://via.placeholder.com/60x60?text=No+Image'}
-                        alt={item.name}
+                      <img                        
+                        src={item.product?.imageUrl || 'https://via.placeholder.com/60x60?text=No+Image'}
+                        alt={item.product?.name}
                         className="w-12 h-12 object-cover rounded-lg"
                         onError={(e) => {
                           e.target.src = 'https://via.placeholder.com/60x60?text=No+Image';
                         }}
                       />
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-white font-medium text-sm truncate">{item.name}</h4>
+                        <h4 className="text-white font-medium text-sm truncate">{item.product?.name}</h4>
                         <p className="text-gray-400 text-xs">Qty: {item.quantity}</p>
-                        <p className="text-[#ea698b] text-sm font-semibold">₹{(item.price * item.quantity).toLocaleString('en-IN')}</p>
+                        <p className="text-[#ea698b] text-sm font-semibold">₹{(item.product?.price * item.quantity).toLocaleString('en-IN')}</p>
                       </div>
                     </div>
                   ))}
