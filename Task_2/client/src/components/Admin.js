@@ -226,7 +226,8 @@ const Admin = () => {
             <input type="number" name="stock" value={newProduct.stock} onChange={handleInputChange} placeholder="Stock" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
           </div>
           <input type="text" name="category" value={newProduct.category} onChange={handleInputChange} placeholder="Category" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
-          <input type="url" name="imageUrl" value={newProduct.imageUrl} onChange={handleInputChange} placeholder="Image URL" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" />
+          <input type="url" name="imageUrl" value={newProduct.imageUrl} onChange={handleInputChange} placeholder="Image URL (for admins)" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" />
+          <input type="file" name="imageFile" onChange={handleInputChange} accept="image/*" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#ea698b] file:text-white hover:file:bg-[#d55d92]" />
           <button type="submit" className="w-full bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold py-3 px-4 rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
             {editingProduct ? 'Update Product' : 'Add Product'}
           </button>
