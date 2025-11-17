@@ -147,7 +147,7 @@ const WishlistPage = () => {
           <div className="flex justify-center gap-3 mb-8">
             <button
               onClick={() => setActiveTab('collection')}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ₹{
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${
                 activeTab === 'collection'
                   ? 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white shadow-lg shadow-[#ea698b]/30'
                   : 'bg-white/5 backdrop-blur-sm border border-[#571089]/30 text-gray-300 hover:bg-white/10 hover:border-[#ea698b]/50'
@@ -158,7 +158,7 @@ const WishlistPage = () => {
             </button>
             <button
               onClick={() => setActiveTab('shared')}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ₹{
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${
                 activeTab === 'shared'
                   ? 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white shadow-lg shadow-[#ea698b]/30'
                   : 'bg-white/5 backdrop-blur-sm border border-[#571089]/30 text-gray-300 hover:bg-white/10 hover:border-[#ea698b]/50'
@@ -169,7 +169,7 @@ const WishlistPage = () => {
             </button>
             <button
               onClick={() => setActiveTab('viewed')}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ₹{
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${
                 activeTab === 'viewed'
                   ? 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white shadow-lg shadow-[#ea698b]/30'
                   : 'bg-white/5 backdrop-blur-sm border border-[#571089]/30 text-gray-300 hover:bg-white/10 hover:border-[#ea698b]/50'
