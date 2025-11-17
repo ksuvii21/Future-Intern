@@ -1,8 +1,10 @@
 {
   "dependencies": {
     "@react-three/fiber": "^9.4.0",
+    "cloudinary": "^2.8.0",
     "http-proxy-middleware": "^3.0.5",
     "lucide-react": "^0.553.0",
+    "multer": "^2.0.2",
     "three": "^0.181.1"
   }
 }
