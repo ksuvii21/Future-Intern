@@ -62,7 +62,7 @@ const Home = () => {
         {/* Hero Section */}
         <section className="relative pt-32 pb-20 px-4">
           <div className="absolute inset-0">
-            <Silk speed={3} scale={1.2} color="#A084CF" noiseIntensity={1.0} rotation={0.2} />
+            <Silk speed={3} scale={1.2} color="#3b1665ff" noiseIntensity={1.0} rotation={0.2} />
           </div>
           <div className="relative z-10 max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
