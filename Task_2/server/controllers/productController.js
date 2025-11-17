@@ -149,17 +149,22 @@ exports.createProduct = asyncHandler(async (req, res) => {
     } else if (req.user.role === 'seller') {
       // Sellers upload images to Cloudinary
       if (req.file) {
-        const result = await cloudinary.uploader.upload_stream(
-          { folder: 'seller-products' },
-          (error, result) => {
-            if (error) {
-              res.status(500);
-              throw new Error('Image upload failed');
-            }
-            imageUrl = result.secure_url;
-          }
-        );
-        result.end(req.file.buffer);
+        try {
+          const result = await new Promise((resolve, reject) => {
+            const stream = cloudinary.uploader.upload_stream(
+              { folder: 'seller-products' },
+              (error, result) => {
+                if (error) reject(error);
+                else resolve(result);
+              }
+            );
+            stream.end(req.file.buffer);
+          });
+          imageUrl = result.secure_url;
+        } catch (error) {
+          res.status(500);
+          throw new Error('Image upload failed: ' + error.message);
+        }
       } else {
         res.status(400);
         throw new Error('Image file is required for seller products.');
