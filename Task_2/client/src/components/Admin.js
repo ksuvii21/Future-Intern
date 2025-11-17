@@ -232,7 +232,7 @@ const Admin = () => {
             {editingProduct ? 'Update Product' : 'Add Product'}
           </button>
           {editingProduct && (
-            <button type="button" onClick={() => { setEditingProduct(null); setNewProduct({ name: '', description: '', price: '', category: '', stock: '', imageUrl: '' }); }} className="w-full mt-2 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg">
+            <button type="button" onClick={() => { setEditingProduct(null); setNewProduct({ name: '', description: '', price: '', category: '', stock: '', imageUrl: '', imageFile: null }); }} className="w-full mt-2 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg">
               Cancel Edit
             </button>
           )}
