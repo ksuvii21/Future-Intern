@@ -195,7 +195,7 @@ const Login = ({ onLogin }) => {
               {/* Checkbox and Forgot Password */}
               <div className="flex items-center justify-between text-sm">
                 <div className="flex items-center group" onClick={() => handleChange({ target: { name: 'rememberMe', type: 'checkbox', checked: !formData.rememberMe } })}>
-                  <div className={`relative w-4 h-4 rounded border ₹{
+                  <div className={`relative w-4 h-4 rounded border ${
                     formData.rememberMe ? 'bg-[#ea698b] border-[#ea698b]' : 'border-gray-600 bg-[#2a1a3e]'
                   } transition-all duration-300 group-hover:border-[#ea698b]`}>
                     <input
