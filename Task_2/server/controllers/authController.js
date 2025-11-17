@@ -1,12 +1,12 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const asyncHandler = require('./asyncHandler');
 
 // @desc    Register user
 // @route   POST /api/auth/register
 // @access  Public
-const register = async (req, res) => {
-  try {
-    const { username, email, password, role } = req.body;
+const register = asyncHandler(async (req, res) => {
+  const { username, email, password, role } = req.body;
 
     // Check if user already exists
     const existingUser = await User.findOne({
@@ -14,9 +14,8 @@ const register = async (req, res) => {
     });
 
     if (existingUser) {
-      return res.status(400).json({
-        message: existingUser.email === email ? 'Email already registered' : 'Username already taken'
-      });
+      res.status(400);
+      throw new Error(existingUser.email === email ? 'Email already registered' : 'Username already taken');
     }
 
     // Ensure role is either 'user' or 'seller' for security
@@ -47,35 +46,26 @@ const register = async (req, res) => {
         createdAt: user.createdAt
       }
     });
-  } catch (error) {
-    console.error('Registration error:', error);
-    res.status(500).json({
-      message: 'Server error during registration'
-    });
-  }
-};
+});
 
 // @desc    Login user
 // @route   POST /api/auth/login
 // @access  Public
-const login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+const login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
 
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({
-        message: 'Invalid email or password'
-      });
+      res.status(401);
+      throw new Error('Invalid email or password');
     }
 
     // Check password
     const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
-      return res.status(401).json({
-        message: 'Invalid email or password'
-      });
+      res.status(401);
+      throw new Error('Invalid email or password');
     }
 
     // Generate token
@@ -94,20 +84,13 @@ const login = async (req, res) => {
         createdAt: user.createdAt
       }
     });
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({
-      message: 'Server error during login'
-    });
-  }
-};
+});
 
 // @desc    Forgot password - Send reset email
 // @route   POST /api/auth/forgot-password
 // @access  Public
-const forgotPassword = async (req, res) => {
-  try {
-    const { email } = req.body;
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
 
     // Check if user exists
     const user = await User.findOne({ email });
@@ -127,20 +110,13 @@ const forgotPassword = async (req, res) => {
     res.json({
       message: 'If an account with that email exists, a password reset link has been sent.'
     });
-  } catch (error) {
-    console.error('Forgot password error:', error);
-    res.status(500).json({
-      message: 'Server error'
-    });
-  }
-};
+});
 
 // @desc    Reset password
 // @route   POST /api/auth/reset-password
 // @access  Public
-const resetPassword = async (req, res) => {
-  try {
-    const { token, newPassword } = req.body;
+const resetPassword = asyncHandler(async (req, res) => {
+  const { token, newPassword } = req.body;
 
     // Verify token and reset password
     // This would be implemented with proper token verification
@@ -148,26 +124,20 @@ const resetPassword = async (req, res) => {
     res.json({
       message: 'Password reset successfully'
     });
-  } catch (error) {
-    console.error('Reset password error:', error);
-    res.status(500).json({
-      message: 'Server error'
-    });
-  }
-};
+});
 
 // @desc    Update user profile
 // @route   PUT /api/auth/profile
 // @access  Private
-const updateProfile = async (req, res) => {
-  try {
-    const userId = req.user.userId;
+const updateProfile = asyncHandler(async (req, res) => {
+  const userId = req.user.userId;
     const { username, email, currentPassword, newPassword } = req.body;
 
     const user = await User.findById(userId);
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      res.status(404);
+      throw new Error('User not found');
     }
 
     // Update username and email if provided
@@ -177,12 +147,14 @@ const updateProfile = async (req, res) => {
     // Update password if requested
     if (newPassword) {
       if (!currentPassword) {
-        return res.status(400).json({ message: 'Current password is required to change password' });
+        res.status(400);
+        throw new Error('Current password is required to change password');
       }
 
       const isPasswordValid = await user.comparePassword(currentPassword);
       if (!isPasswordValid) {
-        return res.status(401).json({ message: 'Invalid current password' });
+        res.status(401);
+        throw new Error('Invalid current password');
       }
 
       user.password = newPassword;
@@ -194,23 +166,15 @@ const updateProfile = async (req, res) => {
       message: 'Profile updated successfully',
       user: await User.findById(userId).select('-password')
     });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error updating profile' });
-  }
-};
+});
 
 // @desc    Get all users (admin only)
 // @route   GET /api/auth/users
 // @access  Private/Admin
-const getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find().select('-password').sort({ createdAt: -1 });
+const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find().select('-password').sort({ createdAt: -1 });
     res.json(users);
-  } catch (error) {
-    console.error('Get all users error:', error);
-    res.status(500).json({ message: 'Server error retrieving users' });
-  }
-};
+});
 
 module.exports = {
   register,
@@ -222,14 +186,14 @@ module.exports = {
   // @desc    Add a new address for a user
   // @route   POST /api/auth/address
   // @access  Private
-  addAddress: async (req, res) => {
-    try {
-      const userId = req.user.userId;
+  addAddress: asyncHandler(async (req, res) => {
+    const userId = req.user.userId;
       const { name, phone, address, city, state, zipCode, isDefault } = req.body;
 
       const user = await User.findById(userId);
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404);
+        throw new Error('User not found');
       }
 
       const newAddress = { name, phone, address, city, state, zipCode, isDefault };
@@ -243,23 +207,19 @@ module.exports = {
       await user.save();
 
       res.status(201).json({ message: 'Address added successfully', user: await User.findById(userId).select('-password') });
-    } catch (error) {
-      console.error('Add address error:', error);
-      res.status(500).json({ message: 'Server error adding address' });
-    }
-  },
+  }),
 
   // @desc    Delete a user's address
   // @route   DELETE /api/auth/address/:id
   // @access  Private
-  deleteAddress: async (req, res) => {
-    try {
-      const userId = req.user.userId;
+  deleteAddress: asyncHandler(async (req, res) => {
+    const userId = req.user.userId;
       const addressId = req.params.id;
 
       const user = await User.findById(userId);
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404);
+        throw new Error('User not found');
       }
 
       // Find and remove the address
@@ -267,38 +227,31 @@ module.exports = {
       await user.save();
 
       res.json({ message: 'Address deleted successfully', user: await User.findById(userId).select('-password') });
-    } catch (error) {
-      console.error('Delete address error:', error);
-      res.status(500).json({ message: 'Server error deleting address' });
-    }
-  },
+  }),
 
   // @desc    Update user role (admin only)
   // @route   PUT /api/auth/users/:id/role
   // @access  Private/Admin
-  updateUserRole: async (req, res) => {
-    try {
-      const { role } = req.body;
+  updateUserRole: asyncHandler(async (req, res) => {
+    const { role } = req.body;
       const userId = req.params.id;
 
       const allowedRoles = ['user', 'seller', 'admin'];
       if (!allowedRoles.includes(role)) {
-        return res.status(400).json({ message: 'Invalid role specified.' });
+        res.status(400);
+        throw new Error('Invalid role specified.');
       }
 
       const user = await User.findById(userId);
       if (!user) {
-        return res.status(404).json({ message: 'User not found.' });
+        res.status(404);
+        throw new Error('User not found.');
       }
 
       user.role = role;
       await user.save();
 
       res.json({ message: 'User role updated successfully.', user: await User.findById(userId).select('-password') });
-    } catch (error) {
-      console.error('Update user role error:', error);
-      res.status(500).json({ message: 'Server error updating user role.' });
-    }
-  },
+  }),
   getAllUsers // Adding the missing export here
 };
