@@ -125,21 +125,33 @@ exports.createProduct = asyncHandler(async (req, res) => {
     throw new Error('Access denied. Only sellers can create products.');
   }
 
-    let imageUrl = req.body.imageUrl; // Default to provided URL
+    let imageUrl;
 
-    // If an image file is uploaded, upload to Cloudinary
-    if (req.file) {
-      const result = await cloudinary.uploader.upload_stream(
-        { folder: 'products' },
-        (error, result) => {
-          if (error) {
-            res.status(500);
-            throw new Error('Image upload failed');
+    if (req.user.role === 'admin') {
+      // Admins provide direct Google Drive URLs
+      imageUrl = req.body.imageUrl;
+      if (!imageUrl) {
+        res.status(400);
+        throw new Error('Image URL is required for admin products.');
+      }
+    } else if (req.user.role === 'seller') {
+      // Sellers upload images to Cloudinary
+      if (req.file) {
+        const result = await cloudinary.uploader.upload_stream(
+          { folder: 'seller-products' },
+          (error, result) => {
+            if (error) {
+              res.status(500);
+              throw new Error('Image upload failed');
+            }
+            imageUrl = result.secure_url;
           }
-          imageUrl = result.secure_url;
-        }
-      );
-      result.end(req.file.buffer);
+        );
+        result.end(req.file.buffer);
+      } else {
+        res.status(400);
+        throw new Error('Image file is required for seller products.');
+      }
     }
 
     const { name, price, description, category, stock } = req.body;
@@ -150,7 +162,7 @@ exports.createProduct = asyncHandler(async (req, res) => {
       category,
       stock,
       imageUrl,
-      user: req.user.userId, // Associate product with the seller
+      user: req.user.userId, // Associate product with the creator
     });
 
     const newProduct = await product.save();
