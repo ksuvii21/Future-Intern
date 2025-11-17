@@ -175,7 +175,7 @@ const Admin = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.delete(`http://localhost:5000/api/products/${id}`, config);
+      await axios.delete(`http://localhost:5000/api/products/admin/${id}`, config);
       fetchDashboardData(); // Refetch all data to keep dashboard consistent
     } catch (error) {
       console.error('Error deleting product:', error);
