@@ -70,18 +70,34 @@ const ProductDetail = () => {
   // Get the current variant based on selected color
   const currentVariant = product?.variants?.find(v => v.color === selectedColor);
 
-  // Get the image for the selected color
-  const currentImage = currentVariant ? currentVariant.imageUrl : product?.imageUrl;
+  // Get the image to display (variant image or default)
+  const displayImage = currentVariant ? currentVariant.imageUrl : product?.imageUrl;
+
+  // Get all images for the lightbox (variant images + default if no variants)
+  const allImages = product?.variants && product.variants.length > 0
+    ? product.variants.map(v => v.imageUrl)
+    : [product?.imageUrl].filter(Boolean);
 
   const addToCart = () => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const existingItem = cart.find(item => item._id === product._id && item.selectedColor === selectedColor);
+    const existingItem = cart.find(item => item._id === product._id);
 
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
       cart.push({ ...product, quantity, selectedColor, selectedSize });
     }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Product added to cart!');
+  };
+
+  const buyNow = () => {
+    addToCart();
+    window.location.href = '/checkout';
+  };
+
+  const addToWishlist = () => {
     const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
     const existingItem = wishlist.find(item => item._id === product._id);
 
@@ -191,9 +207,9 @@ const ProductDetail = () => {
           {/* Product Image */}
           <div className="space-y-4 cursor-pointer" onClick={() => setLightboxOpen(true)}>
             <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden relative aspect-square">
-              {(product.imageUrls && product.imageUrls.length > 0) || product.imageUrl ? (
+              {displayImage ? (
                 <img
-                  src={product.imageUrls?.[0] || product.imageUrl}
+                  src={displayImage}
                   alt={product.name}
                   className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
                   onError={(e) => {
@@ -206,13 +222,13 @@ const ProductDetail = () => {
                 </div>
               )}
             </div>
-            {product.imageUrls && product.imageUrls.length > 1 && (
+            {allImages.length > 1 && (
               <div className="grid grid-cols-4 gap-4">
-                {product.imageUrls.slice(0, 4).map((img, index) => (
+                {allImages.slice(0, 4).map((img, index) => (
                   <div key={index} className="border border-[#571089]/30 rounded-lg overflow-hidden aspect-square" onClick={(e) => { e.stopPropagation(); setLightboxIndex(index); setLightboxOpen(true); }}>
                     <img
                       src={img}
-                      alt={`${product.name} thumbnail ${index + 1}`}
+                      alt={`${product.name} variant ${index + 1}`}
                       className="w-full h-full object-cover hover:opacity-80 transition-opacity"
                       onError={(e) => {
                         e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjOWNhNGIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg==';
@@ -247,22 +263,6 @@ const ProductDetail = () => {
               <p className="text-gray-300 text-lg leading-relaxed">{product.description}</p>
             </div>
 
-            <div className="flex items-center gap-4">
-              <span className="text-5xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                ₹{product.price.toLocaleString('en-IN')}
-              </span>
-            <span className={`text-sm px-3 py-1 rounded-full font-medium ${
-                product.stock > 10
-                  ? 'bg-green-500/20 text-green-400'
-                  : product.stock > 0
-                    ? 'bg-yellow-500/20 text-yellow-400'
-                    : 'bg-red-500/20 text-red-400'
-              }`}>
-                {product.stock > 10
-                  ? 'In Stock'
-                  : product.stock > 0
-                    ? `Only ${product.stock} left`
-                    : 'Out of Stock'}
               </span>
             </div>
 
