@@ -63,8 +63,19 @@ const Admin = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
+      // Build query parameters for products
+      const productParams = new URLSearchParams({
+        limit: '1000',
+        page: '1',
+        ...(filters.products.category !== 'All' && { category: filters.products.category }),
+        ...(filters.products.minPrice && { minPrice: filters.products.minPrice }),
+        ...(filters.products.maxPrice && { maxPrice: filters.products.maxPrice }),
+        ...(searchTerm && { search: searchTerm }),
+        ...(sortConfig.key && { sortBy: sortConfig.key, sortOrder: sortConfig.direction === 'ascending' ? 'asc' : 'desc' })
+      });
+
       const [productsRes, usersRes, ordersRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/products?limit=1000'), // Fetch all products
+        axios.get(`http://localhost:5000/api/products?${productParams}`),
         axios.get('http://localhost:5000/api/auth/users', config),
         axios.get('http://localhost:5000/api/orders/all', config)
       ]);
@@ -76,7 +87,7 @@ const Admin = () => {
       // Calculate stats
       const totalRevenue = ordersRes.data.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
       setStats({
-        totalProducts: productsRes.data.products.length,
+        totalProducts: productsRes.data.totalPages ? productsRes.data.totalPages * productsRes.data.products.length : productsRes.data.products.length,
         totalUsers: usersRes.data.length,
         totalOrders: ordersRes.data.length,
         totalRevenue: totalRevenue.toFixed(2)
