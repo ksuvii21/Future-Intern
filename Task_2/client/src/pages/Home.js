@@ -7,12 +7,20 @@ import Silk from '../components/Silk';
 const offers = [
   {
     logo: true,
+    title: 'Fansee Rebel',
+    description: 'Luxury Fashion & Accessories'
   },
   {
     emoji: '👠',
     title: 'Designer Shoes',
     discount: '60% OFF',
     description: 'Luxury Footwear Collection'
+  },
+  {
+    emoji: '💎',
+    title: 'Exquisite Jewelry',
+    discount: '40% OFF',
+    description: 'Shine with our latest collection'
   }
 ];
 
@@ -112,22 +120,38 @@ const Home = () => {
                 </div>
               </div>
               <div className="relative">
-                <div className="relative">
+                <div className="relative h-96 w-full max-w-sm mx-auto">
                   {/* Rotating Offers */}
-                  <div className="bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm transition-all duration-500">
-                    <div className="text-center mb-4">
-                      {offers[currentOffer].logo ? (
-                        <img src="/logo.png" alt="Fansee Rebel" className="w-58 h-56 rounded-lg mx-auto" />
-                      ) : (
-                        <div className="text-9xl">{offers[currentOffer].emoji}</div>
-                      )}
-                    </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-white mb-2">{offers[currentOffer].title}</p>
-                      <p className="text-[#ea698b] text-4xl font-bold mb-4">{offers[currentOffer].discount}</p>
-                      <p className="text-gray-400">{offers[currentOffer].description}</p>
-                    </div>
-                  </div>
+                  {offers.map((offer, index) => {
+                    const isCurrent = index === currentOffer;
+                    const isPrevious = index === (currentOffer - 1 + offers.length) % offers.length;
+
+                    return (
+                      <div
+                        key={index}
+                        className={`absolute inset-0 bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm transition-all duration-700 ease-in-out`}
+                        style={{
+                          transform: isCurrent ? 'translateX(0) scale(1)' : 'translateX(100%) scale(0.8)',
+                          opacity: isCurrent ? 1 : 0,
+                          zIndex: isCurrent ? 10 : (isPrevious ? 5 : 0),
+                          transformOrigin: 'bottom right',
+                        }}
+                      >
+                        <div className="text-center mb-4">
+                          {offer.logo ? (
+                            <img src="/logo.png" alt="Fansee Rebel" className="w-58 h-56 rounded-lg mx-auto" />
+                          ) : (
+                            <div className="text-9xl">{offer.emoji}</div>
+                          )}
+                        </div>
+                        <div className="text-center">
+                          <p className="text-2xl font-bold text-white mb-2">{offer.title}</p>
+                          <p className="text-[#ea698b] text-4xl font-bold mb-4">{offer.discount}</p>
+                          <p className="text-gray-400">{offer.description}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
