@@ -71,10 +71,18 @@ const Admin = () => {
   };
 
   const handleInputChange = e => {
-    setNewProduct({
-      ...newProduct,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, type, files } = e.target;
+    if (type === 'file') {
+      setNewProduct({
+        ...newProduct,
+        [name]: files[0],
+      });
+    } else {
+      setNewProduct({
+        ...newProduct,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = async e => {
