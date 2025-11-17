@@ -1,6 +1,6 @@
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
-const asyncHandler = require('../middleware/asyncHandler');
+const asyncHandler = require('./asyncHandler');
 
 // Get all products
 exports.getAllProducts = asyncHandler(async (req, res) => {
