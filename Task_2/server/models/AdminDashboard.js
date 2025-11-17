@@ -72,8 +72,8 @@ const AdminDashboard = () => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
         const token = localStorage.getItem('token');
-        const config = { headers: { Authorization: `Bearer ₹{token}` } };
-        await axios.delete(`http://localhost:5000/api/products/₹{productId}`, config);
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+        await axios.delete(`http://localhost:5000/api/products/${productId}`, config);
         fetchAllData();
       } catch (error) {
         console.error("Failed to delete product", error);
