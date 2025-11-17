@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Users, ShoppingBag, Package, DollarSign, Edit, Trash2, Search, Filter, ArrowUpDown } from 'lucide-react';
+import { Users, ShoppingBag, Package, DollarSign, Edit, Trash2, Search, ArrowUpDown } from 'lucide-react';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -29,16 +29,6 @@ const Admin = () => {
     products: { category: 'All', minPrice: '', maxPrice: '', stockLevel: 'All' },
     users: { role: 'All', dateFrom: '', dateTo: '' },
     orders: { status: 'All', dateFrom: '', dateTo: '', minAmount: '', maxAmount: '' },
-  });
-  const [pagination, setPagination] = useState({
-    products: { page: 1, limit: 10 },
-    users: { page: 1, limit: 10 },
-    orders: { page: 1, limit: 10 },
-  });
-  const [selectedItems, setSelectedItems] = useState({
-    products: [],
-    users: [],
-    orders: [],
   });
   const [sortConfig, setSortConfig] = useState({
     key: null,
@@ -272,6 +262,7 @@ const Admin = () => {
           case 'High':
             filtered = filtered.filter(p => p.stock >= 50);
             break;
+          default: break;
         }
       }
     }
