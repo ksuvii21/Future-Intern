@@ -107,7 +107,9 @@ const Home = () => {
                 </div>
               </div>
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#ea698b] to-[#822faf] rounded-3xl blur-3xl opacity-20"></div>
+                <div className="absolute inset-0">
+                  <Silk speed={3} scale={1.2} color="#A084CF" noiseIntensity={1.0} rotation={0.2} />
+                </div>
                 <div className="relative">
                   {/* Rotating Offers */}
                   <div className="bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm transition-all duration-500">
