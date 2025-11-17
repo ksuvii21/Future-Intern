@@ -525,23 +525,33 @@ const Admin = () => {
 
   const renderOrders = () => (
     <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
-      <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
-        <h2 className="text-xl font-bold text-white">Order List</h2>
-        <div className="flex gap-2">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <input type="text" placeholder="Search orders..." onChange={e => setSearchTerm(e.target.value)} className="pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
-          </div>
-          <select onChange={e => setFilters(f => ({ ...f, orders: { status: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
-            <option value="All">All Statuses</option>
-            {['pending', 'processing', 'shipped', 'delivered', 'cancelled'].map(s => <option key={s} value={s} className="capitalize">{s}</option>)}
-          </select>
-          <div className="flex items-center gap-1">
-            <button onClick={() => handleSort('totalAmount')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Amount</button>
-            <button onClick={() => handleSort('totalAmount')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10"><ArrowUpDown className="w-4 h-4" /></button>
+        <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-white">Order List</h2>
+          <div className="flex flex-wrap gap-2">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input type="text" placeholder="Search orders..." onChange={e => setSearchTerm(e.target.value)} className="pl-9 pr-3 py-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+            </div>
+            <select onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, status: e.target.value } }))} className="py-2 px-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm">
+              <option value="All">All Statuses</option>
+              {['pending', 'processing', 'shipped', 'delivered', 'cancelled'].map(s => <option key={s} value={s} className="capitalize">{s}</option>)}
+            </select>
+            <div className="flex gap-1">
+              <input type="number" placeholder="Min Amount" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, minAmount: e.target.value } }))} className="w-24 py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+              <input type="number" placeholder="Max Amount" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, maxAmount: e.target.value } }))} className="w-24 py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 text-sm" />
+            </div>
+            <div className="flex gap-1">
+              <input type="date" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, dateFrom: e.target.value } }))} className="py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm" />
+              <input type="date" onChange={e => setFilters(f => ({ ...f, orders: { ...f.orders, dateTo: e.target.value } }))} className="py-2 px-2 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white text-sm" />
+            </div>
+            <div className="flex items-center gap-1">
+              <button onClick={() => handleSort('totalAmount')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Amount</button>
+              <button onClick={() => handleSort('status')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Status</button>
+              <button onClick={() => handleSort('createdAt')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">Date</button>
+              <button onClick={() => handleSort('user.username')} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 text-xs">User</button>
+            </div>
           </div>
         </div>
-      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-gray-300">
           <thead className="border-b border-[#571089]/30">
