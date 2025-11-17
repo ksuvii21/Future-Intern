@@ -106,7 +106,7 @@ const Login = ({ onLogin }) => {
       </div>
 
       {/* Main Login Card */}
-      <div className={`max-w-6xl w-full bg-[#1a0a2e] border border-[#571089]/30 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 ₹{shake ? 'animate-shake' : ''}`}>
+      <div className={`max-w-6xl w-full bg-[#1a0a2e] border border-[#571089]/30 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-500 ${shake ? 'animate-shake' : ''}`}>
         <div className="grid grid-cols-1 lg:grid-cols-2">
 
           {/* Left Column: Login Form */}
