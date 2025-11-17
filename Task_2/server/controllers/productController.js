@@ -38,9 +38,12 @@ exports.getAllProducts = async (req, res) => {
 
     const products = await Product.find(query).sort(sort);
 
-    res.json({ products, maxProductPrice: await Product.find().sort({ price: -1 }).limit(1).then(p => p[0]?.price || 1000) });
+    const topProduct = await Product.find().sort({ price: -1 }).limit(1);
+    const maxProductPrice = topProduct.length > 0 ? topProduct[0].price : 1000;
+
+    res.json({ products, maxProductPrice });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: 'Server error retrieving products', error: error.message });
   }
 };
 
