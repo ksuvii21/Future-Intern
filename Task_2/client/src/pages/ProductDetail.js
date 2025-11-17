@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Star, Heart, ShoppingBag, Truck, Shield, RotateCcw, MapPin, MessageCircle, Award, Send } from 'lucide-react';
+import Lightbox from "yet-another-react-lightbox";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import "yet-another-react-lightbox/styles.css";
 import axios from 'axios';
 
 const ProductDetail = () => {
@@ -20,6 +23,8 @@ const ProductDetail = () => {
   const [reviewError, setReviewError] = useState('');
   const [reviewSuccess, setReviewSuccess] = useState('');
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -184,13 +189,13 @@ const ProductDetail = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Image */}
-          <div className="space-y-4">
-            <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden relative">
-              {product.imageUrl ? (
+          <div className="space-y-4 cursor-pointer" onClick={() => setLightboxOpen(true)}>
+            <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden relative aspect-square">
+              {(product.imageUrls && product.imageUrls.length > 0) || product.imageUrl ? (
                 <img
-                  src={product.imageUrl}
+                  src={product.imageUrls?.[0] || product.imageUrl}
                   alt={product.name}
-                  className="w-full h-auto max-h-[500px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-125"
+                  className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
                   onError={(e) => {
                     e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDYwMCA2MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiM5Y2E0YjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
                   }}
@@ -201,6 +206,22 @@ const ProductDetail = () => {
                 </div>
               )}
             </div>
+            {product.imageUrls && product.imageUrls.length > 1 && (
+              <div className="grid grid-cols-4 gap-4">
+                {product.imageUrls.slice(0, 4).map((img, index) => (
+                  <div key={index} className="border border-[#571089]/30 rounded-lg overflow-hidden aspect-square" onClick={(e) => { e.stopPropagation(); setLightboxIndex(index); setLightboxOpen(true); }}>
+                    <img
+                      src={img}
+                      alt={`${product.name} thumbnail ${index + 1}`}
+                      className="w-full h-full object-cover hover:opacity-80 transition-opacity"
+                      onError={(e) => {
+                        e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjOWNhNGIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg==';
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
             {product.isNewArrival && (
               <div className="inline-block bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-sm font-bold px-4 py-2 rounded-full">
                 NEW ARRIVAL
@@ -482,6 +503,16 @@ const ProductDetail = () => {
         </div>
       </div>
 
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={(product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls : [product.imageUrl || '']).map(url => ({ src: url }))}
+        index={lightboxIndex}
+        on={{ view: ({ index }) => setLightboxIndex(index) }}
+        plugins={[Zoom]}
+        styles={{ container: { backgroundColor: "rgba(10, 0, 21, .9)" } }}
+      />
+
       {/* Customer Reviews */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-8">
@@ -600,8 +631,8 @@ const ProductDetail = () => {
             {similarProducts.map(p => (
               <div key={p._id} className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 transform hover:-translate-y-2">
                 <div className="relative">
-                  <img
-                    src={p.imageUrl || 'https://via.placeholder.com/300x300?text=No+Image'}
+                  <img                    
+                    src={(p.imageUrls && p.imageUrls[0]) || p.imageUrl || 'https://via.placeholder.com/300x300?text=No+Image'}
                     alt={p.name}
                     className="w-full h-48 object-cover"
                     onError={(e) => {
