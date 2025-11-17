@@ -26,9 +26,19 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
-    products: { category: 'All' },
-    users: { role: 'All' },
-    orders: { status: 'All' },
+    products: { category: 'All', minPrice: '', maxPrice: '', stockLevel: 'All' },
+    users: { role: 'All', dateFrom: '', dateTo: '' },
+    orders: { status: 'All', dateFrom: '', dateTo: '', minAmount: '', maxAmount: '' },
+  });
+  const [pagination, setPagination] = useState({
+    products: { page: 1, limit: 10 },
+    users: { page: 1, limit: 10 },
+    orders: { page: 1, limit: 10 },
+  });
+  const [selectedItems, setSelectedItems] = useState({
+    products: [],
+    users: [],
+    orders: [],
   });
   const [sortConfig, setSortConfig] = useState({
     key: null,
