@@ -13,7 +13,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState('Black');
+  const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('M');
   const [showSizeChart, setShowSizeChart] = useState(false);
   const [pincode, setPincode] = useState('');
@@ -34,9 +34,14 @@ const ProductDetail = () => {
         );
         setProduct(response.data);
 
+        // Set default selected color to first variant if available
+        if (response.data.variants && response.data.variants.length > 0) {
+          setSelectedColor(response.data.variants[0].color);
+        }
+
         // Fetch similar products
         const allProductsResponse = await axios.get('http://localhost:5000/api/products');
-        const similar = allProductsResponse.data.products.filter(p => p && 
+        const similar = allProductsResponse.data.products.filter(p => p &&
           p.category === response.data.category && p._id !== response.data._id
         ).slice(0, 4);
         setSimilarProducts(similar);
@@ -62,26 +67,21 @@ const ProductDetail = () => {
     fetchProduct();
   }, [id]);
 
+  // Get the current variant based on selected color
+  const currentVariant = product?.variants?.find(v => v.color === selectedColor);
+
+  // Get the image for the selected color
+  const currentImage = currentVariant ? currentVariant.imageUrl : product?.imageUrl;
+
   const addToCart = () => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const existingItem = cart.find(item => item._id === product._id);
+    const existingItem = cart.find(item => item._id === product._id && item.selectedColor === selectedColor);
 
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
       cart.push({ ...product, quantity, selectedColor, selectedSize });
     }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Product added to cart!');
-  };
-
-  const buyNow = () => {
-    addToCart();
-    window.location.href = '/checkout';
-  };
-
-  const addToWishlist = () => {
     const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
     const existingItem = wishlist.find(item => item._id === product._id);
 
