@@ -22,7 +22,7 @@ const OrderHistory = () => {
     try {
       const response = await fetch('http://localhost:5000/api/orders', {
         headers: {
-          'Authorization': `Bearer ₹{token}`
+          'Authorization': `Bearer ${token}`
         }
       });
 
@@ -120,7 +120,7 @@ const OrderHistory = () => {
                   <div className="flex items-center gap-4 mb-4 lg:mb-0">
                     <div className="flex items-center gap-2">
                       {getStatusIcon(order.status)}
-                      <span className={`font-semibold capitalize ₹{getStatusColor(order.status)}`}>
+                      <span className={`font-semibold capitalize ${getStatusColor(order.status)}`}>
                         {order.status}
                       </span>
                     </div>
@@ -135,7 +135,7 @@ const OrderHistory = () => {
                       <span className="font-bold">₹{order.totalAmount.toLocaleString('en-IN')}</span>
                     </div>
                     <Link
-                      to={`/orders/₹{order._id}`}
+                      to={`/orders/${order._id}`}
                       className="flex items-center gap-2 px-4 py-2 bg-[#571089]/20 border border-[#571089]/30 rounded-lg text-[#ea698b] hover:bg-[#571089]/30 transition-all"
                     >
                       <Eye className="w-4 h-4" />
