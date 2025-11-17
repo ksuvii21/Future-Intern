@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const mongoose = require('mongoose');
 
 // Get all products
 exports.getAllProducts = async (req, res) => {
@@ -47,7 +48,6 @@ exports.getAllProducts = async (req, res) => {
 exports.getProductById = async (req, res) => {
   try {
     // Add a check for a valid ObjectId to prevent CastError
-    const { default: mongoose } = require('mongoose');
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: 'Invalid Product ID format' });
     }
