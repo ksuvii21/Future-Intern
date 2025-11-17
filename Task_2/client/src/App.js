@@ -149,7 +149,7 @@ function AppLayout({
                 <TrendingUp className="w-4 h-4" />
                 Exclusive: Up to 70% OFF on Premium Collections
               </span>
-              <span className="hidden md:block">Free Shipping on Orders Over ₹50</span>
+              <span className="hidden md:block">Free Shipping on Orders Over ₹5000</span>
             </div>
           </div>
 
