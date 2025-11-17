@@ -28,6 +28,9 @@ const ProductDetail = () => {
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
@@ -294,6 +297,38 @@ const ProductDetail = () => {
                     >
                       {variant.color}
                     </button>
+                  ))}
+                </div>
+                {/* Color Variant Images */}
+                <div className="flex gap-3 flex-wrap mt-4">
+                  {product.variants.map(variant => (
+                    <div
+                      key={`img-${variant.color}`}
+                      className={`relative w-16 h-16 rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${
+                        selectedColor === variant.color
+                          ? 'border-[#ea698b] ring-2 ring-[#ea698b]/50'
+                          : 'border-[#571089]/30 hover:border-[#571089]/50'
+                      }`}
+                      onClick={() => {
+                        // Navigate to the same product with different color parameter
+                        const newUrl = `/product/${id}?color=${encodeURIComponent(variant.color)}`;
+                        window.location.href = newUrl;
+                      }}
+                    >
+                      <img
+                        src={variant.imageUrl}
+                        alt={`${product.name} - ${variant.color}`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjMyIiB5PSIzMiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSIjOWNhNGIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg==';
+                        }}
+                      />
+                      {selectedColor === variant.color && (
+                        <div className="absolute inset-0 bg-[#ea698b]/20 flex items-center justify-center">
+                          <div className="w-3 h-3 bg-[#ea698b] rounded-full"></div>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>
