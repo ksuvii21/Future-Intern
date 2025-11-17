@@ -387,8 +387,7 @@ const Profile = () => {
               </h2>
 
               {orders.length > 0 ? (
-                <div className="space-y-4">
-                  {orders.map(order => (<Link to={`/orders/${order._id}`} key={order._id} className="block border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
+                <div className="space-y-4">                  {orders.map(order => (<Link to={`/order/${order._id}`} key={order._id} className="block border border-[#571089]/30 rounded-lg p-4 hover:border-[#ea698b]/50 transition-colors">
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="text-white font-semibold">Order #{order._id.slice(-8)}</p>
