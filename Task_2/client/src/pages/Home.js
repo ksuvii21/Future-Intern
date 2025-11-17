@@ -148,17 +148,15 @@ const Home = () => {
                   {/* Rotating Offers */}
                   {offers.map((offer, index) => {
                     const isCurrent = index === currentOffer;
-                    const isPrevious = index === (currentOffer - 1 + offers.length) % offers.length;
 
                     return (
                       <div
                         key={index}
                         className={`absolute inset-0 bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 p-8 rounded-3xl border border-[#571089]/30 backdrop-blur-sm transition-all duration-700 ease-in-out`}
                         style={{
-                          transform: isCurrent ? 'translateX(0) scale(1)' : 'translateX(100%) scale(0.8)',
+                          transform: isCurrent ? 'scale(1)' : 'scale(0.95)',
                           opacity: isCurrent ? 1 : 0,
-                          zIndex: isCurrent ? 10 : (isPrevious ? 5 : 0),
-                          transformOrigin: 'bottom right',
+                          zIndex: isCurrent ? 10 : 0,
                         }}
                       >
                         {offer.logo ? (
