@@ -238,11 +238,11 @@ const sampleProducts = [
     price: 1104.15,
     category: 'Jewelry',
     stock: 35,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg',
     variants: [
-      { color: 'Silver', imageUrl: '', stock: 18 },
-      { color: 'Gold', imageUrl: '', stock: 17 },
-      { color: 'White', imageUrl: '', stock: 17 }
+      { color: 'Silver', imageUrl: 'https://i.pinimg.com/736x/d8/35/96/d8359643c16133ce10065a866d38eb6d.jpg', stock: 18 },
+      { color: 'Gold', imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg', stock: 17 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/dc/98/3c/dc983c1081b09ec896e084442a8ffa3c.jpg', stock: 17 }
     ],
     isNewArrival: true,
     rating: 4.6,
@@ -254,10 +254,10 @@ const sampleProducts = [
     price: 11049.15,
     category: 'Jewelry',
     stock: 5,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/fc/2d/e9/fc2de9f6286835fcdced2079985acb7c.jpg',
     variants: [
-      { color: 'Platinum', imageUrl: '', stock: 3 },
-      { color: 'White Gold', imageUrl: '', stock: 2 }
+      { color: 'Platinum', imageUrl: 'https://i.pinimg.com/1200x/fc/2d/e9/fc2de9f6286835fcdced2079985acb7c.jpg', stock: 3 },
+      { color: 'White Gold', imageUrl: 'https://i.pinimg.com/736x/9e/54/17/9e5417f57e1d27dbd28c30609068c578.jpg', stock: 2 }
     ],
     isNewArrival: false,
     rating: 5.0,
@@ -269,12 +269,12 @@ const sampleProducts = [
     price: 5099.15,
     category: 'Accessories',
     stock: 12,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg',
     variants: [
-      { color: 'Blue', imageUrl: '', stock: 6 },
-      { color: 'Brown', imageUrl: '', stock: 6 },
-      { color: 'Burgundy', imageUrl: '', stock: 6 },
-      { color: 'White', imageUrl: '', stock: 6 }
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/ca/64/d9/ca64d90081b931c08f4c7129f766449a.jpg', stock: 6 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg', stock: 6 },
+      { color: 'Burgundy', imageUrl: 'https://i.pinimg.com/1200x/61/5c/db/615cdb9f9b4fa65ab22d4acbe15ce82c.jpg', stock: 6 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/e7/aa/62/e7aa623a6fff5868f69eadd67f0c4cbe.jpg', stock: 6 }
     ],
     isNewArrival: false,
     rating: 4.7,
@@ -288,13 +288,13 @@ const sampleProducts = [
     price: 764.15,
     category: 'Accessories',
     stock: 30,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg',
     variants: [
-      { color: 'Purple', imageUrl: '', stock: 15 },
-      { color: 'Silver', imageUrl: '', stock: 15 },
-      { color: 'Black', imageUrl: '', stock: 15 },
-      { color: 'White', imageUrl: '', stock: 15 },
-      { color: 'Butterfly', imageUrl: '', stock: 15 } 
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg', stock: 15 },
+      { color: 'Silver', imageUrl: 'https://i.pinimg.com/1200x/17/64/a0/1764a0f0c965c60dad06f7a88d95091c.jpg', stock: 15 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/d8/0c/77/d80c771e13b8cede79a02f9a869841d8.jpg', stock: 15 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/b2/d2/94/b2d294c14978a09c86b1f1137278882a.jpg', stock: 15 },
+      { color: 'Butterfly', imageUrl: 'https://i.pinimg.com/1200x/dc/13/52/dc135207d67678b5b63a5e6b7773ed67.jpg', stock: 15 } 
     ],
     isNewArrival: true,
     rating: 4.4,
@@ -307,11 +307,11 @@ const sampleProducts = [
     price: 1359.15,
     category: 'Accessories',
     stock: 16,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/b9/27/cc/b927cc02e2b4832b0cf2e42563746ed6.jpg',
     variants: [
-      { color: 'Black', imageUrl: '', stock: 8 },
-      { color: 'Blue', imageUrl: '', stock: 8 },
-      { color: 'White', imageUrl: '', stock: 8 }
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/b9/27/cc/b927cc02e2b4832b0cf2e42563746ed6.jpg', stock: 8 },
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/1200x/95/7b/ff/957bff37ff0de452125339efdb94af60.jpg', stock: 8 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/38/96/fb/3896fb70b1730a7db25393bdff5f132c.jpg', stock: 8 }
     ],
     isNewArrival: false,
     rating: 4.8,
@@ -323,11 +323,11 @@ const sampleProducts = [
     price: 2379.15,
     category: 'Accessories',
     stock: 14,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/736x/dc/57/0e/dc570e8a4f27bdc98352b1a0018d146b.jpg',
     variants: [
-      { color: 'Black', imageUrl: '', stock: 7 },
-      { color: 'Brown', imageUrl: '', stock: 7 },
-      { color: 'Pink', imageUrl: '', stock: 7 }
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/7a/33/38/7a3338b6f1af8b2f6dae90a9fac1efd4.jpg', stock: 7 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/df/15/e8/df15e8f2c4803285f0d9e78c16f0a555.jpg', stock: 7 },
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/736x/dc/57/0e/dc570e8a4f27bdc98352b1a0018d146b.jpg', stock: 7 }
     ],
     isNewArrival: true,
     rating: 4.7,
@@ -339,10 +339,11 @@ const sampleProducts = [
     price: 3824.15,
     category: 'Accessories',
     stock: 9,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/a0/49/e4/a049e4bdb58ca6f388da6f47b5f466f5.jpg',
     variants: [
-      { color: '', imageUrl: '', stock: 5 },
-      { color: '', imageUrl: '', stock: 4 }
+      { color: 'Rose Gold', imageUrl: 'https://i.pinimg.com/1200x/a0/49/e4/a049e4bdb58ca6f388da6f47b5f466f5.jpg', stock: 5 },
+      { color: 'Black Gold', imageUrl: 'https://i.pinimg.com/1200x/d9/3e/42/d93e42b2bab26bd2a4a94216fca5dba6.jpg', stock: 4 },
+      { color: 'Pink Gold', imageUrl: 'https://i.pinimg.com/1200x/ae/4a/7b/ae4a7be5ff11046ebc8f6e462adc9975.jpg', stock: 4 }
     ],
     isNewArrival: false,
     rating: 4.9,
@@ -354,12 +355,12 @@ const sampleProducts = [
     price: 2974.15,
     category: 'Accessories',
     stock: 18,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/82/6e/22/826e226c96b6e4643a48fe3933da1cc8.jpg',
     variants: [
-      { color: 'Black', imageUrl: '', stock: 9 },
-      { color: 'Brown', imageUrl: '', stock: 9 },
-      { color: 'White', imageUrl: '', stock: 9 },
-      { color: 'Cream', imageUrl: '', stock: 9 }
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/82/6e/22/826e226c96b6e4643a48fe3933da1cc8.jpg', stock: 9 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/d2/21/36/d2213672b28d496e308bb60c546daec4.jpg', stock: 9 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/e6/e6/76/e6e67652de2b62d1e4c82caf7e7c39d3.jpg', stock: 9 },
+      { color: 'Cream', imageUrl: 'https://i.pinimg.com/736x/21/1b/31/211b3105cee08f6b575ad2eb9fba1734.jpg', stock: 9 }
     ],
     isNewArrival: true,
     rating: 4.6,
@@ -371,11 +372,11 @@ const sampleProducts = [
     price: 764.15,
     category: 'Accessories',
     stock: 32,
-    imageUrl: '',
+    imageUrl: 'https://i.pinimg.com/1200x/1c/97/27/1c9727e0795545d01e2ecaeab09857c4.jpg',
     variants: [
-      { color: 'Pink', imageUrl: '', stock: 16 },
-      { color: 'Blue', imageUrl: '', stock: 16 },
-      { color: 'Green', imageUrl: '', stock: 16 }
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/1200x/1c/97/27/1c9727e0795545d01e2ecaeab09857c4.jpg', stock: 16 },
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/c8/a0/e7/c8a0e72f8d24548e9fd9f6a2750a3766.jpg', stock: 16 },
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/736x/94/ca/eb/94caeb1ad863c1cdc993b3b1c4b34f90.jpg', stock: 16 }
     ],
     isNewArrival: true,
     rating: 4.4,
