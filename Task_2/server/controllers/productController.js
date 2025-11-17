@@ -17,14 +17,14 @@ exports.getAllProducts = async (req, res) => {
 
     // Category filtering
     if (category && category.toLowerCase() !== 'all' && category.toLowerCase() !== 'all categories') {
-      query.category = { ₹regex: `^₹{category}₹`, ₹options: 'i' };
+      query.category = { $regex: `^${category}$`, $options: 'i' };
     }
 
     // Price range filtering
     if (minPrice || maxPrice) {
       query.price = {};
-      if (minPrice) query.price.₹gte = Number(minPrice);
-      if (maxPrice) query.price.₹lte = Number(maxPrice);
+      if (minPrice) query.price.$gte = Number(minPrice);
+      if (maxPrice) query.price.$lte = Number(maxPrice);
     }
 
     let sort = {};

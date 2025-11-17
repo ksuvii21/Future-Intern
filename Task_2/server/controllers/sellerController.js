@@ -16,7 +16,7 @@ exports.becomeSeller = async (req, res) => {
     }
 
     if (user.role !== 'user') {
-      return res.status(400).json({ message: `User role is already '₹{user.role}'` });
+      return res.status(400).json({ message: `User role is already '${user.role}'` });
     }
 
     user.role = 'seller';

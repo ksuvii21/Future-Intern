@@ -10,7 +10,7 @@ const register = async (req, res) => {
 
     // Check if user already exists
     const existingUser = await User.findOne({
-      ₹or: [{ email }, { username }]
+      $or: [{ email }, { username }]
     });
 
     if (existingUser) {
