@@ -67,22 +67,19 @@ exports.createOrder = asyncHandler(async (req, res) => {
       // Do not fail the whole request if email fails, just log it.
     }
 
-    res.status(201).json({
-      message: 'Order created successfully',
-      order: populatedOrder
-    });
+    res.status(201).json({ message: 'Order created successfully', order: populatedOrder });
   } catch (error) {
     await session.abortTransaction();
     console.error('Create order error:', error);
-    res.status(500).json({ message: 'Server error during order creation' });
+    // Re-throw the error to be caught by asyncHandler and handled by the global error handler
+    throw error;
   } finally {
     session.endSession();
   }
 };
 
 // Create a Stripe Payment Intent
-exports.createPaymentIntent = async (req, res) => {
-  try {
+exports.createPaymentIntent = asyncHandler(async (req, res) => {
     const { products } = req.body;
 
     if (!products || products.length === 0) {
@@ -104,15 +101,11 @@ exports.createPaymentIntent = async (req, res) => {
       currency: 'usd',
     });
 
-    res.send({ clientSecret: paymentIntent.client_secret });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error creating payment intent', error: error.message });
-  }
-};
+    res.json({ clientSecret: paymentIntent.client_secret });
+});
 
 // Get user's orders
-exports.getUserOrders = async (req, res) => {
-  try {
+exports.getUserOrders = asyncHandler(async (req, res) => {
     const userId = req.user.userId;
     const orders = await Order.find({ user: userId })
       .populate('products.product')
@@ -120,14 +113,12 @@ exports.getUserOrders = async (req, res) => {
 
     res.json(orders);
   } catch (error) {
-    console.error('Get user orders error:', error);
-    res.status(500).json({ message: 'Server error retrieving orders' });
+    throw error; // Let asyncHandler handle it
   }
-};
+});
 
 // Get all orders (admin only)
-exports.getAllOrders = async (req, res) => {
-  try {
+exports.getAllOrders = asyncHandler(async (req, res) => {
     const orders = await Order.find()
       .populate('user', 'username email')
       .populate('products.product')
@@ -135,14 +126,12 @@ exports.getAllOrders = async (req, res) => {
 
     res.json(orders);
   } catch (error) {
-    console.error('Get all orders error:', error);
-    res.status(500).json({ message: 'Server error retrieving orders' });
+    throw error; // Let asyncHandler handle it
   }
-};
+});
 
 // Update order status (admin only)
-exports.updateOrderStatus = async (req, res) => {
-  try {
+exports.updateOrderStatus = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
@@ -150,37 +139,31 @@ exports.updateOrderStatus = async (req, res) => {
     if (!validStatuses.includes(status)) {
       return res.status(400).json({ message: 'Invalid status' });
     }
-
+    
     const order = await Order.findByIdAndUpdate(
       id,
       { status },
       { new: true }
     ).populate('user', 'username email').populate('products.product');
 
-    if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+    if (!order) { // Set status before throwing
+      res.status(404);
+      throw new Error('Order not found');
     }
 
-    res.json({
-      message: 'Order status updated successfully',
-      order
-    });
-  } catch (error) {
-    console.error('Update order status error:', error);
-    res.status(500).json({ message: 'Server error updating order status' });
-  }
-};
+    res.json({ message: 'Order status updated successfully', order });
+});
 
 // Get single order by ID
-exports.getOrderById = async (req, res) => {
-  try {
+exports.getOrderById = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const userId = req.user.userId;
     const userRole = req.user.role;
 
     // Add a check for a valid ObjectId to prevent CastError
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: 'Invalid Order ID format' });
+      res.status(400);
+      throw new Error('Invalid Order ID format');
     }
 
     const order = await Order.findById(id)
@@ -188,20 +171,18 @@ exports.getOrderById = async (req, res) => {
       .populate('products.product');
 
     if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+      res.status(404);
+      throw new Error('Order not found');
     }
 
     // Check if user owns the order or is admin
     if (order.user._id.toString() !== userId && userRole !== 'admin') {
-      return res.status(403).json({ message: 'Access denied' });
+      res.status(403);
+      throw new Error('Access denied');
     }
 
     res.json(order);
-  } catch (error) {
-    console.error('Get order by ID error:', error);
-    res.status(500).json({ message: 'Server error retrieving order' });
-  }
-};
+});
 
 // Cancel an order (user)
 exports.cancelOrder = async (req, res) => {
