@@ -512,10 +512,10 @@ const Admin = () => {
         <table className="w-full text-left text-gray-300">
           <thead className="border-b border-[#571089]/30 text-xs uppercase text-gray-400">
             <tr>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('username')}>Username</th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('username')}>Username <ArrowUpDown className="w-3 h-3" /></th>
               <th className="p-3 cursor-pointer" onClick={() => handleSort('email')}>Email</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('role')}>Role</th>
-              <th className="p-3 cursor-pointer" onClick={() => handleSort('createdAt')}>Joined</th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('role')}>Role <ArrowUpDown className="w-3 h-3" /></th>
+              <th className="p-3 cursor-pointer flex items-center gap-1" onClick={() => handleSort('createdAt')}>Joined <ArrowUpDown className="w-3 h-3" /></th>
               <th className="p-3 text-right">Actions</th>
             </tr>
           </thead>
