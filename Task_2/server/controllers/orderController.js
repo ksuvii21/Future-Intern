@@ -140,7 +140,7 @@ exports.getUserOrders = asyncHandler(async (req, res) => {
 // Get all orders (admin only)
 exports.getAllOrders = asyncHandler(async (req, res) => {
     const orders = await Order.find()
-      .populate('user', 'username email')
+      .populate('user', 'username')
       .populate('products.product')
       .sort({ createdAt: -1 });
 
