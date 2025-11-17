@@ -123,7 +123,7 @@ const AdminDashboard = () => {
   const renderDashboard = () => (
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard icon={<DollarSign />} title="Total Revenue" value={`₹₹{stats?.totalRevenue?.toFixed(2) || 0}`} color="from-green-500/30 to-green-600/30" />
+        <StatCard icon={<DollarSign />} title="Total Revenue" value={`₹{stats?.totalRevenue?.toFixed(2) || 0}`} color="from-green-500/30 to-green-600/30" />
         <StatCard icon={<ShoppingCart />} title="Total Orders" value={stats?.totalOrders || 0} color="from-blue-500/30 to-blue-600/30" />
         <StatCard icon={<Users />} title="Total Users" value={stats?.totalUsers || 0} color="from-purple-500/30 to-purple-600/30" />
         <StatCard icon={<Package />} title="Total Products" value={stats?.totalProducts || 0} color="from-yellow-500/30 to-yellow-600/30" />
@@ -282,7 +282,7 @@ const AdminDashboard = () => {
   const TabButton = ({ id, icon, label }) => (
     <button
       onClick={() => setActiveTab(id)}
-      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors w-full text-left ₹{activeTab === id ? 'bg-[#ea698b]/20 text-[#ea698b]' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors w-full text-left ${activeTab === id ? 'bg-[#ea698b]/20 text-[#ea698b]' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
     >
       {icon}
       <span className="font-medium">{label}</span>
