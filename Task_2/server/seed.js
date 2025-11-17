@@ -132,9 +132,9 @@ const sampleProducts = [
     price: 2804.15,
     category: 'Dresses',
     stock: 10,
-    imageUrl: 'https://drive.google.com/uc?export=view&id=13MOz-x3T9KXR4yrXzuNF9kyDOLJz28Co',
+    imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500',
     variants: [
-      { color: 'Black', imageUrl: 'https://drive.google.com/uc?export=view&id=13MOz-x3T9KXR4yrXzuNF9kyDOLJz28Co', stock: 4 },
+      { color: 'Black', imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500', stock: 4 },
       { color: 'Emerald Green', imageUrl: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500', stock: 3 },
       { color: 'Burgundy', imageUrl: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500', stock: 3 }
     ],
