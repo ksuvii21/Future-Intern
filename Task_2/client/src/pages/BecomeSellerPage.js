@@ -16,7 +16,7 @@ const BecomeSellerPage = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ₹{token}` } };
+      const config = { headers: { Authorization: `Bearer ${token}` } };
 
       const response = await axios.put('http://localhost:5000/api/seller/become-seller', {}, config);
 
