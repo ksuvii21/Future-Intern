@@ -189,20 +189,23 @@ const Home = () => {
         </section>
 
         {/* Category Filter */}
-        <section className="py-8 px-4">
+        <section className="py-12 px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-4">
               {categories.map(category => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  className={`group relative px-8 py-3.5 rounded-full font-medium transition-all duration-500 overflow-hidden ${
                     selectedCategory === category
-                      ? 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white shadow-lg shadow-[#ea698b]/30'
-                      : 'bg-white/5 backdrop-blur-sm border border-[#571089]/30 text-gray-300 hover:bg-white/10 hover:border-[#ea698b]/50'
+                      ? 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white shadow-lg shadow-[#ea698b]/40 scale-105'
+                      : 'bg-white/5 backdrop-blur-md border border-[#571089]/40 text-gray-300 hover:bg-white/10 hover:border-[#ea698b]/60 hover:scale-105'
                   }`}
                 >
-                  {category}
+                  <span className="relative z-10">{category}</span>
+                  {selectedCategory !== category && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#ea698b]/0 via-[#ea698b]/5 to-[#d55d92]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  )}
                 </button>
               ))}
             </div>
@@ -210,18 +213,26 @@ const Home = () => {
         </section>
 
         {/* Products Section */}
-        <section className="py-12 px-4">
+        <section className="py-16 px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
               <div>
-                <h2 className="text-3xl font-bold text-white mb-2">
-                  {selectedCategory === 'All' ? 'Featured Collection' : selectedCategory}
+                <h2 className="text-4xl font-bold mb-3">
+                  <span className="text-white">
+                    {selectedCategory === 'All' ? 'Featured ' : ''}
+                  </span>
+                  <span className="bg-gradient-to-r from-[#ea698b] to-[#822faf] bg-clip-text text-transparent">
+                    {selectedCategory === 'All' ? 'Collection' : selectedCategory}
+                  </span>
                 </h2>
-                <p className="text-gray-400">{filteredProducts.length} exquisite items</p>
+                <div className="flex items-center gap-3">
+                  <div className="h-1 w-12 bg-gradient-to-r from-[#ea698b] to-[#d55d92] rounded-full"></div>
+                  <p className="text-gray-400">{filteredProducts.length} exquisite pieces</p>
+                </div>
               </div>
-              <button className="hidden md:flex items-center gap-2 text-[#ea698b] hover:text-[#d55d92] transition-colors">
-                <span>View All</span>
-                <ChevronRight className="w-5 h-5" />
+              <button className="hidden md:flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-md border border-[#571089]/40 rounded-full text-[#ea698b] hover:bg-white/10 hover:border-[#ea698b]/60 transition-all duration-300 hover:scale-105 group">
+                <span>View All Collection</span>
+                <ChevronRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
             </div>
 
@@ -321,21 +332,53 @@ const Home = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-16 px-4">
-          <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">Why Choose Fansee Rebel?</h2>
-            <p className="text-gray-400 mb-12 max-w-2xl mx-auto">We provide a seamless luxury shopping experience with benefits tailored for you.</p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section className="py-24 px-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#571089]/5 to-transparent"></div>
+          <div className="max-w-7xl mx-auto relative z-10">
+            <div className="text-center mb-16">
+              <div className="inline-block mb-4">
+                <span className="px-4 py-2 bg-gradient-to-r from-[#ea698b]/10 to-[#822faf]/10 border border-[#ea698b]/20 rounded-full text-[#ea698b] text-sm font-medium backdrop-blur-sm">
+                  Premium Benefits
+                </span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Why Choose <span className="bg-gradient-to-r from-[#ea698b] to-[#822faf] bg-clip-text text-transparent">Fansee Rebel</span>?
+              </h2>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+                Experience unparalleled luxury shopping with exclusive benefits designed to elevate your style journey
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className={`group bg-gradient-to-br ${feature.colors} rounded-2xl p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#c05299]/20`}
+                  className="group relative"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.iconColors} rounded-2xl flex items-center justify-center mx-auto mb-6 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-6`}>
-                    <feature.icon className="w-8 h-8 text-white" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#ea698b]/20 to-[#822faf]/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className={`relative bg-gradient-to-br ${feature.colors} backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 transform group-hover:-translate-y-3 group-hover:shadow-2xl`}>
+                    <div className="relative mb-8">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl blur-md"></div>
+                      <div className={`relative w-20 h-20 bg-gradient-to-br ${feature.iconColors} rounded-2xl flex items-center justify-center mx-auto transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-12 shadow-lg`}>
+                        <feature.icon className="w-10 h-10 text-white transition-transform duration-500 group-hover:scale-110" />
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-white mb-3 transition-colors duration-300 group-hover:bg-gradient-to-r group-hover:from-[#ea698b] group-hover:to-[#d55d92] group-hover:bg-clip-text group-hover:text-transparent">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                    
+                    <div className="mt-6 pt-6 border-t border-white/5">
+                      <button className="text-[#ea698b] text-sm font-medium flex items-center gap-2 mx-auto opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                        Learn More
+                        <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                      </button>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                  <p className="text-gray-400">{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -343,29 +386,83 @@ const Home = () => {
         </section>
 
         {/* Newsletter Section */}
-        <section className="py-20 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="bg-gradient-to-br from-[#1a0a2e] to-[#571089]/20 border border-[#571089]/30 rounded-3xl p-12">
-              <h2 className="text-4xl font-bold text-white mb-4">Stay In Style</h2>
-              <p className="text-gray-400 mb-8 text-lg">
-                Subscribe to receive exclusive offers, new arrivals, and style inspiration
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-1 px-6 py-4 bg-white/5 border border-[#571089]/30 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] transition-all"
-                />
-                <button className="px-8 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all duration-300 whitespace-nowrap">
-                  Subscribe Now
-                </button>
+        <section className="py-24 px-4 relative overflow-hidden">
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#ea698b]/10 via-transparent to-[#822faf]/10 animate-pulse"></div>
+          </div>
+          
+          <div className="max-w-5xl mx-auto relative z-10">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#ea698b] via-[#c05299] to-[#822faf] rounded-[2rem] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-700"></div>
+              
+              <div className="relative bg-gradient-to-br from-[#1a0a2e]/90 via-[#571089]/30 to-[#1a0a2e]/90 backdrop-blur-xl border border-[#571089]/40 rounded-[2rem] p-12 md:p-16 overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#ea698b]/20 to-transparent rounded-full blur-3xl transform translate-x-32 -translate-y-32"></div>
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[#822faf]/20 to-transparent rounded-full blur-3xl transform -translate-x-32 translate-y-32"></div>
+                
+                <div className="relative z-10 text-center">
+                  <div className="inline-block mb-6">
+                    <span className="px-5 py-2 bg-gradient-to-r from-[#ea698b]/20 to-[#822faf]/20 border border-[#ea698b]/30 rounded-full text-[#ea698b] text-sm font-medium backdrop-blur-sm">
+                      ✉ Join Our VIP Club
+                    </span>
+                  </div>
+                  
+                  <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                    <span className="text-white">Stay </span>
+                    <span className="bg-gradient-to-r from-[#ea698b] via-[#c05299] to-[#822faf] bg-clip-text text-transparent">
+                      In Style
+                    </span>
+                  </h2>
+                  
+                  <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Join our exclusive community and be the first to discover new collections, limited editions, and receive personalized style recommendations
+                  </p>
+                  
+                  <div className="max-w-xl mx-auto">
+                    <div className="relative group/input">
+                      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#ea698b] to-[#822faf] rounded-full opacity-0 group-hover/input:opacity-100 blur transition-opacity duration-500"></div>
+                      <div className="relative flex flex-col sm:flex-row gap-3 bg-white/5 backdrop-blur-md border border-[#571089]/40 rounded-full p-2">
+                        <input
+                          type="email"
+                          placeholder="Enter your email address"
+                          className="flex-1 px-6 py-3 bg-transparent text-white placeholder-gray-500 focus:outline-none"
+                        />
+                        <button className="group/btn relative px-8 py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-[#ea698b]/50 hover:scale-105">
+                          <span className="relative z-10 flex items-center gap-2 justify-center">
+                            Subscribe Now
+                            <ChevronRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                          </span>
+                          <div className="absolute inset-0 bg-gradient-to-r from-[#d55d92] to-[#ea698b] opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-center gap-8 mt-8 text-sm text-gray-400">
+                      <div className="flex items-center gap-2">
+                        <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[#ea698b] to-[#d55d92] flex items-center justify-center">
+                          <span className="text-white text-xs">✓</span>
+                        </div>
+                        <span>Exclusive Offers</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[#ea698b] to-[#d55d92] flex items-center justify-center">
+                          <span className="text-white text-xs">✓</span>
+                        </div>
+                        <span>Early Access</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[#ea698b] to-[#d55d92] flex items-center justify-center">
+                          <span className="text-white text-xs">✓</span>
+                        </div>
+                        <span>Style Tips</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
       </div>
-
-
     </div>
   );
 };
