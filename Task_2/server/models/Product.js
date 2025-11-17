@@ -9,6 +9,13 @@ const reviewSchema = new mongoose.Schema({
   timestamps: true,
 });
 
+const variantSchema = new mongoose.Schema({
+  color: { type: String, required: true },
+  imageUrl: { type: String, required: true },
+  stock: { type: Number, default: 0 },
+}, {
+  _id: false, // Prevent automatic _id generation for subdocuments
+});
 
 const productSchema = new mongoose.Schema({
   name: {
@@ -42,6 +49,7 @@ const productSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  variants: [variantSchema], // New field for color variants
   reviews: [reviewSchema],
   rating: {
     type: Number,
