@@ -263,9 +263,12 @@ const ProductDetail = () => {
               <p className="text-gray-300 text-lg leading-relaxed">{product.description}</p>
             </div>
 
+            <div className="flex items-center gap-4">
+              <span className="text-5xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                ₹{product.price.toLocaleString('en-IN')}
               </span>
             </div>
-
+            
             {/* Color Selection */}
             <div className="space-y-3">
               <label className="text-gray-300 font-medium">Color:</label>
