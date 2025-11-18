@@ -87,7 +87,11 @@ const WishlistPage = () => {
       alert('Item added to cart!');
     } catch (err) {
       console.error('Error adding to cart:', err);
-      alert('Failed to add item to cart');
+      if (err.response?.status === 401) {
+        alert('Please log in to add items to cart.');
+      } else {
+        alert('Failed to add item to cart');
+      }
     }
   };
 
@@ -113,7 +117,11 @@ const WishlistPage = () => {
       alert('Item moved to cart!');
     } catch (err) {
       console.error('Error moving to cart:', err);
-      alert('Failed to move item to cart');
+      if (err.response?.status === 401) {
+        alert('Please log in to move items to cart.');
+      } else {
+        alert('Failed to move item to cart');
+      }
     }
   };
 
