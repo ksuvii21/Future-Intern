@@ -126,10 +126,7 @@ const WishlistPage = () => {
           </button>
         )}
         <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-          <button
-            onClick={() => moveToCart(product)}
-            className="w-full py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all"
-          >
+          <button onClick={() => moveToCart(product)} className="w-full py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
             Add to Cart
           </button>
         </div>
