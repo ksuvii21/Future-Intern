@@ -123,11 +123,11 @@ const Cart = () => {
                   className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 hover:border-[#ea698b]/50 transition-all duration-300"
                 >
                   <div className="flex items-center gap-6">
-                    {item.imageUrl && (
+                    {item.product.imageUrl && (
                       <div className="relative">
                         <img
-                          src={item.imageUrl}
-                          alt={item.name}
+                          src={item.product.imageUrl}
+                          alt={item.product.name}
                           className="w-24 h-24 object-cover rounded-xl"
                           onError={(e) => {
                             e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSIjOWNhNGIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg==';
@@ -136,11 +136,11 @@ const Cart = () => {
                       </div>
                     )}
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-2">{item.name}</h3>
-                      <p className="text-gray-400 mb-4">{item.category}</p>
+                      <h3 className="text-xl font-semibold text-white mb-2">{item.product.name}</h3>
+                      <p className="text-gray-400 mb-4">{item.product.category}</p>
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                          ₹{item.price.toLocaleString('en-IN')}
+                          ₹{item.product.price.toLocaleString('en-IN')}
                         </span>
                         <div className="flex items-center gap-3">
                           <div className="flex items-center bg-white/5 border border-[#571089]/30 rounded-lg">
