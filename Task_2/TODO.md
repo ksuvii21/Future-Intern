@@ -1,32 +1,22 @@
-# TODO for Task 2 Structure Creation
+# Wishlist Functionality Implementation
 
-- [x] Create server/models/Product.js with basic Mongoose model
-- [x] Create server/routes/productRoutes.js with basic routes
-- [x] Create server/controllers/productController.js with basic controller functions
-- [x] Create server/middleware/auth.js with JWT auth middleware
-- [x] Create server/.env (empty)
-- [x] Create server/server.js with basic Express setup
-- [x] Create client/src/components/ProductList.js with basic React component
-- [x] Create client/src/components/ProductCard.js with basic React component
-- [x] Create client/src/components/Cart.js with basic React component
-- [x] Create client/src/components/Checkout.js with basic React component
-- [x] Create client/src/components/Login.js with basic React component
-- [x] Create client/src/components/Admin.js with basic React component
-- [x] Create client/src/pages/Home.js with basic page component
-- [x] Create client/src/pages/ProductDetail.js with basic page component
-- [x] Create client/src/pages/CartPage.js with basic page component
-- [x] Create client/src/pages/CheckoutPage.js with basic page component
-- [x] Create client/src/tailwind.config.js with basic Tailwind config
-- [x] Create .gitignore at root with standard ignores
-- [x] Create README.md at root with basic description
+## Server-Side Implementation
+- [x] Create Wishlist model (similar to Cart)
+- [x] Create wishlistController with CRUD operations
+- [x] Create wishlistRoutes with protected endpoints
+- [x] Update server.js to include wishlist routes
 
-# Layout and Styling Fixes
-- [x] Fix Tailwind CSS import in index.css (update to v4 syntax)
-- [x] Update tailwind.config.js for v4 compatibility
-- [x] Remove conflicting styles in App.css
-- [x] Test layout and styling in browser (running on http://localhost:3001)
-- [x] Enhance hero banner with animations and better design
-- [x] Improve product cards with gradients, shadows, and hover effects
-- [x] Add custom scrollbar styling
-- [x] Add smooth transitions and custom animations
-- [x] Update background gradients for better visual appeal
+## Client-Side Updates
+- [ ] Update WishlistPage.js to use API calls instead of localStorage
+- [ ] Update ProductDetail.js to use API for wishlist operations
+- [ ] Update Home.js to use API for wishlist operations
+- [ ] Update CategoryPage.js to use API for wishlist operations
+- [ ] Update ProductCard.js to use API for wishlist operations
+- [ ] Update Profile.js to fetch wishlist count from API
+- [ ] Add move to cart functionality from wishlist page
+
+## Testing
+- [ ] Test all API endpoints
+- [ ] Test wishlist functionality across all components
+- [ ] Ensure proper error handling
+- [ ] Verify authentication requirements
