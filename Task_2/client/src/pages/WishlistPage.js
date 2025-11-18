@@ -160,7 +160,10 @@ const WishlistPage = () => {
           <span className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
             ₹{product.price}
           </span>
-          <button className="p-2 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
+          <button
+            onClick={() => moveToCart(product)}
+            className="p-2 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all"
+          >
             <ShoppingBag className="w-5 h-5" />
           </button>
         </div>
