@@ -91,12 +91,11 @@ const WishlistPage = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      // Update local state
-      setWishlistItems(wishlistItems.filter(item => item._id !== product._id));
-      alert('Item moved to cart successfully!');
+      // Item remains in wishlist, just show success message
+      alert('Item added to cart successfully!');
     } catch (error) {
-      console.error('Error moving to cart:', error);
-      alert('Failed to move item to cart');
+      console.error('Error adding to cart:', error);
+      alert('Failed to add item to cart');
     }
   };
 
