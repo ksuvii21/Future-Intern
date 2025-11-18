@@ -258,15 +258,26 @@ const Home = () => {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-                          const existingItem = wishlist.find(item => item._id === product._id);
+                          const token = localStorage.getItem('token');
+                          if (!token) {
+                            alert('Please log in to add items to your wishlist.');
+                            return;
+                          }
 
-                          if (!existingItem) {
-                            wishlist.push(product);
-                            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                          try {
+                            await axios.post('http://localhost:5000/api/wishlist', {
+                              productId: product._id
+                            }, {
+                              headers: { Authorization: `Bearer ${token}` }
+                            });
                             alert('Added to wishlist!');
-                          } else {
-                            alert('Already in wishlist!');
+                          } catch (error) {
+                            console.error('Error adding to wishlist:', error);
+                            if (error.response?.status === 400) {
+                              alert('Already in wishlist!');
+                            } else {
+                              alert('Failed to add to wishlist.');
+                            }
                           }
                         }}
                         className="absolute top-4 right-4 p-2 bg-black/50 backdrop-blur-sm rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#ea698b]"
