@@ -295,7 +295,7 @@ function AppLayout({
                 to="/search"
                 className="text-sm text-gray-300 hover:text-[#ea698b] transition-colors font-medium relative group"
               >
-                Search
+                Filter
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ea698b] to-[#d55d92] group-hover:w-full transition-all duration-300"></span>
               </Link>
             </nav>
