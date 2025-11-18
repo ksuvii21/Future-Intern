@@ -67,7 +67,7 @@ const WishlistPage = () => {
       });
 
       // Update local state to remove the item from the view
-      setWishlistItems(prevItems => prevItems.filter(item => item._id !== productId));
+      setWishlistItems(prevItems => prevItems.filter(item => item.product._id !== productId));
 
       alert('Item removed from wishlist successfully!');
     } catch (error) {
