@@ -149,7 +149,7 @@ exports.updateOrderStatus = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
 
-    const validStatuses = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
+    const validStatuses = ['ordered', 'processing', 'shipped', 'out for delivery', 'delivered', 'cancelled'];
     if (!validStatuses.includes(status)) {
       res.status(400);
       throw new Error('Invalid status provided.');
@@ -219,8 +219,8 @@ exports.cancelOrder = asyncHandler(async (req, res) => {  const session = await 
       throw new Error('Access denied');
     }
 
-    // Only allow cancellation if the order is pending
-    if (order.status !== 'pending') {
+    // Only allow cancellation if the order is ordered
+    if (order.status !== 'ordered') {
       res.status(400);
       throw new Error(`Cannot cancel order with status: ${order.status}`);
     }

@@ -86,12 +86,14 @@ const OrderDetail = () => {
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case 'pending':
+      case 'ordered':
         return <Clock className="w-6 h-6 text-yellow-400" />;
       case 'processing':
         return <Package className="w-6 h-6 text-blue-400" />;
       case 'shipped':
         return <Truck className="w-6 h-6 text-purple-400" />;
+      case 'out for delivery':
+        return <Truck className="w-6 h-6 text-orange-400" />;
       case 'delivered':
         return <CheckCircle className="w-6 h-6 text-green-400" />;
       case 'cancelled':
@@ -103,12 +105,14 @@ const OrderDetail = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending':
+      case 'ordered':
         return 'text-yellow-400 border-yellow-400/30';
       case 'processing':
         return 'text-blue-400 border-blue-400/30';
       case 'shipped':
         return 'text-purple-400 border-purple-400/30';
+      case 'out for delivery':
+        return 'text-orange-400 border-orange-400/30';
       case 'delivered':
         return 'text-green-400 border-green-400/30';
       case 'cancelled':
@@ -119,7 +123,7 @@ const OrderDetail = () => {
   };
 
   const getStatusSteps = (status) => {
-    const steps = ['pending', 'processing', 'shipped', 'delivered'];
+    const steps = ['ordered', 'processing', 'shipped', 'out for delivery', 'delivered'];
     const currentIndex = steps.indexOf(status);
     return steps.map((step, index) => ({
       step,

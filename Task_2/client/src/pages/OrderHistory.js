@@ -42,12 +42,14 @@ const OrderHistory = () => {
 
   const getStatusIcon = (status) => {
     switch (status) {
-      case 'pending':
+      case 'ordered':
         return <Clock className="w-4 h-4 text-yellow-400" />;
       case 'processing':
         return <Package className="w-4 h-4 text-blue-400" />;
       case 'shipped':
         return <Truck className="w-4 h-4 text-purple-400" />;
+      case 'out for delivery':
+        return <Truck className="w-4 h-4 text-orange-400" />;
       case 'delivered':
         return <CheckCircle className="w-4 h-4 text-green-400" />;
       case 'cancelled':
@@ -59,12 +61,14 @@ const OrderHistory = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending':
+      case 'ordered':
         return 'text-yellow-400';
       case 'processing':
         return 'text-blue-400';
       case 'shipped':
         return 'text-purple-400';
+      case 'out for delivery':
+        return 'text-orange-400';
       case 'delivered':
         return 'text-green-400';
       case 'cancelled':
