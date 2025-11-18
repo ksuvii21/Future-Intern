@@ -116,11 +116,11 @@ const Home = () => {
                   Discover our curated collection of luxury fashion, exquisite jewelry, and timeless accessories that define sophisticated style.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <button className="px-8 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all duration-300 hover:scale-105">
-                    Shop Collection
-                  </button>
+                  <Link to="/search" className="px-8 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all duration-300 hover:scale-105 inline-block text-center">
+                    Advanced Search
+                  </Link>
                   <button className="px-8 py-4 bg-white/5 backdrop-blur-sm border border-[#571089]/30 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300">
-                    Explore More
+                    Shop Collection
                   </button>
                 </div>
                 <div className="flex items-center gap-8 pt-4">
