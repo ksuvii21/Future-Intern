@@ -116,16 +116,27 @@ const ProductDetail = () => {
     window.location.href = '/checkout';
   };
 
-  const addToWishlist = () => {
-    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-    const existingItem = wishlist.find(item => item._id === product._id);
+  const addToWishlist = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Please log in to add items to your wishlist.');
+      return;
+    }
 
-    if (!existingItem) {
-      wishlist.push(product);
-      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    try {
+      await axios.post('http://localhost:5000/api/wishlist', {
+        productId: product._id
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       alert('Product added to wishlist!');
-    } else {
-      alert('Product already in wishlist!');
+    } catch (error) {
+      console.error('Error adding to wishlist:', error);
+      if (error.response?.status === 400) {
+        alert('Product already in wishlist!');
+      } else {
+        alert('Failed to add product to wishlist.');
+      }
     }
   };
 
