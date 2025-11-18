@@ -66,6 +66,9 @@ const WishlistPage = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
 
+      // Update local state to remove the item from the view
+      setWishlistItems(prevItems => prevItems.filter(item => item._id !== productId));
+
       alert('Item removed from wishlist successfully!');
     } catch (error) {
       console.error('Error removing from wishlist:', error);
