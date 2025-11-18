@@ -66,8 +66,7 @@ const WishlistPage = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      // Update local state
-      setWishlistItems(wishlistItems.filter(item => item._id !== productId));
+      alert('Item removed from wishlist successfully!');
     } catch (error) {
       console.error('Error removing from wishlist:', error);
       alert('Failed to remove item from wishlist');
@@ -82,7 +81,7 @@ const WishlistPage = () => {
         return;
       }
 
-      await axios.post('http://localhost:5000/api/wishlist/move-to-cart', {
+      await axios.post('http://localhost:5000/api/cart', {
         productId: product._id,
         quantity: 1,
         selectedColor: product.variants ? product.variants[0]?.color : null,
@@ -91,16 +90,13 @@ const WishlistPage = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      // Remove from local wishlist display since item is moved
-      setWishlistItems(wishlistItems.filter(item => item._id !== product._id));
-
       // Dispatch storage event to update cart component
       window.dispatchEvent(new Event('storage'));
 
-      alert('Item moved to cart successfully!');
+      alert('Item added to cart successfully!');
     } catch (error) {
       console.error('Error moving to cart:', error);
-      alert('Failed to move item to cart');
+      alert('Failed to add item to cart');
     }
   };
 
@@ -131,7 +127,7 @@ const WishlistPage = () => {
             onClick={() => moveToCart(product)}
             className="w-full py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all"
           >
-            Move to Cart
+            Add to Cart
           </button>
         </div>
       </div>
