@@ -66,12 +66,27 @@ const Profile = () => {
       // Calculate stats
       const totalOrders = ordersResponse.data.length;
       const totalSpent = ordersResponse.data.reduce((sum, order) => sum + order.totalAmount, 0);
-      const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+      // Fetch wishlist count from API
+      const token = localStorage.getItem('token');
+      let wishlistCount = 0;
+
+      if (token) {
+        try {
+          const wishlistResponse = await axios.get('http://localhost:5000/api/wishlist', {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          wishlistCount = wishlistResponse.data.items.length;
+        } catch (error) {
+          console.error('Error fetching wishlist count:', error);
+          wishlistCount = 0;
+        }
+      }
 
       setStats({
         totalOrders,
         totalSpent: totalSpent.toFixed(2),
-        wishlistItems: wishlist.length
+        wishlistItems: wishlistCount
       });
     } catch (error) {
       console.error('Error fetching user data:', error);
