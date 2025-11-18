@@ -139,7 +139,7 @@ const OrderHistory = () => {
                       <span className="font-bold">₹{order.totalAmount.toLocaleString('en-IN')}</span>
                     </div>
                     <Link
-                      to={`/order/${order._id}`}
+                      to={`/orders/${order._id}`}
                       className="flex items-center gap-2 px-4 py-2 bg-[#571089]/20 border border-[#571089]/30 rounded-lg text-[#ea698b] hover:bg-[#571089]/30 transition-all"
                     >
                       <Eye className="w-4 h-4" />
