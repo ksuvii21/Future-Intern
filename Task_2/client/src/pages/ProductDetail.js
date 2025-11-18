@@ -5,8 +5,7 @@ import Lightbox from "yet-another-react-lightbox";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 import axios from 'axios';
-import RecentlyViewedProducts from '../components/RecentlyViewedProducts';
-import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
+
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -28,7 +27,6 @@ const ProductDetail = () => {
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [showShareModal, setShowShareModal] = useState(false);
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -493,7 +491,8 @@ const ProductDetail = () => {
             <div className="flex gap-4">
               <button
                 onClick={buyNow}
-                disabled={product.stock === 0}className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+                disabled={product.stock === 0}
+                className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                   product.stock === 0
                     ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-green-500 to-green-600 text-white hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105'
@@ -504,7 +503,8 @@ const ProductDetail = () => {
               </button>
               <button
                 onClick={addToCart}
-                disabled={product.stock === 0}className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+                disabled={product.stock === 0}
+                className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                   product.stock === 0
                     ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105'
@@ -518,6 +518,12 @@ const ProductDetail = () => {
                 className="p-4 bg-white/5 border border-[#571089]/30 rounded-xl text-white hover:bg-white/10 hover:border-[#ea698b]/50 transition-all"
               >
                 <Heart className="w-5 h-5" />
+              </button>
+              <button
+                onClick={shareProduct}
+                className="p-4 bg-white/5 border border-[#571089]/30 rounded-xl text-white hover:bg-white/10 hover:border-[#ea698b]/50 transition-all"
+              >
+                <Share className="w-5 h-5" />
               </button>
             </div>
 
