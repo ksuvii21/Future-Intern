@@ -281,13 +281,6 @@ function AppLayout({
 
             {/* Category Navigation */}
             <nav className="hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-[#571089]/20">
-              <Link
-                to="/search"
-                className="text-sm text-gray-300 hover:text-[#ea698b] transition-colors font-medium relative group"
-              >
-                🔍 Search
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ea698b] to-[#d55d92] group-hover:w-full transition-all duration-300"></span>
-              </Link>
               {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'New Arrivals', 'Girlies <3'].map((item) => (
                 <Link
                   key={item}
@@ -298,6 +291,13 @@ function AppLayout({
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ea698b] to-[#d55d92] group-hover:w-full transition-all duration-300"></span>
                 </Link>
               ))}
+              <Link
+                to="/search"
+                className="text-sm text-gray-300 hover:text-[#ea698b] transition-colors font-medium relative group"
+              >
+                Search
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ea698b] to-[#d55d92] group-hover:w-full transition-all duration-300"></span>
+              </Link>
             </nav>
           </div>
         </header>
