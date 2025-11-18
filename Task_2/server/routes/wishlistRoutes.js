@@ -3,8 +3,7 @@ const router = express.Router();
 const {
   getWishlist,
   addToWishlist,
-  removeFromWishlist,
-  moveToCart
+  removeFromWishlist
 } = require('../controllers/wishlistController');
 const auth = require('../middleware/auth');
 
@@ -19,9 +18,5 @@ router.post('/', auth, addToWishlist);
 // @route   DELETE /api/wishlist/:productId
 // @desc    Remove item from wishlist
 router.delete('/:productId', auth, removeFromWishlist);
-
-// @route   POST /api/wishlist/move-to-cart
-// @desc    Move item from wishlist to cart
-router.post('/move-to-cart', auth, moveToCart);
 
 module.exports = router;
