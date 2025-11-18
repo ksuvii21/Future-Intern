@@ -5,6 +5,8 @@ import Lightbox from "yet-another-react-lightbox";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 import axios from 'axios';
+import RecentlyViewedProducts from '../components/RecentlyViewedProducts';
+import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
 
 
 const ProductDetail = () => {
