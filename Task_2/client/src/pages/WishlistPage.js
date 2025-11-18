@@ -54,24 +54,50 @@ const WishlistPage = () => {
     };
   }, []);
 
-  const removeFromWishlist = (productId) => {
-    const updatedWishlist = wishlistItems.filter(item => item._id !== productId);
-    setWishlistItems(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  const removeFromWishlist = async (productId) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please log in to manage your wishlist');
+        return;
+      }
+
+      await axios.delete(`http://localhost:5000/api/wishlist/${productId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      // Update local state
+      setWishlistItems(wishlistItems.filter(item => item._id !== productId));
+    } catch (error) {
+      console.error('Error removing from wishlist:', error);
+      alert('Failed to remove item from wishlist');
+    }
   };
 
-  const addToCart = (product) => {
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const existingItem = cart.find(item => item._id === product._id);
+  const moveToCart = async (product) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please log in to add items to cart');
+        return;
+      }
 
-    if (existingItem) {
-      existingItem.quantity += 1;
-    } else {
-      cart.push({ ...product, quantity: 1 });
+      await axios.post('http://localhost:5000/api/wishlist/move-to-cart', {
+        productId: product._id,
+        quantity: 1,
+        selectedColor: product.variants ? product.variants[0]?.color : null,
+        selectedSize: 'M'
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      // Update local state
+      setWishlistItems(wishlistItems.filter(item => item._id !== product._id));
+      alert('Item moved to cart successfully!');
+    } catch (error) {
+      console.error('Error moving to cart:', error);
+      alert('Failed to move item to cart');
     }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    window.dispatchEvent(new Event('storage'));
   };
 
   const renderProductCard = (product, showRemove = false, showSharedInfo = false) => (
