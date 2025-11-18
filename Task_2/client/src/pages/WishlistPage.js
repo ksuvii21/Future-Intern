@@ -91,11 +91,16 @@ const WishlistPage = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      // Item remains in wishlist, just show success message
-      alert('Item added to cart successfully!');
+      // Remove from local wishlist display since item is moved
+      setWishlistItems(wishlistItems.filter(item => item._id !== product._id));
+
+      // Dispatch storage event to update cart component
+      window.dispatchEvent(new Event('storage'));
+
+      alert('Item moved to cart successfully!');
     } catch (error) {
-      console.error('Error adding to cart:', error);
-      alert('Failed to add item to cart');
+      console.error('Error moving to cart:', error);
+      alert('Failed to move item to cart');
     }
   };
 
