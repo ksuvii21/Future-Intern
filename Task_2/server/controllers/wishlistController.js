@@ -80,7 +80,7 @@ exports.removeFromWishlist = asyncHandler(async (req, res) => {
 });
 
 /**
- * @desc    Move item from wishlist to cart
+ * @desc    Add item from wishlist to cart (without removing from wishlist)
  * @route   POST /api/wishlist/move-to-cart
  * @access  Private
  */
@@ -88,12 +88,8 @@ exports.moveToCart = asyncHandler(async (req, res) => {
   const { productId, quantity = 1, selectedColor, selectedSize } = req.body;
   const userId = req.user.userId;
 
-  // Remove from wishlist
-  const wishlist = await Wishlist.findOneAndUpdate(
-    { user: userId },
-    { $pull: { items: { product: productId } } },
-    { new: true }
-  ).populate('items.product');
+  // Get wishlist (without removing item)
+  const wishlist = await Wishlist.findOne({ user: userId }).populate('items.product');
 
   if (!wishlist) {
     res.status(404);
@@ -125,6 +121,6 @@ exports.moveToCart = asyncHandler(async (req, res) => {
   res.status(200).json({
     wishlist,
     cart: populatedCart,
-    message: 'Item moved to cart successfully'
+    message: 'Item added to cart successfully'
   });
 });
