@@ -312,7 +312,7 @@ const Home = () => {
                           ₹{product.price}
                         </span>
                         <button
-                          onClick={(e) => {
+                          onClick={async (e) => {
                             e.preventDefault();
                             e.stopPropagation(); // Prevent link navigation
                             const token = localStorage.getItem('token');
@@ -320,18 +320,20 @@ const Home = () => {
                               alert('Please log in to add items to your cart.');
                               return;
                             }
-                            axios.post('http://localhost:5000/api/cart', {
-                              productId: product._id,
-                              quantity: 1,
-                              selectedColor: product.variants?.[0]?.color || 'Default',
-                              selectedSize: 'M' // Default size
-                            }, {
-                              headers: { Authorization: `Bearer ${token}` }
-                            }).catch(err => {
+                            try {
+                              await axios.post('http://localhost:5000/api/cart', {
+                                productId: product._id,
+                                quantity: 1,
+                                selectedColor: product.variants?.[0]?.color || 'Default',
+                                selectedSize: 'M' // Default size
+                              }, {
+                                headers: { Authorization: `Bearer ${token}` }
+                              });
+                              alert('Added to cart!');
+                            } catch (err) {
                               console.error("Error adding to cart", err);
                               alert('Failed to add to cart.');
-                            });
-                            alert('Added to cart!');
+                            }
                           }}
                           className="p-2 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all"
                         >

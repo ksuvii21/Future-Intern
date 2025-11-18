@@ -68,7 +68,6 @@ const Profile = () => {
       const totalSpent = ordersResponse.data.reduce((sum, order) => sum + order.totalAmount, 0);
 
       // Fetch wishlist count from API
-      const token = localStorage.getItem('token');
       let wishlistCount = 0;
 
       if (token) {
