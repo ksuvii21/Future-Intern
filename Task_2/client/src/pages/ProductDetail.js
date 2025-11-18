@@ -117,25 +117,26 @@ const ProductDetail = () => {
   };
 
   const addToWishlist = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert('Please log in to add items to your wishlist.');
-      return;
-    }
-
     try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please log in to add items to your wishlist');
+        return;
+      }
+
       await axios.post('http://localhost:5000/api/wishlist', {
         productId: product._id
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
+
       alert('Product added to wishlist!');
     } catch (error) {
-      console.error('Error adding to wishlist:', error);
       if (error.response?.status === 400) {
         alert('Product already in wishlist!');
       } else {
-        alert('Failed to add product to wishlist.');
+        console.error('Error adding to wishlist:', error);
+        alert('Failed to add product to wishlist');
       }
     }
   };
