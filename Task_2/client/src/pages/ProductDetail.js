@@ -734,47 +734,56 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      {/* Similar Products */}
-      {similarProducts.length > 0 && (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <h2 className="text-3xl font-bold text-white mb-8">You Might Also Like</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {similarProducts.map(p => (
-              <div key={p._id} className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 transform hover:-translate-y-2">
-                <div className="relative">
-                  <img                    
-                    src={(p.imageUrls && p.imageUrls[0]) || p.imageUrl || 'https://via.placeholder.com/300x300?text=No+Image'}
-                    alt={p.name}
-                    className="w-full h-48 object-cover"
-                    onError={(e) => {
-                      e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM5Y2E0YjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
-                    }}
-                  />
-                  {p.isNewArrival && (
-                    <div className="absolute top-3 left-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-xs font-bold px-2 py-1 rounded-full">
-                      NEW
+      {/* Product Recommendations */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Recently Viewed Products */}
+        <RecentlyViewedProducts currentProductId={id} />
+
+        {/* Personalized Recommendations */}
+        <PersonalizedRecommendations currentProduct={product} />
+
+        {/* Similar Products */}
+        {similarProducts.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-3xl font-bold text-white mb-8">You Might Also Like</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {similarProducts.map(p => (
+                <div key={p._id} className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 transform hover:-translate-y-2">
+                  <div className="relative">
+                    <img
+                      src={(p.imageUrls && p.imageUrls[0]) || p.imageUrl || 'https://via.placeholder.com/300x300?text=No+Image'}
+                      alt={p.name}
+                      className="w-full h-48 object-cover"
+                      onError={(e) => {
+                        e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM5Y2E0YjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
+                      }}
+                    />
+                    {p.isNewArrival && (
+                      <div className="absolute top-3 left-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white text-xs font-bold px-2 py-1 rounded-full">
+                        NEW
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-white font-semibold mb-2 line-clamp-2">{p.name}</h3>
+                    <p className="text-gray-400 text-sm mb-3 line-clamp-2">{p.description}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                        ₹{p.price.toLocaleString('en-IN')}</span>
+                      <Link
+                        to={`/product/${p._id}`}
+                        className="px-4 py-2 bg-[#ea698b] text-white text-sm rounded-lg hover:bg-[#d55d92] transition-all"
+                      >
+                        View
+                      </Link>
                     </div>
-                  )}
-                </div>
-                <div className="p-4">
-                  <h3 className="text-white font-semibold mb-2 line-clamp-2">{p.name}</h3>
-                  <p className="text-gray-400 text-sm mb-3 line-clamp-2">{p.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                      ₹{p.price.toLocaleString('en-IN')}</span>
-                    <Link
-                      to={`/product/${p._id}`}
-                      className="px-4 py-2 bg-[#ea698b] text-white text-sm rounded-lg hover:bg-[#d55d92] transition-all"
-                    >
-                      View
-                    </Link>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
