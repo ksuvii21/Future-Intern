@@ -107,11 +107,15 @@ const ProductDetail = () => {
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
+      alert('Product added to cart!');
     } catch (error) {
       console.error("Error adding to cart", error);
-      alert('Failed to add item to cart.');
+      if (error.response?.status === 401) {
+        alert('Please log in to add items to your cart.');
+      } else {
+        alert('Failed to add item to cart.');
+      }
     }
-    alert('Product added to cart!');
   };
 
   const buyNow = () => {
