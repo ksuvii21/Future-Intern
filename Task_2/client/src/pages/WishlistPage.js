@@ -23,7 +23,7 @@ const WishlistPage = () => {
       const response = await axios.get('http://localhost:5000/api/wishlist', {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setWishlistItems(response.data.items.map(item => item.product));
+      setWishlistItems(response.data.items); // Use the full item object
       setLoading(false);
     } catch (error) {
       console.error('Error loading wishlist:', error);
@@ -85,9 +85,9 @@ const WishlistPage = () => {
       }
 
       await axios.post('http://localhost:5000/api/cart', {
-        productId: product._id,
+        productId: product.product._id, // Correctly access the nested product ID
         quantity: 1,
-        selectedColor: product.variants ? product.variants[0]?.color : null,
+        selectedColor: product.product.variants ? product.product.variants[0]?.color : null,
         selectedSize: 'M'
       }, {
         headers: { Authorization: `Bearer ${token}` }
@@ -105,13 +105,13 @@ const WishlistPage = () => {
 
   const renderProductCard = (product, showRemove = false, showSharedInfo = false) => (
     <div
-      key={product._id || product.id}
+      key={product.product._id}
       className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden hover:border-[#ea698b]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#ea698b]/20 hover:-translate-y-2"
     >
       <div className="relative overflow-hidden bg-gradient-to-br from-[#571089]/20 to-[#47126b]/20 aspect-square">
         <img
-          src={product.imageUrl}
-          alt={product.name}
+          src={product.product.imageUrl}
+          alt={product.product.name}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           onError={(e) => {
             e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5Y2E0YjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
@@ -119,7 +119,7 @@ const WishlistPage = () => {
         />
         {showRemove && (
           <button
-            onClick={() => removeFromWishlist(product._id)}
+            onClick={() => removeFromWishlist(product.product._id)}
             className="absolute top-4 right-4 p-2 bg-red-500/80 backdrop-blur-sm rounded-full text-white opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-600"
           >
             <X className="w-4 h-4" />
@@ -142,20 +142,20 @@ const WishlistPage = () => {
         )}
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs text-[#ea698b] font-medium px-3 py-1 bg-[#ea698b]/10 rounded-full">
-            {product.category}
+            {product.product.category}
           </span>
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 fill-[#ea698b] text-[#ea698b]" />
-            <span className="text-sm text-gray-400">{product.rating || 4.5}</span>
-            <span className="text-xs text-gray-500">({product.numReviews || 0})</span>
+            <span className="text-sm text-gray-400">{product.product.rating || 4.5}</span>
+            <span className="text-xs text-gray-500">({product.product.numReviews || 0})</span>
           </div>
         </div>
         <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#ea698b] transition-colors">
-          {product.name}
+          {product.product.name}
         </h3>
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-            ₹{product.price}
+            ₹{product.product.price}
           </span>
           <button
             onClick={() => moveToCart(product)}
