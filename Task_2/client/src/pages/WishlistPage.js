@@ -1,18 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Share2, Eye, Star, ShoppingBag, X } from 'lucide-react';
+import axios from 'axios';
 
 const WishlistPage = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [sharedItems, setSharedItems] = useState([]);
   const [viewedItems, setViewedItems] = useState([]);
   const [activeTab, setActiveTab] = useState('collection');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const loadItemsFromStorage = () => {
-    const savedWishlist = localStorage.getItem('wishlist');
-    if (savedWishlist) {
-      setWishlistItems(JSON.parse(savedWishlist));
+  const loadWishlist = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('Please log in to view your wishlist');
+        setLoading(false);
+        return;
+      }
+
+      const response = await axios.get('http://localhost:5000/api/wishlist', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setWishlistItems(response.data.items.map(item => item.product));
+      setLoading(false);
+    } catch (error) {
+      console.error('Error loading wishlist:', error);
+      setError('Failed to load wishlist');
+      setLoading(false);
     }
+  };
+
+  const loadViewedItems = () => {
     const savedViewed = localStorage.getItem('viewedItems');
     if (savedViewed) {
       setViewedItems(JSON.parse(savedViewed));
@@ -20,16 +40,17 @@ const WishlistPage = () => {
   };
 
   useEffect(() => {
-    loadItemsFromStorage();
+    loadWishlist();
+    loadViewedItems();
 
-    // Listen for storage changes to update the UI in real-time
-    window.addEventListener('storage', loadItemsFromStorage);
+    // Listen for storage changes to update viewed items
+    window.addEventListener('storage', loadViewedItems);
 
     // Mock data for shared items
     setSharedItems([]); // Clearing mock data for now
 
     return () => {
-      window.removeEventListener('storage', loadItemsFromStorage);
+      window.removeEventListener('storage', loadViewedItems);
     };
   }, []);
 
