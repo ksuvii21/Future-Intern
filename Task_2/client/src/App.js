@@ -9,6 +9,7 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import WishlistPage from './pages/WishlistPage';
 import CategoryPage from './pages/CategoryPage';
+import SearchPage from './pages/SearchPage';
 import OrderHistory from './pages/OrderHistory';
 import OrderDetail from './pages/OrderDetail';
 import Profile from './pages/Profile';
