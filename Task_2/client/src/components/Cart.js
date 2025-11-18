@@ -1,17 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Plus, Minus, X, CreditCard, Truck, Shield } from 'lucide-react';
+import axios from 'axios';
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cart, setCart] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Load cart from localStorage
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
-    }
+    fetchCart();
   }, []);
+
+  const fetchCart = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('Please log in to view your cart');
+        setLoading(false);
+        return;
+      }
+
+      const response = await axios.get('http://localhost:5000/api/cart', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setCart(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching cart:', error);
+      setError('Failed to load cart');
+      setLoading(false);
+    }
+  };
 
   const removeFromCart = productId => {
     const updatedCart = cartItems.filter(item => item._id !== productId);
@@ -38,6 +59,29 @@ const Cart = () => {
   const shipping = totalPrice > 4250 ? 0 : 849.15;
   const tax = totalPrice * 0.08;
   const finalTotal = totalPrice + shipping + tax;
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#ea698b]"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-6xl mb-4">😔</div>
+          <h2 className="text-2xl font-bold text-white mb-2">Error Loading Cart</h2>
+          <p className="text-gray-400 mb-6">{error}</p>
+          <Link to="/" className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
+            Go Back Home
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto">
