@@ -144,6 +144,27 @@ const ProductDetail = () => {
     }
   };
 
+  const shareProduct = () => {
+    const url = window.location.href;
+    const title = product.name;
+    const text = `Check out this amazing product: ${product.name}`;
+
+    if (navigator.share) {
+      navigator.share({
+        title,
+        text,
+        url,
+      }).catch(console.error);
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(url).then(() => {
+        alert('Product link copied to clipboard!');
+      }).catch(() => {
+        alert('Unable to copy link. Please copy the URL manually.');
+      });
+    }
+  };
+
   const checkDelivery = () => {
     if (pincode.length === 6) {
       // Mock delivery calculation
