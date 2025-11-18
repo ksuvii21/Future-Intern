@@ -228,7 +228,7 @@ const CategoryPage = () => {
                     </div>
                   )}
                   <button
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       const token = localStorage.getItem('token');
