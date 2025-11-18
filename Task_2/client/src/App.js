@@ -328,6 +328,7 @@ function AppLayout({
       <main className={`flex-1 ${isAuthPage ? '' : 'pt-[170px] md:pt-[130px] lg:pt-[190px]'}`}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/search" element={<SearchPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<CartPage />} />
