@@ -34,25 +34,50 @@ const Cart = () => {
     }
   };
 
-  const removeFromCart = productId => {
-    const updatedCart = cartItems.filter(item => item._id !== productId);
-    setCartItems(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    window.dispatchEvent(new Event('storage'));
+  const removeFromCart = async (itemId) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please log in to remove items from cart');
+        return;
+      }
+
+      await axios.delete(`http://localhost:5000/api/cart/${itemId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      fetchCart(); // Refresh cart
+    } catch (error) {
+      console.error('Error removing from cart:', error);
+      alert('Failed to remove item from cart');
+    }
   };
 
-  const updateQuantity = (productId, newQuantity) => {
+  const updateQuantity = async (itemId, newQuantity) => {
     if (newQuantity < 1) return;
-    const updatedCart = cartItems.map(item =>
-      item._id === productId ? { ...item, quantity: newQuantity } : item
-    );
-    setCartItems(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    window.dispatchEvent(new Event('storage'));
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please log in to update cart');
+        return;
+      }
+
+      await axios.put(`http://localhost:5000/api/cart/${itemId}`, {
+        quantity: newQuantity
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      fetchCart(); // Refresh cart
+    } catch (error) {
+      console.error('Error updating cart:', error);
+      alert('Failed to update cart');
+    }
   };
 
+  const cartItems = cart?.items || [];
   const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + item.product.price * item.quantity,
     0
   );
 
