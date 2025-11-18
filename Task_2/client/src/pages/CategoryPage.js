@@ -292,7 +292,7 @@ const CategoryPage = () => {
                       ₹{product.price.toLocaleString('en-IN')}
                     </span>
                     <button
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       const cart = JSON.parse(localStorage.getItem('cart') || '[]');
