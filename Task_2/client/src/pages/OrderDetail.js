@@ -238,7 +238,7 @@ const OrderDetail = () => {
               </div>
 
               {/* Cancel Order Button */}
-              {order.status === 'pending' && (
+              {order.status === 'ordered' && (
                 <div className="mt-6">
                   <button
                     onClick={handleCancelOrder}
