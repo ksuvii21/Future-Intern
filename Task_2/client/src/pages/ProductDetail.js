@@ -73,7 +73,13 @@ const ProductDetail = () => {
 
         setLoading(false);
       } catch (error) {
-        setError('Error fetching product details');
+        if (error.response?.status === 404) {
+          setError('Product not found');
+        } else if (error.response?.status === 400) {
+          setError('Invalid product ID');
+        } else {
+          setError('Error fetching product details');
+        }
         setLoading(false);
       }
     };
