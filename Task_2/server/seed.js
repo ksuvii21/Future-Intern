@@ -47,6 +47,38 @@ const sampleProducts = [
     numReviews: 24
   },
   {
+    name: 'Elegant Evening Gown',
+    description: 'Stunning floor-length evening gown with intricate lace detailing and flowing silhouette. Perfect for special occasions.',
+    price: 2549.15,
+    category: 'Dresses',
+    stock: 15,
+    imageUrl: 'https://i.pinimg.com/1200x/84/33/84/8433843541b3bcfdc279a9430678e333.jpg',
+    variants: [
+      { color: 'Blue-Black', imageUrl: 'https://i.pinimg.com/1200x/84/33/84/8433843541b3bcfdc279a9430678e333.jpg', stock: 5 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/736x/17/7d/8e/177d8e9da528eca0433fdbd694d9cf65.jpg', stock: 5 },
+      { color: 'Red-Black', imageUrl: 'https://i.pinimg.com/1200x/be/37/68/be3768f7c25a393ffbc1cc1a74da7204.jpg', stock: 5 }
+    ],
+    isNewArrival: false,
+    rating: 4.8,
+    numReviews: 24
+  },
+  {
+    name: 'Elegant Evening Gown',
+    description: 'Stunning floor-length evening gown with intricate lace detailing and flowing silhouette. Perfect for special occasions.',
+    price: 2549.15,
+    category: 'Dresses',
+    stock: 15,
+    imageUrl: 'https://i.pinimg.com/1200x/be/37/68/be3768f7c25a393ffbc1cc1a74da7204.jpg',
+    variants: [
+      { color: 'Red-Black', imageUrl: 'https://i.pinimg.com/1200x/be/37/68/be3768f7c25a393ffbc1cc1a74da7204.jpg', stock: 5 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/736x/17/7d/8e/177d8e9da528eca0433fdbd694d9cf65.jpg', stock: 5 },
+      { color: 'Blue-Black', imageUrl: 'https://i.pinimg.com/1200x/84/33/84/8433843541b3bcfdc279a9430678e333.jpg', stock: 5 }
+    ],
+    isNewArrival: false,
+    rating: 4.8,
+    numReviews: 24
+  },
+  {
     name: 'Velvet Maxi Dress',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
     price: 2804.15,
