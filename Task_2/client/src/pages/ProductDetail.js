@@ -758,7 +758,10 @@ const ProductDetail = () => {
                     type="file"
                     multiple
                     accept="image/*"
-                    onChange={handleImageUpload}
+                    onChange={(e) => {
+                      const files = Array.from(e.target.files);
+                      setReviewImages(files);
+                    }}
                     className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#ea698b] file:text-white hover:file:bg-[#d55d92]"
                   />
                   <p className="text-xs text-gray-400 mt-1">Upload up to 5 images (max 5MB each)</p>
@@ -773,7 +776,10 @@ const ProductDetail = () => {
                           />
                           <button
                             type="button"
-                            onClick={() => removeImage(index)}
+                            onClick={() => {
+                              const newImages = reviewImages.filter((_, i) => i !== index);
+                              setReviewImages(newImages);
+                            }}
                             className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs hover:bg-red-600"
                           >
                             ×
