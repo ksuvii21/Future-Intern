@@ -111,9 +111,6 @@ const ProductDetail = () => {
     ? product.variants.map(v => ({ src: v.imageUrl }))
     : (product?.imageUrl ? [{ src: product.imageUrl }] : []);
 
-  // Get the image to display, prioritizing the selected thumbnail
-  const displayImage = allImages[selectedImageIndex]?.src || product?.imageUrl;
-
   // Get additional product images for thumbnails (simulating different perspectives)
   const productImages = product?.imageUrls && product.imageUrls.length > 0
     ? product.imageUrls.map(url => ({ src: url }))
