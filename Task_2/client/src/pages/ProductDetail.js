@@ -296,7 +296,7 @@ const ProductDetail = () => {
 
       {/* Product Details */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Product Image */}
           <div className="space-y-2">
             <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-xl overflow-hidden relative aspect-[4/3] cursor-pointer" onClick={() => setLightboxOpen(true)}>
@@ -381,12 +381,12 @@ const ProductDetail = () => {
                   </div>
                 )}
               </div>
-              <h1 className="text-4xl font-bold text-white mb-4">{product.name}</h1>
-              <p className="text-gray-300 text-lg leading-relaxed">{product.description}</p>
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">{product.name}</h1>
+              <p className="text-gray-300 text-base md:text-lg leading-relaxed">{product.description}</p>
             </div>
 
             <div className="flex items-center gap-4">
-              <span className="text-5xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+              <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
                 ₹{product.price.toLocaleString('en-IN')}
               </span>
             </div>
@@ -558,11 +558,11 @@ const ProductDetail = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={buyNow}
                 disabled={product.stock === 0}
-                className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+                className={`w-full sm:flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                   product.stock === 0
                     ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-green-500 to-green-600 text-white hover:shadow-lg hover:shadow-green-500/50 transform hover:scale-105'
@@ -574,7 +574,7 @@ const ProductDetail = () => {
               <button
                 onClick={addToCart}
                 disabled={product.stock === 0}
-                className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+                className={`w-full sm:flex-1 py-4 px-6 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                   product.stock === 0
                     ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105'
@@ -583,18 +583,20 @@ const ProductDetail = () => {
                 <ShoppingBag className="w-5 h-5" />
                 {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
               </button>
-              <button
-                onClick={addToWishlist}
-                className="p-4 bg-white/5 border border-[#571089]/30 rounded-xl text-white hover:bg-white/10 hover:border-[#ea698b]/50 transition-all"
-              >
-                <Heart className="w-5 h-5" />
-              </button>
-              <button
-                onClick={shareProduct}
-                className="p-4 bg-white/5 border border-[#571089]/30 rounded-xl text-white hover:bg-white/10 hover:border-[#ea698b]/50 transition-all"
-              >
-                <Share className="w-5 h-5" />
-              </button>
+              <div className="flex gap-4 w-full sm:w-auto">
+                <button
+                  onClick={addToWishlist}
+                  className="flex-1 sm:flex-none p-4 bg-white/5 border border-[#571089]/30 rounded-xl text-white hover:bg-white/10 hover:border-[#ea698b]/50 transition-all"
+                >
+                  <Heart className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={shareProduct}
+                  className="flex-1 sm:flex-none p-4 bg-white/5 border border-[#571089]/30 rounded-xl text-white hover:bg-white/10 hover:border-[#ea698b]/50 transition-all"
+                >
+                  <Share className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Delivery Information */}
@@ -643,7 +645,7 @@ const ProductDetail = () => {
             {/* Product Details */}
             <div className="pt-6 border-t border-[#571089]/30">
               <h3 className="text-lg font-semibold text-white mb-4">Product Details</h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-400">Fabric:</span>
                   <span className="text-white">Premium Cotton</span>
@@ -700,7 +702,7 @@ const ProductDetail = () => {
             <h2 className="text-3xl font-bold text-white">Customer Reviews & Ratings</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <div className="flex">
