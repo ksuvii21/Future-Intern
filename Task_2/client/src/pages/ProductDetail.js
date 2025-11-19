@@ -304,11 +304,13 @@ const ProductDetail = () => {
             {thumbnailImages.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
                 {thumbnailImages.map((img, index) => (
+
                   <div
                     key={index}
                     className={`border-2 rounded-md overflow-hidden aspect-square cursor-pointer transition-all ${
                       selectedImageIndex === index
                         ? 'border-[#ea698b] ring-2 ring-[#ea698b]/50'
+
                         : 'border-[#571089]/30 hover:border-[#571089]/50'
                     }`}
                     onClick={() => setSelectedImageIndex(index)}
@@ -316,6 +318,7 @@ const ProductDetail = () => {
                     <img
                       src={img.src}
                       alt={`${product.name} view ${index + 1}`}
+
                       className="w-full h-full object-cover hover:opacity-80 transition-opacity"
                       onError={(e) => {
                         e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjOWNhNGIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg==';
@@ -327,6 +330,7 @@ const ProductDetail = () => {
                       </div>
                     )}
                   </div>
+
                 ))}
               </div>
             )}
@@ -368,11 +372,11 @@ const ProductDetail = () => {
                 <div className="flex gap-2 flex-wrap">
                   {product.variants.map(variant => (
                     <button
-                      key={variant.color}
+                      key={`color-button-${variant.color}`}
                       onClick={() => setSelectedColor(variant.color)}
                       className={`px-3 py-1 rounded-md border-2 transition-all text-sm ${
                         selectedColor === variant.color
-                          ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
+                          ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b] '
                           : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
                       }`}
                     >
@@ -382,7 +386,7 @@ const ProductDetail = () => {
                   ))}
                 </div>
                 {/* Color Variant Images */}
-                <div className="flex gap-2 flex-wrap">
+                <div className="flex gap-2 flex-wrap ">
                   {product.variants.map(variant => (
                     <div
                       key={`img-${variant.color}`}
@@ -391,12 +395,14 @@ const ProductDetail = () => {
                           ? 'border-[#ea698b] ring-2 ring-[#ea698b]/50'
                           : 'border-[#571089]/30 hover:border-[#571089]/50'
                       }`}
-                     onClick={() => {
+                      onClick={() => {
                         setSelectedColor(variant.color);
                         // Find the index of this variant's image in the allImages array and update the main image
                         const imageIndex = allImages.findIndex(img => img.src === variant.imageUrl);
                         if (imageIndex !== -1) setSelectedImageIndex(imageIndex);
-                     }}
+                        const newUrl = `/product/${product._id}?color=${encodeURIComponent(variant.color)}`;
+                        window.location.href = newUrl;
+                      }}
                     >
                       <img
                         src={variant.imageUrl}
@@ -415,6 +421,7 @@ const ProductDetail = () => {
                   ))}
                 </div>
               </div>
+
             )}
 
             {/* Size Selection */}
