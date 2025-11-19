@@ -103,7 +103,7 @@ const Home = () => {
                 <div className="inline-block px-4 py-2 bg-gradient-to-r from-[#ea698b]/20 to-[#822faf]/20 border border-[#ea698b]/30 rounded-full">
                   <span className="text-[#ea698b] text-sm font-medium">✨ New Season Collection</span>
                 </div>
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
                     Elegance
                   </span>
@@ -112,7 +112,7 @@ const Home = () => {
                     Redefined
                   </span>
                 </h1>
-                <p className="text-xl text-gray-400 leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
                   Discover our curated collection of luxury fashion, exquisite jewelry, and timeless accessories that define sophisticated style.
                 </p>
                 <div className="flex flex-wrap gap-4">
@@ -144,7 +144,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="relative">
-                <div className="relative h-80 w-full max-w-xl mx-auto">
+                <div className="relative h-80 sm:h-96 w-full max-w-xl mx-auto">
                   {/* Rotating Offers */}
                   {offers.map((offer, index) => {
                     const isCurrent = index === currentOffer;
@@ -160,14 +160,14 @@ const Home = () => {
                         }}
                       >
                         {offer.logo ? (
-                          <div className="flex flex-col items-center justify-center h-full text-center">
+                          <div className="flex flex-col items-center justify-center h-full text-center p-4">
                             <img src="/logo.png" alt="Fansee Rebel" className="w-50 h-48 rounded-lg mx-auto mb-4" />
                             <p className="text-3xl font-bold text-white mb-2">{offer.title}</p>
                             <p className="text-gray-300">{offer.description}</p>
                           </div>
                         ) : (
-                          <div className="grid grid-cols-2 gap-6 items-center h-full">
-                            <div className="text-center">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center h-full">
+                            <div className="text-center hidden sm:block">
                               <div className="text-8xl">{offer.emoji}</div>
                             </div>
                             <div className="text-left">
@@ -214,7 +214,7 @@ const Home = () => {
         <section className="py-16 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
-              <div>
+              <div className="text-center md:text-left w-full md:w-auto">
                 <h2 className="text-4xl font-bold mb-3">
                   <span className="text-white">
                     {selectedCategory === 'All' ? 'Featured ' : ''}
@@ -228,7 +228,7 @@ const Home = () => {
                   <p className="text-gray-400">{filteredProducts.length} exquisite pieces</p>
                 </div>
               </div>
-              <button className="hidden md:flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-md border border-[#571089]/40 rounded-full text-[#ea698b] hover:bg-white/10 hover:border-[#ea698b]/60 transition-all duration-300 hover:scale-105 group">
+              <button className="self-center md:self-auto flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-md border border-[#571089]/40 rounded-full text-[#ea698b] hover:bg-white/10 hover:border-[#ea698b]/60 transition-all duration-300 hover:scale-105 group">
                 <span>View All Collection</span>
                 <ChevronRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
@@ -239,7 +239,7 @@ const Home = () => {
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ea698b]"></div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
                   <div
                     key={product._id}
@@ -374,10 +374,10 @@ const Home = () => {
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-[#ea698b]/20 to-[#822faf]/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className={`relative bg-gradient-to-br ${feature.colors} backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 transform group-hover:-translate-y-3 group-hover:shadow-2xl`}>
+                    <div className={`relative bg-gradient-to-br ${feature.colors} backdrop-blur-xl rounded-3xl p-8 text-center md:text-left border transition-all duration-500 transform group-hover:-translate-y-3 group-hover:shadow-2xl`}>
                     <div className="relative mb-8">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl blur-md"></div>
-                      <div className={`relative w-20 h-20 bg-gradient-to-br ${feature.iconColors} rounded-2xl flex items-center justify-center mx-auto transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-12 shadow-lg`}>
+                        <div className={`relative w-20 h-20 bg-gradient-to-br ${feature.iconColors} rounded-2xl flex items-center justify-center mx-auto md:mx-0 transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-12 shadow-lg`}>
                         <feature.icon className="w-10 h-10 text-white transition-transform duration-500 group-hover:scale-110" />
                       </div>
                     </div>
@@ -423,14 +423,14 @@ const Home = () => {
                     </span>
                   </div>
                   
-                  <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                  <h2 className="text-3xl md:text-5xl font-bold mb-4">
                     <span className="text-white">Stay </span>
                     <span className="bg-gradient-to-r from-[#ea698b] via-[#c05299] to-[#822faf] bg-clip-text text-transparent">
                       In Style
                     </span>
                   </h2>
                   
-                  <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+                  <p className="text-base md:text-lg text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
                     Join our exclusive community and be the first to discover new collections, limited editions, and receive personalized style recommendations
                   </p>
                   
@@ -453,7 +453,7 @@ const Home = () => {
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-center gap-8 mt-8 text-sm text-gray-400">
+                    <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-8 text-sm text-gray-400">
                       <div className="flex items-center gap-2">
                         <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[#ea698b] to-[#d55d92] flex items-center justify-center">
                           <span className="text-white text-xs">✓</span>
