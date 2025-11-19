@@ -47,6 +47,8 @@ const Cart = () => {
       });
 
       fetchCart(); // Refresh cart
+      // Trigger cart count update
+      window.dispatchEvent(new Event('storage'));
     } catch (error) {
       console.error('Error removing from cart:', error);
       alert('Failed to remove item from cart');
