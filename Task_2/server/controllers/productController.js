@@ -4,6 +4,10 @@ const Order = require('../models/Order');
 const asyncHandler = require('./asyncHandler');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
+const NodeCache = require('node-cache');
+
+// Initialize cache with a 2-minute TTL for product lists
+const productCache = new NodeCache({ stdTTL: 120 });
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
@@ -11,6 +15,11 @@ const upload = multer({ storage: storage });
 
 // Get all products
 exports.getAllProducts = asyncHandler(async (req, res) => {
+  const cacheKey = `products_${JSON.stringify(req.query)}`;
+  if (productCache.has(cacheKey)) {
+    return res.json(productCache.get(cacheKey));
+  }
+
   const { search, category, minPrice, maxPrice, sortBy, sortOrder, page = 1, limit = 12 } = req.query;
 
     let query = {};
@@ -59,6 +68,9 @@ exports.getAllProducts = asyncHandler(async (req, res) => {
 
     const topProduct = await Product.findOne().sort({ price: -1 }); // More efficient than find().limit(1)
     const maxProductPrice = topProduct ? topProduct.price : 1000;
+
+    const responseData = { products, maxProductPrice, totalPages: Math.ceil(count / limit), currentPage: Number(page) };
+    productCache.set(cacheKey, responseData);
 
     res.json({
       products,
@@ -143,13 +155,15 @@ exports.createProductReview = asyncHandler(async (req, res) => {
     let reviewImages = [];
 
     // Handle review images upload
-    let reviewImages = [];
     if (req.files && req.files.length > 0) {
       for (const file of req.files) {
         try {
           const result = await new Promise((resolve, reject) => {
             const stream = cloudinary.uploader.upload_stream(
-              { folder: 'review-images' },
+              { 
+                folder: 'review-images',
+                transformation: [{ width: 300, height: 300, crop: "limit", quality: "auto" }]
+              },
               (error, result) => {
                 if (error) reject(error);
                 else resolve(result);
@@ -216,7 +230,10 @@ exports.createProduct = asyncHandler(async (req, res) => {
         try {
           const result = await new Promise((resolve, reject) => {
             const stream = cloudinary.uploader.upload_stream(
-              { folder: 'seller-products' },
+              { 
+                folder: 'seller-products',
+                transformation: [{ width: 800, height: 800, crop: "limit", quality: "auto" }]
+              },
               (error, result) => {
                 if (error) reject(error);
                 else resolve(result);
@@ -240,7 +257,10 @@ exports.createProduct = asyncHandler(async (req, res) => {
         for (let i = 1; i < req.files.length; i++) {
           const result = await new Promise((resolve, reject) => {
             const stream = cloudinary.uploader.upload_stream(
-              { folder: 'seller-products' },
+              { 
+                folder: 'seller-products',
+                transformation: [{ width: 800, height: 800, crop: "limit", quality: "auto" }]
+              },
               (error, result) => {
                 if (error) reject(error);
                 else resolve(result);
@@ -484,4 +504,36 @@ exports.unsubscribeStockAlert = asyncHandler(async (req, res) => {
 
   await product.save();
   res.json({ message: 'Stock alert subscription removed' });
+});
+
+// @desc    Bulk delete products
+// @route   POST /api/products/bulk-delete
+// @access  Private/Admin
+exports.bulkDeleteProducts = asyncHandler(async (req, res) => {
+  const { productIds } = req.body;
+
+  if (!productIds || !Array.isArray(productIds) || productIds.length === 0) {
+    res.status(400);
+    throw new Error('Product IDs are required');
+  }
+
+  await Product.deleteMany({ _id: { $in: productIds } });
+
+  res.json({ message: 'Products deleted successfully' });
+});
+
+// @desc    Bulk update products
+// @route   POST /api/products/bulk-update
+// @access  Private/Admin
+exports.bulkUpdateProducts = asyncHandler(async (req, res) => {
+  const { productIds, update } = req.body;
+
+  if (!productIds || !Array.isArray(productIds) || productIds.length === 0 || !update) {
+    res.status(400);
+    throw new Error('Product IDs and update data are required');
+  }
+
+  await Product.updateMany({ _id: { $in: productIds } }, { $set: update });
+
+  res.json({ message: 'Products updated successfully' });
 });
