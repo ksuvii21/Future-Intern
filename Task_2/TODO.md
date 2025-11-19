@@ -1,22 +1,13 @@
-# Wishlist Functionality Implementation
+# TODO: Implement Footer Pages and Customer Support
 
-## Server-Side Implementation
-- [x] Create Wishlist model (similar to Cart)
-- [x] Create wishlistController with CRUD operations
-- [x] Create wishlistRoutes with protected endpoints
-- [x] Update server.js to include wishlist routes
-
-## Client-Side Updates
-- [ ] Update WishlistPage.js to use API calls instead of localStorage
-- [ ] Update ProductDetail.js to use API for wishlist operations
-- [ ] Update Home.js to use API for wishlist operations
-- [ ] Update CategoryPage.js to use API for wishlist operations
-- [ ] Update ProductCard.js to use API for wishlist operations
-- [ ] Update Profile.js to fetch wishlist count from API
-- [ ] Add move to cart functionality from wishlist page
-
-## Testing
-- [ ] Test all API endpoints
-- [ ] Test wishlist functionality across all components
-- [ ] Ensure proper error handling
-- [ ] Verify authentication requirements
+## Tasks
+- [ ] Create ReturnPolicyPage.js
+- [ ] Create RefundPolicyPage.js
+- [ ] Create PrivacyPolicyPage.js
+- [ ] Create DisclaimerPage.js
+- [ ] Create AboutUsPage.js
+- [ ] Create CustomerSupportPage.js (with FAQ and live chat)
+- [ ] Update App.js: Add imports for new pages
+- [ ] Update App.js: Add routes for new pages
+- [ ] Update App.js: Update footer links to correct routes
+- [ ] Test navigation and pages
