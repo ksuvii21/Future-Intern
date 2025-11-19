@@ -55,6 +55,10 @@ const Home = () => {
   const [currentOffer, setCurrentOffer] = useState(0);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
