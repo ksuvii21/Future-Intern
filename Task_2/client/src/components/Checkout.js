@@ -404,7 +404,7 @@ const Checkout = () => {
               </h2>
 
               {/* Payment Options */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 <button
                   onClick={() => setPaymentMethod('card')}
                 className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
@@ -432,6 +432,21 @@ const Checkout = () => {
                   <div className="text-left">
                     <div className="font-semibold">UPI</div>
                     <div className="text-sm opacity-75">Google Pay, PhonePe, etc.</div>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => setPaymentMethod('upi_scanner')}
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                    paymentMethod === 'upi_scanner'
+                      ? 'border-[#ea698b] bg-[#ea698b]/10 text-[#ea698b]'
+                      : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
+                  }`}
+                >
+                  <Smartphone className="w-6 h-6" />
+                  <div className="text-left">
+                    <div className="font-semibold">UPI Scanner</div>
+                    <div className="text-sm opacity-75">Scan QR Code</div>
                   </div>
                 </button>
 
