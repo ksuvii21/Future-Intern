@@ -23,8 +23,7 @@ const AdminDashboard = () => {
   const fetchAllData = useCallback(async () => {
     // Scroll to top when tab changes
     window.scrollTo(0, 0);
-  }, [activeTab]);
-
+    
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
