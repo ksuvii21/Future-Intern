@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { Heart, Users, Award, Globe } from 'lucide-react';
 
 const AboutUsPage = () => {
-  return (
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] py-12">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
