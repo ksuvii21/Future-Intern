@@ -141,6 +141,8 @@ const ProductDetail = () => {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Product added to cart!');
+      // Trigger cart count update
+      window.dispatchEvent(new Event('storage'));
     } catch (error) {
       console.error("Error adding to cart", error);
       if (error.response?.status === 401) {
