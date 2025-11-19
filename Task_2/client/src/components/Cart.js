@@ -21,14 +21,15 @@ const Cart = () => {
       if (!token) {
         // Handle guest cart from localStorage
         const localCart = JSON.parse(localStorage.getItem('cart') || '[]');
-        // The cart component expects an object with an 'items' property.
-        // The items in localStorage are full product objects, so we format them.
-        // The structure for a guest cart item should be { product: {...}, quantity: X }
-        // The _id for the item itself is not needed for local cart display.
-        const formattedGuestCart = { items: localCart };
-        // The local cart items are already in the format { product: {...}, quantity: X }
-        // so we can just wrap it in the expected object structure.
-        setCart({ items: localCart });
+        // The component expects each item to have a `product` property.
+        // The items in localStorage are the product objects themselves, with an added `quantity`.
+        // We need to map them to the expected structure: { product: {...}, quantity: X }
+        const formattedGuestCart = localCart.map(item => ({
+          _id: item._id, // Use product ID as the item ID for guests
+          product: item, // The full product object is nested here
+          quantity: item.quantity || 1
+        }));
+        setCart({ items: formattedGuestCart });
         setLoading(false);
         return;
       }
