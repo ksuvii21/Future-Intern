@@ -1277,6 +1277,38 @@ const sampleProducts = [
     isNewArrival: true,
     rating: 4.4,
     numReviews: 29
+  },
+  {
+    name: 'Silk Scarf',
+    description: 'Luxurious silk scarf with artistic print and fringed edges. Elevate any outfit with this versatile accessory.',
+    price: 764.15,
+    category: 'Accessories',
+    stock: 32,
+    imageUrl: 'https://i.pinimg.com/1200x/1c/97/27/1c9727e0795545d01e2ecaeab09857c4.jpg',
+    variants: [
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/1200x/1c/97/27/1c9727e0795545d01e2ecaeab09857c4.jpg', stock: 16 },
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/c8/a0/e7/c8a0e72f8d24548e9fd9f6a2750a3766.jpg', stock: 16 },
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/736x/94/ca/eb/94caeb1ad863c1cdc993b3b1c4b34f90.jpg', stock: 16 }
+    ],
+    isNewArrival: true,
+    rating: 4.4,
+    numReviews: 29
+  },
+  {
+    name: 'Silk Scarf',
+    description: 'Luxurious silk scarf with artistic print and fringed edges. Elevate any outfit with this versatile accessory.',
+    price: 764.15,
+    category: 'Accessories',
+    stock: 32,
+    imageUrl: 'https://i.pinimg.com/1200x/1c/97/27/1c9727e0795545d01e2ecaeab09857c4.jpg',
+    variants: [
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/1200x/1c/97/27/1c9727e0795545d01e2ecaeab09857c4.jpg', stock: 16 },
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/c8/a0/e7/c8a0e72f8d24548e9fd9f6a2750a3766.jpg', stock: 16 },
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/736x/94/ca/eb/94caeb1ad863c1cdc993b3b1c4b34f90.jpg', stock: 16 }
+    ],
+    isNewArrival: true,
+    rating: 4.4,
+    numReviews: 29
   }
 ];
 
