@@ -34,4 +34,8 @@ router.post('/admin', auth, adminAuth, upload.fields([{ name: 'image', maxCount:
 router.put('/admin/:id', auth, adminAuth, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'variantImages', maxCount: 10 }]), productController.updateProduct);
 router.delete('/admin/:id', auth, adminAuth, productController.deleteProduct);
 
+// Bulk operations
+router.post('/bulk-delete', auth, adminAuth, productController.bulkDeleteProducts);
+router.post('/bulk-update', auth, adminAuth, productController.bulkUpdateProducts);
+
 module.exports = router;
