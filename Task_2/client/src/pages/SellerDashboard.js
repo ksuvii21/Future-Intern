@@ -57,6 +57,10 @@ const SellerDashboard = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     fetchDashboardData();
     // Set up real-time updates every 30 seconds
     const interval = setInterval(fetchDashboardData, 30000);
