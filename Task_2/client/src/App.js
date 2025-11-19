@@ -206,7 +206,7 @@ function AppLayout({
       {/* Elegant Header - Only show if not on auth pages */}
       {!isAuthPage && (
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-transparent'
+          scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-[#0a0015]/95 backdrop-blur-lg'
         }`}>
           {/* Top Announcement Bar */}
           <div className="bg-gradient-to-r from-[#ea698b] via-[#ac46a1] to-[#822faf] text-white text-sm py-2">
