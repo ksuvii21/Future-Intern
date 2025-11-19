@@ -8,12 +8,13 @@ const OrderDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isCancelling, setIsCancelling] = useState(false);
+  const navigate = useNavigate();
   const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
 
   useEffect(() => {
     if (notification.show) {
       const timer = setTimeout(() => {
-        setNotification({ show: false, message: '', type: 'success' });
+        setNotification({ show: false, message: '', type: 'success' }); 
       }, 5000); // Auto-hide after 5 seconds
       return () => clearTimeout(timer);
     }
@@ -22,7 +23,8 @@ const OrderDetail = () => {
   const fetchOrderDetail = useCallback(async () => {
     const token = localStorage.getItem('token');
     if (!token) {
-      setError('Please login to view order details');
+      setError('Authentication required. Please log in.');
+      navigate('/login'); // Redirect to login
       setLoading(false);
       return;
     }
@@ -38,7 +40,14 @@ const OrderDetail = () => {
         const data = await response.json();
         setOrder(data);
       } else {
-        setError('Failed to fetch order details');
+        if (response.status === 401) {
+          setError('Invalid credentials. Please log in again.');
+          localStorage.removeItem('token'); // Clear invalid token
+          navigate('/login'); // Redirect to login
+        } else {
+          setError('Failed to fetch order details');
+        }
+
       }
     } catch (error) {
       console.error('Fetch order detail error:', error);
@@ -46,7 +55,7 @@ const OrderDetail = () => {
     } finally {
       setLoading(false);
     }
-  }, [id]);
+  }, [id, navigate]);
 
   useEffect(() => {
     fetchOrderDetail();
