@@ -95,13 +95,13 @@ const Checkout = () => {
 
     const orderData = {
       products: cartItems.map(item => ({
-        product: item._id,
-        name: item.name,
-        price: item.price,
+        product: item.product?._id || item._id,
+        name: item.product?.name || item.name,
+        price: item.product?.price || item.price,
         quantity: item.quantity,
         selectedColor: item.selectedColor,
         selectedSize: item.selectedSize,
-        imageUrl: item.imageUrl
+        imageUrl: item.product?.imageUrl || item.imageUrl
       })),
       totalAmount: totalPrice + totalPrice * 0.08, // Including tax
       shippingAddress: {
