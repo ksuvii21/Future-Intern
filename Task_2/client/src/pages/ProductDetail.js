@@ -428,7 +428,7 @@ const ProductDetail = () => {
                         const imageIndex = allImages.findIndex(img => img.src === variant.imageUrl);
                         if (imageIndex !== -1) setSelectedImageIndex(imageIndex);
                         const newUrl = `/product/${product._id}?color=${encodeURIComponent(variant.color)}`;
-                        window.location.href = newUrl;
+                        navigate(newUrl);
                       }}
                     >
                       <img
@@ -680,9 +680,9 @@ const ProductDetail = () => {
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
-        slides={(product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls : [product.imageUrl || '']).map(url => ({ src: url }))}
-        index={lightboxIndex}
-        on={{ view: ({ index }) => setLightboxIndex(index) }}
+        slides={thumbnailImages.map(img => ({ src: img.src }))}
+        index={selectedImageIndex}
+        on={{ view: ({ index }) => setSelectedImageIndex(index) }}
         plugins={[Zoom]}
         styles={{ container: { backgroundColor: "rgba(10, 0, 21, .9)" } }}
       />
