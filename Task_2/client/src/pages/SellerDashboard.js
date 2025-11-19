@@ -397,7 +397,7 @@ const SellerDashboard = () => {
             <h3 className="text-xl font-bold text-white">Low Stock Alert</h3>
           </div>
           <p className="text-3xl font-bold text-yellow-400">{stats.lowStockProducts}</p>
-          <p className="text-gray-400">Products with stock < 10</p>
+          <p className="text-gray-400">Products with stock &lt; 10</p>
         </div>
         <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
           <div className="flex items-center gap-3 mb-4">
