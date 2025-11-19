@@ -5,6 +5,7 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [cartLoading, setCartLoading] = useState(true);
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [formData, setFormData] = useState({
     name: '',
@@ -23,10 +24,32 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      setCartItems(JSON.parse(savedCart));
-    }
+    const fetchCart = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setError('Please login to place an order.');
+        setCartLoading(false);
+        return;
+      }
+      try {
+        const response = await fetch('http://localhost:5000/api/cart', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setCartItems(data.items || []);
+        } else {
+          setError('Failed to load cart');
+        }
+      } catch (error) {
+        setError('Failed to load cart');
+      } finally {
+        setCartLoading(false);
+      }
+    };
+    fetchCart();
   }, []);
 
   const handleInputChange = e => {
