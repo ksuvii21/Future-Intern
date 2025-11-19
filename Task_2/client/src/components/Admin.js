@@ -100,6 +100,17 @@ const Admin = () => {
     }
   };
 
+  const fetchPendingReviews = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const response = await axios.get('http://localhost:5000/api/products/reviews/pending', config);
+      setPendingReviews(response.data);
+    } catch (error) {
+      console.error('Error fetching pending reviews:', error);
+    }
+  };
+
   const handleInputChange = e => {
     const { name, value, type, files } = e.target;
     if (type === 'file') {
@@ -621,7 +632,7 @@ const Admin = () => {
                     <img
                       key={index}
                       src={image}
-                      alt={`Review image ${index + 1}`}
+                      alt={`Review ${index + 1}`}
                       className="w-16 h-16 object-cover rounded-md border border-[#571089]/30 cursor-pointer hover:opacity-80"
                       onClick={() => window.open(image, '_blank')}
                     />
