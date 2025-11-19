@@ -529,6 +529,31 @@ const Checkout = () => {
                 </div>
               )}
 
+              {paymentMethod === 'upi_scanner' && (
+                <div className="space-y-4">
+                  <div className="text-center">
+                    <button
+                      type="button"
+                      className="w-full px-6 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 mb-4"
+                      onClick={() => {
+                        // Placeholder for UPI scanner functionality
+                        alert('UPI Scanner: Please allow camera access to scan QR codes. Feature coming soon!');
+                      }}
+                    >
+                      <Smartphone className="w-6 h-6" />
+                      Open Camera & Scan QR Code
+                    </button>
+                    <p className="text-gray-400 text-sm mb-4">Scan the merchant's UPI QR code to pay</p>
+                  </div>
+
+                  <div className="p-4 bg-[#ea698b]/10 border border-[#ea698b]/30 rounded-lg">
+                    <p className="text-[#ea698b] text-sm">
+                      Position the QR code within the camera frame. The payment will be processed securely through your UPI app.
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {paymentMethod === 'cod' && (
                 <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
                   <p className="text-green-400 text-sm">
