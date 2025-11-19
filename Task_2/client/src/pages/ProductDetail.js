@@ -369,6 +369,8 @@ const ProductDetail = () => {
                   {product.variants.map(variant => (
                     <button
                       key={variant.color}
+                      onClick={() => setSelectedColor(variant.color)}
+                      className={`px-3 py-1 rounded-md border-2 transition-all text-sm ${
                         selectedColor === variant.color
                           ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
                           : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
