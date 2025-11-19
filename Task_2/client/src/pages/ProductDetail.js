@@ -480,19 +480,19 @@ const ProductDetail = () => {
             )}
 
             {/* Quantity Selector */}
-            <div className="flex items-center gap-4">
-              <label className="text-gray-300 font-medium">Quantity:</label>
-              <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <label className="text-gray-300 font-medium text-sm">Quantity:</label>
+              <div className="flex items-center gap-1">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 bg-white/5 border border-[#571089]/30 rounded-lg text-white hover:bg-white/10 transition-all"
+                  className="w-8 h-8 bg-white/5 border border-[#571089]/30 rounded-md text-white hover:bg-white/10 transition-all text-sm"
                 >
                   -
                 </button>
-                <span className="w-12 text-center text-white font-semibold">{quantity}</span>
+                <span className="w-10 text-center text-white font-semibold text-sm">{quantity}</span>
                 <button
                   onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                  className="w-10 h-10 bg-white/5 border border-[#571089]/30 rounded-lg text-white hover:bg-white/10 transition-all"
+                  className="w-8 h-8 bg-white/5 border border-[#571089]/30 rounded-md text-white hover:bg-white/10 transition-all text-sm"
                 >
                   +
                 </button>
