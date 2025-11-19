@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Send, Mail, Phone, MapPin, MessageCircle, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
 const CustomerSupportPage = () => {
@@ -6,6 +6,10 @@ const CustomerSupportPage = () => {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [expandedFAQ, setExpandedFAQ] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
