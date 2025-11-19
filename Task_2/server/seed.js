@@ -836,7 +836,7 @@ const sampleProducts = [
     price: 1104.15,
     category: 'Jewelry',
     stock: 35,
-    imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg',
+    imageUrl: 'https://i.pinimg.com/736x/d8/35/96/d8359643c16133ce10065a866d38eb6d.jpg',
     variants: [
       { color: 'Silver', imageUrl: 'https://i.pinimg.com/736x/d8/35/96/d8359643c16133ce10065a866d38eb6d.jpg', stock: 18 },
       { color: 'Gold', imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg', stock: 17 },
@@ -852,11 +852,11 @@ const sampleProducts = [
     price: 1104.15,
     category: 'Jewelry',
     stock: 35,
-    imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg',
+    imageUrl: 'https://i.pinimg.com/736x/dc/98/3c/dc983c1081b09ec896e084442a8ffa3c.jpg',
     variants: [
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/dc/98/3c/dc983c1081b09ec896e084442a8ffa3c.jpg', stock: 17 },
       { color: 'Silver', imageUrl: 'https://i.pinimg.com/736x/d8/35/96/d8359643c16133ce10065a866d38eb6d.jpg', stock: 18 },
-      { color: 'Gold', imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg', stock: 17 },
-      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/dc/98/3c/dc983c1081b09ec896e084442a8ffa3c.jpg', stock: 17 }
+      { color: 'Gold', imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg', stock: 17 }
     ],
     isNewArrival: true,
     rating: 4.6,
