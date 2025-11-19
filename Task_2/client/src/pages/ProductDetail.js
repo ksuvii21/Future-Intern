@@ -32,6 +32,10 @@ const ProductDetail = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
 
