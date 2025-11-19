@@ -43,6 +43,10 @@ const SearchPage = () => {
   ];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [searchParams]);
+
+  useEffect(() => {
     fetchProducts();
   }, [searchQuery, selectedCategory, priceRange, sortBy, sortOrder, currentPage]);
 
