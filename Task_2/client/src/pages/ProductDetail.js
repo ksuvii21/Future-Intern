@@ -128,7 +128,23 @@ const ProductDetail = () => {
   const addToCart = async () => {
     const token = localStorage.getItem('token');
     if (!token) {
-      alert('Please log in to add items to your cart.');
+      // Guest user cart logic
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const existingItemIndex = cart.findIndex(item => item._id === product._id && item.selectedColor === selectedColor && item.selectedSize === selectedSize);
+
+      if (existingItemIndex > -1) {
+        cart[existingItemIndex].quantity += quantity;
+      } else {
+        cart.push({
+          ...product,
+          quantity: quantity,
+          selectedColor: selectedColor,
+          selectedSize: selectedSize
+        });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert('Product added to cart!');
+      window.dispatchEvent(new Event('storage')); // Trigger cart count update
       return;
     }
     try {
