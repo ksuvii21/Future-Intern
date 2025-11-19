@@ -12,6 +12,10 @@ const OrderDetail = () => {
   const [notification, setNotification] = useState({ show: false, message: '', type: 'success' });
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  useEffect(() => {
     if (notification.show) {
       const timer = setTimeout(() => {
         setNotification({ show: false, message: '', type: 'success' }); 
