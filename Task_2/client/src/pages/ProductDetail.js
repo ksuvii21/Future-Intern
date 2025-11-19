@@ -24,6 +24,7 @@ const ProductDetail = () => {
   const [deliveryInfo, setDeliveryInfo] = useState(null);
   const [reviewRating, setReviewRating] = useState(0);
   const [reviewComment, setReviewComment] = useState('');
+  const [reviewImages, setReviewImages] = useState([]);
   const [reviewError, setReviewError] = useState('');
   const [reviewSuccess, setReviewSuccess] = useState('');
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
@@ -754,6 +755,37 @@ const ProductDetail = () => {
                     required
                   ></textarea>
                 </div>
+                <div>
+                  <label className="text-gray-300 mb-2 block">Add Images (Optional)</label>
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#ea698b] file:text-white hover:file:bg-[#d55d92]"
+                  />
+                  <p className="text-xs text-gray-400 mt-1">Upload up to 5 images (max 5MB each)</p>
+                  {reviewImages.length > 0 && (
+                    <div className="flex gap-2 mt-2 flex-wrap">
+                      {reviewImages.map((image, index) => (
+                        <div key={index} className="relative">
+                          <img
+                            src={URL.createObjectURL(image)}
+                            alt={`Review ${index + 1}`}
+                            className="w-16 h-16 object-cover rounded-md border border-[#571089]/30"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeImage(index)}
+                            className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white rounded-full text-xs hover:bg-red-600"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
                 {reviewError && <p className="text-red-400 text-sm">{reviewError}</p>}
                 {reviewSuccess && <p className="text-green-400 text-sm">{reviewSuccess}</p>}
                 <button
@@ -788,7 +820,23 @@ const ProductDetail = () => {
                       </div>
                       <span className="text-xs text-gray-500 ml-auto">{new Date(review.createdAt).toLocaleDateString()}</span>
                     </div>
-                    <p className="text-gray-300 text-xs leading-relaxed">{review.comment}</p>
+                    <p className="text-gray-300 text-sm leading-relaxed mb-2">{review.comment}</p>
+                    {review.images && review.images.length > 0 && (
+                      <div className="flex gap-2 mt-2 flex-wrap">
+                        {review.images.map((image, index) => (
+                          <img
+                            key={index}
+                            src={image}
+                            alt={`Review image ${index + 1}`}
+                            className="w-16 h-16 object-cover rounded-md border border-[#571089]/30 cursor-pointer hover:opacity-80"
+                            onClick={() => {
+                              // Open image in lightbox or new tab
+                              window.open(image, '_blank');
+                            }}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
