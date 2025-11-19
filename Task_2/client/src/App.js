@@ -136,7 +136,6 @@ function App() {
         setMobileMenuOpen={setMobileMenuOpen}
         scrolled={scrolled}
         setScrolled={setScrolled}
-        handleLogout={handleLogout}
         handleLogin={handleLogin}
         toggleDarkMode={toggleDarkMode}
         authPages={authPages}
