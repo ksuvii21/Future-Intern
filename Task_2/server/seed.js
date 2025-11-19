@@ -735,6 +735,38 @@ const sampleProducts = [
     numReviews: 27
   },
   {
+    name: 'Pearl Necklace Set',
+    description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
+    price: 2974.15,
+    category: 'Jewelry',
+    stock: 20,
+    imageUrl: 'https://i.pinimg.com/1200x/15/69/da/1569da9d9af7dc3c2d2045da56e1766b.jpg',
+    variants: [
+      { color: 'Gold', imageUrl: 'https://i.pinimg.com/1200x/15/69/da/1569da9d9af7dc3c2d2045da56e1766b.jpg', stock: 10 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/00/91/a5/0091a5c38cd9e4169cb3e5b9aac3d032.jpg', stock: 10 },
+      { color: 'Emerald', imageUrl: 'https://i.pinimg.com/736x/96/fd/01/96fd013bf8bb1f36ded49b0d990422b6.jpg', stock: 10 }
+    ],
+    isNewArrival: false,
+    rating: 4.6,
+    numReviews: 27
+  },
+  {
+    name: 'Pearl Necklace Set',
+    description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
+    price: 2974.15,
+    category: 'Jewelry',
+    stock: 20,
+    imageUrl: 'https://i.pinimg.com/1200x/00/91/a5/0091a5c38cd9e4169cb3e5b9aac3d032.jpg',
+    variants: [
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/00/91/a5/0091a5c38cd9e4169cb3e5b9aac3d032.jpg', stock: 10 },
+      { color: 'Gold', imageUrl: 'https://i.pinimg.com/1200x/15/69/da/1569da9d9af7dc3c2d2045da56e1766b.jpg', stock: 10 },
+      { color: 'Emerald', imageUrl: 'https://i.pinimg.com/736x/96/fd/01/96fd013bf8bb1f36ded49b0d990422b6.jpg', stock: 10 }
+    ],
+    isNewArrival: false,
+    rating: 4.6,
+    numReviews: 27
+  },
+  {
     name: 'Gold Bangle Bracelet',
     description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
     price: 1699.15,
