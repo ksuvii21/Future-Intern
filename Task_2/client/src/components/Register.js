@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Mail, Lock, User, CheckCircle, Eye, EyeOff, Sparkles, Shield, Zap, Fingerprint } from 'lucide-react';
+import { Mail, Lock, User, CheckCircle, Eye, EyeOff, Sparkles, Shield, Zap, Fingerprint, Chrome } from 'lucide-react';
  
 const Register = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -103,6 +103,11 @@ const Register = ({ onLogin }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleGoogleLogin = () => {
+    // Redirect to the backend Google OAuth route
+    window.location.href = 'http://localhost:5000/api/auth/google';
   };
 
   if (success) {
@@ -352,6 +357,15 @@ const Register = ({ onLogin }) => {
                 )}
               </button>
             </form>
+            
+            {/* OR Separator */}
+            <div className="flex items-center gap-4">
+              <div className="flex-grow h-px bg-[#571089]/30"></div>
+              <span className="text-gray-500 text-sm">OR</span>
+              <div className="flex-grow h-px bg-[#571089]/30"></div>
+            </div>
+
+            <button type="button" onClick={handleGoogleLogin} className="w-full flex justify-center items-center gap-3 py-3 px-4 rounded-lg border border-[#571089] text-gray-300 hover:bg-[#571089]/20 hover:border-[#ea698b]/50 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"><Chrome className="w-5 h-5" /> Continue with Google</button>
 
             {/* Login Link */}
             <div className="text-center pt-4">
