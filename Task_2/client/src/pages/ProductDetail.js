@@ -840,7 +840,7 @@ const ProductDetail = () => {
                           <img
                             key={index}
                             src={image}
-                            alt={`Review image ${index + 1}`}
+                            alt=""
                             className="w-16 h-16 object-cover rounded-md border border-[#571089]/30 cursor-pointer hover:opacity-80"
                             onClick={() => {
                               // Open image in lightbox or new tab
