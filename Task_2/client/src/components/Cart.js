@@ -24,12 +24,12 @@ const Cart = () => {
         // The component expects each item to have a `product` property.
         // The items in localStorage are the product objects themselves, with an added `quantity`.
         // We need to map them to the expected structure: { product: {...}, quantity: X }
-        const formattedGuestCart = localCart.map(item => ({
-          _id: item._id, // Use product ID as the item ID for guests
-          product: item, // The full product object is nested here
-          quantity: item.quantity || 1
+        const formattedItems = localCart.map(item => ({
+          product: item, // The item from localStorage is the product
+          quantity: item.quantity,
+          _id: item._id // Use product's _id as the item's key
         }));
-        setCart({ items: formattedGuestCart });
+        setCart({ items: formattedItems });
         setLoading(false);
         return;
       }
