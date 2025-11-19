@@ -214,27 +214,6 @@ const ProductDetail = () => {
     }
   };
 
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length + reviewImages.length > 5) {
-      setReviewError('You can upload a maximum of 5 images.');
-      return;
-    }
-    const validFiles = files.filter(file => {
-      if (file.size > 5 * 1024 * 1024) { // 5MB limit
-        setReviewError('Each image must be less than 5MB.');
-        return false;
-      }
-      return true;
-    });
-    setReviewImages(prev => [...prev, ...validFiles]);
-    setReviewError('');
-  };
-
-  const removeImage = (index) => {
-    setReviewImages(prev => prev.filter((_, i) => i !== index));
-  };
-
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     setReviewError('');
@@ -249,25 +228,13 @@ const ProductDetail = () => {
     }
 
     try {
-      const formData = new FormData();
-      formData.append('rating', reviewRating);
-      formData.append('comment', reviewComment);
-      reviewImages.forEach((image, index) => {
-        formData.append('images', image);
-      });
-
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
-        }
-      };
-      await axios.post(`http://localhost:5000/api/products/${id}/reviews`, formData, config);
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const reviewData = { rating: reviewRating, comment: reviewComment };
+      await axios.post(`http://localhost:5000/api/products/${id}/reviews`, reviewData, config);
 
       setReviewSuccess('Review submitted successfully! It will be visible after refreshing.');
       setReviewRating(0);
       setReviewComment('');
-      setReviewImages([]);
     } catch (error) {
       setReviewError(error.response?.data?.message || 'Failed to submit review.');
     } finally {
@@ -850,6 +817,11 @@ const ProductDetail = () => {
                             <Star key={i} className={`w-3 h-3 ${i < review.rating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
                           ))}
                         </div>
+                        {review.verified && (
+                          <div className="flex items-center gap-1 text-xs text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full">
+                            <Shield className="w-3 h-3" /> Verified Purchase
+                          </div>
+                        )}
                       </div>
                       <span className="text-xs text-gray-500 ml-auto">{new Date(review.createdAt).toLocaleDateString()}</span>
                     </div>
