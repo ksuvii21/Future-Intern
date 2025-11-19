@@ -108,7 +108,15 @@ function App() {
     setUser(userData);
   };
 
-
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+    setCartCount(0);
+    // Dispatch storage event to update any components listening for changes
+    window.dispatchEvent(new Event('storage'));
+    navigate('/');
+  };
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -266,16 +274,6 @@ function AppLayout({
                     <Link to="/profile" className="text-sm hover:text-[#ea698b] ml-2">
                       Profile
                     </Link>
-                    <button onClick={() => {
-                      localStorage.removeItem('token');
-                      localStorage.removeItem('user');
-                      setUser(null);
-                      setCartCount(0);
-                      window.dispatchEvent(new Event('storage'));
-                      navigate('/');
-                    }} className="text-sm hover:text-[#ea698b] ml-2">
-                      Logout
-                    </button>
                   </div>
                 ) : (
                   <Link to="/login" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
