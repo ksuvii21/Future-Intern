@@ -237,17 +237,6 @@ const Admin = () => {
     }
   };
 
-  const fetchPendingReviews = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.get('http://localhost:5000/api/products/reviews/pending', config);
-      setPendingReviews(response.data);
-    } catch (error) {
-      console.error('Error fetching pending reviews:', error);
-    }
-  };
-
   const handleReviewModeration = async (productId, reviewId, action) => {
     try {
       const token = localStorage.getItem('token');
