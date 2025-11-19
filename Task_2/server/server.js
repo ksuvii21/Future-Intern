@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const { notFound, errorHandler } = require('./controllers/errorHandler');
+const passport = require('passport');
+const session = require('express-session');
 const cloudinary = require('cloudinary').v2;
 
 const dotenv = require('dotenv');
@@ -14,11 +16,25 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// Passport config
+require('./config/passport')(passport);
+
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Express session
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Connect to MongoDB
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/shophub';
