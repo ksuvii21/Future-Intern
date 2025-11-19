@@ -94,13 +94,13 @@ const ProductDetail = () => {
   // Get the current variant based on selected color
   const currentVariant = product?.variants?.find(v => v.color === selectedColor);
 
-  // Get the image to display (variant image or default)
-  const displayImage = currentVariant ? currentVariant.imageUrl : product?.imageUrl;
-
   // Get all images for the lightbox (variant images + default if no variants)
   const allImages = product?.variants && product.variants.length > 0
     ? product.variants.map(v => ({ src: v.imageUrl }))
     : (product?.imageUrl ? [{ src: product.imageUrl }] : []);
+
+  // Get the image to display, prioritizing the selected thumbnail
+  const displayImage = allImages[selectedImageIndex]?.src || product?.imageUrl;
 
   // Get additional product images for thumbnails (simulating different perspectives)
   const productImages = product?.imageUrls && product.imageUrls.length > 0
@@ -391,7 +391,11 @@ const ProductDetail = () => {
                           : 'border-[#571089]/30 hover:border-[#571089]/50'
                       }`}
                       onClick={() => {
-                        setSelectedColor(variant.color);                      }}
+                        setSelectedColor(variant.color);
+                        // Find the index of this variant's image in the allImages array and update the main image
+                        const imageIndex = allImages.findIndex(img => img.src === variant.imageUrl);
+                        if (imageIndex !== -1) setSelectedImageIndex(imageIndex);
+                      }}
                     >
                       <img
                         src={variant.imageUrl}
@@ -442,8 +446,8 @@ const ProductDetail = () => {
 
             {/* Size Chart Modal */}
             {showSizeChart && (
-              <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowSizeChart(false)}>
-                <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="text-2xl font-bold text-white">Size Chart</h3>
                     <button
@@ -695,8 +699,7 @@ const ProductDetail = () => {
                   <div className="flex gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
-                        key={i}
-                        className={`w-7 h-7 cursor-pointer transition-colors ${i < reviewRating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600 hover:text-gray-400'}`}
+                        key={i}className={`w-7 h-7 cursor-pointer transition-colors ${i < reviewRating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600 hover:text-gray-400'}`}
                         onClick={() => setReviewRating(i + 1)}
                       />
                     ))}
