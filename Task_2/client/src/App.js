@@ -50,10 +50,31 @@ function App() {
       setUser(JSON.parse(storedUser));
     }
 
-    const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const count = cart.reduce((total, item) => total + item.quantity, 0);
-      setCartCount(count);
+    const updateCartCount = async () => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        try {
+          const token = localStorage.getItem('token');
+          if (token) {
+            const response = await axios.get('http://localhost:5000/api/cart', {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            const count = response.data.items.reduce((total, item) => total + item.quantity, 0);
+            setCartCount(count);
+          }
+        } catch (error) {
+          console.error('Error fetching cart count:', error);
+          // Fallback to localStorage if API fails
+          const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+          const count = cart.reduce((total, item) => total + item.quantity, 0);
+          setCartCount(count);
+        }
+      } else {
+        // For non-logged in users, use localStorage
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const count = cart.reduce((total, item) => total + item.quantity, 0);
+        setCartCount(count);
+      }
     };
 
     updateCartCount();
