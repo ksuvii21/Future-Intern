@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Package, DollarSign, BarChart2, Edit, Trash2, Search, AlertTriangle, CheckCircle, Clock, TrendingUp, Plus } from 'lucide-react';
+import { Package, DollarSign, BarChart2, Edit, Trash2, Search, AlertTriangle, CheckCircle, Clock, TrendingUp, Plus, Tag, Truck } from 'lucide-react';
 
 const SellerDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -31,6 +31,22 @@ const SellerDashboard = () => {
     key: null,
     direction: 'descending',
   });
+  const [coupons, setCoupons] = useState([]);
+  const [newCoupon, setNewCoupon] = useState({
+    code: '',
+    discountType: 'percentage',
+    value: '',
+    expiryDate: '',
+  });
+  const [editingCoupon, setEditingCoupon] = useState(null);
+
+  const [shippingOptions, setShippingOptions] = useState([]);
+  const [newShippingOption, setNewShippingOption] = useState({
+    name: '',
+    cost: '',
+    estimatedDelivery: '',
+  });
+  const [editingShippingOption, setEditingShippingOption] = useState(null);
 
   const handleSort = (key) => {
     let direction = 'ascending';
@@ -72,6 +88,29 @@ const SellerDashboard = () => {
         lowStockProducts,
         outOfStockProducts
       });
+
+      // Mock fetching coupons and shipping options
+      // In a real app, these would be API calls:
+      // const couponsRes = await axios.get('http://localhost:5000/api/coupons/seller', config);
+      // setCoupons(couponsRes.data);
+      // const shippingRes = await axios.get('http://localhost:5000/api/shipping/seller', config);
+      // setShippingOptions(shippingRes.data);
+
+      // Mock data for demonstration
+      if (coupons.length === 0) {
+        setCoupons([
+          { _id: 'c1', code: 'SUMMER25', discountType: 'percentage', value: 25, expiryDate: '2025-12-31' },
+          { _id: 'c2', code: 'FLAT500', discountType: 'fixed', value: 500, expiryDate: '2025-11-30' },
+        ]);
+      }
+
+      if (shippingOptions.length === 0) {
+        setShippingOptions([
+          { _id: 's1', name: 'Standard Shipping', cost: 50, estimatedDelivery: '5-7 business days' },
+          { _id: 's2', name: 'Express Shipping', cost: 150, estimatedDelivery: '1-2 business days' },
+        ]);
+      }
+
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
       setProducts([]);
@@ -82,6 +121,8 @@ const SellerDashboard = () => {
         lowStockProducts: 0,
         outOfStockProducts: 0
       });
+      setCoupons([]);
+      setShippingOptions([]);
     } finally {
       setLoading(false);
     }
@@ -219,6 +260,140 @@ const SellerDashboard = () => {
     }
     return filtered;
   };
+
+  const handleCouponSubmit = async (e) => {
+    e.preventDefault();
+    // Mock API call
+    console.log('Submitting coupon:', newCoupon);
+    if (editingCoupon) {
+      setCoupons(coupons.map(c => c._id === editingCoupon._id ? { ...newCoupon, _id: c._id } : c));
+    } else {
+      setCoupons([...coupons, { ...newCoupon, _id: `c${Date.now()}` }]);
+    }
+    setNewCoupon({ code: '', discountType: 'percentage', value: '', expiryDate: '' });
+    setEditingCoupon(null);
+  };
+
+  const handleEditCoupon = (coupon) => {
+    setEditingCoupon(coupon);
+    setNewCoupon(coupon);
+  };
+
+  const handleDeleteCoupon = (id) => {
+    if (window.confirm('Are you sure you want to delete this coupon?')) {
+      setCoupons(coupons.filter(c => c._id !== id));
+    }
+  };
+
+  const handleShippingSubmit = async (e) => {
+    e.preventDefault();
+    // Mock API call
+    console.log('Submitting shipping option:', newShippingOption);
+    if (editingShippingOption) {
+      setShippingOptions(shippingOptions.map(s => s._id === editingShippingOption._id ? { ...newShippingOption, _id: s._id } : s));
+    } else {
+      setShippingOptions([...shippingOptions, { ...newShippingOption, _id: `s${Date.now()}` }]);
+    }
+    setNewShippingOption({ name: '', cost: '', estimatedDelivery: '' });
+    setEditingShippingOption(null);
+  };
+
+  const handleEditShipping = (option) => {
+    setEditingShippingOption(option);
+    setNewShippingOption(option);
+  };
+
+  const handleDeleteShipping = (id) => {
+    if (window.confirm('Are you sure you want to delete this shipping option?')) {
+      setShippingOptions(shippingOptions.filter(s => s._id !== id));
+    }
+  };
+
+  const renderDiscounts = () => (
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="lg:col-span-1 bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-fit">
+        <h2 className="text-xl font-bold mb-4 text-white">{editingCoupon ? 'Edit Coupon' : 'Create Coupon'}</h2>
+        <form onSubmit={handleCouponSubmit} className="space-y-4">
+          <input type="text" name="code" value={newCoupon.code} onChange={e => setNewCoupon({ ...newCoupon, code: e.target.value.toUpperCase() })} placeholder="Coupon Code (e.g., SUMMER25)" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+          <div className="grid grid-cols-2 gap-4">
+            <select name="discountType" value={newCoupon.discountType} onChange={e => setNewCoupon({ ...newCoupon, discountType: e.target.value })} className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white focus:ring-2 focus:ring-[#ea698b]">
+              <option value="percentage">Percentage %</option>
+              <option value="fixed">Fixed Amount (₹)</option>
+            </select>
+            <input type="number" name="value" value={newCoupon.value} onChange={e => setNewCoupon({ ...newCoupon, value: e.target.value })} placeholder="Value" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" required />
+          </div>
+          <input type="date" name="expiryDate" value={newCoupon.expiryDate} onChange={e => setNewCoupon({ ...newCoupon, expiryDate: e.target.value })} className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-[#ea698b]" />
+          <button type="submit" className="w-full bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold py-3 px-4 rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all">
+            {editingCoupon ? 'Update Coupon' : 'Create Coupon'}
+          </button>
+          {editingCoupon && <button type="button" onClick={() => { setEditingCoupon(null); setNewCoupon({ code: '', discountType: 'percentage', value: '', expiryDate: '' }); }} className="w-full mt-2 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg">Cancel Edit</button>}
+        </form>
+      </div>
+      <div className="lg:col-span-2 bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
+        <h2 className="text-2xl font-bold text-white mb-4">Your Coupons</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-gray-300">
+            <thead className="border-b border-[#571089]/30 text-xs uppercase text-gray-400">
+              <tr>
+                <th className="p-3">Code</th><th className="p-3">Discount</th><th className="p-3">Expires</th><th className="p-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {coupons.map(coupon => (
+                <tr key={coupon._id} className="border-b border-[#571089]/20 hover:bg-white/5">
+                  <td className="p-3 font-mono text-white bg-white/5 rounded-l-lg">{coupon.code}</td>
+                  <td className="p-3 font-semibold text-green-400">{coupon.discountType === 'percentage' ? `${coupon.value}%` : `₹${coupon.value}`}</td>
+                  <td className="p-3">{coupon.expiryDate ? new Date(coupon.expiryDate).toLocaleDateString() : 'No Expiry'}</td>
+                  <td className="p-3 text-right rounded-r-lg">
+                    <div className="flex gap-2 justify-end">
+                      <button onClick={() => handleEditCoupon(coupon)} className="p-2 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30"><Edit className="w-4 h-4" /></button>
+                      <button onClick={() => handleDeleteCoupon(coupon._id)} className="p-2 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30"><Trash2 className="w-4 h-4" /></button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderShipping = () => (
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="lg:col-span-1 bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-fit">
+        <h2 className="text-xl font-bold mb-4 text-white">{editingShippingOption ? 'Edit Shipping Option' : 'Add Shipping Option'}</h2>
+        <form onSubmit={handleShippingSubmit} className="space-y-4">
+          <input type="text" name="name" value={newShippingOption.name} onChange={e => setNewShippingOption({ ...newShippingOption, name: e.target.value })} placeholder="Option Name (e.g., Express)" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white" required />
+          <input type="number" name="cost" value={newShippingOption.cost} onChange={e => setNewShippingOption({ ...newShippingOption, cost: e.target.value })} placeholder="Cost (₹)" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white" required />
+          <input type="text" name="estimatedDelivery" value={newShippingOption.estimatedDelivery} onChange={e => setNewShippingOption({ ...newShippingOption, estimatedDelivery: e.target.value })} placeholder="Est. Delivery (e.g., 2-3 days)" className="w-full px-4 py-3 bg-[#2a1a3e] border border-[#571089]/50 rounded-lg text-white" required />
+          <button type="submit" className="w-full bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold py-3 px-4 rounded-lg">{editingShippingOption ? 'Update Option' : 'Add Option'}</button>
+          {editingShippingOption && <button type="button" onClick={() => { setEditingShippingOption(null); setNewShippingOption({ name: '', cost: '', estimatedDelivery: '' }); }} className="w-full mt-2 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg">Cancel Edit</button>}
+        </form>
+      </div>
+      <div className="lg:col-span-2 bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
+        <h2 className="text-2xl font-bold text-white mb-4">Your Shipping Options</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-gray-300">
+            <thead className="border-b border-[#571089]/30 text-xs uppercase text-gray-400"><tr><th className="p-3">Option</th><th className="p-3">Cost</th><th className="p-3">Est. Delivery</th><th className="p-3 text-right">Actions</th></tr></thead>
+            <tbody>
+              {shippingOptions.map(opt => (
+                <tr key={opt._id} className="border-b border-[#571089]/20 hover:bg-white/5">
+                  <td className="p-3 font-medium text-white">{opt.name}</td><td className="p-3 font-semibold text-green-400">₹{opt.cost}</td><td className="p-3">{opt.estimatedDelivery}</td>
+                  <td className="p-3 text-right">
+                    <div className="flex gap-2 justify-end">
+                      <button onClick={() => handleEditShipping(opt)} className="p-2 bg-yellow-500/20 text-yellow-400 rounded-md hover:bg-yellow-500/30"><Edit className="w-4 h-4" /></button>
+                      <button onClick={() => handleDeleteShipping(opt._id)} className="p-2 bg-red-500/20 text-red-400 rounded-md hover:bg-red-500/30"><Trash2 className="w-4 h-4" /></button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
 
   const renderDashboard = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -500,12 +675,16 @@ const SellerDashboard = () => {
           <button onClick={() => setActiveTab('dashboard')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'dashboard' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Dashboard</button>
           <button onClick={() => setActiveTab('products')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'products' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Products</button>
           <button onClick={() => setActiveTab('inventory')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'inventory' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Inventory</button>
+          <button onClick={() => setActiveTab('discounts')} className={`flex items-center gap-2 px-4 py-2 font-medium transition-colors ${activeTab === 'discounts' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}><Tag className="w-4 h-4" />Discounts</button>
+          <button onClick={() => setActiveTab('shipping')} className={`flex items-center gap-2 px-4 py-2 font-medium transition-colors ${activeTab === 'shipping' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}><Truck className="w-4 h-4" />Shipping</button>
         </div>
 
         <div>
           {activeTab === 'dashboard' && renderDashboard()}
           {activeTab === 'products' && renderProducts()}
           {activeTab === 'inventory' && renderInventory()}
+          {activeTab === 'discounts' && renderDiscounts()}
+          {activeTab === 'shipping' && renderShipping()}
         </div>
       </div>
     </div>
