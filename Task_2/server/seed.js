@@ -185,6 +185,38 @@ const sampleProducts = [
     numReviews: 15
   },
   {
+    name: 'Silk Cocktail Dress',
+    description: 'Luxurious silk cocktail dress with asymmetric hem and delicate beading. Perfect for evening events.',
+    price: 2124.15,
+    category: 'Dresses',
+    stock: 18,
+    imageUrl: 'https://i.pinimg.com/1200x/96/9b/93/969b939280a6ef1fee231781eb7fc372.jpg',
+    variants: [
+      { color: 'Navy Blue', imageUrl: 'https://i.pinimg.com/1200x/96/9b/93/969b939280a6ef1fee231781eb7fc372.jpg', stock: 6 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/ea/02/2b/ea022b104a901fbc73d40fbbdd4aad95.jpg', stock: 6 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/f7/36/02/f7360267ab6dc116f9670b2166b40879.jpg', stock: 6 }
+    ],
+    isNewArrival: true,
+    rating: 4.8,
+    numReviews: 15
+  },
+  {
+    name: 'Silk Cocktail Dress',
+    description: 'Luxurious silk cocktail dress with asymmetric hem and delicate beading. Perfect for evening events.',
+    price: 2124.15,
+    category: 'Dresses',
+    stock: 18,
+    imageUrl: 'https://i.pinimg.com/736x/f7/36/02/f7360267ab6dc116f9670b2166b40879.jpg',
+    variants: [
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/f7/36/02/f7360267ab6dc116f9670b2166b40879.jpg', stock: 6 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/ea/02/2b/ea022b104a901fbc73d40fbbdd4aad95.jpg', stock: 6 },
+      { color: 'Navy Blue', imageUrl: 'https://i.pinimg.com/1200x/96/9b/93/969b939280a6ef1fee231781eb7fc372.jpg', stock: 6 }
+    ],
+    isNewArrival: true,
+    rating: 4.8,
+    numReviews: 15
+  },
+  {
     name: 'Satin Wrap Dress',
     description: 'Elegant satin wrap dress with tie waist and flowing skirt. Versatile piece for both casual and formal wear.',
     price: 1529.15,
