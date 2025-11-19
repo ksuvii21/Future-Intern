@@ -320,7 +320,19 @@ const ProductDetail = () => {
 
                         : 'border-[#571089]/30 hover:border-[#571089]/50'
                     }`}
-                    onClick={() => setSelectedImageIndex(index)}
+                    onClick={() => {
+                      if (index < allImages.length) {
+                        // It's a variant image
+                        const variant = product.variants[index];
+                        setSelectedColor(variant.color);
+                        setSelectedImageIndex(index);
+                        const newUrl = `/product/${product._id}?color=${encodeURIComponent(variant.color)}`;
+                        navigate(newUrl);
+                      } else {
+                        // It's an additional image, just set the index
+                        setSelectedImageIndex(index);
+                      }
+                    }}
                   >
                     <img
                       src={img.src}
