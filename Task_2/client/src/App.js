@@ -419,8 +419,8 @@ function AppLayout({
                   <li><Link to="/customer-support" className="hover:text-[#ea698b] transition-colors">Customer Support</Link></li>
                   <li><Link to="/return-policy" className="hover:text-[#ea698b] transition-colors">Returns</Link></li>
                   <li><Link to="/refund-policy" className="hover:text-[#ea698b] transition-colors">Refunds</Link></li>
-                  <li><Link to="/" className="hover:text-[#ea698b] transition-colors">Track Order</Link></li>
-                  <li><Link to="/" className="hover:text-[#ea698b] transition-colors">Shipping Info</Link></li>
+                  <li><Link to="/profile" className="hover:text-[#ea698b] transition-colors">Track Order</Link></li>
+                  <li><Link to="/profile" className="hover:text-[#ea698b] transition-colors">Shipping Info</Link></li>
                   <li><Link to="/" className="hover:text-[#ea698b] transition-colors">Size Guide</Link></li>
                 </ul>
               </div>
