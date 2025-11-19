@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Star, Heart, ShoppingBag, Truck, Shield, RotateCcw, MapPin, MessageCircle, Award, Send, Share } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
