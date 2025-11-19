@@ -224,10 +224,15 @@ const ProductDetail = () => {
       return;
     }
 
-    try {
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-      const reviewData = { rating: reviewRating, comment: reviewComment };
-      await axios.post(`http://localhost:5000/api/products/${id}/reviews`, reviewData, config);
+      try {
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+        const reviewData = new FormData();
+        reviewData.append('rating', reviewRating);
+        reviewData.append('comment', reviewComment);
+        reviewImages.forEach((image, index) => {
+          reviewData.append('images', image);
+        });
+        await axios.post(`http://localhost:5000/api/products/${id}/reviews`, reviewData, config);
 
       setReviewSuccess('Review submitted successfully! It will be visible after refreshing.');
       setReviewRating(0);
