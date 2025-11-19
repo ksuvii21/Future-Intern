@@ -655,6 +655,7 @@ const Admin = () => {
         <div className="flex space-x-2 border-b border-[#571089]/30 mb-8">
           <button onClick={() => setActiveTab('dashboard')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'dashboard' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Dashboard</button>
           <button onClick={() => setActiveTab('products')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'products' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Products</button>
+          <button onClick={() => setActiveTab('reviews')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'reviews' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Reviews</button>
           <button onClick={() => setActiveTab('users')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'users' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Users</button>
           <button onClick={() => setActiveTab('orders')} className={`px-4 py-2 font-medium transition-colors ${activeTab === 'orders' ? 'text-[#ea698b] border-b-2 border-[#ea698b]' : 'text-gray-400'}`}>Orders</button>
         </div>
