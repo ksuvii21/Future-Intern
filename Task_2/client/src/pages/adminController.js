@@ -147,3 +147,38 @@ exports.generateSalesReport = async (req, res) => {
     res.status(500).json({ message: 'Server error generating report.' });
   }
 };
+
+/**
+ * @route   GET /api/admin/customer-analytics
+ * @desc    Get analytics about customers
+ * @access  Private (Admin)
+ */
+exports.getCustomerAnalytics = async (req, res) => {
+  try {
+    const customerData = await Order.aggregate([
+      {
+        $group: {
+          _id: '$user',
+          totalOrders: { $sum: 1 },
+          totalSpent: { $sum: '$totalAmount' }
+        }
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'userDetails'
+        }
+      },
+      { $unwind: '$userDetails' },
+      { $sort: { totalSpent: -1 } },
+      { $project: { 'userDetails.password': 0 } } // Exclude password
+    ]);
+
+    res.json(customerData);
+  } catch (error) {
+    console.error('Get customer analytics error:', error);
+    res.status(500).json({ message: 'Server error fetching customer analytics.' });
+  }
+};
