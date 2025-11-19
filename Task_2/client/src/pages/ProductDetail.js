@@ -52,10 +52,17 @@ const ProductDetail = () => {
             ? colorParam
             : response.data.variants[0].color;
           setSelectedColor(defaultColor);
-        }
 
-        // Reset selected image index when product changes
-        setSelectedImageIndex(0);
+          // Set selected image index to the variant's image
+          const variant = response.data.variants.find(v => v.color === defaultColor);
+          if (variant) {
+            const allImagesTemp = response.data.variants.map(v => ({ src: v.imageUrl }));
+            const imageIndex = allImagesTemp.findIndex(img => img.src === variant.imageUrl);
+            if (imageIndex !== -1) setSelectedImageIndex(imageIndex);
+          }
+        } else {
+          setSelectedImageIndex(0);
+        }
 
         // Fetch similar products
         const allProductsResponse = await axios.get('http://localhost:5000/api/products');
