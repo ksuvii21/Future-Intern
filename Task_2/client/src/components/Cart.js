@@ -77,8 +77,10 @@ const Cart = () => {
     }
   };
 
-  const cartItems = cart?.items || [];
-  const totalPrice = cartItems.reduce(
+  // Filter out items where the product might have been deleted
+  const validCartItems = cart?.items?.filter(item => item.product) || [];
+
+  const totalPrice = validCartItems.reduce(
     (total, item) => total + item.product.price * item.quantity,
     0
   );
@@ -127,7 +129,7 @@ const Cart = () => {
         </h1>
       </div>
 
-      {cartItems.length === 0 ? (
+      {validCartItems.length === 0 ? (
         <div className="text-center py-16">
           <ShoppingBag className="w-24 h-24 text-gray-600 mx-auto mb-6" />
           <h3 className="text-2xl font-bold text-white mb-4">Your cart is empty</h3>
@@ -144,7 +146,7 @@ const Cart = () => {
           {/* Cart Items */}
           <div className="lg:col-span-2">
             <div className="space-y-6">
-              {cartItems.map(item => (
+              {validCartItems.map(item => (
                 <div
                   key={item._id}
                   className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 hover:border-[#ea698b]/50 transition-all duration-300"
@@ -207,7 +209,7 @@ const Cart = () => {
 
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between text-gray-300">
-                  <span>Subtotal ({cartItems.length} items)</span>
+                  <span>Subtotal ({validCartItems.length} items)</span>
                   <span>₹{totalPrice.toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between text-gray-300">
