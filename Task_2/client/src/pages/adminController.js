@@ -25,9 +25,9 @@ exports.getStats = async (req, res) => {
     const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
 
     const monthlySales = await Order.aggregate([
-      { ₹match: { status: { ₹ne: 'cancelled' } } },
-      { ₹group: { _id: { ₹month: '₹createdAt' }, total: { ₹sum: '₹totalAmount' } } },
-      { ₹sort: { '_id': 1 } }
+      { $match: { status: { $ne: 'cancelled' } } },
+      { $group: { _id: { $month: '$createdAt' }, total: { $sum: '$totalAmount' } } },
+      { $sort: { '_id': 1 } }
     ]);
 
     const salesByCategory = await Order.aggregate([
