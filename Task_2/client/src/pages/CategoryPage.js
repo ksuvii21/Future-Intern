@@ -20,6 +20,10 @@ const CategoryPage = () => {
   const searchQuery = searchParams.get('search') || '';
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [category, searchParams]);
+
+  useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
