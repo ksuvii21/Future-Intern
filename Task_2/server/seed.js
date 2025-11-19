@@ -1115,6 +1115,38 @@ const sampleProducts = [
     numReviews: 25
   },
   {
+    name: 'Designer Sunglasses',
+    description: 'Luxury oversized sunglasses with gold accents and UV protection. Timeless style meets modern comfort.',
+    price: 2379.15,
+    category: 'Accessories',
+    stock: 14,
+    imageUrl: 'https://i.pinimg.com/736x/dc/57/0e/dc570e8a4f27bdc98352b1a0018d146b.jpg',
+    variants: [
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/7a/33/38/7a3338b6f1af8b2f6dae90a9fac1efd4.jpg', stock: 7 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/df/15/e8/df15e8f2c4803285f0d9e78c16f0a555.jpg', stock: 7 },
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/736x/dc/57/0e/dc570e8a4f27bdc98352b1a0018d146b.jpg', stock: 7 }
+    ],
+    isNewArrival: true,
+    rating: 4.7,
+    numReviews: 25
+  },
+  {
+    name: 'Designer Sunglasses',
+    description: 'Luxury oversized sunglasses with gold accents and UV protection. Timeless style meets modern comfort.',
+    price: 2379.15,
+    category: 'Accessories',
+    stock: 14,
+    imageUrl: 'https://i.pinimg.com/736x/dc/57/0e/dc570e8a4f27bdc98352b1a0018d146b.jpg',
+    variants: [
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/7a/33/38/7a3338b6f1af8b2f6dae90a9fac1efd4.jpg', stock: 7 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/df/15/e8/df15e8f2c4803285f0d9e78c16f0a555.jpg', stock: 7 },
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/736x/dc/57/0e/dc570e8a4f27bdc98352b1a0018d146b.jpg', stock: 7 }
+    ],
+    isNewArrival: true,
+    rating: 4.7,
+    numReviews: 25
+  },
+  {
     name: 'Rose Gold Watch',
     description: 'Elegant rose gold watch with diamond bezel and leather strap. Sophisticated timepiece for the modern woman.',
     price: 3824.15,
