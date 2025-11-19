@@ -322,8 +322,8 @@ const ProductDetail = () => {
                       }}
                     />
                     {selectedImageIndex === index && (
-                      <div className="absolute inset-0 bg-[#ea698b]/20 flex items-center justify-center">
-                        <div className="w-2 h-2 bg-[#ea698b] rounded-full"></div>
+                      <div className="inset-0 bg-[#ea698b]/20 flex items-center justify-center">
+                        <div className="w-2 h-2 rounded-full"></div>
                       </div>
                     )}
                   </div>
