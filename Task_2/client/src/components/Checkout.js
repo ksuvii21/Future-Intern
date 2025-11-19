@@ -191,6 +191,22 @@ const Checkout = () => {
     0
   );
 
+  if (cartLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] flex items-center justify-center">
+        <div className="text-white text-xl">Loading cart...</div>
+      </div>
+    );
+  }
+
+  if (error && cartItems.length === 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] flex items-center justify-center">
+        <div className="text-red-400 text-xl">{error}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] relative">
       {/* Header */}
