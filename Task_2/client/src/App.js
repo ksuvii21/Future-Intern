@@ -274,7 +274,14 @@ function AppLayout({
                     <Link to="/profile" className="text-sm hover:text-[#ea698b] ml-2">
                       Profile
                     </Link>
-                    <button onClick={handleLogout} className="text-sm hover:text-[#ea698b] ml-2">
+                    <button onClick={() => {
+                      localStorage.removeItem('token');
+                      localStorage.removeItem('user');
+                      setUser(null);
+                      setCartCount(0);
+                      window.dispatchEvent(new Event('storage'));
+                      navigate('/');
+                    }} className="text-sm hover:text-[#ea698b] ml-2">
                       Logout
                     </button>
                   </div>
