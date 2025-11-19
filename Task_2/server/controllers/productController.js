@@ -154,7 +154,6 @@ exports.createProductReview = asyncHandler(async (req, res) => {
     // Handle review images upload
     let reviewImages = [];
 
-    // Handle review images upload
     if (req.files && req.files.length > 0) {
       for (const file of req.files) {
         try {
