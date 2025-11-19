@@ -8,6 +8,10 @@ const OrderHistory = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     fetchOrders();
   }, []);
 
