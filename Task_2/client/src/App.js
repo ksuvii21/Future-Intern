@@ -108,14 +108,14 @@ function App() {
     setUser(userData);
   };
 
-  const handleLogout = () => {
+  const handleLogout = (navigate) => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
     setCartCount(0);
     // Dispatch storage event to update any components listening for changes
     window.dispatchEvent(new Event('storage'));
-    navigate('/');
+    if (navigate) navigate('/');
   };
 
   const toggleDarkMode = () => {
@@ -206,7 +206,7 @@ function AppLayout({
       {/* Elegant Header - Only show if not on auth pages */}
       {!isAuthPage && (
         <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30'
+          scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-transparent'
         }`}>
           {/* Top Announcement Bar */}
           <div className="bg-gradient-to-r from-[#ea698b] via-[#ac46a1] to-[#822faf] text-white text-sm py-2">
