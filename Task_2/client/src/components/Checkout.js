@@ -187,7 +187,7 @@ const Checkout = () => {
   };
 
   const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + (item.product?.price || item.price) * item.quantity,
     0
   );
 
