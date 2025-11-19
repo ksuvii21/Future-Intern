@@ -212,11 +212,11 @@ const Checkout = () => {
       {/* Header */}
       <div className="bg-black/20 backdrop-blur-sm border-b border-[#571089]/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-4xl font-bold text-white">Checkout</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white">Checkout</h1>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Order Summary */}
           <div className="lg:col-span-1">
