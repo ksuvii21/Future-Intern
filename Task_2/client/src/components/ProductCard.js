@@ -30,7 +30,7 @@ const ProductCard = ({ product }) => {
   const mainImage = product.variants && product.variants.length > 0 ? product.variants[0].imageUrl : product.imageUrl;
 
   return (
-    <div className="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 border border-gray-100">
+    <div className="product-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-lg transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 border border-gray-100">
       <div className="relative group">
         {mainImage ? (
           <img
@@ -113,7 +113,7 @@ const ProductCard = ({ product }) => {
           <button
             onClick={addToCart}
             disabled={product.stock === 0}
-            className={`flex-1 py-3 px-4 rounded-xl transition-all duration-300 font-semibold shadow-md hover:shadow-lg ${
+            className={`flex-1 py-3 px-4 rounded-xl transition-all duration-300 font-semibold shadow-md hover:shadow-md ${
               product.stock === 0
                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                 : 'bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700 transform hover:scale-105'
