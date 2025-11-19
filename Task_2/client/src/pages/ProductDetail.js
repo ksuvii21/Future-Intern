@@ -28,7 +28,6 @@ const ProductDetail = () => {
   const [reviewSuccess, setReviewSuccess] = useState('');
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   useEffect(() => {
