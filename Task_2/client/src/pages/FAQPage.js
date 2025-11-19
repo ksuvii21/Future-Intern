@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HelpCircle, ChevronDown } from 'lucide-react';
 
 const faqs = [
@@ -47,6 +47,10 @@ const FAQItem = ({ faq, index, toggleFAQ }) => {
 
 const FAQPage = () => {
   const [faqList, setFaqList] = useState(faqs.map(f => ({ ...f, open: false })));
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const toggleFAQ = index => {
     setFaqList(
