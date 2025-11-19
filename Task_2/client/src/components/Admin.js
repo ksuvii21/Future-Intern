@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Users, ShoppingBag, Package, DollarSign, Edit, Trash2, Search} from 'lucide-react';
 
 const Admin = () => {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('reviews');
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -45,7 +45,10 @@ const Admin = () => {
 
   useEffect(() => {
     fetchDashboardData();
-  }, []);
+    if (activeTab === 'reviews') {
+      fetchPendingReviews();
+    }
+  }, [activeTab]);
 
   const fetchDashboardData = async () => {
     setLoading(true);
@@ -219,6 +222,30 @@ const Admin = () => {
       fetchDashboardData(); // Refetch to show updated role
     } catch (error) {
       console.error('Error updating user role:', error);
+    }
+  };
+
+  const fetchPendingReviews = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const response = await axios.get('http://localhost:5000/api/products/reviews/pending', config);
+      setPendingReviews(response.data);
+    } catch (error) {
+      console.error('Error fetching pending reviews:', error);
+    }
+  };
+
+  const handleReviewModeration = async (productId, reviewId, action) => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      await axios.put(`http://localhost:5000/api/products/${productId}/reviews/${reviewId}/moderate`, { action }, config);
+      fetchPendingReviews(); // Refetch pending reviews
+      alert(`Review ${action}d successfully`);
+    } catch (error) {
+      console.error('Error moderating review:', error);
+      alert('Failed to moderate review');
     }
   };
 
