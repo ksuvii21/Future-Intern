@@ -917,8 +917,8 @@ const sampleProducts = [
     stock: 12,
     imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg',
     variants: [
-      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/ca/64/d9/ca64d90081b931c08f4c7129f766449a.jpg', stock: 6 },
       { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg', stock: 6 },
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/ca/64/d9/ca64d90081b931c08f4c7129f766449a.jpg', stock: 6 },
       { color: 'Burgundy', imageUrl: 'https://i.pinimg.com/1200x/61/5c/db/615cdb9f9b4fa65ab22d4acbe15ce82c.jpg', stock: 6 },
       { color: 'White', imageUrl: 'https://i.pinimg.com/736x/e7/aa/62/e7aa623a6fff5868f69eadd67f0c4cbe.jpg', stock: 6 }
     ],
