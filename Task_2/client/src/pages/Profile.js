@@ -37,6 +37,10 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (!storedUser) {
       navigate('/login');
