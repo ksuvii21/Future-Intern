@@ -34,6 +34,7 @@ const Admin = () => {
     key: null,
     direction: 'descending',
   });
+  const [pendingReviews, setPendingReviews] = useState([]);
 
   const handleSort = (key) => {
     let direction = 'ascending';
