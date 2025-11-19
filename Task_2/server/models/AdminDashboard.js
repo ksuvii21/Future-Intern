@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
-import { LayoutDashboard, Package, ShoppingCart, Users, DollarSign, Edit, Trash2, PlusCircle, Save, X, Search } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, Users, DollarSign, Edit, Trash2, PlusCircle, Save, X, Search, FileDown, AlertTriangle, CheckSquare, Settings } from 'lucide-react';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -9,6 +11,7 @@ const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [users, setUsers] = useState([]);
+  const [customerAnalytics, setCustomerAnalytics] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [showProductModal, setShowProductModal] = useState(false);
@@ -21,17 +24,19 @@ const AdminDashboard = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      const [statsRes, productsRes, ordersRes, usersRes] = await Promise.all([
+      const [statsRes, productsRes, ordersRes, usersRes, customerAnalyticsRes] = await Promise.all([
         axios.get('http://localhost:5000/api/admin/stats', config),
         axios.get('http://localhost:5000/api/products', config),
         axios.get('http://localhost:5000/api/orders/all', config),
         axios.get('http://localhost:5000/api/auth/users', config),
+        axios.get('http://localhost:5000/api/admin/customer-analytics', config),
       ]);
 
       setStats(statsRes.data);
       setProducts(productsRes.data.products || []);
       setOrders(ordersRes.data);
       setUsers(usersRes.data);
+      setCustomerAnalytics(customerAnalyticsRes.data);
 
     } catch (error) {
       console.error("Failed to fetch admin data", error);
@@ -107,6 +112,69 @@ const AdminDashboard = () => {
   const openProductModal = (product = null) => {
     setEditingProduct(product);
     setShowProductModal(true);
+  };
+
+  const generateSalesReportPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Sales Report", 14, 16);
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22);
+
+    const salesData = [
+      ["Total Revenue", `Rs. ${stats.totalRevenue.toFixed(2)}`],
+      ["Total Orders", stats.totalOrders],
+      ["Avg. Order Value", `Rs. ${stats.avgOrderValue.toFixed(2)}`],
+      ["Total Products", stats.totalProducts],
+    ];
+
+    doc.autoTable({
+      startY: 30,
+      head: [['Metric', 'Value']],
+      body: salesData,
+    });
+
+    const topProducts = stats.productPerformance.map(p => [p.name, p.unitsSold, `Rs. ${p.totalRevenue.toFixed(2)}`]);
+    doc.autoTable({
+      startY: doc.lastAutoTable.finalY + 10,
+      head: [['Top Products', 'Units Sold', 'Revenue']],
+      body: topProducts,
+    });
+
+    doc.save('sales-report.pdf');
+  };
+
+  const generateLedgerPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Financial Ledger", 14, 16);
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22);
+
+    const tableColumn = ["Order ID", "Date", "Customer", "Amount", "Status"];
+    const tableRows = [];
+
+    orders.forEach(order => {
+      const orderData = [
+        order._id,
+        new Date(order.createdAt).toLocaleDateString(),
+        order.user?.username || 'N/A',
+        `Rs. ${order.totalAmount.toFixed(2)}`,
+        order.status
+      ];
+      tableRows.push(orderData);
+    });
+
+    doc.autoTable(tableColumn, tableRows, { startY: 30 });
+    doc.save('financial-ledger.pdf');
+  };
+
+  const generateCustomerAnalyticsPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Customer Analytics Report", 14, 16);
+    const head = [['Customer', 'Email', 'Total Orders', 'Total Spent (Rs.)']];
+    const body = customerAnalytics.map(c => [c.userDetails.username, c.userDetails.email, c.totalOrders, c.totalSpent.toFixed(2)]);
+    
+    doc.autoTable({ head, body, startY: 30 });
+    doc.save('customer-analytics.pdf');
   };
   
   const StatCard = ({ icon, title, value, color, prefix = '', suffix = '' }) => (
@@ -311,6 +379,59 @@ const AdminDashboard = () => {
     </div>
   );
 
+  const renderReports = () => (
+    <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold text-white">Sales Reports</h2>
+        <div className="flex gap-4">
+          <button onClick={generateSalesReportPDF} className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+            <FileDown className="w-4 h-4" /> Download Sales PDF
+          </button>
+          <button onClick={generateLedgerPDF} className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+            <FileDown className="w-4 h-4" /> Download Ledger PDF
+          </button>
+        </div>
+      </div>
+      {renderDashboard()}
+    </div>
+  );
+
+  const renderCustomers = () => (
+    <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold text-white">Customer Analytics</h2>
+        <button onClick={generateCustomerAnalyticsPDF} className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors">
+          <FileDown className="w-4 h-4" /> Download Customer PDF
+        </button>
+      </div>
+      <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
+        <h3 className="text-xl font-bold text-white mb-4">Top Customers</h3>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-left text-gray-400">
+            <thead className="text-xs text-gray-300 uppercase bg-white/5">
+              <tr>
+                <th scope="col" className="px-6 py-3">Customer</th>
+                <th scope="col" className="px-6 py-3">Email</th>
+                <th scope="col" className="px-6 py-3">Total Orders</th>
+                <th scope="col" className="px-6 py-3">Total Spent</th>
+              </tr>
+            </thead>
+            <tbody>
+              {customerAnalytics.map(c => (
+                <tr key={c._id} className="border-b border-[#571089]/30 hover:bg-white/5">
+                  <td className="px-6 py-4 font-medium text-white">{c.userDetails.username}</td>
+                  <td className="px-6 py-4">{c.userDetails.email}</td>
+                  <td className="px-6 py-4 text-center">{c.totalOrders}</td>
+                  <td className="px-6 py-4 text-green-400 font-semibold">₹{c.totalSpent.toLocaleString('en-IN')}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+
   const renderContent = () => {
     if (loading) {
       return <div className="flex justify-center items-center h-64"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ea698b]"></div></div>;
@@ -320,6 +441,8 @@ const AdminDashboard = () => {
       case 'products': return renderProducts();
       case 'orders': return renderOrders();
       case 'users': return renderUsers();
+      case 'reports': return renderReports();
+      case 'customers': return renderCustomers();
       case 'performance': return renderPerformance();
       default: return null;
     }
@@ -349,6 +472,8 @@ const AdminDashboard = () => {
               <TabButton id="products" icon={<Package className="w-5 h-5" />} label="Products" />
               <TabButton id="orders" icon={<ShoppingCart className="w-5 h-5" />} label="Orders" />
               <TabButton id="users" icon={<Users className="w-5 h-5" />} label="Users" />
+              <TabButton id="reports" icon={<FileDown className="w-5 h-5" />} label="Reports" />
+              <TabButton id="customers" icon={<Users className="w-5 h-5" />} label="Customers" />
               <TabButton id="performance" icon={<BarChart className="w-5 h-5" />} label="Performance" />
             </div>
           </aside>
