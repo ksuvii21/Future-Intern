@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Star, Shield, Truck, RotateCcw, Heart, ShoppingBag } from 'lucide-react';
 import axios from 'axios';
@@ -53,6 +53,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [currentOffer, setCurrentOffer] = useState(0);
+  const categoriesRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -92,6 +93,10 @@ const Home = () => {
     return selectedCategory === 'All' || product.category === selectedCategory;
   });
 
+  const handleShopNowClick = () => {
+    categoriesRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]">
       {/* Main Content */}
@@ -123,7 +128,7 @@ const Home = () => {
                   <Link to="/search" className="px-8 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all duration-300 hover:scale-105 inline-block text-center">
                     Advanced Search
                   </Link>
-                  <button className="px-8 py-4 bg-white/5 backdrop-blur-sm border border-[#571089]/30 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300">
+                  <button onClick={handleShopNowClick} className="px-8 py-4 bg-white/5 backdrop-blur-sm border border-[#571089]/30 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300">
                     Shop Collection
                   </button>
                 </div>
@@ -191,7 +196,7 @@ const Home = () => {
         </section>
 
         {/* Category Filter */}
-        <section className="py-12 px-4">
+        <section ref={categoriesRef} className="py-12 px-4">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-wrap justify-center gap-4">
               {categories.map(category => (
