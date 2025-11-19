@@ -336,14 +336,14 @@ const ProductDetail = () => {
             
             {/* Color Selection */}
             {product?.variants && product.variants.length > 0 && (
-              <div className="space-y-3">
-                <label className="text-gray-300 font-medium">Color:</label>
-                <div className="flex gap-3 flex-wrap">
+              <div className="space-y-2">
+                <label className="text-gray-300 font-medium text-sm">Color:</label>
+                <div className="flex gap-2 flex-wrap">
                   {product.variants.map(variant => (
                     <button
                       key={variant.color}
                       onClick={() => setSelectedColor(variant.color)}
-                      className={`px-4 py-2 rounded-lg border-2 transition-all ${
+                      className={`px-3 py-1 rounded-md border-2 transition-all text-sm ${
                         selectedColor === variant.color
                           ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
                           : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
@@ -354,11 +354,11 @@ const ProductDetail = () => {
                   ))}
                 </div>
                 {/* Color Variant Images */}
-                <div className="flex gap-3 flex-wrap mt-4">
+                <div className="flex gap-2 flex-wrap mt-2">
                   {product.variants.map(variant => (
                     <div
                       key={`img-${variant.color}`}
-                      className={`relative w-16 h-16 rounded-lg overflow-hidden border-2 cursor-pointer transition-all ${
+                      className={`relative w-12 h-12 rounded-md overflow-hidden border-2 cursor-pointer transition-all ${
                         selectedColor === variant.color
                           ? 'border-[#ea698b] ring-2 ring-[#ea698b]/50'
                           : 'border-[#571089]/30 hover:border-[#571089]/50'
@@ -384,12 +384,12 @@ const ProductDetail = () => {
                         alt={`${product.name} - ${variant.color}`}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjMyIiB5PSIzMiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSIjOWNhNGIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg==';
+                          e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjI0IiB5PSIyNCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjgiIGZpbGw9IiM5Y2E0YjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
                         }}
                       />
                       {selectedColor === variant.color && (
                         <div className="absolute inset-0 bg-[#ea698b]/20 flex items-center justify-center">
-                          <div className="w-3 h-3 bg-[#ea698b] rounded-full"></div>
+                          <div className="w-2 h-2 bg-[#ea698b] rounded-full"></div>
                         </div>
                       )}
                     </div>
