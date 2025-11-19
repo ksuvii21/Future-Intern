@@ -380,7 +380,13 @@ const ProductDetail = () => {
                   {product.variants.map(variant => (
                     <button
                       key={`color-button-${variant.color}`}
-                      onClick={() => setSelectedColor(variant.color)}
+                      onClick={() => {
+                        setSelectedColor(variant.color);
+                        const imageIndex = allImages.findIndex(img => img.src === variant.imageUrl);
+                        if (imageIndex !== -1) setSelectedImageIndex(imageIndex);
+                        const newUrl = `/product/${product._id}?color=${encodeURIComponent(variant.color)}`;
+                        navigate(newUrl);
+                      }}
                       className={`px-3 py-1 rounded-md border-2 transition-all text-sm ${
                         selectedColor === variant.color
                           ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b] '
