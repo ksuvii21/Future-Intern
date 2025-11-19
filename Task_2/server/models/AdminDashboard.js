@@ -21,6 +21,10 @@ const AdminDashboard = () => {
   const PIE_COLORS = ['#ea698b', '#c05299', '#822faf', '#6d23b6', '#ac46a1'];
 
   const fetchAllData = useCallback(async () => {
+    // Scroll to top when tab changes
+    window.scrollTo(0, 0);
+  }, [activeTab]);
+
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
@@ -45,6 +49,10 @@ const AdminDashboard = () => {
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
