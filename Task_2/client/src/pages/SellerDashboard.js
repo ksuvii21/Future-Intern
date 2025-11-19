@@ -89,27 +89,13 @@ const SellerDashboard = () => {
         outOfStockProducts
       });
 
-      // Mock fetching coupons and shipping options
-      // In a real app, these would be API calls:
-      // const couponsRes = await axios.get('http://localhost:5000/api/coupons/seller', config);
-      // setCoupons(couponsRes.data);
-      // const shippingRes = await axios.get('http://localhost:5000/api/shipping/seller', config);
-      // setShippingOptions(shippingRes.data);
+      // Fetch coupons and shipping options from the backend
+      const couponsRes = await axios.get('http://localhost:5000/api/coupons/seller', config);
+      setCoupons(couponsRes.data);
 
-      // Mock data for demonstration
-      if (coupons.length === 0) {
-        setCoupons([
-          { _id: 'c1', code: 'SUMMER25', discountType: 'percentage', value: 25, expiryDate: '2025-12-31' },
-          { _id: 'c2', code: 'FLAT500', discountType: 'fixed', value: 500, expiryDate: '2025-11-30' },
-        ]);
-      }
+      const shippingRes = await axios.get('http://localhost:5000/api/shipping/seller', config);
+      setShippingOptions(shippingRes.data);
 
-      if (shippingOptions.length === 0) {
-        setShippingOptions([
-          { _id: 's1', name: 'Standard Shipping', cost: 50, estimatedDelivery: '5-7 business days' },
-          { _id: 's2', name: 'Express Shipping', cost: 150, estimatedDelivery: '1-2 business days' },
-        ]);
-      }
 
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
@@ -263,15 +249,23 @@ const SellerDashboard = () => {
 
   const handleCouponSubmit = async (e) => {
     e.preventDefault();
-    // Mock API call
-    console.log('Submitting coupon:', newCoupon);
-    if (editingCoupon) {
-      setCoupons(coupons.map(c => c._id === editingCoupon._id ? { ...newCoupon, _id: c._id } : c));
-    } else {
-      setCoupons([...coupons, { ...newCoupon, _id: `c${Date.now()}` }]);
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      
+      if (editingCoupon) {
+        await axios.put(`http://localhost:5000/api/coupons/${editingCoupon._id}`, newCoupon, config);
+      } else {
+        await axios.post('http://localhost:5000/api/coupons', newCoupon, config);
+      }
+
+      setNewCoupon({ code: '', discountType: 'percentage', value: '', expiryDate: '' });
+      setEditingCoupon(null);
+      // Refetch data to show the new/updated coupon
+      fetchDashboardData();
+    } catch (error) {
+      console.error('Error saving coupon:', error);
     }
-    setNewCoupon({ code: '', discountType: 'percentage', value: '', expiryDate: '' });
-    setEditingCoupon(null);
   };
 
   const handleEditCoupon = (coupon) => {
@@ -279,33 +273,48 @@ const SellerDashboard = () => {
     setNewCoupon(coupon);
   };
 
-  const handleDeleteCoupon = (id) => {
+  const handleDeleteCoupon = async (id) => {
     if (window.confirm('Are you sure you want to delete this coupon?')) {
-      setCoupons(coupons.filter(c => c._id !== id));
+      try {
+        const token = localStorage.getItem('token');
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+        await axios.delete(`http://localhost:5000/api/coupons/${id}`, config);
+        fetchDashboardData();
+      } catch (error) {
+        console.error('Error deleting coupon:', error);
+      }
     }
   };
 
   const handleShippingSubmit = async (e) => {
     e.preventDefault();
-    // Mock API call
-    console.log('Submitting shipping option:', newShippingOption);
-    if (editingShippingOption) {
-      setShippingOptions(shippingOptions.map(s => s._id === editingShippingOption._id ? { ...newShippingOption, _id: s._id } : s));
-    } else {
-      setShippingOptions([...shippingOptions, { ...newShippingOption, _id: `s${Date.now()}` }]);
+    try {
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+
+      if (editingShippingOption) {
+        await axios.put(`http://localhost:5000/api/shipping/${editingShippingOption._id}`, newShippingOption, config);
+      } else {
+        await axios.post('http://localhost:5000/api/shipping', newShippingOption, config);
+      }
+      setNewShippingOption({ name: '', cost: '', estimatedDelivery: '' });
+      setEditingShippingOption(null);
+      fetchDashboardData();
+    } catch (error) {
+      console.error('Error saving shipping option:', error);
     }
-    setNewShippingOption({ name: '', cost: '', estimatedDelivery: '' });
-    setEditingShippingOption(null);
   };
 
   const handleEditShipping = (option) => {
     setEditingShippingOption(option);
     setNewShippingOption(option);
   };
-
-  const handleDeleteShipping = (id) => {
+  const handleDeleteShipping = async (id) => {
     if (window.confirm('Are you sure you want to delete this shipping option?')) {
-      setShippingOptions(shippingOptions.filter(s => s._id !== id));
+      const token = localStorage.getItem('token');
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      await axios.delete(`http://localhost:5000/api/shipping/${id}`, config);
+      fetchDashboardData();
     }
   };
 
