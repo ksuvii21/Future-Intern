@@ -783,6 +783,38 @@ const sampleProducts = [
     numReviews: 22
   },
   {
+    name: 'Gold Bangle Bracelet',
+    description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
+    price: 1699.15,
+    category: 'Jewelry',
+    stock: 25,
+    imageUrl: 'https://i.pinimg.com/1200x/a3/17/82/a317829ddbba3c7a7ef33afc5d23aff0.jpg',
+    variants: [
+      { color: 'Rose Gold', imageUrl: 'https://i.pinimg.com/1200x/a3/17/82/a317829ddbba3c7a7ef33afc5d23aff0.jpg', stock: 12 },
+      { color: 'Yellow Gold', imageUrl: 'https://i.pinimg.com/1200x/0b/b1/b3/0bb1b33706dbc5daa5101c0a03a77c9c.jpg', stock: 13 },
+      { color: 'Flower', imageUrl: 'https://i.pinimg.com/1200x/64/38/c7/6438c7c5faca2c8925f17da104c97a3f.jpg', stock: 12 }
+    ],
+    isNewArrival: false,
+    rating: 4.5,
+    numReviews: 22
+  },
+  {
+    name: 'Gold Bangle Bracelet',
+    description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
+    price: 1699.15,
+    category: 'Jewelry',
+    stock: 25,
+    imageUrl: 'https://i.pinimg.com/1200x/0b/b1/b3/0bb1b33706dbc5daa5101c0a03a77c9c.jpg',
+    variants: [
+      { color: 'Yellow Gold', imageUrl: 'https://i.pinimg.com/1200x/0b/b1/b3/0bb1b33706dbc5daa5101c0a03a77c9c.jpg', stock: 13 },
+      { color: 'Rose Gold', imageUrl: 'https://i.pinimg.com/1200x/a3/17/82/a317829ddbba3c7a7ef33afc5d23aff0.jpg', stock: 12 },
+      { color: 'Flower', imageUrl: 'https://i.pinimg.com/1200x/64/38/c7/6438c7c5faca2c8925f17da104c97a3f.jpg', stock: 12 }
+    ],
+    isNewArrival: false,
+    rating: 4.5,
+    numReviews: 22
+  },
+  {
     name: 'Silver Hoop Earrings',
     description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
     price: 1104.15,
