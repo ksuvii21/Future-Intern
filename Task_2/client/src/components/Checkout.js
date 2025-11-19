@@ -478,6 +478,21 @@ const Checkout = () => {
 
               {paymentMethod === 'upi' && (
                 <div className="space-y-4">
+                  <div className="text-center">
+                    <button
+                      type="button"
+                      className="w-full px-6 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 mb-4"
+                      onClick={() => {
+                        // Placeholder for UPI scanner functionality
+                        alert('UPI Scanner: Please allow camera access to scan QR codes. Feature coming soon!');
+                      }}
+                    >
+                      <Smartphone className="w-6 h-6" />
+                      Scan UPI QR Code
+                    </button>
+                    <p className="text-gray-400 text-sm mb-4">or enter UPI ID manually</p>
+                  </div>
+
                   <div>
                     <label className="block text-gray-300 mb-2">UPI ID</label>
                     <input
@@ -490,19 +505,7 @@ const Checkout = () => {
                       required
                     />
                   </div>
-                  <div className="flex gap-4">
-                    <button
-                      type="button"
-                      className="flex-1 px-4 py-3 bg-[#ea698b]/20 border border-[#ea698b]/30 rounded-lg text-[#ea698b] hover:bg-[#ea698b]/30 transition-all flex items-center justify-center gap-2"
-                      onClick={() => {
-                        // Placeholder for UPI scanner functionality
-                        alert('UPI Scanner feature coming soon! For now, please enter your UPI ID manually.');
-                      }}
-                    >
-                      <Smartphone className="w-5 h-5" />
-                      Scan QR Code
-                    </button>
-                  </div>
+
                   <div className="p-4 bg-[#ea698b]/10 border border-[#ea698b]/30 rounded-lg">
                     <p className="text-[#ea698b] text-sm">
                       You will be redirected to your UPI app to complete the payment securely.
