@@ -267,11 +267,11 @@ const ProductDetail = () => {
       </div>
 
       {/* Product Details */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Product Image */}
-          <div className="space-y-4 cursor-pointer" onClick={() => setLightboxOpen(true)}>
-            <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl overflow-hidden relative aspect-square">
+          <div className="space-y-2 cursor-pointer" onClick={() => setLightboxOpen(true)}>
+            <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-xl overflow-hidden relative aspect-[4/3]">
               {displayImage ? (
                 <img
                   src={displayImage}
