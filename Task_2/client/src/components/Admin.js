@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Users, ShoppingBag, Package, DollarSign, Edit, Trash2, Search, Star} from 'lucide-react';
 
 const Admin = () => {
-  const [activeTab, setActiveTab] = useState('reviews');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
