@@ -169,9 +169,11 @@ const ProductDetail = () => {
     }
   };
 
-  const buyNow = () => {
-    addToCart();
-    window.location.href = '/checkout';
+  const buyNow = async () => {
+    // First, add the item to the cart and wait for it to complete
+    await addToCart();
+    // Then, navigate to the checkout page
+    navigate('/checkout');
   };
 
   const addToWishlist = async () => {
