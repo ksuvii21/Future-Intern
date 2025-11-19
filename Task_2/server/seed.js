@@ -909,8 +909,57 @@ const sampleProducts = [
     rating: 4.7,
     numReviews: 31
   },
-
-  
+  {
+    name: 'Designer Handbag',
+    description: 'Luxury leather handbag with gold hardware and structured silhouette. Spacious interior with multiple compartments.',
+    price: 5099.15,
+    category: 'Accessories',
+    stock: 12,
+    imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg',
+    variants: [
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/ca/64/d9/ca64d90081b931c08f4c7129f766449a.jpg', stock: 6 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg', stock: 6 },
+      { color: 'Burgundy', imageUrl: 'https://i.pinimg.com/1200x/61/5c/db/615cdb9f9b4fa65ab22d4acbe15ce82c.jpg', stock: 6 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/e7/aa/62/e7aa623a6fff5868f69eadd67f0c4cbe.jpg', stock: 6 }
+    ],
+    isNewArrival: false,
+    rating: 4.7,
+    numReviews: 31
+  },
+  {
+    name: 'Designer Handbag',
+    description: 'Luxury leather handbag with gold hardware and structured silhouette. Spacious interior with multiple compartments.',
+    price: 5099.15,
+    category: 'Accessories',
+    stock: 12,
+    imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg',
+    variants: [
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/ca/64/d9/ca64d90081b931c08f4c7129f766449a.jpg', stock: 6 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg', stock: 6 },
+      { color: 'Burgundy', imageUrl: 'https://i.pinimg.com/1200x/61/5c/db/615cdb9f9b4fa65ab22d4acbe15ce82c.jpg', stock: 6 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/e7/aa/62/e7aa623a6fff5868f69eadd67f0c4cbe.jpg', stock: 6 }
+    ],
+    isNewArrival: false,
+    rating: 4.7,
+    numReviews: 31
+  },
+  {
+    name: 'Designer Handbag',
+    description: 'Luxury leather handbag with gold hardware and structured silhouette. Spacious interior with multiple compartments.',
+    price: 5099.15,
+    category: 'Accessories',
+    stock: 12,
+    imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg',
+    variants: [
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/ca/64/d9/ca64d90081b931c08f4c7129f766449a.jpg', stock: 6 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg', stock: 6 },
+      { color: 'Burgundy', imageUrl: 'https://i.pinimg.com/1200x/61/5c/db/615cdb9f9b4fa65ab22d4acbe15ce82c.jpg', stock: 6 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/e7/aa/62/e7aa623a6fff5868f69eadd67f0c4cbe.jpg', stock: 6 }
+    ],
+    isNewArrival: false,
+    rating: 4.7,
+    numReviews: 31
+  },
   {
     name: 'Crystal Hair Accessories',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
@@ -929,7 +978,78 @@ const sampleProducts = [
     rating: 4.4,
     numReviews: 33
   },
-  
+  {
+    name: 'Crystal Hair Accessories',
+    description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
+    price: 764.15,
+    category: 'Accessories',
+    stock: 30,
+    imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg',
+    variants: [
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg', stock: 15 },
+      { color: 'Silver', imageUrl: 'https://i.pinimg.com/1200x/17/64/a0/1764a0f0c965c60dad06f7a88d95091c.jpg', stock: 15 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/d8/0c/77/d80c771e13b8cede79a02f9a869841d8.jpg', stock: 15 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/b2/d2/94/b2d294c14978a09c86b1f1137278882a.jpg', stock: 15 },
+      { color: 'Butterfly', imageUrl: 'https://i.pinimg.com/1200x/dc/13/52/dc135207d67678b5b63a5e6b7773ed67.jpg', stock: 15 } 
+    ],
+    isNewArrival: true,
+    rating: 4.4,
+    numReviews: 33
+  },
+  {
+    name: 'Crystal Hair Accessories',
+    description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
+    price: 764.15,
+    category: 'Accessories',
+    stock: 30,
+    imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg',
+    variants: [
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg', stock: 15 },
+      { color: 'Silver', imageUrl: 'https://i.pinimg.com/1200x/17/64/a0/1764a0f0c965c60dad06f7a88d95091c.jpg', stock: 15 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/d8/0c/77/d80c771e13b8cede79a02f9a869841d8.jpg', stock: 15 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/b2/d2/94/b2d294c14978a09c86b1f1137278882a.jpg', stock: 15 },
+      { color: 'Butterfly', imageUrl: 'https://i.pinimg.com/1200x/dc/13/52/dc135207d67678b5b63a5e6b7773ed67.jpg', stock: 15 } 
+    ],
+    isNewArrival: true,
+    rating: 4.4,
+    numReviews: 33
+  },
+  {
+    name: 'Crystal Hair Accessories',
+    description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
+    price: 764.15,
+    category: 'Accessories',
+    stock: 30,
+    imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg',
+    variants: [
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg', stock: 15 },
+      { color: 'Silver', imageUrl: 'https://i.pinimg.com/1200x/17/64/a0/1764a0f0c965c60dad06f7a88d95091c.jpg', stock: 15 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/d8/0c/77/d80c771e13b8cede79a02f9a869841d8.jpg', stock: 15 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/b2/d2/94/b2d294c14978a09c86b1f1137278882a.jpg', stock: 15 },
+      { color: 'Butterfly', imageUrl: 'https://i.pinimg.com/1200x/dc/13/52/dc135207d67678b5b63a5e6b7773ed67.jpg', stock: 15 } 
+    ],
+    isNewArrival: true,
+    rating: 4.4,
+    numReviews: 33
+  },
+  {
+    name: 'Crystal Hair Accessories',
+    description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
+    price: 764.15,
+    category: 'Accessories',
+    stock: 30,
+    imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg',
+    variants: [
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg', stock: 15 },
+      { color: 'Silver', imageUrl: 'https://i.pinimg.com/1200x/17/64/a0/1764a0f0c965c60dad06f7a88d95091c.jpg', stock: 15 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/d8/0c/77/d80c771e13b8cede79a02f9a869841d8.jpg', stock: 15 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/b2/d2/94/b2d294c14978a09c86b1f1137278882a.jpg', stock: 15 },
+      { color: 'Butterfly', imageUrl: 'https://i.pinimg.com/1200x/dc/13/52/dc135207d67678b5b63a5e6b7773ed67.jpg', stock: 15 } 
+    ],
+    isNewArrival: true,
+    rating: 4.4,
+    numReviews: 33
+  },
   {
     name: 'Embroidered Clutch',
     description: 'Hand-embroidered silk clutch with beaded detailing. Perfect complement to evening wear.',
