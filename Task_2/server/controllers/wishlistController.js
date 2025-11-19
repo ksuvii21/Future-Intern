@@ -78,7 +78,7 @@ exports.removeFromWishlist = asyncHandler(async (req, res) => {
 
   res.json(wishlist);
 });
-s
+
 /**
  * @desc    Move item from wishlist to cart
  * @route   POST /api/wishlist/move-to-cart
