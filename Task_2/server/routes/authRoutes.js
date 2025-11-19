@@ -12,6 +12,8 @@ const {
   updateUserRole
 } = require('../controllers/authController');
 const auth = require('../middleware/auth');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 // @route   POST /api/auth/register
 // @desc    Register a new user
@@ -62,5 +64,30 @@ router.get('/users', auth, adminAuth, getAllUsers);
 // @desc    Update a user's role (admin only)
 // @access  Private/Admin
 router.put('/users/:id/role', auth, adminAuth, updateUserRole);
+
+// @desc    Auth with Google
+// @route   GET /api/auth/google
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+// @desc    Google auth callback
+// @route   GET /api/auth/google/callback
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
+    // On successful authentication, Passport attaches the user to req.user.
+    // We'll generate a JWT and send it back to a dedicated callback page on the frontend.
+    const token = jwt.sign({ userId: req.user._id, role: req.user.role }, process.env.JWT_SECRET || 'your-secret-key', {
+      expiresIn: '7d'
+    });
+
+    const user = {
+      id: req.user._id,
+      username: req.user.username,
+      email: req.user.email,
+      role: req.user.role,
+      createdAt: req.user.createdAt
+    };
+
+    res.redirect(`${process.env.FRONTEND_URL}/oauth-callback?token=${token}&user=${encodeURIComponent(JSON.stringify(user))}`);
+  }
+);
 
 module.exports = router;
