@@ -61,6 +61,14 @@ const productSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
+  priceHistory: [{
+    price: { type: Number, required: true },
+    date: { type: Date, default: Date.now }
+  }],
+  stockAlerts: [{
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    alerted: { type: Boolean, default: false }
+  }],
 }, {
   timestamps: true,
 });
