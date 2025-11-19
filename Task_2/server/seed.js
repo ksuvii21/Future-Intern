@@ -344,12 +344,12 @@ const sampleProducts = [
     price: 1019.15,
     category: 'Dresses',
     stock: 28,
-    imageUrl: 'https://i.pinimg.com/1200x/95/97/30/9597308035ebd87a5e11c5b3d6c50376.jpg',
+    imageUrl: 'https://i.pinimg.com/1200x/6f/cc/2e/6fcc2e7995a0c7ffff020c7a315068ef.jpg',
     variants: [
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/6f/cc/2e/6fcc2e7995a0c7ffff020c7a315068ef.jpg', stock: 9 },
       { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/95/97/30/9597308035ebd87a5e11c5b3d6c50376.jpg', stock: 10 },
       { color: 'Blue', imageUrl: 'https://i.pinimg.com/1200x/4a/3a/bf/4a3abfb4aa790b2a173fba7e5577a8ea.jpg', stock: 9 },
       { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/76/63/f3/7663f3bb566d3b2a243b22cacbe53d09.jpg', stock: 9 },
-      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/6f/cc/2e/6fcc2e7995a0c7ffff020c7a315068ef.jpg', stock: 9 },
       { color: 'Green', imageUrl: 'https://i.pinimg.com/736x/1c/a4/6a/1ca46a357251cf715d9dd3fec3cf2f1c.jpg', stock: 10 }
     ],
     isNewArrival: true,
