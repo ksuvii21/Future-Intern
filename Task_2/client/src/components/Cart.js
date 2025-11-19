@@ -45,6 +45,8 @@ const Cart = () => {
     } catch (error) {
       console.error('Error fetching cart:', error);
       setError('Failed to load cart');
+    } finally {
+      setLoading(false);
     }
   };
 
