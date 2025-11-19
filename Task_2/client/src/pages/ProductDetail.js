@@ -7,7 +7,7 @@ import "yet-another-react-lightbox/styles.css";
 import axios from 'axios';
 import RecentlyViewedProducts from '../components/RecentlyViewedProducts';
 import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
-
+ 
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -97,10 +97,20 @@ const ProductDetail = () => {
   // Get the image to display (variant image or default)
   const displayImage = currentVariant ? currentVariant.imageUrl : product?.imageUrl;
 
-    // Get all images for the lightbox (variant images + default if no variants)
-    const allImages = product?.variants && product.variants.length > 0
+  // Get all images for the lightbox (variant images + default if no variants)
+  const allImages = product?.variants && product.variants.length > 0
     ? product.variants.map(v => ({ src: v.imageUrl }))
     : (product?.imageUrl ? [{ src: product.imageUrl }] : []);
+
+  // Get additional product images for thumbnails (simulating different perspectives)
+  const productImages = product?.imageUrls && product.imageUrls.length > 0
+    ? product.imageUrls.map(url => ({ src: url }))
+    : allImages;
+
+  // Combine variant images and product images for comprehensive view
+  const thumbnailImages = [...allImages, ...productImages.filter(img =>
+    !allImages.some(variantImg => variantImg.src === img.src)
+  )].slice(0, 4); // Limit to 4 thumbnails
 
   const addToCart = async () => {
     const token = localStorage.getItem('token');
