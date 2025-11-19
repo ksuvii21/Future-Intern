@@ -54,6 +54,9 @@ const ProductDetail = () => {
           setSelectedColor(defaultColor);
         }
 
+        // Reset selected image index when product changes
+        setSelectedImageIndex(0);
+
         // Fetch similar products
         const allProductsResponse = await axios.get('http://localhost:5000/api/products');
         const similar = allProductsResponse.data.products.filter(p => p &&
@@ -271,11 +274,11 @@ const ProductDetail = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Product Image */}
-          <div className="space-y-2 cursor-pointer" onClick={() => setLightboxOpen(true)}>
-            <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-xl overflow-hidden relative aspect-[4/3]">
-              {displayImage ? (
+          <div className="space-y-2">
+            <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-xl overflow-hidden relative aspect-[4/3] cursor-pointer" onClick={() => setLightboxOpen(true)}>
+              {thumbnailImages[selectedImageIndex] ? (
                 <img
-                  src={displayImage}
+                  src={thumbnailImages[selectedImageIndex].src}
                   alt={product.name}
                   className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
                   onError={(e) => {
@@ -288,18 +291,31 @@ const ProductDetail = () => {
                 </div>
               )}
             </div>
-            {allImages.length > 1 && (
+            {thumbnailImages.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
-                {allImages.slice(0, 4).map((img, index) => (
-                  <div key={index} className="border border-[#571089]/30 rounded-md overflow-hidden aspect-square" onClick={(e) => { e.stopPropagation(); setLightboxIndex(index); setLightboxOpen(true); }}>
+                {thumbnailImages.map((img, index) => (
+                  <div
+                    key={index}
+                    className={`border-2 rounded-md overflow-hidden aspect-square cursor-pointer transition-all ${
+                      selectedImageIndex === index
+                        ? 'border-[#ea698b] ring-2 ring-[#ea698b]/50'
+                        : 'border-[#571089]/30 hover:border-[#571089]/50'
+                    }`}
+                    onClick={() => setSelectedImageIndex(index)}
+                  >
                     <img
                       src={img.src}
-                      alt={`${product.name} variant ${index + 1}`}
+                      alt={`${product.name} view ${index + 1}`}
                       className="w-full h-full object-cover hover:opacity-80 transition-opacity"
                       onError={(e) => {
                         e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjOWNhNGIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg==';
                       }}
                     />
+                    {selectedImageIndex === index && (
+                      <div className="absolute inset-0 bg-[#ea698b]/20 flex items-center justify-center">
+                        <div className="w-2 h-2 bg-[#ea698b] rounded-full"></div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
