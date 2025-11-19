@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import { LayoutDashboard, Package, ShoppingCart, Users, DollarSign, Edit, Trash2, PlusCircle, Save, X, Search } from 'lucide-react';
 
 const AdminDashboard = () => {
@@ -13,6 +13,7 @@ const AdminDashboard = () => {
 
   const [showProductModal, setShowProductModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const PIE_COLORS = ['#ea698b', '#c05299', '#822faf', '#6d23b6', '#ac46a1'];
 
   const fetchAllData = useCallback(async () => {
     setLoading(true);
@@ -107,15 +108,15 @@ const AdminDashboard = () => {
     setEditingProduct(product);
     setShowProductModal(true);
   };
-
-  const StatCard = ({ icon, title, value, color }) => (
+  
+  const StatCard = ({ icon, title, value, color, prefix = '', suffix = '' }) => (
     <div className={`bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 flex items-center gap-4`}>
       <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br ${color}`}>
         {icon}
       </div>
       <div>
         <p className="text-gray-400 text-sm">{title}</p>
-        <p className="text-2xl font-bold text-white">{value}</p>
+        <p className="text-2xl font-bold text-white">{prefix}{value}{suffix}</p>
       </div>
     </div>
   );
@@ -123,10 +124,10 @@ const AdminDashboard = () => {
   const renderDashboard = () => (
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard icon={<DollarSign />} title="Total Revenue" value={`₹{stats?.totalRevenue?.toFixed(2) || 0}`} color="from-green-500/30 to-green-600/30" />
+        <StatCard icon={<DollarSign />} title="Total Revenue" value={stats?.totalRevenue?.toFixed(2) || 0} prefix="₹" color="from-green-500/30 to-green-600/30" />
+        <StatCard icon={<DollarSign />} title="Avg. Order Value" value={stats?.avgOrderValue?.toFixed(2) || 0} prefix="₹" color="from-teal-500/30 to-teal-600/30" />
         <StatCard icon={<ShoppingCart />} title="Total Orders" value={stats?.totalOrders || 0} color="from-blue-500/30 to-blue-600/30" />
         <StatCard icon={<Users />} title="Total Users" value={stats?.totalUsers || 0} color="from-purple-500/30 to-purple-600/30" />
-        <StatCard icon={<Package />} title="Total Products" value={stats?.totalProducts || 0} color="from-yellow-500/30 to-yellow-600/30" />
       </div>
       <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-[400px]">
         <h3 className="text-xl font-bold text-white mb-4">Monthly Sales</h3>
@@ -140,6 +141,24 @@ const AdminDashboard = () => {
             <Bar dataKey="total" fill="#ea698b" name="Sales (₹)" />
           </BarChart>
         </ResponsiveContainer>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-[400px]">
+          <h3 className="text-xl font-bold text-white mb-4">Sales by Category</h3>
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie data={stats?.salesByCategory} dataKey="totalRevenue" nameKey="_id" cx="50%" cy="50%" outerRadius={120} fill="#8884d8" label>
+                {stats?.salesByCategory?.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip contentStyle={{ backgroundColor: '#1a0a2e', border: '1px solid #571089' }} />
+              <Legend />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        {/* Placeholder for User Registrations Chart */}
+        <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-[400px]"></div>
       </div>
     </div>
   );
@@ -266,6 +285,32 @@ const AdminDashboard = () => {
     </div>
   );
 
+  const renderPerformance = () => (
+    <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
+      <h2 className="text-2xl font-bold text-white mb-6">Top Product Performance</h2>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm text-left text-gray-400">
+          <thead className="text-xs text-gray-300 uppercase bg-white/5">
+            <tr>
+              <th scope="col" className="px-6 py-3">Product Name</th>
+              <th scope="col" className="px-6 py-3">Units Sold</th>
+              <th scope="col" className="px-6 py-3">Total Revenue</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stats?.productPerformance?.map(p => (
+              <tr key={p._id} className="border-b border-[#571089]/30 hover:bg-white/5">
+                <td className="px-6 py-4 font-medium text-white">{p.name}</td>
+                <td className="px-6 py-4">{p.unitsSold}</td>
+                <td className="px-6 py-4 text-green-400">₹{p.totalRevenue.toLocaleString('en-IN')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+
   const renderContent = () => {
     if (loading) {
       return <div className="flex justify-center items-center h-64"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#ea698b]"></div></div>;
@@ -275,6 +320,7 @@ const AdminDashboard = () => {
       case 'products': return renderProducts();
       case 'orders': return renderOrders();
       case 'users': return renderUsers();
+      case 'performance': return renderPerformance();
       default: return null;
     }
   };
@@ -303,6 +349,7 @@ const AdminDashboard = () => {
               <TabButton id="products" icon={<Package className="w-5 h-5" />} label="Products" />
               <TabButton id="orders" icon={<ShoppingCart className="w-5 h-5" />} label="Orders" />
               <TabButton id="users" icon={<Users className="w-5 h-5" />} label="Users" />
+              <TabButton id="performance" icon={<BarChart className="w-5 h-5" />} label="Performance" />
             </div>
           </aside>
 
