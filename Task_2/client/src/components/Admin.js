@@ -35,6 +35,19 @@ const Admin = () => {
     direction: 'descending',
   });
   const [pendingReviews, setPendingReviews] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [analyticsData, setAnalyticsData] = useState({
+    salesTrends: [],
+    customerDemographics: [],
+    productPerformance: [],
+    revenueBreakdown: []
+  });
+  const [reportFilters, setReportFilters] = useState({
+    dateRange: 'last30days',
+    category: 'all',
+    status: 'all'
+  });
+  const [ledgerData, setLedgerData] = useState([]);
 
   const handleSort = (key) => {
     let direction = 'ascending';
