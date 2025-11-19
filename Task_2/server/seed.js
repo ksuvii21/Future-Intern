@@ -1184,11 +1184,11 @@ const sampleProducts = [
     price: 3824.15,
     category: 'Accessories',
     stock: 9,
-    imageUrl: 'https://i.pinimg.com/1200x/a0/49/e4/a049e4bdb58ca6f388da6f47b5f466f5.jpg',
+    imageUrl: 'https://i.pinimg.com/1200x/ae/4a/7b/ae4a7be5ff11046ebc8f6e462adc9975.jpg',
     variants: [
+      { color: 'Pink Gold', imageUrl: 'https://i.pinimg.com/1200x/ae/4a/7b/ae4a7be5ff11046ebc8f6e462adc9975.jpg', stock: 4 },
       { color: 'Rose Gold', imageUrl: 'https://i.pinimg.com/1200x/a0/49/e4/a049e4bdb58ca6f388da6f47b5f466f5.jpg', stock: 5 },
-      { color: 'Black Gold', imageUrl: 'https://i.pinimg.com/1200x/d9/3e/42/d93e42b2bab26bd2a4a94216fca5dba6.jpg', stock: 4 },
-      { color: 'Pink Gold', imageUrl: 'https://i.pinimg.com/1200x/ae/4a/7b/ae4a7be5ff11046ebc8f6e462adc9975.jpg', stock: 4 }
+      { color: 'Black Gold', imageUrl: 'https://i.pinimg.com/1200x/d9/3e/42/d93e42b2bab26bd2a4a94216fca5dba6.jpg', stock: 4 }
     ],
     isNewArrival: false,
     rating: 4.9,
