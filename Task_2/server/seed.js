@@ -687,6 +687,38 @@ const sampleProducts = [
     numReviews: 27
   },
   {
+    name: 'Emerald Drop Earrings',
+    description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
+    price: 2974.15,
+    category: 'Jewelry',
+    stock: 20,
+    imageUrl: 'https://i.pinimg.com/1200x/66/d9/b7/66d9b763cc9064a3f03ab1e459146092.jpg',
+    variants: [
+      { color: 'Emerald', imageUrl: 'https://i.pinimg.com/1200x/c9/f6/1a/c9f61af97627380595c8e816b02ff2b7.jpg', stock: 10 },
+      { color: 'Gold', imageUrl: 'https://i.pinimg.com/1200x/66/d9/b7/66d9b763cc9064a3f03ab1e459146092.jpg', stock: 10 },
+      { color: 'Butterfly', imageUrl: 'https://i.pinimg.com/1200x/af/7f/c9/af7fc907f5f26ef64b8ecc56be9a08e0.jpg', stock: 10 }
+    ],
+    isNewArrival: false,
+    rating: 4.6,
+    numReviews: 27
+  },
+  {
+    name: 'Emerald Drop Earrings',
+    description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
+    price: 2974.15,
+    category: 'Jewelry',
+    stock: 20,
+    imageUrl: 'https://i.pinimg.com/1200x/66/d9/b7/66d9b763cc9064a3f03ab1e459146092.jpg',
+    variants: [
+      { color: 'Emerald', imageUrl: 'https://i.pinimg.com/1200x/c9/f6/1a/c9f61af97627380595c8e816b02ff2b7.jpg', stock: 10 },
+      { color: 'Gold', imageUrl: 'https://i.pinimg.com/1200x/66/d9/b7/66d9b763cc9064a3f03ab1e459146092.jpg', stock: 10 },
+      { color: 'Butterfly', imageUrl: 'https://i.pinimg.com/1200x/af/7f/c9/af7fc907f5f26ef64b8ecc56be9a08e0.jpg', stock: 10 }
+    ],
+    isNewArrival: false,
+    rating: 4.6,
+    numReviews: 27
+  },
+  {
     name: 'Pearl Necklace Set',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
     price: 2974.15,
