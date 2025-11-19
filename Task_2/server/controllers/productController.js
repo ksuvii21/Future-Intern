@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
+const Order = require('../models/Order');
 const asyncHandler = require('./asyncHandler');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
@@ -131,6 +132,16 @@ exports.createProductReview = asyncHandler(async (req, res) => {
       throw new Error('You have already reviewed this product');
     }
 
+    // Check if the user has purchased this product
+    const hasPurchased = await Order.findOne({
+      user: req.user.userId,
+      'products.product': req.params.id,
+      status: 'delivered' // Only count delivered orders as a valid purchase
+    });
+
+    // Handle review images upload
+    let reviewImages = [];
+
     // Handle review images upload
     let reviewImages = [];
     if (req.files && req.files.length > 0) {
@@ -164,8 +175,8 @@ exports.createProductReview = asyncHandler(async (req, res) => {
       helpful: {
         upvotes: [],
         downvotes: []
-      },
-      verified: false // Will be set based on purchase history
+      },      
+      verified: !!hasPurchased // Set to true if a purchase is found, otherwise false
     };
 
     product.reviews.push(review);
