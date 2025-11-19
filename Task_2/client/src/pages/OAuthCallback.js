@@ -7,6 +7,10 @@ const OAuthCallback = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const token = searchParams.get('token');
     const user = searchParams.get('user');
 
