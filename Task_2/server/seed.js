@@ -1212,6 +1212,57 @@ const sampleProducts = [
     numReviews: 23
   },
   {
+    name: 'Leather Ankle Boots',
+    description: 'Premium leather ankle boots with block heel and side zipper. Versatile style for any season.',
+    price: 2974.15,
+    category: 'Accessories',
+    stock: 18,
+    imageUrl: 'https://i.pinimg.com/1200x/82/6e/22/826e226c96b6e4643a48fe3933da1cc8.jpg',
+    variants: [
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/82/6e/22/826e226c96b6e4643a48fe3933da1cc8.jpg', stock: 9 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/d2/21/36/d2213672b28d496e308bb60c546daec4.jpg', stock: 9 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/e6/e6/76/e6e67652de2b62d1e4c82caf7e7c39d3.jpg', stock: 9 },
+      { color: 'Cream', imageUrl: 'https://i.pinimg.com/736x/21/1b/31/211b3105cee08f6b575ad2eb9fba1734.jpg', stock: 9 }
+    ],
+    isNewArrival: true,
+    rating: 4.6,
+    numReviews: 23
+  },
+  {
+    name: 'Leather Ankle Boots',
+    description: 'Premium leather ankle boots with block heel and side zipper. Versatile style for any season.',
+    price: 2974.15,
+    category: 'Accessories',
+    stock: 18,
+    imageUrl: 'https://i.pinimg.com/1200x/82/6e/22/826e226c96b6e4643a48fe3933da1cc8.jpg',
+    variants: [
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/82/6e/22/826e226c96b6e4643a48fe3933da1cc8.jpg', stock: 9 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/d2/21/36/d2213672b28d496e308bb60c546daec4.jpg', stock: 9 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/e6/e6/76/e6e67652de2b62d1e4c82caf7e7c39d3.jpg', stock: 9 },
+      { color: 'Cream', imageUrl: 'https://i.pinimg.com/736x/21/1b/31/211b3105cee08f6b575ad2eb9fba1734.jpg', stock: 9 }
+    ],
+    isNewArrival: true,
+    rating: 4.6,
+    numReviews: 23
+  },
+  {
+    name: 'Leather Ankle Boots',
+    description: 'Premium leather ankle boots with block heel and side zipper. Versatile style for any season.',
+    price: 2974.15,
+    category: 'Accessories',
+    stock: 18,
+    imageUrl: 'https://i.pinimg.com/1200x/82/6e/22/826e226c96b6e4643a48fe3933da1cc8.jpg',
+    variants: [
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/82/6e/22/826e226c96b6e4643a48fe3933da1cc8.jpg', stock: 9 },
+      { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/d2/21/36/d2213672b28d496e308bb60c546daec4.jpg', stock: 9 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/1200x/e6/e6/76/e6e67652de2b62d1e4c82caf7e7c39d3.jpg', stock: 9 },
+      { color: 'Cream', imageUrl: 'https://i.pinimg.com/736x/21/1b/31/211b3105cee08f6b575ad2eb9fba1734.jpg', stock: 9 }
+    ],
+    isNewArrival: true,
+    rating: 4.6,
+    numReviews: 23
+  },
+  {
     name: 'Silk Scarf',
     description: 'Luxurious silk scarf with artistic print and fringed edges. Elevate any outfit with this versatile accessory.',
     price: 764.15,
