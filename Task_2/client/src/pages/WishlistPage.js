@@ -40,6 +40,10 @@ const WishlistPage = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     loadWishlist();
     loadItemsFromStorage();
 
