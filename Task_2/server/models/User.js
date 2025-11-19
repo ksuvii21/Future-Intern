@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -25,6 +26,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['user', 'admin', 'seller'],
     default: 'user'
+  },
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true // Allows multiple documents to have a null value for this field
   },
   createdAt: {
     type: Date,
