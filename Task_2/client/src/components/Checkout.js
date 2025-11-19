@@ -266,12 +266,12 @@ const Checkout = () => {
                   <span>₹{(totalPrice * 0.08).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="border-t border-[#571089]/30 pt-2 mt-4">
-                  <div className="flex justify-between text-xl font-bold text-white">
-                    <span>Total:</span>
-                    <span className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                      ₹{(totalPrice + totalPrice * 0.08).toLocaleString('en-IN')}
-                    </span>
-                  </div>
+                <div className="flex justify-between text-xl font-bold text-white">
+                  <span>Total:</span>
+                  <span className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+                    ₹{(totalPrice + (totalPrice * 0.08)).toLocaleString('en-IN')}
+                  </span>
+                </div>
                 </div>
               </div>
             </div>
