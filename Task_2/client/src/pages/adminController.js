@@ -76,6 +76,16 @@ exports.getStats = async (req, res) => {
       { $project: { name: '$productInfo.name', totalRevenue: 1, unitsSold: 1 } }
     ]);
 
+    const userRegistrationTrend = await User.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ]);
+
     res.json({
       totalUsers,
       totalOrders,
@@ -85,6 +95,7 @@ exports.getStats = async (req, res) => {
       monthlySales,
       salesByCategory,
       productPerformance,
+      userRegistrationTrend,
     });
   } catch (error) {
     console.error('Get admin stats error:', error);
