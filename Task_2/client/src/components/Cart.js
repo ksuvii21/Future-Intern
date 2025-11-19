@@ -15,22 +15,36 @@ const Cart = () => {
   const fetchCart = async () => {
     try {
       setLoading(true);
+      setError(null);
       const token = localStorage.getItem('token');
+      
       if (!token) {
-        setError('Please log in to view your cart');
+        // Handle guest cart from localStorage
+        const localCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        // The cart component expects an object with an 'items' property.
+        // The items in localStorage are full product objects, so we format them.
+        const formattedGuestCart = {
+          items: localCart.map(item => ({
+            _id: item._id, // Use product ID as item ID for guests
+            product: item,
+            quantity: item.quantity,
+            selectedColor: item.selectedColor,
+            selectedSize: item.selectedSize,
+          }))
+        };
+        setCart(formattedGuestCart);
         setLoading(false);
         return;
       }
-
+      
+      // Fetch cart for logged-in user
       const response = await axios.get('http://localhost:5000/api/cart', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCart(response.data);
-      setLoading(false);
     } catch (error) {
       console.error('Error fetching cart:', error);
       setError('Failed to load cart');
-      setLoading(false);
     }
   };
 
