@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Mail, Lock, CheckCircle, Fingerprint, Shield, Zap, Eye, EyeOff, Sparkles } from 'lucide-react';
+import { Mail, Lock, CheckCircle, Fingerprint, Shield, Zap, Eye, EyeOff, Sparkles, Chrome } from 'lucide-react';
  
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -93,6 +93,11 @@ const Login = ({ onLogin }) => {
       password: 'guest123',
       rememberMe: false
     });
+  };
+
+  const handleGoogleLogin = () => {
+    // Redirect to the backend Google OAuth route
+    window.location.href = 'http://localhost:5000/api/auth/google';
   };
 
   return (
@@ -238,6 +243,15 @@ const Login = ({ onLogin }) => {
                 ) : (
                   'Sign In'
                 )}
+              </button>
+
+              {/* Google Login Button */}
+              <button
+                type="button"
+                onClick={handleGoogleLogin}
+                className="w-full flex justify-center items-center gap-3 py-3 px-4 rounded-lg border border-[#571089] text-gray-300 hover:bg-[#571089]/20 hover:border-[#ea698b]/50 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <Chrome className="w-5 h-5" /> Sign In with Google
               </button>
 
               {/* Guest Login Button */}
