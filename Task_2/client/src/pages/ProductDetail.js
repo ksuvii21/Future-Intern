@@ -288,11 +288,11 @@ const ProductDetail = () => {
               )}
             </div>
             {allImages.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 gap-2">
                 {allImages.slice(0, 4).map((img, index) => (
-                  <div key={index} className="border border-[#571089]/30 rounded-lg overflow-hidden aspect-square" onClick={(e) => { e.stopPropagation(); setLightboxIndex(index); setLightboxOpen(true); }}>
+                  <div key={index} className="border border-[#571089]/30 rounded-md overflow-hidden aspect-square" onClick={(e) => { e.stopPropagation(); setLightboxIndex(index); setLightboxOpen(true); }}>
                     <img
-                      src={img}
+                      src={img.src}
                       alt={`${product.name} variant ${index + 1}`}
                       className="w-full h-full object-cover hover:opacity-80 transition-opacity"
                       onError={(e) => {
