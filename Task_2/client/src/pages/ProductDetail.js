@@ -364,13 +364,11 @@ const ProductDetail = () => {
             {/* Color Selection */}
             {product?.variants && product.variants.length > 0 && (
               <div className="space-y-2">
-                <label className="text-gray-300 font-medium text-sm">Color:</label>
+                <label className="text-gray-300 font-medium text-sm">Color Variants:</label>
                 <div className="flex gap-2 flex-wrap">
                   {product.variants.map(variant => (
                     <button
                       key={variant.color}
-                      onClick={() => setSelectedColor(variant.color)}
-                      className={`px-3 py-1 rounded-md border-2 transition-all text-sm ${
                         selectedColor === variant.color
                           ? 'border-[#ea698b] bg-[#ea698b]/20 text-[#ea698b]'
                           : 'border-[#571089]/30 bg-white/5 text-gray-300 hover:border-[#571089]/50'
@@ -378,10 +376,11 @@ const ProductDetail = () => {
                     >
                       {variant.color}
                     </button>
+
                   ))}
                 </div>
                 {/* Color Variant Images */}
-                <div className="flex gap-2 flex-wrap mt-2">
+                <div className="flex gap-2 flex-wrap">
                   {product.variants.map(variant => (
                     <div
                       key={`img-${variant.color}`}
@@ -390,12 +389,12 @@ const ProductDetail = () => {
                           ? 'border-[#ea698b] ring-2 ring-[#ea698b]/50'
                           : 'border-[#571089]/30 hover:border-[#571089]/50'
                       }`}
-                      onClick={() => {
+                     onClick={() => {
                         setSelectedColor(variant.color);
                         // Find the index of this variant's image in the allImages array and update the main image
                         const imageIndex = allImages.findIndex(img => img.src === variant.imageUrl);
                         if (imageIndex !== -1) setSelectedImageIndex(imageIndex);
-                      }}
+                     }}
                     >
                       <img
                         src={variant.imageUrl}
