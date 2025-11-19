@@ -256,11 +256,11 @@ const sampleProducts = [
     price: 1529.15,
     category: 'Dresses',
     stock: 22,
-    imageUrl: 'https://i.pinimg.com/1200x/7e/31/0b/7e310b8bf8b2019c6c66fa83b3922516.jpg',
+    imageUrl: 'https://i.pinimg.com/1200x/18/0a/eb/180aeb0dd7df42ee573df18619430811.jpg',
     variants: [
+      { color: 'Dark Green', imageUrl: 'https://i.pinimg.com/1200x/18/0a/eb/180aeb0dd7df42ee573df18619430811.jpg', stock: 7 },
       { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/7e/31/0b/7e310b8bf8b2019c6c66fa83b3922516.jpg', stock: 8 },
       { color: 'Light Green', imageUrl: 'https://i.pinimg.com/1200x/cb/67/25/cb6725d31d435bd4cbe401dee953ada9.jpg', stock: 7 },
-      { color: 'Dark Green', imageUrl: 'https://i.pinimg.com/1200x/18/0a/eb/180aeb0dd7df42ee573df18619430811.jpg', stock: 7 },
       { color: 'Blue', imageUrl: 'https://i.pinimg.com/1200x/01/76/6a/01766a8afb7ff81bb53ea3d50320a51f.jpg', stock: 7 }
     ],
     isNewArrival: true,
@@ -273,12 +273,12 @@ const sampleProducts = [
     price: 1529.15,
     category: 'Dresses',
     stock: 22,
-    imageUrl: 'https://i.pinimg.com/1200x/7e/31/0b/7e310b8bf8b2019c6c66fa83b3922516.jpg',
+    imageUrl: 'https://i.pinimg.com/1200x/01/76/6a/01766a8afb7ff81bb53ea3d50320a51f.jpg',
     variants: [
+      { color: 'Blue', imageUrl: 'https://i.pinimg.com/1200x/01/76/6a/01766a8afb7ff81bb53ea3d50320a51f.jpg', stock: 7 },
       { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/7e/31/0b/7e310b8bf8b2019c6c66fa83b3922516.jpg', stock: 8 },
       { color: 'Light Green', imageUrl: 'https://i.pinimg.com/1200x/cb/67/25/cb6725d31d435bd4cbe401dee953ada9.jpg', stock: 7 },
-      { color: 'Dark Green', imageUrl: 'https://i.pinimg.com/1200x/18/0a/eb/180aeb0dd7df42ee573df18619430811.jpg', stock: 7 },
-      { color: 'Blue', imageUrl: 'https://i.pinimg.com/1200x/01/76/6a/01766a8afb7ff81bb53ea3d50320a51f.jpg', stock: 7 }
+      { color: 'Dark Green', imageUrl: 'https://i.pinimg.com/1200x/18/0a/eb/180aeb0dd7df42ee573df18619430811.jpg', stock: 7 }
     ],
     isNewArrival: true,
     rating: 4.7,
