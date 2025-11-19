@@ -102,6 +102,12 @@ exports.getProductById = asyncHandler(async (req, res) => {
     res.json(product);
 });
 
+// Get products by seller
+exports.getProductsBySeller = asyncHandler(async (req, res) => {
+  const products = await Product.find({ user: req.user.userId });
+  res.json(products);
+});
+
 // @desc    Create new review
 // @route   POST /api/products/:id/reviews
 // @access  Private
