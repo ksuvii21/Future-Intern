@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Package, Truck, CheckCircle, Clock, XCircle, MapPin, CreditCard, User, Calendar, DollarSign } from 'lucide-react';
 
 const OrderDetail = () => {
