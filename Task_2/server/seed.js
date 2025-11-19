@@ -572,6 +572,57 @@ const sampleProducts = [
     numReviews: 20
   },
   {
+    name: 'Tulle Skirt',
+    description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
+    price: 1359.15,
+    category: 'Dresses',
+    stock: 24,
+    imageUrl: 'https://i.pinimg.com/1200x/71/0c/ce/710cceb17f4cbdccf2ec982338e52d7e.jpg',
+    variants: [
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/1200x/71/0c/ce/710cceb17f4cbdccf2ec982338e52d7e.jpg', stock: 8 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/7e/24/79/7e2479621324efcc0497a93339457122.jpg', stock: 8 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/a9/0b/bc/a90bbcffa3510b6704ec2a89f542b604.jpg', stock: 8 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/91/91/71/9191711700631689e229a45790707d07.jpg', stock: 8 }
+    ],
+    isNewArrival: true,
+    rating: 4.7,
+    numReviews: 20
+  },
+  {
+    name: 'Tulle Skirt',
+    description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
+    price: 1359.15,
+    category: 'Dresses',
+    stock: 24,
+    imageUrl: 'https://i.pinimg.com/736x/a9/0b/bc/a90bbcffa3510b6704ec2a89f542b604.jpg',
+    variants: [
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/a9/0b/bc/a90bbcffa3510b6704ec2a89f542b604.jpg', stock: 8 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/7e/24/79/7e2479621324efcc0497a93339457122.jpg', stock: 8 },
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/1200x/71/0c/ce/710cceb17f4cbdccf2ec982338e52d7e.jpg', stock: 8 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/91/91/71/9191711700631689e229a45790707d07.jpg', stock: 8 }
+    ],
+    isNewArrival: true,
+    rating: 4.7,
+    numReviews: 20
+  },
+  {
+    name: 'Tulle Skirt',
+    description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
+    price: 1359.15,
+    category: 'Dresses',
+    stock: 24,
+    imageUrl: 'https://i.pinimg.com/1200x/7e/24/79/7e2479621324efcc0497a93339457122.jpg',
+    variants: [
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/7e/24/79/7e2479621324efcc0497a93339457122.jpg', stock: 8 },
+      { color: 'Pink', imageUrl: 'https://i.pinimg.com/1200x/71/0c/ce/710cceb17f4cbdccf2ec982338e52d7e.jpg', stock: 8 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/736x/a9/0b/bc/a90bbcffa3510b6704ec2a89f542b604.jpg', stock: 8 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/91/91/71/9191711700631689e229a45790707d07.jpg', stock: 8 }
+    ],
+    isNewArrival: true,
+    rating: 4.7,
+    numReviews: 20
+  },
+  {
     name: 'Diamond Stud Earrings',
     description: 'Classic 1-carat diamond stud earrings in 18k white gold setting. Timeless elegance for any occasion.',
     price: 7649.15,
