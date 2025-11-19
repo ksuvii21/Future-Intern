@@ -24,6 +24,10 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchCart = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
