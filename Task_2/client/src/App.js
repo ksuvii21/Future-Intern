@@ -281,7 +281,7 @@ function AppLayout({
 
             {/* Category Navigation */}
             <nav className="hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-[#571089]/20">
-              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'New Arrivals', 'Girlies <3'].map((item) => (
+              {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'New Arrivals'].map((item) => (
                 <Link
                   key={item}
                   to={item === 'All Categories' ? '/' : `/category/${item.toLowerCase().replace(/ /g, '-')}`}
