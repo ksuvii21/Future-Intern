@@ -540,34 +540,34 @@ const ProductDetail = () => {
             </div>
 
             {/* Delivery Information */}
-            <div className="space-y-4 pt-6 border-t border-[#571089]/30">
-              <h3 className="text-lg font-semibold text-white">Delivery & Returns</h3>
-              <div className="flex gap-4">
+            <div className="space-y-3 pt-4 border-t border-[#571089]/30">
+              <h3 className="text-base font-semibold text-white">Delivery & Returns</h3>
+              <div className="flex gap-3">
                 <div className="flex-1">
                   <input
                     type="text"
                     placeholder="Enter pincode"
                     value={pincode}
                     onChange={(e) => setPincode(e.target.value)}
-                    className="w-full px-4 py-2 bg-white/5 border border-[#571089]/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b]"
+                    className="w-full px-3 py-2 bg-white/5 border border-[#571089]/30 rounded-md text-white placeholder-gray-400 focus:outline-none focus:border-[#ea698b] text-sm"
                     maxLength="6"
                   />
                 </div>
                 <button
                   onClick={checkDelivery}
                   disabled={pincode.length !== 6}
-                  className="px-6 py-2 bg-[#ea698b] text-white rounded-lg hover:bg-[#d55d92] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  className="px-4 py-2 bg-[#ea698b] text-white rounded-md hover:bg-[#d55d92] disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm"
                 >
                   Check
                 </button>
               </div>
               {deliveryInfo && (
-                <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-lg">
-                  <div className="flex items-center gap-2 text-green-400 mb-2">
-                    <MapPin className="w-4 h-4" />
-                    <span className="font-medium">Delivery Available</span>
+                <div className="p-3 bg-green-500/10 border border-green-500/30 rounded-md">
+                  <div className="flex items-center gap-2 text-green-400 mb-1">
+                    <MapPin className="w-3 h-3" />
+                    <span className="font-medium text-sm">Delivery Available</span>
                   </div>
-                  <p className="text-sm text-gray-300">
+                  <p className="text-xs text-gray-300">
                     Estimated delivery by <span className="text-white font-medium">{deliveryInfo.date}</span> to {deliveryInfo.location}
                   </p>
                 </div>
@@ -606,18 +606,18 @@ const ProductDetail = () => {
             </div>
 
             {/* Features */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[#571089]/30">
-              <div className="flex items-center gap-3 text-gray-300">
-                <Truck className="w-5 h-5 text-[#ea698b]" />
-                <span className="text-sm">Free Shipping</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-[#571089]/30">
+              <div className="flex items-center gap-2 text-gray-300">
+                <Truck className="w-4 h-4 text-[#ea698b]" />
+                <span className="text-xs">Free Shipping</span>
               </div>
-              <div className="flex items-center gap-3 text-gray-300">
-                <Shield className="w-5 h-5 text-[#ea698b]" />
-                <span className="text-sm">Secure Payment</span>
+              <div className="flex items-center gap-2 text-gray-300">
+                <Shield className="w-4 h-4 text-[#ea698b]" />
+                <span className="text-xs">Secure Payment</span>
               </div>
-              <div className="flex items-center gap-3 text-gray-300">
-                <RotateCcw className="w-5 h-5 text-[#ea698b]" />
-                <span className="text-sm">Easy Returns</span>
+              <div className="flex items-center gap-2 text-gray-300">
+                <RotateCcw className="w-4 h-4 text-[#ea698b]" />
+                <span className="text-xs">Easy Returns</span>
               </div>
             </div>
           </div>
@@ -673,8 +673,8 @@ const ProductDetail = () => {
             </div>
 
             {/* Write a review */}
-            <div className="p-6 bg-white/5 rounded-lg border border-[#571089]/30">
-              <h3 className="text-xl font-bold text-white mb-4">Write a Review</h3>
+            <div className="p-4 bg-white/5 rounded-md border border-[#571089]/30">
+              <h3 className="text-lg font-bold text-white mb-3">Write a Review</h3>
               <form onSubmit={handleReviewSubmit} className="space-y-4">
                 <div>
                   <label className="text-gray-300 mb-2 block">Your Rating</label>
@@ -714,31 +714,31 @@ const ProductDetail = () => {
           </div>
 
           {/* Existing Reviews */}
-          <div className="mt-12">
+          <div className="mt-8">
             {product.reviews && product.reviews.length > 0 ? (
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {product.reviews.map(review => (
-                  <div key={review._id} className="p-6 bg-white/5 rounded-lg border border-[#571089]/30">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-10 h-10 bg-[#ea698b] rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  <div key={review._id} className="p-4 bg-white/5 rounded-md border border-[#571089]/30">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-8 h-8 bg-[#ea698b] rounded-full flex items-center justify-center text-white font-bold text-sm">
                         {review.name.charAt(0).toUpperCase()}
                       </div>
                       <div>
-                        <span className="text-white font-medium">{review.name}</span>
+                        <span className="text-white font-medium text-sm">{review.name}</span>
                         <div className="flex">
                           {[...Array(5)].map((_, i) => (
-                            <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
+                            <Star key={i} className={`w-3 h-3 ${i < review.rating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
                           ))}
                         </div>
                       </div>
                       <span className="text-xs text-gray-500 ml-auto">{new Date(review.createdAt).toLocaleDateString()}</span>
                     </div>
-                    <p className="text-gray-300 text-sm leading-relaxed">{review.comment}</p>
+                    <p className="text-gray-300 text-xs leading-relaxed">{review.comment}</p>
                   </div>
                 ))}
               </div>
             ) : (
-              <p className="text-center text-gray-400 py-8">Be the first to review this product!</p>
+              <p className="text-center text-gray-400 py-6 text-sm">Be the first to review this product!</p>
             )}
           </div>
         </div>
