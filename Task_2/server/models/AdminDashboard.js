@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
-import { LayoutDashboard, Package, ShoppingCart, Users, DollarSign, Edit, Trash2, PlusCircle, Save, X, Search, FileDown, AlertTriangle, CheckSquare, Settings, Menu, BarChart2 as BarChartIcon, Loader2 } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, AreaChart, Area } from 'recharts';
+import { LayoutDashboard, Package, ShoppingCart, Users, DollarSign, Edit, Trash2, PlusCircle, Save, X, Search, FileDown, AlertTriangle, CheckSquare, Settings, Menu, BarChart2 as BarChartIcon } from 'lucide-react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import html2canvas from 'html2canvas';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -17,11 +16,8 @@ const AdminDashboard = () => {
 
   const [showProductModal, setShowProductModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
-  const salesReportRef = useRef(null);
-  const customerAnalyticsRef = useRef(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const PIE_COLORS = ['#ea698b', '#c05299', '#822faf', '#6d23b6', '#ac46a1'];
 
   const fetchAllData = useCallback(async () => {
@@ -42,7 +38,7 @@ const AdminDashboard = () => {
       setProducts(productsRes.data.products || []);
       setOrders(ordersRes.data);
       setUsers(usersRes.data);
-      setCustomerAnalytics(customerAnalyticsRes.data);
+      setCustomerAnalytics(customerAnalyticsRes.data || { topCustomers: [], userRegistrations: [] });
 
     } catch (error) {
       console.error("Failed to fetch admin data", error);
@@ -120,36 +116,61 @@ const AdminDashboard = () => {
     setShowProductModal(true);
   };
 
-  const generatePDF = async (title, elementRef, filename) => {
-    if (!elementRef.current) return;
-    setIsGeneratingPDF(true);
+  const handleBulkDelete = async () => {
+    if (window.confirm(`Are you sure you want to delete ${selectedProducts.length} products?`)) {
+      try {
+        const token = localStorage.getItem('token');
+        await axios.post('http://localhost:5000/api/products/bulk-delete', { productIds: selectedProducts }, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setSelectedProducts([]);
+        fetchAllData();
+      } catch (error) {
+        console.error("Failed to bulk delete products", error);
+      }
+    }
+  };
 
+  const handleSelectProduct = (productId) => {
+    setSelectedProducts(prev =>
+      prev.includes(productId) ? prev.filter(id => id !== productId) : [...prev, productId]
+    );
+  };
+
+  const generateSalesReportPDF = () => {
     const doc = new jsPDF();
-    doc.text(title, 14, 16);
+    doc.text("Sales Report", 14, 16);
     doc.setFontSize(10);
     doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22);
 
-    const canvas = await html2canvas(elementRef.current, {
-      backgroundColor: '#1a0a2e', // Match the background
-      useCORS: true,
-    });
-    const imgData = canvas.toDataURL('image/png');
-    const imgProps = doc.getImageProperties(imgData);
-    const pdfWidth = doc.internal.pageSize.getWidth();
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    const salesData = [
+      ["Total Revenue", `Rs. ${stats.totalRevenue.toFixed(2)}`],
+      ["Total Orders", stats.totalOrders],
+      ["Avg. Order Value", `Rs. ${stats.avgOrderValue.toFixed(2)}`],
+      ["Total Products", stats.totalProducts],
+    ];
 
-    doc.addImage(imgData, 'PNG', 10, 30, pdfWidth - 20, pdfHeight - 20);
-    doc.save(filename);
-    setIsGeneratingPDF(false);
+    doc.autoTable({
+      startY: 30,
+      head: [['Metric', 'Value']],
+      body: salesData,
+    });
+
+    const topProducts = stats.productPerformance.map(p => [p.name, p.unitsSold, `Rs. ${p.totalRevenue.toFixed(2)}`]);
+    doc.autoTable({
+      startY: doc.lastAutoTable.finalY + 10,
+      head: [['Top Products', 'Units Sold', 'Revenue']],
+      body: topProducts,
+    });
+
+    doc.save('sales-report.pdf');
   };
 
   const generateLedgerPDF = () => {
-    setIsGeneratingPDF(true);
     const doc = new jsPDF();
     doc.text("Financial Ledger", 14, 16);
     doc.setFontSize(10);
     doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22);
-    doc.text("Status: Verified", 14, 28);
 
     const tableColumn = ["Order ID", "Date", "Customer", "Amount", "Status"];
     const tableRows = [];
@@ -167,40 +188,16 @@ const AdminDashboard = () => {
 
     doc.autoTable(tableColumn, tableRows, { startY: 30 });
     doc.save('financial-ledger.pdf');
-    setIsGeneratingPDF(false);
   };
 
-  const handleProductSelection = (productId) => {
-    setSelectedProducts(prev =>
-      prev.includes(productId)
-        ? prev.filter(id => id !== productId)
-        : [...prev, productId]
-    );
-  };
-
-  const handleBulkAction = async (action) => {
-    if (selectedProducts.length === 0) return;
-    if (!window.confirm(`Are you sure you want to ${action} ${selectedProducts.length} products?`)) return;
-
-    const token = localStorage.getItem('token');
-    const config = { headers: { Authorization: `Bearer ${token}` } };
-
-    try {
-      if (action === 'delete') {
-        await axios.post('http://localhost:5000/api/products/bulk-delete', { productIds: selectedProducts }, config);
-      } else if (action === 'setNewArrival') {
-        await axios.post('http://localhost:5000/api/products/bulk-update', { productIds: selectedProducts, update: { isNewArrival: true } }, config);
-      }
-      setSelectedProducts([]);
-      fetchAllData();
-    } catch (error) {
-      console.error(`Failed to perform bulk ${action}`, error);
-    }
-  };
-
-  const handleSelectAllProducts = () => {
-    if (selectedProducts.length === products.length) setSelectedProducts([]);
-    else setSelectedProducts(products.map(p => p._id));
+  const generateCustomerAnalyticsPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Customer Analytics Report", 14, 16);
+    const head = [['Customer', 'Email', 'Total Orders', 'Total Spent (Rs.)']];
+    const body = customerAnalytics.topCustomers.map(c => [c.userDetails.username, c.userDetails.email, c.totalOrders, c.totalSpent.toFixed(2)]);
+    
+    doc.autoTable({ head, body, startY: 30 });
+    doc.save('customer-analytics.pdf');
   };
   
   const StatCard = ({ icon, title, value, color, prefix = '', suffix = '' }) => (
@@ -251,8 +248,18 @@ const AdminDashboard = () => {
             </PieChart>
           </ResponsiveContainer>
         </div>
-        {/* Placeholder for User Registrations Chart */}
-        <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-[400px]"></div>
+        <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-[400px]">
+          <h3 className="text-xl font-bold text-white mb-4">Recent User Registrations</h3>
+          <ResponsiveContainer width="100%" height="90%">
+            <AreaChart data={customerAnalytics?.userRegistrations}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#57108930" />
+              <XAxis dataKey="_id" tick={{ fill: '#9ca3af' }} />
+              <YAxis tick={{ fill: '#9ca3af' }} />
+              <Tooltip contentStyle={{ backgroundColor: '#1a0a2e', border: '1px solid #571089' }} />
+              <Area type="monotone" dataKey="count" stroke="#822faf" fill="#822faf" fillOpacity={0.3} name="New Users" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
@@ -260,22 +267,28 @@ const AdminDashboard = () => {
   const renderProducts = () => (
     <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-        <h2 className="text-2xl font-bold text-white">Manage Products</h2>
+        <div>
+          <h2 className="text-2xl font-bold text-white">Manage Products</h2>
+          {selectedProducts.length > 0 && (
+            <p className="text-sm text-gray-400">{selectedProducts.length} products selected</p>
+          )}
+        </div>
         <div className="flex gap-2">
           {selectedProducts.length > 0 && (
-            <div className="flex gap-2">
-              <button onClick={() => handleBulkAction('delete')} className="flex items-center gap-2 px-3 py-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg text-sm"><Trash2 className="w-4 h-4" /> Delete ({selectedProducts.length})</button>
-              <button onClick={() => handleBulkAction('setNewArrival')} className="flex items-center gap-2 px-3 py-2 bg-blue-600/80 hover:bg-blue-600 text-white rounded-lg text-sm"><CheckSquare className="w-4 h-4" /> Mark as New</button>
-            </div>
+            <button onClick={handleBulkDelete} className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
+              <Trash2 className="w-4 h-4" /> Delete Selected
+            </button>
           )}
-          <button onClick={() => openProductModal()} className="flex items-center gap-2 px-4 py-2 bg-[#ea698b] hover:bg-[#d55d92] text-white rounded-lg transition-colors"><PlusCircle className="w-4 h-4" /> Add Product</button>
+          <button onClick={() => openProductModal()} className="flex items-center gap-2 px-4 py-2 bg-[#ea698b] hover:bg-[#d55d92] text-white rounded-lg transition-colors">
+            <PlusCircle className="w-4 h-4" /> Add Product
+          </button>
         </div>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left text-gray-400">
           <thead className="text-xs text-gray-300 uppercase bg-white/5">
             <tr>
-              <th scope="col" className="p-4"><input type="checkbox" onChange={handleSelectAllProducts} checked={selectedProducts.length === products.length && products.length > 0} className="w-4 h-4 text-[#ea698b] bg-gray-700 border-gray-600 rounded focus:ring-[#ea698b]" /></th>
+              <th scope="col" className="p-4"><input type="checkbox" className="bg-transparent" onChange={(e) => setSelectedProducts(e.target.checked ? products.map(p => p._id) : [])} /></th>
               <th scope="col" className="px-6 py-3">Product Name</th>
               <th scope="col" className="px-6 py-3 hidden md:table-cell">Category</th>
               <th scope="col" className="px-6 py-3 hidden sm:table-cell">Price</th>
@@ -286,10 +299,8 @@ const AdminDashboard = () => {
           <tbody>
             {products.map(p => (
               <tr key={p._id} className="border-b border-[#571089]/30 hover:bg-white/5">
-                <td className="p-4"><input type="checkbox" checked={selectedProducts.includes(p._id)} onChange={() => handleProductSelection(p._id)} className="w-4 h-4 text-[#ea698b] bg-gray-700 border-gray-600 rounded focus:ring-[#ea698b]" /></td>
-                <td className="px-6 py-4 font-medium text-white flex items-center gap-3">
-                  <img src={p.imageUrl} alt={p.name} className="w-10 h-10 rounded-md object-cover" />
-                  {p.name}</td>
+                <td className="p-4"><input type="checkbox" className="bg-transparent" checked={selectedProducts.includes(p._id)} onChange={() => handleSelectProduct(p._id)} /></td>
+                <td className="px-6 py-4 font-medium text-white">{p.name}</td>
                 <td className="px-6 py-4 hidden md:table-cell">{p.category}</td>
                 <td className="px-6 py-4 hidden sm:table-cell">₹{p.price}</td>
                 <td className="px-6 py-4 hidden sm:table-cell">{p.stock}</td>
@@ -417,13 +428,13 @@ const AdminDashboard = () => {
 
   const renderReports = () => (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <h2 className="text-3xl font-bold text-white">Sales Reports</h2>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <button onClick={generateSalesReportPDF} className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+          <button onClick={generateSalesReportPDF} className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
             <FileDown className="w-4 h-4" /> Download Sales PDF
           </button>
-          <button onClick={generateLedgerPDF} className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+          <button onClick={generateLedgerPDF} className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
             <FileDown className="w-4 h-4" /> Download Ledger PDF
           </button>
         </div>
@@ -434,11 +445,23 @@ const AdminDashboard = () => {
 
   const renderCustomers = () => (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
         <h2 className="text-3xl font-bold text-white">Customer Analytics</h2>
         <button onClick={generateCustomerAnalyticsPDF} className="flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors">
           <FileDown className="w-4 h-4" /> Download Customer PDF
         </button>
+      </div>
+      <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-[400px]">
+        <h3 className="text-xl font-bold text-white mb-4">New User Registrations</h3>
+        <ResponsiveContainer width="100%" height="90%">
+          <AreaChart data={customerAnalytics?.userRegistrations}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#57108930" />
+            <XAxis dataKey="_id" tick={{ fill: '#9ca3af' }} />
+            <YAxis tick={{ fill: '#9ca3af' }} />
+            <Tooltip contentStyle={{ backgroundColor: '#1a0a2e', border: '1px solid #571089' }} />
+            <Area type="monotone" dataKey="count" stroke="#822faf" fill="#822faf" fillOpacity={0.3} name="New Users" />
+          </AreaChart>
+        </ResponsiveContainer>
       </div>
       <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-4 sm:p-6">
         <h3 className="text-xl font-bold text-white mb-4">Top Customers</h3>
@@ -453,10 +476,10 @@ const AdminDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {customerAnalytics.map(c => (
+              {customerAnalytics?.topCustomers?.map(c => (
                 <tr key={c._id} className="border-b border-[#571089]/30 hover:bg-white/5">
-                  <td className="px-6 py-4 font-medium text-white">{c.userDetails?.username}</td>
-                  <td className="px-6 py-4 hidden md:table-cell">{c.userDetails?.email}</td>
+                  <td className="px-6 py-4 font-medium text-white">{c.userDetails.username}</td>
+                  <td className="px-6 py-4 hidden md:table-cell">{c.userDetails.email}</td>
                   <td className="px-6 py-4 text-center">{c.totalOrders}</td>
                   <td className="px-6 py-4 text-green-400 font-semibold">₹{c.totalSpent.toLocaleString('en-IN')}</td>
                 </tr>
