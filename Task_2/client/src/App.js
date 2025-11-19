@@ -108,10 +108,14 @@ function App() {
     setUser(userData);
   };
 
-  const handleLogout = () => {
+  const handleLogout = (navigate) => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setUser(null);
+    setCartCount(0);
+    // Dispatch storage event to update any components listening for changes
+    window.dispatchEvent(new Event('storage'));
+    navigate('/');
   };
 
   const toggleDarkMode = () => {
