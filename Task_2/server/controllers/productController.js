@@ -131,22 +131,48 @@ exports.createProductReview = asyncHandler(async (req, res) => {
       throw new Error('You have already reviewed this product');
     }
 
+    // Handle review images upload
+    let reviewImages = [];
+    if (req.files && req.files.length > 0) {
+      for (const file of req.files) {
+        try {
+          const result = await new Promise((resolve, reject) => {
+            const stream = cloudinary.uploader.upload_stream(
+              { folder: 'review-images' },
+              (error, result) => {
+                if (error) reject(error);
+                else resolve(result);
+              }
+            );
+            stream.end(file.buffer);
+          });
+          reviewImages.push(result.secure_url);
+        } catch (error) {
+          console.error('Error uploading review image:', error);
+        }
+      }
+    }
+
     const review = {
-      name: req.user.username, // Assuming username is on req.user from auth middleware
+      name: req.user.username,
       rating: Number(rating),
       comment,
       user: req.user.userId,
+      images: reviewImages,
+      moderated: false,
+      approved: null, // Pending moderation
+      helpful: {
+        upvotes: [],
+        downvotes: []
+      },
+      verified: false // Will be set based on purchase history
     };
 
     product.reviews.push(review);
 
-    product.numReviews = product.reviews.length;
-    product.rating =
-      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
-      product.reviews.length;
-
+    // Don't update rating until review is approved
     await product.save();
-    res.status(201).json({ message: 'Review added successfully' });
+    res.status(201).json({ message: 'Review submitted successfully! It will be visible after moderation.' });
 });
 
 // Create product
