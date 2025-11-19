@@ -93,51 +93,6 @@ exports.getStats = async (req, res) => {
 };
 
 /**
- * @route   GET /api/admin/customer-analytics
- * @desc    Get analytics about customers
- * @access  Private (Admin)
- */
-exports.getCustomerAnalytics = async (req, res) => {
-  try {
-    const customerData = await Order.aggregate([
-      {
-        $group: {
-          _id: '$user',
-          totalOrders: { $sum: 1 },
-          totalSpent: { $sum: '$totalAmount' }
-        }
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: '_id',
-          foreignField: '_id',
-          as: 'userDetails'
-        }
-      },
-      { $unwind: '$userDetails' },
-      { $sort: { totalSpent: -1 } },
-      { $project: { 'userDetails.password': 0 } } // Exclude password
-    ]);
-
-    const userRegistrations = await User.aggregate([
-      {
-        $group: {
-          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
-          count: { $sum: 1 }
-        }
-      },
-      { $sort: { _id: 1 } }
-    ]);
-
-    res.json(customerData);
-  } catch (error) {
-    console.error('Get customer analytics error:', error);
-    res.status(500).json({ message: 'Server error fetching customer analytics.' });
-  }
-};
-
-/**
  * @route   GET /api/admin/sales-report
  * @desc    Generate a CSV sales report
  * @access  Private (Admin)
@@ -158,6 +113,11 @@ exports.generateSalesReport = async (req, res) => {
   }
 };
 
+/**
+ * @route   GET /api/admin/customer-analytics
+ * @desc    Get analytics about customers
+ * @access  Private (Admin)
+ */
 exports.getCustomerAnalytics = async (req, res) => {
   try {
     const [customerData, userRegistrations] = await Promise.all([
