@@ -97,6 +97,78 @@ const sampleProducts = [
     numReviews: 12
   },
   {
+    name: 'Velvet Maxi Dress',
+    description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
+    price: 2804.15,
+    category: 'Dresses',
+    stock: 10,
+    imageUrl: 'https://i.pinimg.com/1200x/02/c5/0e/02c50e8bc313d06a833f3ee672933260.jpg',
+    variants: [
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/1200x/02/c5/0e/02c50e8bc313d06a833f3ee672933260.jpg', stock: 3 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/2f/3e/a7/2f3ea7bd7bdc9c7d655cef6d4d4c6ba0.jpg', stock: 4 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/ab/04/77/ab04778495e2a60595faef8874c0b9fd.jpg', stock: 3 },
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/99/b2/a5/99b2a5a1c000e051d7c7c9aaceb34cdd.jpg', stock: 2 },
+      { color: 'Navy Blue', imageUrl: 'https://i.pinimg.com/736x/3e/f8/61/3ef86150cff14188c3b5957393d7ad41.jpg', stock: 2 }
+    ],
+    isNewArrival: false,
+    rating: 4.9,
+    numReviews: 12
+  },
+  {
+    name: 'Velvet Maxi Dress',
+    description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
+    price: 2804.15,
+    category: 'Dresses',
+    stock: 10,
+    imageUrl: 'https://i.pinimg.com/1200x/ab/04/77/ab04778495e2a60595faef8874c0b9fd.jpg',
+    variants: [
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/ab/04/77/ab04778495e2a60595faef8874c0b9fd.jpg', stock: 3 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/2f/3e/a7/2f3ea7bd7bdc9c7d655cef6d4d4c6ba0.jpg', stock: 4 },
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/1200x/02/c5/0e/02c50e8bc313d06a833f3ee672933260.jpg', stock: 3 },
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/99/b2/a5/99b2a5a1c000e051d7c7c9aaceb34cdd.jpg', stock: 2 },
+      { color: 'Navy Blue', imageUrl: 'https://i.pinimg.com/736x/3e/f8/61/3ef86150cff14188c3b5957393d7ad41.jpg', stock: 2 }
+    ],
+    isNewArrival: false,
+    rating: 4.9,
+    numReviews: 12
+  },
+  {
+    name: 'Velvet Maxi Dress',
+    description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
+    price: 2804.15,
+    category: 'Dresses',
+    stock: 10,
+    imageUrl: 'https://i.pinimg.com/1200x/99/b2/a5/99b2a5a1c000e051d7c7c9aaceb34cdd.jpg',
+    variants: [
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/99/b2/a5/99b2a5a1c000e051d7c7c9aaceb34cdd.jpg', stock: 2 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/2f/3e/a7/2f3ea7bd7bdc9c7d655cef6d4d4c6ba0.jpg', stock: 4 },
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/1200x/02/c5/0e/02c50e8bc313d06a833f3ee672933260.jpg', stock: 3 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/ab/04/77/ab04778495e2a60595faef8874c0b9fd.jpg', stock: 3 },
+      { color: 'Navy Blue', imageUrl: 'https://i.pinimg.com/736x/3e/f8/61/3ef86150cff14188c3b5957393d7ad41.jpg', stock: 2 }
+    ],
+    isNewArrival: false,
+    rating: 4.9,
+    numReviews: 12
+  },
+  {
+    name: 'Velvet Maxi Dress',
+    description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
+    price: 2804.15,
+    category: 'Dresses',
+    stock: 10,
+    imageUrl: 'https://i.pinimg.com/736x/3e/f8/61/3ef86150cff14188c3b5957393d7ad41.jpg',
+    variants: [
+      { color: 'Navy Blue', imageUrl: 'https://i.pinimg.com/736x/3e/f8/61/3ef86150cff14188c3b5957393d7ad41.jpg', stock: 2 },
+      { color: 'Red', imageUrl: 'https://i.pinimg.com/1200x/2f/3e/a7/2f3ea7bd7bdc9c7d655cef6d4d4c6ba0.jpg', stock: 4 },
+      { color: 'Green', imageUrl: 'https://i.pinimg.com/1200x/02/c5/0e/02c50e8bc313d06a833f3ee672933260.jpg', stock: 3 },
+      { color: 'Black', imageUrl: 'https://i.pinimg.com/1200x/ab/04/77/ab04778495e2a60595faef8874c0b9fd.jpg', stock: 3 },
+      { color: 'Purple', imageUrl: 'https://i.pinimg.com/1200x/99/b2/a5/99b2a5a1c000e051d7c7c9aaceb34cdd.jpg', stock: 2 }
+    ],
+    isNewArrival: false,
+    rating: 4.9,
+    numReviews: 12
+  },
+  {
     name: 'Silk Cocktail Dress',
     description: 'Luxurious silk cocktail dress with asymmetric hem and delicate beading. Perfect for evening events.',
     price: 2124.15,
