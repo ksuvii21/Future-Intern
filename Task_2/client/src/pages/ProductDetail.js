@@ -291,10 +291,7 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Product Image */}
           <div className="space-y-2">
-            <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-xl overflow-hidden relative aspect-[4/3] cursor-pointer" onClick={() => {
-              setLightboxOpen(true);
-              setLightboxIndex(selectedImageIndex);
-            }}>
+            <div className="group bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-xl overflow-hidden relative aspect-[4/3] cursor-pointer" onClick={() => setLightboxOpen(true)}>
               {thumbnailImages.length > 0 && thumbnailImages[selectedImageIndex] ? (
                 <img
                   src={thumbnailImages[selectedImageIndex].src}
