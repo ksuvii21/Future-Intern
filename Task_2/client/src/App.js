@@ -20,6 +20,13 @@ import Admin from './components/Admin';
 import BecomeSellerPage from './pages/BecomeSellerPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import SellerDashboard from './pages/SellerDashboard';
+import ContactUsPage from './pages/ContactUsPage';
+import ReturnPolicyPage from './pages/ReturnPolicyPage';
+import RefundPolicyPage from './pages/RefundPolicyPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import DisclaimerPage from './pages/DisclaimerPage';
+import AboutUsPage from './pages/AboutUsPage';
+import CustomerSupportPage from './pages/CustomerSupportPage';
 import './App.css';
 
 // The main application state and context provider
