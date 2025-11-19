@@ -34,6 +34,11 @@ const ProductDetail = () => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
 
+    // Load review draft from localStorage
+    const savedReview = JSON.parse(localStorage.getItem(`reviewDraft-${id}`) || '{}');
+    if (savedReview.rating) setReviewRating(savedReview.rating);
+    if (savedReview.comment) setReviewComment(savedReview.comment);
+
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
