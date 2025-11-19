@@ -883,10 +883,10 @@ const sampleProducts = [
     price: 11049.15,
     category: 'Jewelry',
     stock: 5,
-    imageUrl: 'https://i.pinimg.com/1200x/fc/2d/e9/fc2de9f6286835fcdced2079985acb7c.jpg',
+    imageUrl: 'https://i.pinimg.com/736x/9e/54/17/9e5417f57e1d27dbd28c30609068c578.jpg',
     variants: [
-      { color: 'Platinum', imageUrl: 'https://i.pinimg.com/1200x/fc/2d/e9/fc2de9f6286835fcdced2079985acb7c.jpg', stock: 3 },
-      { color: 'White Gold', imageUrl: 'https://i.pinimg.com/736x/9e/54/17/9e5417f57e1d27dbd28c30609068c578.jpg', stock: 2 }
+      { color: 'White Gold', imageUrl: 'https://i.pinimg.com/736x/9e/54/17/9e5417f57e1d27dbd28c30609068c578.jpg', stock: 2 },
+      { color: 'Platinum', imageUrl: 'https://i.pinimg.com/1200x/fc/2d/e9/fc2de9f6286835fcdced2079985acb7c.jpg', stock: 3 }
     ],
     isNewArrival: false,
     rating: 5.0,
