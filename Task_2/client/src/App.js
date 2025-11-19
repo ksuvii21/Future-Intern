@@ -427,9 +427,11 @@ function AppLayout({
               <div>
                 <h4 className="text-white font-semibold mb-4">Company</h4>
                 <ul className="space-y-2 text-sm text-gray-400">
-                  {['About Us', 'Careers', 'Press', 'Blog', 'Affiliate Program'].map((item) => (
-                    <li key={item}><Link to="/" className="hover:text-[#ea698b] transition-colors">{item}</Link></li>
-                  ))}
+                  <li><Link to="/about" className="hover:text-[#ea698b] transition-colors">About Us</Link></li>
+                  <li><Link to="/" className="hover:text-[#ea698b] transition-colors">Careers</Link></li>
+                  <li><Link to="/" className="hover:text-[#ea698b] transition-colors">Press</Link></li>
+                  <li><Link to="/" className="hover:text-[#ea698b] transition-colors">Blog</Link></li>
+                  <li><Link to="/" className="hover:text-[#ea698b] transition-colors">Affiliate Program</Link></li>
                 </ul>
               </div>
             </div>
