@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
-import { LayoutDashboard, Package, ShoppingCart, Users, DollarSign, Edit, Trash2, PlusCircle, Save, X, Search, FileDown, AlertTriangle, CheckSquare, Settings, Menu, BarChart2 as BarChartIcon } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, Users, DollarSign, Edit, Trash2, PlusCircle, Save, X, Search, FileDown, AlertTriangle, CheckSquare, Settings, Menu, BarChart2 as BarChartIcon, Loader2 } from 'lucide-react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import html2canvas from 'html2canvas';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -17,6 +18,10 @@ const AdminDashboard = () => {
   const [showProductModal, setShowProductModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const salesReportRef = useRef(null);
+  const customerAnalyticsRef = useRef(null);
   const PIE_COLORS = ['#ea698b', '#c05299', '#822faf', '#6d23b6', '#ac46a1'];
 
   const fetchAllData = useCallback(async () => {
@@ -115,40 +120,36 @@ const AdminDashboard = () => {
     setShowProductModal(true);
   };
 
-  const generateSalesReportPDF = () => {
+  const generatePDF = async (title, elementRef, filename) => {
+    if (!elementRef.current) return;
+    setIsGeneratingPDF(true);
+
     const doc = new jsPDF();
-    doc.text("Sales Report", 14, 16);
+    doc.text(title, 14, 16);
     doc.setFontSize(10);
     doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22);
 
-    const salesData = [
-      ["Total Revenue", `Rs. ${stats.totalRevenue.toFixed(2)}`],
-      ["Total Orders", stats.totalOrders],
-      ["Avg. Order Value", `Rs. ${stats.avgOrderValue.toFixed(2)}`],
-      ["Total Products", stats.totalProducts],
-    ];
-
-    doc.autoTable({
-      startY: 30,
-      head: [['Metric', 'Value']],
-      body: salesData,
+    const canvas = await html2canvas(elementRef.current, {
+      backgroundColor: '#1a0a2e', // Match the background
+      useCORS: true,
     });
+    const imgData = canvas.toDataURL('image/png');
+    const imgProps = doc.getImageProperties(imgData);
+    const pdfWidth = doc.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-    const topProducts = stats.productPerformance.map(p => [p.name, p.unitsSold, `Rs. ${p.totalRevenue.toFixed(2)}`]);
-    doc.autoTable({
-      startY: doc.lastAutoTable.finalY + 10,
-      head: [['Top Products', 'Units Sold', 'Revenue']],
-      body: topProducts,
-    });
-
-    doc.save('sales-report.pdf');
+    doc.addImage(imgData, 'PNG', 10, 30, pdfWidth - 20, pdfHeight - 20);
+    doc.save(filename);
+    setIsGeneratingPDF(false);
   };
 
   const generateLedgerPDF = () => {
+    setIsGeneratingPDF(true);
     const doc = new jsPDF();
     doc.text("Financial Ledger", 14, 16);
     doc.setFontSize(10);
     doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 22);
+    doc.text("Status: Verified", 14, 28);
 
     const tableColumn = ["Order ID", "Date", "Customer", "Amount", "Status"];
     const tableRows = [];
@@ -166,16 +167,40 @@ const AdminDashboard = () => {
 
     doc.autoTable(tableColumn, tableRows, { startY: 30 });
     doc.save('financial-ledger.pdf');
+    setIsGeneratingPDF(false);
   };
 
-  const generateCustomerAnalyticsPDF = () => {
-    const doc = new jsPDF();
-    doc.text("Customer Analytics Report", 14, 16);
-    const head = [['Customer', 'Email', 'Total Orders', 'Total Spent (Rs.)']];
-    const body = customerAnalytics.map(c => [c.userDetails.username, c.userDetails.email, c.totalOrders, c.totalSpent.toFixed(2)]);
-    
-    doc.autoTable({ head, body, startY: 30 });
-    doc.save('customer-analytics.pdf');
+  const handleProductSelection = (productId) => {
+    setSelectedProducts(prev =>
+      prev.includes(productId)
+        ? prev.filter(id => id !== productId)
+        : [...prev, productId]
+    );
+  };
+
+  const handleBulkAction = async (action) => {
+    if (selectedProducts.length === 0) return;
+    if (!window.confirm(`Are you sure you want to ${action} ${selectedProducts.length} products?`)) return;
+
+    const token = localStorage.getItem('token');
+    const config = { headers: { Authorization: `Bearer ${token}` } };
+
+    try {
+      if (action === 'delete') {
+        await axios.post('http://localhost:5000/api/products/bulk-delete', { productIds: selectedProducts }, config);
+      } else if (action === 'setNewArrival') {
+        await axios.post('http://localhost:5000/api/products/bulk-update', { productIds: selectedProducts, update: { isNewArrival: true } }, config);
+      }
+      setSelectedProducts([]);
+      fetchAllData();
+    } catch (error) {
+      console.error(`Failed to perform bulk ${action}`, error);
+    }
+  };
+
+  const handleSelectAllProducts = () => {
+    if (selectedProducts.length === products.length) setSelectedProducts([]);
+    else setSelectedProducts(products.map(p => p._id));
   };
   
   const StatCard = ({ icon, title, value, color, prefix = '', suffix = '' }) => (
@@ -236,14 +261,21 @@ const AdminDashboard = () => {
     <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <h2 className="text-2xl font-bold text-white">Manage Products</h2>
-        <button onClick={() => openProductModal()} className="flex items-center gap-2 px-4 py-2 bg-[#ea698b] hover:bg-[#d55d92] text-white rounded-lg transition-colors">
-          <PlusCircle className="w-4 h-4" /> Add Product
-        </button>
+        <div className="flex gap-2">
+          {selectedProducts.length > 0 && (
+            <div className="flex gap-2">
+              <button onClick={() => handleBulkAction('delete')} className="flex items-center gap-2 px-3 py-2 bg-red-600/80 hover:bg-red-600 text-white rounded-lg text-sm"><Trash2 className="w-4 h-4" /> Delete ({selectedProducts.length})</button>
+              <button onClick={() => handleBulkAction('setNewArrival')} className="flex items-center gap-2 px-3 py-2 bg-blue-600/80 hover:bg-blue-600 text-white rounded-lg text-sm"><CheckSquare className="w-4 h-4" /> Mark as New</button>
+            </div>
+          )}
+          <button onClick={() => openProductModal()} className="flex items-center gap-2 px-4 py-2 bg-[#ea698b] hover:bg-[#d55d92] text-white rounded-lg transition-colors"><PlusCircle className="w-4 h-4" /> Add Product</button>
+        </div>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm text-left text-gray-400">
           <thead className="text-xs text-gray-300 uppercase bg-white/5">
             <tr>
+              <th scope="col" className="p-4"><input type="checkbox" onChange={handleSelectAllProducts} checked={selectedProducts.length === products.length && products.length > 0} className="w-4 h-4 text-[#ea698b] bg-gray-700 border-gray-600 rounded focus:ring-[#ea698b]" /></th>
               <th scope="col" className="px-6 py-3">Product Name</th>
               <th scope="col" className="px-6 py-3 hidden md:table-cell">Category</th>
               <th scope="col" className="px-6 py-3 hidden sm:table-cell">Price</th>
@@ -254,7 +286,10 @@ const AdminDashboard = () => {
           <tbody>
             {products.map(p => (
               <tr key={p._id} className="border-b border-[#571089]/30 hover:bg-white/5">
-                <td className="px-6 py-4 font-medium text-white">{p.name}</td>
+                <td className="p-4"><input type="checkbox" checked={selectedProducts.includes(p._id)} onChange={() => handleProductSelection(p._id)} className="w-4 h-4 text-[#ea698b] bg-gray-700 border-gray-600 rounded focus:ring-[#ea698b]" /></td>
+                <td className="px-6 py-4 font-medium text-white flex items-center gap-3">
+                  <img src={p.imageUrl} alt={p.name} className="w-10 h-10 rounded-md object-cover" />
+                  {p.name}</td>
                 <td className="px-6 py-4 hidden md:table-cell">{p.category}</td>
                 <td className="px-6 py-4 hidden sm:table-cell">₹{p.price}</td>
                 <td className="px-6 py-4 hidden sm:table-cell">{p.stock}</td>
