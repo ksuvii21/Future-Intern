@@ -578,6 +578,77 @@ const Admin = () => {
     </div>
   );
 
+  const renderReviews = () => (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-white">Review Moderation</h2>
+        <button
+          onClick={fetchPendingReviews}
+          className="px-4 py-2 bg-[#ea698b] text-white rounded-lg hover:bg-[#d55d92] transition-colors"
+        >
+          Refresh
+        </button>
+      </div>
+
+      <div className="space-y-4">
+        {pendingReviews.length === 0 ? (
+          <div className="text-center py-8 text-gray-400">
+            No pending reviews to moderate
+          </div>
+        ) : (
+          pendingReviews.map(review => (
+            <div key={review._id} className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-xl p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{review.productName}</h3>
+                  <p className="text-sm text-gray-400">By {review.user.username} ({review.user.email})</p>
+                  <div className="flex items-center mt-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
+                    ))}
+                    <span className="ml-2 text-sm text-gray-300">{review.rating}/5</span>
+                  </div>
+                </div>
+                <span className="text-xs text-gray-500">{new Date(review.createdAt).toLocaleDateString()}</span>
+              </div>
+
+              <p className="text-gray-300 mb-4">{review.comment}</p>
+
+              {review.images && review.images.length > 0 && (
+                <div className="flex gap-2 mb-4">
+                  {review.images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`Review image ${index + 1}`}
+                      className="w-16 h-16 object-cover rounded-md border border-[#571089]/30 cursor-pointer hover:opacity-80"
+                      onClick={() => window.open(image, '_blank')}
+                    />
+                  ))}
+                </div>
+              )}
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleReviewModeration(review.productId, review._id, 'approve')}
+                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  Approve
+                </button>
+                <button
+                  onClick={() => handleReviewModeration(review.productId, review._id, 'reject')}
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Reject
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+
   const renderOrders = () => (
     <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
       <div className="flex flex-wrap gap-4 justify-between items-center mb-4">
