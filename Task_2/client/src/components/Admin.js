@@ -662,6 +662,7 @@ const Admin = () => {
         <div>
           {activeTab === 'dashboard' && renderDashboard()}
           {activeTab === 'products' && renderProducts()}
+          {activeTab === 'reviews' && renderReviews()}
           {activeTab === 'users' && renderUsers()}
           {activeTab === 'orders' && renderOrders()}
         </div>
