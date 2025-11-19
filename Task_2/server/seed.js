@@ -804,15 +804,31 @@ const sampleProducts = [
     price: 1699.15,
     category: 'Jewelry',
     stock: 25,
-    imageUrl: 'https://i.pinimg.com/1200x/0b/b1/b3/0bb1b33706dbc5daa5101c0a03a77c9c.jpg',
+    imageUrl: 'https://i.pinimg.com/1200x/64/38/c7/6438c7c5faca2c8925f17da104c97a3f.jpg',
     variants: [
+      { color: 'Flower', imageUrl: 'https://i.pinimg.com/1200x/64/38/c7/6438c7c5faca2c8925f17da104c97a3f.jpg', stock: 12 },
       { color: 'Yellow Gold', imageUrl: 'https://i.pinimg.com/1200x/0b/b1/b3/0bb1b33706dbc5daa5101c0a03a77c9c.jpg', stock: 13 },
-      { color: 'Rose Gold', imageUrl: 'https://i.pinimg.com/1200x/a3/17/82/a317829ddbba3c7a7ef33afc5d23aff0.jpg', stock: 12 },
-      { color: 'Flower', imageUrl: 'https://i.pinimg.com/1200x/64/38/c7/6438c7c5faca2c8925f17da104c97a3f.jpg', stock: 12 }
+      { color: 'Rose Gold', imageUrl: 'https://i.pinimg.com/1200x/a3/17/82/a317829ddbba3c7a7ef33afc5d23aff0.jpg', stock: 12 }
     ],
     isNewArrival: false,
     rating: 4.5,
     numReviews: 22
+  },
+  {
+    name: 'Silver Hoop Earrings',
+    description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
+    price: 1104.15,
+    category: 'Jewelry',
+    stock: 35,
+    imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg',
+    variants: [
+      
+      { color: 'Silver', imageUrl: 'https://i.pinimg.com/736x/d8/35/96/d8359643c16133ce10065a866d38eb6d.jpg', stock: 18 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/dc/98/3c/dc983c1081b09ec896e084442a8ffa3c.jpg', stock: 17 }
+    ],
+    isNewArrival: true,
+    rating: 4.6,
+    numReviews: 28
   },
   {
     name: 'Silver Hoop Earrings',
@@ -829,6 +845,37 @@ const sampleProducts = [
     isNewArrival: true,
     rating: 4.6,
     numReviews: 28
+  },
+  {
+    name: 'Silver Hoop Earrings',
+    description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
+    price: 1104.15,
+    category: 'Jewelry',
+    stock: 35,
+    imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg',
+    variants: [
+      { color: 'Silver', imageUrl: 'https://i.pinimg.com/736x/d8/35/96/d8359643c16133ce10065a866d38eb6d.jpg', stock: 18 },
+      { color: 'Gold', imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg', stock: 17 },
+      { color: 'White', imageUrl: 'https://i.pinimg.com/736x/dc/98/3c/dc983c1081b09ec896e084442a8ffa3c.jpg', stock: 17 }
+    ],
+    isNewArrival: true,
+    rating: 4.6,
+    numReviews: 28
+  },
+  {
+    name: 'Diamond Tennis Bracelet',
+    description: 'Sparkling diamond tennis bracelet in platinum setting. Dazzling elegance for special occasions.',
+    price: 11049.15,
+    category: 'Jewelry',
+    stock: 5,
+    imageUrl: 'https://i.pinimg.com/1200x/fc/2d/e9/fc2de9f6286835fcdced2079985acb7c.jpg',
+    variants: [
+      { color: 'Platinum', imageUrl: 'https://i.pinimg.com/1200x/fc/2d/e9/fc2de9f6286835fcdced2079985acb7c.jpg', stock: 3 },
+      { color: 'White Gold', imageUrl: 'https://i.pinimg.com/736x/9e/54/17/9e5417f57e1d27dbd28c30609068c578.jpg', stock: 2 }
+    ],
+    isNewArrival: false,
+    rating: 5.0,
+    numReviews: 8
   },
   {
     name: 'Diamond Tennis Bracelet',
