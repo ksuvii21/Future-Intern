@@ -273,10 +273,10 @@ const ProductDetail = () => {
       {/* Header */}
       <div className="bg-black/20 backdrop-blur-sm border-b border-[#571089]/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link to="/" className="inline-flex items-center text-gray-300 hover:text-[#ea698b] transition-colors">
+          <button onClick={() => navigate(-1)} className="inline-flex items-center text-gray-300 hover:text-[#ea698b] transition-colors">
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Shop
-          </Link>
+          </button>
         </div>
       </div>
 
