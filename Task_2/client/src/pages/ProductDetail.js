@@ -7,11 +7,11 @@ import "yet-another-react-lightbox/styles.css";
 import axios from 'axios';
 import RecentlyViewedProducts from '../components/RecentlyViewedProducts';
 import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
- 
 
 const ProductDetail = () => {
   const { id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [loading, setLoading] = useState(true);
