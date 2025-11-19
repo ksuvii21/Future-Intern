@@ -288,3 +288,163 @@ exports.deleteProduct = asyncHandler(async (req, res) => {
   await Product.findByIdAndDelete(req.params.id);
   res.json({ message: 'Product deleted' });
 });
+
+// @desc    Moderate review (approve/reject)
+// @route   PUT /api/products/:productId/reviews/:reviewId/moderate
+// @access  Private/Admin
+exports.moderateReview = asyncHandler(async (req, res) => {
+  const { approved } = req.body; // true for approve, false for reject
+
+  const product = await Product.findById(req.params.productId);
+  if (!product) {
+    res.status(404);
+    throw new Error('Product not found');
+  }
+
+  const review = product.reviews.id(req.params.reviewId);
+  if (!review) {
+    res.status(404);
+    throw new Error('Review not found');
+  }
+
+  review.moderated = true;
+  review.approved = approved;
+
+  // Recalculate rating if approved
+  if (approved) {
+    const approvedReviews = product.reviews.filter(r => r.approved === true);
+    product.numReviews = approvedReviews.length;
+    product.rating = approvedReviews.length > 0
+      ? approvedReviews.reduce((acc, item) => item.rating + acc, 0) / approvedReviews.length
+      : 0;
+  }
+
+  await product.save();
+
+  // Create notification for user
+  const Notification = require('../models/Notification');
+  await Notification.create({
+    user: review.user,
+    type: approved ? 'review_approved' : 'review_rejected',
+    title: approved ? 'Review Approved' : 'Review Rejected',
+    message: approved
+      ? `Your review for "${product.name}" has been approved and is now visible.`
+      : `Your review for "${product.name}" has been rejected. Please ensure reviews follow our guidelines.`,
+    data: {
+      productId: product._id,
+      reviewId: review._id
+    }
+  });
+
+  res.json({ message: `Review ${approved ? 'approved' : 'rejected'} successfully` });
+});
+
+// @desc    Vote on review helpfulness
+// @route   POST /api/products/:productId/reviews/:reviewId/vote
+// @access  Private
+exports.voteReview = asyncHandler(async (req, res) => {
+  const { vote } = req.body; // 'up' or 'down'
+
+  const product = await Product.findById(req.params.productId);
+  if (!product) {
+    res.status(404);
+    throw new Error('Product not found');
+  }
+
+  const review = product.reviews.id(req.params.reviewId);
+  if (!review) {
+    res.status(404);
+    throw new Error('Review not found');
+  }
+
+  // Remove existing votes from this user
+  review.helpful.upvotes = review.helpful.upvotes.filter(id => id.toString() !== req.user.userId);
+  review.helpful.downvotes = review.helpful.downvotes.filter(id => id.toString() !== req.user.userId);
+
+  // Add new vote
+  if (vote === 'up') {
+    review.helpful.upvotes.push(req.user.userId);
+  } else if (vote === 'down') {
+    review.helpful.downvotes.push(req.user.userId);
+  }
+
+  await product.save();
+  res.json({ message: 'Vote recorded successfully' });
+});
+
+// @desc    Get pending reviews for moderation
+// @route   GET /api/products/reviews/pending
+// @access  Private/Admin
+exports.getPendingReviews = asyncHandler(async (req, res) => {
+  const products = await Product.find({
+    'reviews.approved': null,
+    'reviews.moderated': false
+  }).populate('reviews.user', 'username email');
+
+  const pendingReviews = [];
+  products.forEach(product => {
+    product.reviews.forEach(review => {
+      if (review.approved === null && !review.moderated) {
+        pendingReviews.push({
+          _id: review._id,
+          productId: product._id,
+          productName: product.name,
+          user: review.user,
+          rating: review.rating,
+          comment: review.comment,
+          images: review.images,
+          createdAt: review.createdAt
+        });
+      }
+    });
+  });
+
+  res.json(pendingReviews);
+});
+
+// @desc    Subscribe to stock alerts
+// @route   POST /api/products/:id/stock-alert
+// @access  Private
+exports.subscribeStockAlert = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (!product) {
+    res.status(404);
+    throw new Error('Product not found');
+  }
+
+  // Check if user is already subscribed
+  const existingAlert = product.stockAlerts.find(
+    alert => alert.user.toString() === req.user.userId
+  );
+
+  if (existingAlert) {
+    res.status(400);
+    throw new Error('Already subscribed to stock alerts for this product');
+  }
+
+  product.stockAlerts.push({
+    user: req.user.userId,
+    alerted: false
+  });
+
+  await product.save();
+  res.json({ message: 'Stock alert subscription added' });
+});
+
+// @desc    Unsubscribe from stock alerts
+// @route   DELETE /api/products/:id/stock-alert
+// @access  Private
+exports.unsubscribeStockAlert = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (!product) {
+    res.status(404);
+    throw new Error('Product not found');
+  }
+
+  product.stockAlerts = product.stockAlerts.filter(
+    alert => alert.user.toString() !== req.user.userId
+  );
+
+  await product.save();
+  res.json({ message: 'Stock alert subscription removed' });
+});
