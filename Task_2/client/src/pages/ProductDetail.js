@@ -442,8 +442,8 @@ const ProductDetail = () => {
 
             {/* Size Chart Modal */}
             {showSizeChart && (
-              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+              <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowSizeChart(false)}>
+                <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="text-2xl font-bold text-white">Size Chart</h3>
                     <button
@@ -695,7 +695,8 @@ const ProductDetail = () => {
                   <div className="flex gap-1">
                     {[...Array(5)].map((_, i) => (
                       <Star
-                        key={i}className={`w-7 h-7 cursor-pointer transition-colors ${i < reviewRating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600 hover:text-gray-400'}`}
+                        key={i}
+                        className={`w-7 h-7 cursor-pointer transition-colors ${i < reviewRating ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600 hover:text-gray-400'}`}
                         onClick={() => setReviewRating(i + 1)}
                       />
                     ))}
