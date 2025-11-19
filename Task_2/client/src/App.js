@@ -369,6 +369,13 @@ function AppLayout({
               <SellerDashboard />
             </ProtectedRoute>
           } />
+          <Route path="/contact" element={<ContactUsPage />} />
+          <Route path="/customer-support" element={<CustomerSupportPage />} />
+          <Route path="/return-policy" element={<ReturnPolicyPage />} />
+          <Route path="/refund-policy" element={<RefundPolicyPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/disclaimer" element={<DisclaimerPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
         </Routes>
       </main>
 
