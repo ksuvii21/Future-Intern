@@ -194,7 +194,7 @@ const AdminDashboard = () => {
     const doc = new jsPDF();
     doc.text("Customer Analytics Report", 14, 16);
     const head = [['Customer', 'Email', 'Total Orders', 'Total Spent (Rs.)']];
-    const body = customerAnalytics.topCustomers.map(c => [c.userDetails.username, c.userDetails.email, c.totalOrders, c.totalSpent.toFixed(2)]);
+    const body = customerAnalytics?.topCustomers?.map(c => [c.userDetails.username, c.userDetails.email, c.totalOrders, c.totalSpent.toFixed(2)]) || [];
     
     doc.autoTable({ head, body, startY: 30 });
     doc.save('customer-analytics.pdf');
@@ -265,7 +265,7 @@ const AdminDashboard = () => {
   );
 
   const renderProducts = () => (
-    <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6">
+    <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-4 sm:p-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white">Manage Products</h2>
@@ -273,13 +273,13 @@ const AdminDashboard = () => {
             <p className="text-sm text-gray-400">{selectedProducts.length} products selected</p>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 self-start sm:self-center">
           {selectedProducts.length > 0 && (
             <button onClick={handleBulkDelete} className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors">
               <Trash2 className="w-4 h-4" /> Delete Selected
             </button>
           )}
-          <button onClick={() => openProductModal()} className="flex items-center gap-2 px-4 py-2 bg-[#ea698b] hover:bg-[#d55d92] text-white rounded-lg transition-colors">
+          <button onClick={() => openProductModal()} className="flex items-center gap-2 px-4 py-2 bg-[#ea698b] hover:bg-[#d55d92] text-white rounded-lg transition-colors self-start sm:self-center">
             <PlusCircle className="w-4 h-4" /> Add Product
           </button>
         </div>
@@ -288,7 +288,14 @@ const AdminDashboard = () => {
         <table className="w-full text-sm text-left text-gray-400">
           <thead className="text-xs text-gray-300 uppercase bg-white/5">
             <tr>
-              <th scope="col" className="p-4"><input type="checkbox" className="bg-transparent" onChange={(e) => setSelectedProducts(e.target.checked ? products.map(p => p._id) : [])} /></th>
+              <th scope="col" className="p-4">
+                <input 
+                  type="checkbox" 
+                  className="bg-transparent rounded border-gray-600 text-[#ea698b] focus:ring-[#ea698b]" 
+                  onChange={(e) => setSelectedProducts(e.target.checked ? products.map(p => p._id) : [])}
+                  checked={selectedProducts.length > 0 && selectedProducts.length === products.length}
+                />
+              </th>
               <th scope="col" className="px-6 py-3">Product Name</th>
               <th scope="col" className="px-6 py-3 hidden md:table-cell">Category</th>
               <th scope="col" className="px-6 py-3 hidden sm:table-cell">Price</th>
@@ -299,7 +306,14 @@ const AdminDashboard = () => {
           <tbody>
             {products.map(p => (
               <tr key={p._id} className="border-b border-[#571089]/30 hover:bg-white/5">
-                <td className="p-4"><input type="checkbox" className="bg-transparent" checked={selectedProducts.includes(p._id)} onChange={() => handleSelectProduct(p._id)} /></td>
+                <td className="p-4">
+                  <input 
+                    type="checkbox" 
+                    className="bg-transparent rounded border-gray-600 text-[#ea698b] focus:ring-[#ea698b]" 
+                    checked={selectedProducts.includes(p._id)} 
+                    onChange={() => handleSelectProduct(p._id)} 
+                  />
+                </td>
                 <td className="px-6 py-4 font-medium text-white">{p.name}</td>
                 <td className="px-6 py-4 hidden md:table-cell">{p.category}</td>
                 <td className="px-6 py-4 hidden sm:table-cell">₹{p.price}</td>
@@ -428,7 +442,7 @@ const AdminDashboard = () => {
 
   const renderReports = () => (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-3xl font-bold text-white">Sales Reports</h2>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <button onClick={generateSalesReportPDF} className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
@@ -439,13 +453,33 @@ const AdminDashboard = () => {
           </button>
         </div>
       </div>
-      {renderDashboard()}
+      {/* Sales specific dashboard content */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StatCard icon={<DollarSign />} title="Total Revenue" value={stats?.totalRevenue?.toFixed(2) || 0} prefix="₹" color="from-green-500/30 to-green-600/30" />
+        <StatCard icon={<DollarSign />} title="Avg. Order Value" value={stats?.avgOrderValue?.toFixed(2) || 0} prefix="₹" color="from-teal-500/30 to-teal-600/30" />
+        <StatCard icon={<ShoppingCart />} title="Total Orders" value={stats?.totalOrders || 0} color="from-blue-500/30 to-blue-600/30" />
+        <StatCard icon={<Package />} title="Total Products" value={stats?.totalProducts || 0} color="from-yellow-500/30 to-yellow-600/30" />
+      </div>
+      <div className="bg-gradient-to-br from-[#1a0a2e] to-[#0a0015] border border-[#571089]/30 rounded-2xl p-6 h-[400px]">
+        <h3 className="text-xl font-bold text-white mb-4">Monthly Sales</h3>
+        <ResponsiveContainer width="100%" height="90%">
+          <BarChart data={stats?.monthlySales} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#57108930" />
+            <XAxis dataKey="_id" tick={{ fill: '#9ca3af' }} />
+            <YAxis tick={{ fill: '#9ca3af' }} />
+            <Tooltip contentStyle={{ backgroundColor: '#1a0a2e', border: '1px solid #571089' }} />
+            <Legend />
+            <Bar dataKey="total" fill="#ea698b" name="Sales (₹)" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      {renderPerformance()}
     </div>
   );
 
   const renderCustomers = () => (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-3xl font-bold text-white">Customer Analytics</h2>
         <button onClick={generateCustomerAnalyticsPDF} className="flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors">
           <FileDown className="w-4 h-4" /> Download Customer PDF
