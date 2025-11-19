@@ -898,7 +898,7 @@ const sampleProducts = [
     price: 5099.15,
     category: 'Accessories',
     stock: 12,
-    imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg',
+    imageUrl: 'https://i.pinimg.com/736x/ca/64/d9/ca64d90081b931c08f4c7129f766449a.jpg',
     variants: [
       { color: 'Blue', imageUrl: 'https://i.pinimg.com/736x/ca/64/d9/ca64d90081b931c08f4c7129f766449a.jpg', stock: 6 },
       { color: 'Brown', imageUrl: 'https://i.pinimg.com/736x/60/20/68/602068c076c9138ba97f02c3cc2f4367.jpg', stock: 6 },
