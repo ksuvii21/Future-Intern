@@ -65,8 +65,10 @@ const Home = () => {
         setLoading(true);
         // Fetch all products without pagination for proper category filtering
         const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products?limit=100`);
-        // The API sends an array directly, not an object with a 'products' property.
-        setProducts(response.data || []);
+        // The API response structure is inconsistent. Sometimes it's an array, sometimes an object.
+        // This ensures we always work with an array.
+        const productData = Array.isArray(response.data) ? response.data : response.data.products;
+        setProducts(productData || []);
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {
