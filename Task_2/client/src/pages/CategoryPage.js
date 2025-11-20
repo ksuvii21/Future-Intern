@@ -48,7 +48,7 @@ const CategoryPage = () => {
         }
         // Fetch all unique categories for the filter bar
         if (allCategories.length === 0) {
-          const allProdsResponse = await axios.get('http://localhost:5000/api/products');
+          const allProdsResponse = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products');
           const productList = allProdsResponse.data.products || [];
           setAllCategories(['All Categories', ...new Set(productList.map(p => p.category))]);
         }
@@ -247,7 +247,7 @@ const CategoryPage = () => {
                       }
 
                       try {
-                        await axios.post('http://localhost:5000/api/wishlist', {
+                        await axios.post('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/wishlist', {
                           productId: product._id
                         }, {
                           headers: { Authorization: `Bearer ${token}` }
