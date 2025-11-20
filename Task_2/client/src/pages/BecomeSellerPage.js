@@ -22,7 +22,7 @@ const BecomeSellerPage = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      const response = await axios.put('http://localhost:5000/api/seller/become-seller', {}, config);
+      const response = await axios.put('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/seller/become-seller', {}, config);
 
       // Update user in local storage with new role
       localStorage.setItem('user', JSON.stringify(response.data.user));
