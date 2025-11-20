@@ -20,7 +20,7 @@ const WishlistPage = () => {
         return;
       }
 
-      const response = await axios.get('/api/wishlist', {
+      const response = await axios.get('http://localhost:5000/api/wishlist', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setWishlistItems(response.data.items || []);
@@ -61,7 +61,7 @@ const WishlistPage = () => {
   const removeFromWishlist = async (productId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`/api/wishlist/${productId}`, {
+      await axios.delete(`http://localhost:5000/api/wishlist/${productId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Filter out the removed item from the local state
