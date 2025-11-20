@@ -64,7 +64,7 @@ const SearchPage = () => {
       params.append('page', currentPage);
       params.append('limit', '12');
 
-      const response = await axios.get(`http://localhost:5000/api/products?${params}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products?${params}`);
       setProducts(response.data.products);
       setMaxProductPrice(response.data.maxProductPrice);
       setTotalPages(response.data.totalPages);
@@ -117,7 +117,7 @@ const SearchPage = () => {
         return;
       }
 
-      await axios.post('http://localhost:5000/api/wishlist', {
+      await axios.post('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/wishlist', {
         productId: productId
       }, {
         headers: { Authorization: `Bearer ${token}` }
@@ -141,7 +141,7 @@ const SearchPage = () => {
       return;
     }
     try {
-      await axios.post('http://localhost:5000/api/cart', {
+      await axios.post('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart', {
         productId: product._id,
         quantity: 1,
         selectedColor: product.variants?.[0]?.color || 'Default',
