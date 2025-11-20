@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Mail, Lock, CheckCircle, Fingerprint, Shield, Zap, Eye, EyeOff, Sparkles, Chrome } from 'lucide-react';
- 
+
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: '',
@@ -60,7 +60,7 @@ const Login = ({ onLogin }) => {
 
     try {
       const response = await axios.post(
-        '${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/login',
+        `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/login`,
         formData
       );
       
