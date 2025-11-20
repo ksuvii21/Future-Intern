@@ -33,7 +33,7 @@ const sampleProducts = [
   {
     name: 'Elegant Evening Gown',
     description: 'Stunning floor-length evening gown with intricate lace detailing and flowing silhouette. Perfect for special occasions.',
-    price: 2549.15,
+    price: 4499.15,
     category: 'Dresses',
     stock: 15,
     imageUrl: 'https://i.pinimg.com/736x/17/7d/8e/177d8e9da528eca0433fdbd694d9cf65.jpg',
@@ -49,7 +49,7 @@ const sampleProducts = [
   {
     name: 'Elegant Evening Gown',
     description: 'Stunning floor-length evening gown with intricate lace detailing and flowing silhouette. Perfect for special occasions.',
-    price: 2549.15,
+    price: 4599.15,
     category: 'Dresses',
     stock: 15,
     imageUrl: 'https://i.pinimg.com/1200x/84/33/84/8433843541b3bcfdc279a9430678e333.jpg',
@@ -65,7 +65,7 @@ const sampleProducts = [
   {
     name: 'Elegant Evening Gown',
     description: 'Stunning floor-length evening gown with intricate lace detailing and flowing silhouette. Perfect for special occasions.',
-    price: 2549.15,
+    price: 4699.15,
     category: 'Dresses',
     stock: 15,
     imageUrl: 'https://i.pinimg.com/1200x/be/37/68/be3768f7c25a393ffbc1cc1a74da7204.jpg',
@@ -81,7 +81,7 @@ const sampleProducts = [
   {
     name: 'Velvet Maxi Dress',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
-    price: 2804.15,
+    price: 4299.15,
     category: 'Dresses',
     stock: 10,
     imageUrl: 'https://i.pinimg.com/1200x/2f/3e/a7/2f3ea7bd7bdc9c7d655cef6d4d4c6ba0.jpg',
@@ -99,7 +99,7 @@ const sampleProducts = [
   {
     name: 'Velvet Maxi Dress',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
-    price: 2804.15,
+    price: 4099.15,
     category: 'Dresses',
     stock: 10,
     imageUrl: 'https://i.pinimg.com/1200x/02/c5/0e/02c50e8bc313d06a833f3ee672933260.jpg',
@@ -117,7 +117,7 @@ const sampleProducts = [
   {
     name: 'Velvet Maxi Dress',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
-    price: 2804.15,
+    price: 4999.15,
     category: 'Dresses',
     stock: 10,
     imageUrl: 'https://i.pinimg.com/1200x/ab/04/77/ab04778495e2a60595faef8874c0b9fd.jpg',
@@ -135,7 +135,7 @@ const sampleProducts = [
   {
     name: 'Velvet Maxi Dress',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
-    price: 2804.15,
+    price: 4299.15,
     category: 'Dresses',
     stock: 10,
     imageUrl: 'https://i.pinimg.com/1200x/99/b2/a5/99b2a5a1c000e051d7c7c9aaceb34cdd.jpg',
@@ -153,7 +153,7 @@ const sampleProducts = [
   {
     name: 'Velvet Maxi Dress',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
-    price: 2804.15,
+    price: 4299.15,
     category: 'Dresses',
     stock: 10,
     imageUrl: 'https://i.pinimg.com/736x/3e/f8/61/3ef86150cff14188c3b5957393d7ad41.jpg',
@@ -171,7 +171,7 @@ const sampleProducts = [
   {
     name: 'Silk Cocktail Dress',
     description: 'Luxurious silk cocktail dress with asymmetric hem and delicate beading. Perfect for evening events.',
-    price: 2124.15,
+    price: 3099.15,
     category: 'Dresses',
     stock: 18,
     imageUrl: 'https://i.pinimg.com/1200x/ea/02/2b/ea022b104a901fbc73d40fbbdd4aad95.jpg',
@@ -187,7 +187,7 @@ const sampleProducts = [
   {
     name: 'Silk Cocktail Dress',
     description: 'Luxurious silk cocktail dress with asymmetric hem and delicate beading. Perfect for evening events.',
-    price: 2124.15,
+    price: 3099.15,
     category: 'Dresses',
     stock: 18,
     imageUrl: 'https://i.pinimg.com/1200x/96/9b/93/969b939280a6ef1fee231781eb7fc372.jpg',
@@ -203,7 +203,7 @@ const sampleProducts = [
   {
     name: 'Silk Cocktail Dress',
     description: 'Luxurious silk cocktail dress with asymmetric hem and delicate beading. Perfect for evening events.',
-    price: 2124.15,
+    price: 3299.15,
     category: 'Dresses',
     stock: 18,
     imageUrl: 'https://i.pinimg.com/736x/f7/36/02/f7360267ab6dc116f9670b2166b40879.jpg',
@@ -219,7 +219,7 @@ const sampleProducts = [
   {
     name: 'Satin Wrap Dress',
     description: 'Elegant satin wrap dress with tie waist and flowing skirt. Versatile piece for both casual and formal wear.',
-    price: 1529.15,
+    price: 4999.15,
     category: 'Dresses',
     stock: 22,
     imageUrl: 'https://i.pinimg.com/1200x/7e/31/0b/7e310b8bf8b2019c6c66fa83b3922516.jpg',
@@ -236,7 +236,7 @@ const sampleProducts = [
   {
     name: 'Satin Wrap Dress',
     description: 'Elegant satin wrap dress with tie waist and flowing skirt. Versatile piece for both casual and formal wear.',
-    price: 1529.15,
+    price: 4999.15,
     category: 'Dresses',
     stock: 22,
     imageUrl: 'https://i.pinimg.com/1200x/cb/67/25/cb6725d31d435bd4cbe401dee953ada9.jpg',
@@ -253,7 +253,7 @@ const sampleProducts = [
   {
     name: 'Satin Wrap Dress',
     description: 'Elegant satin wrap dress with tie waist and flowing skirt. Versatile piece for both casual and formal wear.',
-    price: 1529.15,
+    price: 4999.15,
     category: 'Dresses',
     stock: 22,
     imageUrl: 'https://i.pinimg.com/1200x/18/0a/eb/180aeb0dd7df42ee573df18619430811.jpg',
@@ -270,7 +270,7 @@ const sampleProducts = [
   {
     name: 'Satin Wrap Dress',
     description: 'Elegant satin wrap dress with tie waist and flowing skirt. Versatile piece for both casual and formal wear.',
-    price: 1529.15,
+    price: 4999.15,
     category: 'Dresses',
     stock: 22,
     imageUrl: 'https://i.pinimg.com/1200x/01/76/6a/01766a8afb7ff81bb53ea3d50320a51f.jpg',
@@ -287,7 +287,7 @@ const sampleProducts = [
   {
     name: 'Chiffon Blouse',
     description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
-    price: 1019.15,
+    price: 1599.15,
     category: 'Dresses',
     stock: 28,
     imageUrl: 'https://i.pinimg.com/1200x/95/97/30/9597308035ebd87a5e11c5b3d6c50376.jpg',
@@ -305,7 +305,7 @@ const sampleProducts = [
   {
     name: 'Chiffon Blouse',
     description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
-    price: 1019.15,
+    price: 1599.15,
     category: 'Dresses',
     stock: 28,
     imageUrl: 'https://i.pinimg.com/1200x/4a/3a/bf/4a3abfb4aa790b2a173fba7e5577a8ea.jpg',
@@ -323,7 +323,7 @@ const sampleProducts = [
   {
     name: 'Chiffon Blouse',
     description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
-    price: 1019.15,
+    price: 1599.15,
     category: 'Dresses',
     stock: 28,
     imageUrl: 'https://i.pinimg.com/1200x/76/63/f3/7663f3bb566d3b2a243b22cacbe53d09.jpg',
@@ -341,7 +341,7 @@ const sampleProducts = [
   {
     name: 'Chiffon Blouse',
     description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
-    price: 1019.15,
+    price: 1599.15,
     category: 'Dresses',
     stock: 28,
     imageUrl: 'https://i.pinimg.com/1200x/6f/cc/2e/6fcc2e7995a0c7ffff020c7a315068ef.jpg',
@@ -359,7 +359,7 @@ const sampleProducts = [
   {
     name: 'Chiffon Blouse',
     description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
-    price: 1019.15,
+    price: 1599.15,
     category: 'Dresses',
     stock: 28,
     imageUrl: 'https://i.pinimg.com/736x/1c/a4/6a/1ca46a357251cf715d9dd3fec3cf2f1c.jpg',
@@ -377,7 +377,7 @@ const sampleProducts = [
   {
     name: 'Cashmere Sweater',
     description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
-    price: 1614.15,
+    price: 1699.15,
     category: 'Dresses',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/1200x/a2/01/15/a201158baeb4fd979e200b01fefa4b0b.jpg',
@@ -395,7 +395,7 @@ const sampleProducts = [
   {
     name: 'Cashmere Sweater',
     description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
-    price: 1614.15,
+    price: 1699.15,
     category: 'Dresses',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/736x/39/17/b4/3917b46f3bcd9c6a12d1a015aa185c82.jpg',
@@ -413,7 +413,7 @@ const sampleProducts = [
   {
     name: 'Cashmere Sweater',
     description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
-    price: 1614.15,
+    price: 1699.15,
     category: 'Dresses',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/736x/35/4a/44/354a4406601ef03badf7c2f69582003b.jpg',
@@ -431,7 +431,7 @@ const sampleProducts = [
   {
     name: 'Cashmere Sweater',
     description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
-    price: 1614.15,
+    price: 1699.15,
     category: 'Dresses',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/736x/92/93/f5/9293f5bb151897edf16913a81eecc8e6.jpg',
@@ -449,7 +449,7 @@ const sampleProducts = [
   {
     name: 'Cashmere Sweater',
     description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
-    price: 1614.15,
+    price: 1699.15,
     category: 'Dresses',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/736x/eb/94/a3/eb94a338256803a15a553a079925e465.jpg',
@@ -467,7 +467,7 @@ const sampleProducts = [
   {
     name: 'Tulle Shirt',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
-    price: 1359.15,
+    price: 1299.15,
     category: 'Dresses',
     stock: 24,
     imageUrl: 'https://i.pinimg.com/1200x/c8/35/35/c83535e6210ad6c13371315e9c36a9e2.jpg',
@@ -485,7 +485,7 @@ const sampleProducts = [
   {
     name: 'Tulle Shirt',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
-    price: 1359.15,
+    price: 1299.15,
     category: 'Dresses',
     stock: 24,
     imageUrl: 'https://i.pinimg.com/1200x/17/59/14/175914e3fb75944c5c1760189bfc5fd8.jpg',
@@ -503,7 +503,7 @@ const sampleProducts = [
   {
     name: 'Tulle Shirt',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
-    price: 1359.15,
+    price: 1299.15,
     category: 'Dresses',
     stock: 24,
     imageUrl: 'https://i.pinimg.com/736x/ef/fa/5e/effa5ee311c44c4fdef858f7cb17fdde.jpg',
@@ -521,7 +521,7 @@ const sampleProducts = [
   {
     name: 'Tulle Shirt',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
-    price: 1359.15,
+    price: 1299.15,
     category: 'Dresses',
     stock: 24,
     imageUrl: 'https://i.pinimg.com/1200x/ef/9d/ac/ef9dac25b0086913d41f7734fd40abc8.jpg',
@@ -539,7 +539,7 @@ const sampleProducts = [
   {
     name: 'Tulle Shirt',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
-    price: 1359.15,
+    price: 1299.15,
     category: 'Dresses',
     stock: 24,
     imageUrl: 'https://i.pinimg.com/1200x/3b/14/33/3b14339bb34b6fa9c2c6259e9d124b17.jpg',
@@ -574,7 +574,7 @@ const sampleProducts = [
   {
     name: 'Tulle Skirt',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
-    price: 1359.15,
+    price: 1259.15,
     category: 'Dresses',
     stock: 24,
     imageUrl: 'https://i.pinimg.com/1200x/71/0c/ce/710cceb17f4cbdccf2ec982338e52d7e.jpg',
@@ -591,7 +591,7 @@ const sampleProducts = [
   {
     name: 'Tulle Skirt',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
-    price: 1359.15,
+    price: 1279.15,
     category: 'Dresses',
     stock: 24,
     imageUrl: 'https://i.pinimg.com/736x/a9/0b/bc/a90bbcffa3510b6704ec2a89f542b604.jpg',
@@ -608,7 +608,7 @@ const sampleProducts = [
   {
     name: 'Tulle Skirt',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
-    price: 1359.15,
+    price: 1399.15,
     category: 'Dresses',
     stock: 24,
     imageUrl: 'https://i.pinimg.com/736x/91/91/71/9191711700631689e229a45790707d07.jpg',
@@ -673,7 +673,7 @@ const sampleProducts = [
   {
     name: 'Emerald Drop Earrings',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
-    price: 2974.15,
+    price: 4974.15,
     category: 'Jewelry',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/1200x/66/d9/b7/66d9b763cc9064a3f03ab1e459146092.jpg',
@@ -689,7 +689,7 @@ const sampleProducts = [
   {
     name: 'Emerald Drop Earrings',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
-    price: 2974.15,
+    price: 4974.15,
     category: 'Jewelry',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/1200x/c9/f6/1a/c9f61af97627380595c8e816b02ff2b7.jpg',
@@ -705,7 +705,7 @@ const sampleProducts = [
   {
     name: 'Emerald Drop Earrings',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
-    price: 2974.15,
+    price: 5974.15,
     category: 'Jewelry',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/1200x/af/7f/c9/af7fc907f5f26ef64b8ecc56be9a08e0.jpg',
@@ -721,7 +721,7 @@ const sampleProducts = [
   {
     name: 'Pearl Necklace Set',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
-    price: 2974.15,
+    price: 9974.15,
     category: 'Jewelry',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/1200x/00/91/a5/0091a5c38cd9e4169cb3e5b9aac3d032.jpg',
@@ -737,7 +737,7 @@ const sampleProducts = [
   {
     name: 'Pearl Necklace Set',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
-    price: 2974.15,
+    price: 9974.15,
     category: 'Jewelry',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/1200x/15/69/da/1569da9d9af7dc3c2d2045da56e1766b.jpg',
@@ -753,7 +753,7 @@ const sampleProducts = [
   {
     name: 'Pearl Necklace Set',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
-    price: 2974.15,
+    price: 9974.15,
     category: 'Jewelry',
     stock: 20,
     imageUrl: 'https://i.pinimg.com/736x/96/fd/01/96fd013bf8bb1f36ded49b0d990422b6.jpg',
@@ -769,7 +769,7 @@ const sampleProducts = [
   {
     name: 'Gold Bangle Bracelet',
     description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
-    price: 1699.15,
+    price: 3699.15,
     category: 'Jewelry',
     stock: 25,
     imageUrl: 'https://i.pinimg.com/1200x/0b/b1/b3/0bb1b33706dbc5daa5101c0a03a77c9c.jpg',
@@ -785,7 +785,7 @@ const sampleProducts = [
   {
     name: 'Gold Bangle Bracelet',
     description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
-    price: 1699.15,
+    price: 3699.15,
     category: 'Jewelry',
     stock: 25,
     imageUrl: 'https://i.pinimg.com/1200x/a3/17/82/a317829ddbba3c7a7ef33afc5d23aff0.jpg',
@@ -801,7 +801,7 @@ const sampleProducts = [
   {
     name: 'Gold Bangle Bracelet',
     description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
-    price: 1699.15,
+    price: 3699.15,
     category: 'Jewelry',
     stock: 25,
     imageUrl: 'https://i.pinimg.com/1200x/64/38/c7/6438c7c5faca2c8925f17da104c97a3f.jpg',
@@ -817,7 +817,7 @@ const sampleProducts = [
   {
     name: 'Silver Hoop Earrings',
     description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
-    price: 1104.15,
+    price: 11040.15,
     category: 'Jewelry',
     stock: 35,
     imageUrl: 'https://i.pinimg.com/736x/27/b3/0c/27b30ccdf6485fb9b22abee1d1fb7947.jpg',
@@ -833,7 +833,7 @@ const sampleProducts = [
   {
     name: 'Silver Hoop Earrings',
     description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
-    price: 1104.15,
+    price: 11040.15,
     category: 'Jewelry',
     stock: 35,
     imageUrl: 'https://i.pinimg.com/736x/d8/35/96/d8359643c16133ce10065a866d38eb6d.jpg',
@@ -849,7 +849,7 @@ const sampleProducts = [
   {
     name: 'Silver Hoop Earrings',
     description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
-    price: 1104.15,
+    price: 11040.15,
     category: 'Jewelry',
     stock: 35,
     imageUrl: 'https://i.pinimg.com/736x/dc/98/3c/dc983c1081b09ec896e084442a8ffa3c.jpg',
@@ -963,7 +963,7 @@ const sampleProducts = [
   {
     name: 'Crystal Hair Accessories',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
-    price: 764.15,
+    price: 1064.15,
     category: 'Accessories',
     stock: 30,
     imageUrl: 'https://i.pinimg.com/1200x/43/43/40/434340016214bf4dace539d2c2c25054.jpg',
@@ -981,7 +981,7 @@ const sampleProducts = [
   {
     name: 'Crystal Hair Accessories',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
-    price: 764.15,
+    price: 1064.15,
     category: 'Accessories',
     stock: 30,
     imageUrl: 'https://i.pinimg.com/1200x/17/64/a0/1764a0f0c965c60dad06f7a88d95091c.jpg',
@@ -999,7 +999,7 @@ const sampleProducts = [
   {
     name: 'Crystal Hair Accessories',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
-    price: 764.15,
+    price: 1064.15,
     category: 'Accessories',
     stock: 30,
     imageUrl: 'https://i.pinimg.com/1200x/d8/0c/77/d80c771e13b8cede79a02f9a869841d8.jpg',
@@ -1017,7 +1017,7 @@ const sampleProducts = [
   {
     name: 'Crystal Hair Accessories',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
-    price: 764.15,
+    price: 1064.15,
     category: 'Accessories',
     stock: 30,
     imageUrl: 'https://i.pinimg.com/1200x/b2/d2/94/b2d294c14978a09c86b1f1137278882a.jpg',
@@ -1035,7 +1035,7 @@ const sampleProducts = [
   {
     name: 'Crystal Hair Accessories',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
-    price: 764.15,
+    price: 1064.15,
     category: 'Accessories',
     stock: 30,
     imageUrl: 'https://i.pinimg.com/1200x/dc/13/52/dc135207d67678b5b63a5e6b7773ed67.jpg',
