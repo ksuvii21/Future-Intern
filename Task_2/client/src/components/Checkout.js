@@ -191,7 +191,7 @@ const Checkout = () => {
   };
 
   const totalPrice = cartItems.reduce(
-    (total, item) => total + (item.product?.price || item.price) * item.quantity,
+    (total, item) => total + (Number(item.product?.price) || 0) * (Number(item.quantity) || 0),
     0
   );
 
@@ -203,7 +203,7 @@ const Checkout = () => {
     );
   }
 
-  if (error && cartItems.length === 0) {
+  if (cartItems.length === 0 && !cartLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] flex items-center justify-center">
         <div className="text-red-400 text-xl">{error}</div>
