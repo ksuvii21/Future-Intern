@@ -304,7 +304,7 @@ const CategoryPage = () => {
                     onClick={async (e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                      const cart = JSON.parse(localStorage.getItem('cart') || '[]') || [];
                       const existingItem = cart.find(item => item._id === product._id);
 
                       if (existingItem) {
