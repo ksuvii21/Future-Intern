@@ -285,12 +285,18 @@ function AppLayout({
                   <span className="text-sm">Wishlist</span>
                 </Link>
                 {user ? (
-                  <div className="hidden md:flex items-center gap-2 text-gray-300">
+                  <div className="hidden md:flex items-center gap-2 text-gray-300 relative group">
                     <User className="w-5 h-5" />
                     <span className="text-sm">Hello, {user.username}</span>
                     <Link to="/profile" className="text-sm hover:text-[#ea698b] ml-2">
                       Profile
                     </Link>
+                    <button
+                      onClick={() => handleLogout(navigate)}
+                      className="text-sm hover:text-[#ea698b] ml-2 px-3 py-1 bg-white/5 border border-[#571089]/30 rounded-md transition-colors"
+                    >
+                      Logout
+                    </button>
                   </div>
                 ) : (
                   <Link to="/login" className="hidden md:flex items-center gap-2 text-gray-300 hover:text-[#ea698b] transition-colors">
