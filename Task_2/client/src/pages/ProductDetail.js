@@ -150,6 +150,14 @@ const ProductDetail = () => {
       return;
     }
     try {
+      await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart`, {
+        productId: product._id,
+        quantity: quantity,
+        selectedColor: selectedColor,
+        selectedSize: selectedSize
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       alert('Product added to cart!');
       // Trigger cart count update
       window.dispatchEvent(new Event('storage'));
@@ -197,11 +205,6 @@ const ProductDetail = () => {
         return;
       }
 
-      await axios.post('/api/wishlist', {
-        productId: product._id
-      }, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
 
       alert('Product added to wishlist!');
     } catch (error) {
