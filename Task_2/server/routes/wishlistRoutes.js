@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { protect } = require('../middleware/authMiddleware'); // Assuming this path is correct
+const { protect } = require('../middleware/auth'); // Corrected path to auth middleware
 const {
   getWishlist,
   addToWishlist,
