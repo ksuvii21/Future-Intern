@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { User, Mail, Lock, Edit, Save, X, ShoppingBag, Heart, Calendar, Eye, EyeOff, Store, MapPin, Trash2, PlusCircle, LogOut } from 'lucide-react';
 
+
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState('profile');
