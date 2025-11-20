@@ -110,11 +110,11 @@ The application will be running on:
    - Go to [Netlify](https://netlify.com)
    - Click "New site from Git"
    - Connect your GitHub repository
-   - Select the `Task_2/client` folder as the base directory
 
 2. **Build Settings:**
+   - Base directory: `Task_2/client`
    - Build command: `npm run build`
-   - Publish directory: `build`
+   - Publish directory: `Task_2/client/build`
    - Add environment variable: `REACT_APP_API_URL=https://your-render-backend-url.onrender.com`
 
 3. **Deploy:**
@@ -127,7 +127,6 @@ The application will be running on:
    - Go to [Render](https://render.com)
    - Click "New +" → "Web Service"
    - Connect your GitHub repository
-   - Select the `Task_2/server` folder
 
 2. **Service Configuration:**
    - Runtime: `Node`
