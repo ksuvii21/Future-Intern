@@ -129,7 +129,7 @@ const ProductDetail = () => {
     const token = localStorage.getItem('token');
     if (!token) {
       // Guest user cart logic
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]') || [];
       const existingItemIndex = cart.findIndex(item => item.product._id === product._id && item.selectedColor === selectedColor && item.selectedSize === selectedSize);
 
       if (existingItemIndex > -1) {
