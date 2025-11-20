@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Loader } from 'lucide-react';
 
 const OAuthCallback = () => {
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
