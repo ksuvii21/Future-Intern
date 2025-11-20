@@ -47,7 +47,7 @@ const sampleProducts = [
     numReviews: 24
   },
   {
-    name: 'Elegant Evening Gown',
+    name: 'Elegant Evening Gown - Blue-Black',
     description: 'Stunning floor-length evening gown with intricate lace detailing and flowing silhouette. Perfect for special occasions.',
     price: 4599.15,
     category: 'Dresses',
@@ -63,7 +63,7 @@ const sampleProducts = [
     numReviews: 24
   },
   {
-    name: 'Elegant Evening Gown',
+    name: 'Elegant Evening Gown - Red-Black',
     description: 'Stunning floor-length evening gown with intricate lace detailing and flowing silhouette. Perfect for special occasions.',
     price: 4699.15,
     category: 'Dresses',
@@ -97,7 +97,7 @@ const sampleProducts = [
     numReviews: 12
   },
   {
-    name: 'Velvet Maxi Dress',
+    name: 'Velvet Maxi Dress - Green',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
     price: 4099.15,
     category: 'Dresses',
@@ -115,7 +115,7 @@ const sampleProducts = [
     numReviews: 12
   },
   {
-    name: 'Velvet Maxi Dress',
+    name: 'Velvet Maxi Dress - Black',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
     price: 4999.15,
     category: 'Dresses',
@@ -133,7 +133,7 @@ const sampleProducts = [
     numReviews: 12
   },
   {
-    name: 'Velvet Maxi Dress',
+    name: 'Velvet Maxi Dress - Purple',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
     price: 4299.15,
     category: 'Dresses',
@@ -151,7 +151,7 @@ const sampleProducts = [
     numReviews: 12
   },
   {
-    name: 'Velvet Maxi Dress',
+    name: 'Velvet Maxi Dress - Navy Blue',
     description: 'Sumptuous velvet maxi dress with deep V-neck and long sleeves. Luxurious fabric for winter elegance.',
     price: 4299.15,
     category: 'Dresses',
@@ -185,7 +185,7 @@ const sampleProducts = [
     numReviews: 15
   },
   {
-    name: 'Silk Cocktail Dress',
+    name: 'Silk Cocktail Dress - Navy Blue',
     description: 'Luxurious silk cocktail dress with asymmetric hem and delicate beading. Perfect for evening events.',
     price: 3099.15,
     category: 'Dresses',
@@ -201,7 +201,7 @@ const sampleProducts = [
     numReviews: 15
   },
   {
-    name: 'Silk Cocktail Dress',
+    name: 'Silk Cocktail Dress - Black',
     description: 'Luxurious silk cocktail dress with asymmetric hem and delicate beading. Perfect for evening events.',
     price: 3299.15,
     category: 'Dresses',
@@ -234,7 +234,7 @@ const sampleProducts = [
     numReviews: 19
   },
   {
-    name: 'Satin Wrap Dress',
+    name: 'Satin Wrap Dress - Light Green',
     description: 'Elegant satin wrap dress with tie waist and flowing skirt. Versatile piece for both casual and formal wear.',
     price: 4999.15,
     category: 'Dresses',
@@ -251,7 +251,7 @@ const sampleProducts = [
     numReviews: 19
   },
   {
-    name: 'Satin Wrap Dress',
+    name: 'Satin Wrap Dress - Dark Green',
     description: 'Elegant satin wrap dress with tie waist and flowing skirt. Versatile piece for both casual and formal wear.',
     price: 4999.15,
     category: 'Dresses',
@@ -268,7 +268,7 @@ const sampleProducts = [
     numReviews: 19
   },
   {
-    name: 'Satin Wrap Dress',
+    name: 'Satin Wrap Dress - Blue',
     description: 'Elegant satin wrap dress with tie waist and flowing skirt. Versatile piece for both casual and formal wear.',
     price: 4999.15,
     category: 'Dresses',
@@ -303,7 +303,7 @@ const sampleProducts = [
     numReviews: 21
   },
   {
-    name: 'Chiffon Blouse',
+    name: 'Chiffon Blouse - Blue',
     description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
     price: 1599.15,
     category: 'Dresses',
@@ -321,7 +321,7 @@ const sampleProducts = [
     numReviews: 21
   },
   {
-    name: 'Chiffon Blouse',
+    name: 'Chiffon Blouse - Red',
     description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
     price: 1599.15,
     category: 'Dresses',
@@ -339,7 +339,7 @@ const sampleProducts = [
     numReviews: 21
   },
   {
-    name: 'Chiffon Blouse',
+    name: 'Chiffon Blouse - White',
     description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
     price: 1599.15,
     category: 'Dresses',
@@ -357,7 +357,7 @@ const sampleProducts = [
     numReviews: 21
   },
   {
-    name: 'Chiffon Blouse',
+    name: 'Chiffon Blouse - Green',
     description: 'Light and airy chiffon blouse with delicate ruffles and pearl buttons. Elegant layering piece.',
     price: 1599.15,
     category: 'Dresses',
@@ -393,7 +393,7 @@ const sampleProducts = [
     numReviews: 17
   },
   {
-    name: 'Cashmere Sweater',
+    name: 'Cashmere Sweater - Blue',
     description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
     price: 1699.15,
     category: 'Dresses',
@@ -411,7 +411,7 @@ const sampleProducts = [
     numReviews: 17
   },
   {
-    name: 'Cashmere Sweater',
+    name: 'Cashmere Sweater - Black',
     description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
     price: 1699.15,
     category: 'Dresses',
@@ -429,7 +429,7 @@ const sampleProducts = [
     numReviews: 17
   },
   {
-    name: 'Cashmere Sweater',
+    name: 'Cashmere Sweater - Green',
     description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
     price: 1699.15,
     category: 'Dresses',
@@ -447,7 +447,7 @@ const sampleProducts = [
     numReviews: 17
   },
   {
-    name: 'Cashmere Sweater',
+    name: 'Cashmere Sweater - Red',
     description: 'Ultra-soft cashmere sweater with crew neck and ribbed cuffs. Luxurious comfort for cooler days.',
     price: 1699.15,
     category: 'Dresses',
@@ -483,7 +483,7 @@ const sampleProducts = [
     numReviews: 20
   },
   {
-    name: 'Tulle Shirt',
+    name: 'Tulle Shirt - Cream',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
     price: 1299.15,
     category: 'Dresses',
@@ -501,7 +501,7 @@ const sampleProducts = [
     numReviews: 20
   },
   {
-    name: 'Tulle Shirt',
+    name: 'Tulle Shirt - Light Brown',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
     price: 1299.15,
     category: 'Dresses',
@@ -519,7 +519,7 @@ const sampleProducts = [
     numReviews: 20
   },
   {
-    name: 'Tulle Shirt',
+    name: 'Tulle Shirt - Blue',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
     price: 1299.15,
     category: 'Dresses',
@@ -537,7 +537,7 @@ const sampleProducts = [
     numReviews: 20
   },
   {
-    name: 'Tulle Shirt',
+    name: 'Tulle Shirt - Red',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
     price: 1299.15,
     category: 'Dresses',
@@ -572,7 +572,7 @@ const sampleProducts = [
     numReviews: 20
   },
   {
-    name: 'Tulle Skirt',
+    name: 'Tulle Skirt - Pink',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
     price: 1259.15,
     category: 'Dresses',
@@ -589,7 +589,7 @@ const sampleProducts = [
     numReviews: 20
   },
   {
-    name: 'Tulle Skirt',
+    name: 'Tulle Skirt - Black',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
     price: 1279.15,
     category: 'Dresses',
@@ -606,7 +606,7 @@ const sampleProducts = [
     numReviews: 20
   },
   {
-    name: 'Tulle Skirt',
+    name: 'Tulle Skirt - White',
     description: 'Romantic tulle shirt with layered design and delicate detailing. Perfect for special occasions or everyday elegance.',
     price: 1399.15,
     category: 'Dresses',
@@ -639,7 +639,7 @@ const sampleProducts = [
     numReviews: 18
   },
   {
-    name: 'Diamond Stud Earrings',
+    name: 'Diamond Stud Earrings - Black Gold',
     description: 'Classic 1-carat diamond stud earrings in 18k white gold setting. Timeless elegance for any occasion.',
     price: 7649.15,
     category: 'Jewelry',
@@ -655,7 +655,7 @@ const sampleProducts = [
     numReviews: 18
   },
   {
-    name: 'Diamond Stud Earrings',
+    name: 'Diamond Stud Earrings - White',
     description: 'Classic 1-carat diamond stud earrings in 18k white gold setting. Timeless elegance for any occasion.',
     price: 7649.15,
     category: 'Jewelry',
@@ -687,7 +687,7 @@ const sampleProducts = [
     numReviews: 27
   },
   {
-    name: 'Emerald Drop Earrings',
+    name: 'Emerald Drop Earrings - Emerald',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
     price: 4974.15,
     category: 'Jewelry',
@@ -703,7 +703,7 @@ const sampleProducts = [
     numReviews: 27
   },
   {
-    name: 'Emerald Drop Earrings',
+    name: 'Emerald Drop Earrings - Butterfly',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
     price: 5974.15,
     category: 'Jewelry',
@@ -719,7 +719,7 @@ const sampleProducts = [
     numReviews: 27
   },
   {
-    name: 'Pearl Necklace Set',
+    name: 'Pearl Necklace Set - Gold',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
     price: 9974.15,
     category: 'Jewelry',
@@ -735,7 +735,7 @@ const sampleProducts = [
     numReviews: 27
   },
   {
-    name: 'Pearl Necklace Set',
+    name: 'Pearl Necklace Set - Emerald',
     description: 'Exquisite freshwater pearl necklace with matching earrings. Classic and sophisticated design.',
     price: 9974.15,
     category: 'Jewelry',
@@ -783,7 +783,7 @@ const sampleProducts = [
     numReviews: 22
   },
   {
-    name: 'Gold Bangle Bracelet',
+    name: 'Gold Bangle Bracelet - Rose Gold',
     description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
     price: 3699.15,
     category: 'Jewelry',
@@ -799,7 +799,7 @@ const sampleProducts = [
     numReviews: 22
   },
   {
-    name: 'Gold Bangle Bracelet',
+    name: 'Gold Bangle Bracelet - Flower',
     description: '18k yellow gold bangle bracelet with intricate engraving. Stackable design for versatile styling.',
     price: 3699.15,
     category: 'Jewelry',
@@ -831,7 +831,7 @@ const sampleProducts = [
     numReviews: 28
   },
   {
-    name: 'Silver Hoop Earrings',
+    name: 'Silver Hoop Earrings - Silver',
     description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
     price: 11040.15,
     category: 'Jewelry',
@@ -847,7 +847,7 @@ const sampleProducts = [
     numReviews: 28
   },
   {
-    name: 'Silver Hoop Earrings',
+    name: 'Silver Hoop Earrings - White',
     description: 'Large silver hoop earrings with intricate filigree design. Bold statement piece for modern women.',
     price: 11040.15,
     category: 'Jewelry',
@@ -878,7 +878,7 @@ const sampleProducts = [
     numReviews: 8
   },
   {
-    name: 'Diamond Tennis Bracelet',
+    name: 'Diamond Tennis Bracelet - White Gold',
     description: 'Sparkling diamond tennis bracelet in platinum setting. Dazzling elegance for special occasions.',
     price: 11049.15,
     category: 'Jewelry',
@@ -910,7 +910,7 @@ const sampleProducts = [
     numReviews: 31
   },
   {
-    name: 'Designer Handbag',
+    name: 'Designer Handbag - Brown',
     description: 'Luxury leather handbag with gold hardware and structured silhouette. Spacious interior with multiple compartments.',
     price: 5099.15,
     category: 'Accessories',
@@ -927,7 +927,7 @@ const sampleProducts = [
     numReviews: 31
   },
   {
-    name: 'Designer Handbag',
+    name: 'Designer Handbag - Burgundy',
     description: 'Luxury leather handbag with gold hardware and structured silhouette. Spacious interior with multiple compartments.',
     price: 5099.15,
     category: 'Accessories',
@@ -944,7 +944,7 @@ const sampleProducts = [
     numReviews: 31
   },
   {
-    name: 'Designer Handbag',
+    name: 'Designer Handbag - White',
     description: 'Luxury leather handbag with gold hardware and structured silhouette. Spacious interior with multiple compartments.',
     price: 5099.15,
     category: 'Accessories',
@@ -979,7 +979,7 @@ const sampleProducts = [
     numReviews: 33
   },
   {
-    name: 'Crystal Hair Accessories',
+    name: 'Crystal Hair Accessories - Silver',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
     price: 1064.15,
     category: 'Accessories',
@@ -997,7 +997,7 @@ const sampleProducts = [
     numReviews: 33
   },
   {
-    name: 'Crystal Hair Accessories',
+    name: 'Crystal Hair Accessories - Black',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
     price: 1064.15,
     category: 'Accessories',
@@ -1015,7 +1015,7 @@ const sampleProducts = [
     numReviews: 33
   },
   {
-    name: 'Crystal Hair Accessories',
+    name: 'Crystal Hair Accessories - White',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
     price: 1064.15,
     category: 'Accessories',
@@ -1033,7 +1033,7 @@ const sampleProducts = [
     numReviews: 33
   },
   {
-    name: 'Crystal Hair Accessories',
+    name: 'Crystal Hair Accessories - Butterfly',
     description: 'Delicate crystal-encrusted hair clips and combs. Add sparkle to your updo or everyday hairstyle.',
     price: 1064.15,
     category: 'Accessories',
@@ -1067,7 +1067,7 @@ const sampleProducts = [
     numReviews: 16
   },
   {
-    name: 'Embroidered Clutch',
+    name: 'Embroidered Clutch - Blue',
     description: 'Hand-embroidered silk clutch with beaded detailing. Perfect complement to evening wear.',
     price: 1359.15,
     category: 'Accessories',
@@ -1083,7 +1083,7 @@ const sampleProducts = [
     numReviews: 16
   },
   {
-    name: 'Embroidered Clutch',
+    name: 'Embroidered Clutch - White',
     description: 'Hand-embroidered silk clutch with beaded detailing. Perfect complement to evening wear.',
     price: 1359.15,
     category: 'Accessories',
@@ -1115,7 +1115,7 @@ const sampleProducts = [
     numReviews: 25
   },
   {
-    name: 'Designer Sunglasses',
+    name: 'Designer Sunglasses - Black',
     description: 'Luxury oversized sunglasses with gold accents and UV protection. Timeless style meets modern comfort.',
     price: 2379.15,
     category: 'Accessories',
@@ -1131,7 +1131,7 @@ const sampleProducts = [
     numReviews: 25
   },
   {
-    name: 'Designer Sunglasses',
+    name: 'Designer Sunglasses - Brown',
     description: 'Luxury oversized sunglasses with gold accents and UV protection. Timeless style meets modern comfort.',
     price: 2379.15,
     category: 'Accessories',
@@ -1163,7 +1163,7 @@ const sampleProducts = [
     numReviews: 14
   },
   {
-    name: 'Rose Gold Watch',
+    name: 'Rose Gold Watch - Black Gold',
     description: 'Elegant rose gold watch with diamond bezel and leather strap. Sophisticated timepiece for the modern woman.',
     price: 3824.15,
     category: 'Accessories',
@@ -1179,7 +1179,7 @@ const sampleProducts = [
     numReviews: 14
   },
   {
-    name: 'Rose Gold Watch',
+    name: 'Rose Gold Watch - Pink Gold',
     description: 'Elegant rose gold watch with diamond bezel and leather strap. Sophisticated timepiece for the modern woman.',
     price: 3824.15,
     category: 'Accessories',
@@ -1212,7 +1212,7 @@ const sampleProducts = [
     numReviews: 23
   },
   {
-    name: 'Leather Ankle Boots',
+    name: 'Leather Ankle Boots - Brown',
     description: 'Premium leather ankle boots with block heel and side zipper. Versatile style for any season.',
     price: 2974.15,
     category: 'Accessories',
@@ -1229,7 +1229,7 @@ const sampleProducts = [
     numReviews: 23
   },
   {
-    name: 'Leather Ankle Boots',
+    name: 'Leather Ankle Boots - White',
     description: 'Premium leather ankle boots with block heel and side zipper. Versatile style for any season.',
     price: 2974.15,
     category: 'Accessories',
@@ -1246,7 +1246,7 @@ const sampleProducts = [
     numReviews: 23
   },
   {
-    name: 'Leather Ankle Boots',
+    name: 'Leather Ankle Boots - Cream',
     description: 'Premium leather ankle boots with block heel and side zipper. Versatile style for any season.',
     price: 2974.15,
     category: 'Accessories',
@@ -1279,7 +1279,7 @@ const sampleProducts = [
     numReviews: 29
   },
   {
-    name: 'Silk Scarf',
+    name: 'Silk Scarf - Blue',
     description: 'Luxurious silk scarf with artistic print and fringed edges. Elevate any outfit with this versatile accessory.',
     price: 764.15,
     category: 'Accessories',
@@ -1295,7 +1295,7 @@ const sampleProducts = [
     numReviews: 29
   },
   {
-    name: 'Silk Scarf',
+    name: 'Silk Scarf - Green',
     description: 'Luxurious silk scarf with artistic print and fringed edges. Elevate any outfit with this versatile accessory.',
     price: 764.15,
     category: 'Accessories',
