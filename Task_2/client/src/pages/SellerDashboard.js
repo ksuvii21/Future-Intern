@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Package, DollarSign, BarChart2, Edit, Trash2, Search, AlertTriangle, CheckCircle, Clock, TrendingUp, Plus, Tag, Truck } from 'lucide-react';
+import { formatCurrency } from './formatters';
 
 const SellerDashboard = () => {
 
