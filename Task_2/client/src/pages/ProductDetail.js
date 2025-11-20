@@ -75,7 +75,10 @@ const ProductDetail = () => {
 
         // Fetch similar products
         const allProductsResponse = await axios.get('/api/products');
-        const similar = allProductsResponse.data.products.filter(p => p &&
+        // The API response for all products is inconsistent. This handles both array and object responses.
+        const allProducts = Array.isArray(allProductsResponse.data) ? allProductsResponse.data : allProductsResponse.data.products;
+        
+        const similar = (allProducts || []).filter(p => p &&
           p.category === response.data.category && p._id !== response.data._id
         ).slice(0, 4);
         setSimilarProducts(similar);
