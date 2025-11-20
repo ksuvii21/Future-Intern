@@ -20,7 +20,7 @@ const WishlistPage = () => {
         return;
       }
 
-      const response = await axios.get('/api/wishlist', {
+      const response = await axios.get('http://localhost:5000/api/wishlist', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setWishlistItems(response.data.items || []);
@@ -79,7 +79,7 @@ const WishlistPage = () => {
         return;
       }
 
-      await axios.post('/api/cart', {
+      await axios.post('http://localhost:5000/api/cart', {
         productId: product._id,
         quantity: 1,
         selectedColor: product.selectedColor || '',
@@ -107,7 +107,7 @@ const WishlistPage = () => {
         return;
       }
 
-      await axios.post('/api/wishlist/move-to-cart', {
+      await axios.post('http://localhost:5000/api/wishlist/move-to-cart', {
         productId: product._id,
         quantity: 1,
         selectedColor: product.selectedColor || '',
