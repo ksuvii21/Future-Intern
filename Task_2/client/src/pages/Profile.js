@@ -64,7 +64,7 @@ const Profile = () => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
       // Fetch orders
-      const ordersResponse = await axios.get('http://localhost:5000/api/orders', config);
+      const ordersResponse = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders', config);
       setOrders(ordersResponse.data.slice(0, 5)); // Get last 5 orders
 
       // Calculate stats
@@ -76,7 +76,7 @@ const Profile = () => {
 
       if (token) {
         try {
-          const wishlistResponse = await axios.get('http://localhost:5000/api/wishlist', {
+          const wishlistResponse = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/wishlist', {
             headers: { Authorization: `Bearer ${token}` }
           });
           wishlistCount = wishlistResponse.data.items.length;
@@ -133,7 +133,7 @@ const Profile = () => {
         updateData.newPassword = formData.newPassword;
       }
 
-      const response = await axios.put('http://localhost:5000/api/auth/profile', updateData, config);
+      const response = await axios.put('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/profile', updateData, config);
 
       // Update local storage
       localStorage.setItem('user', JSON.stringify(response.data.user));
@@ -192,7 +192,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.post('http://localhost:5000/api/auth/address', newAddress, config);
+      const response = await axios.post('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/address', newAddress, config);
 
       localStorage.setItem('user', JSON.stringify(response.data.user));
       setUser(response.data.user);
@@ -210,7 +210,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.delete(`http://localhost:5000/api/auth/address/${addressId}`, config);
+      const response = await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/address/${addressId}`, config);
 
       localStorage.setItem('user', JSON.stringify(response.data.user));
       setUser(response.data.user);
