@@ -110,7 +110,7 @@ const PersonalizedRecommendations = ({ currentProduct }) => {
               <p className="text-gray-400 text-sm mb-3 line-clamp-2">{product.description}</p>
               <div className="flex items-center justify-between">
                 <span className="text-xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                  ₹{product.price.toLocaleString('en-IN')}
+                  {formatCurrency(product.price)}
                 </span>
                 <Link
                   to={`/product/${product._id}`}
