@@ -234,7 +234,7 @@ const Checkout = () => {
                 {cartItems.map(item => (
                   <div key={item._id} className="flex gap-4 p-4 bg-white/5 rounded-lg border border-[#571089]/20">
                     <img
-                      src={item.imageUrl || 'https://via.placeholder.com/80x80?text=No+Image'}
+                      src={item.imageUrl || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjQwIiB5PSI0MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSIjOWNhNGIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg=='}
                       alt={item.name}
                       className="w-16 h-16 object-cover rounded-lg"
                       onError={(e) => {
