@@ -9,7 +9,7 @@ export const formatCurrency = (price) => {
   if (price === null || price === undefined || isNaN(numericPrice)) {
     return 'N/A';
   }
-  return `₹${numericPrice}`;
+  return `₹${numericPrice.toLocaleString('en-IN')}`;
 };
 
 /**
