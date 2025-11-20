@@ -134,13 +134,13 @@ const OrderHistory = () => {
                     </div>
                     <div className="flex items-center gap-2 text-gray-400">
                       <Calendar className="w-4 h-4" />
-                      <span>{new Date(order.createdAt).toLocaleDateString()}</span>
+                      <span>{new Date(order.createdAt).toDateString()}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2 text-white">
                       <DollarSign className="w-4 h-4" />
-                      <span className="font-bold">₹{order.totalAmount.toLocaleString('en-IN')}</span>
+                      <span className="font-bold">₹{order.totalAmount}</span>
                     </div>
                     <Link
                       to={`/orders/${order._id}`}
@@ -166,7 +166,7 @@ const OrderHistory = () => {
                       <div className="flex-1 min-w-0">
                         <h4 className="text-white font-medium text-sm truncate">{item.product?.name}</h4>
                         <p className="text-gray-400 text-xs">Qty: {item.quantity}</p>
-                        <p className="text-[#ea698b] text-sm font-semibold">₹{(item.product?.price * item.quantity).toLocaleString('en-IN')}</p>
+                        <p className="text-[#ea698b] text-sm font-semibold">₹{(item.product?.price * item.quantity)}</p>
                       </div>
                     </div>
                   ))}
