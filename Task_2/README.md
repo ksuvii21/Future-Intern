@@ -102,6 +102,80 @@ The application will be running on:
 - PUT /api/products/:id - Update product (auth required)
 - DELETE /api/products/:id - Delete product (auth required)
 
+## Deployment Guide
+
+### Frontend Deployment (Netlify)
+
+1. **Connect Repository:**
+   - Go to [Netlify](https://netlify.com)
+   - Click "New site from Git"
+   - Connect your GitHub repository
+   - Select the `Task_2/client` folder as the base directory
+
+2. **Build Settings:**
+   - Build command: `npm run build`
+   - Publish directory: `build`
+   - Add environment variable: `REACT_APP_API_URL=https://your-render-backend-url.onrender.com`
+
+3. **Deploy:**
+   - Click "Deploy site"
+   - Your frontend will be live at `https://your-site-name.netlify.app`
+
+### Backend Deployment (Render)
+
+1. **Connect Repository:**
+   - Go to [Render](https://render.com)
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository
+   - Select the `Task_2/server` folder
+
+2. **Service Configuration:**
+   - Runtime: `Node`
+   - Build Command: `npm install`
+   - Start Command: `npm start`
+   - Add all environment variables (see below)
+
+3. **Environment Variables:**
+   - MONGODB_URI
+   - JWT_SECRET
+   - CLOUDINARY_CLOUD_NAME
+   - CLOUDINARY_API_KEY
+   - CLOUDINARY_API_SECRET
+   - STRIPE_SECRET_KEY
+   - STRIPE_PUBLISHABLE_KEY
+   - EMAIL_USER
+   - EMAIL_PASS
+   - GOOGLE_CLIENT_ID
+   - GOOGLE_CLIENT_SECRET
+   - FRONTEND_URL=https://your-netlify-frontend-url.netlify.app
+
+4. **Deploy:**
+   - Click "Create Web Service"
+   - Your backend will be live at `https://your-service-name.onrender.com`
+
+### Environment Variables Setup
+
+**Frontend (.env file for local development):**
+```
+REACT_APP_API_URL=http://localhost:5000
+```
+
+**Backend (.env file for local development):**
+```
+MONGODB_URI=mongodb://localhost:27017/shophub
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_email_password
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+FRONTEND_URL=http://localhost:3000
+```
+
 ## Contributing
 
 1. Fork the repository
