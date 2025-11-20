@@ -9,7 +9,7 @@ export const formatCurrency = (price) => {
   if (price === null || price === undefined || isNaN(numericPrice)) {
     return 'N/A';
   }
-  return `₹${numericPrice.toLocaleString('en-IN')}`;
+  return `₹${numericPrice}`;
 };
 
 /**
@@ -26,9 +26,5 @@ export const formatDate = (date) => {
   if (isNaN(dateObj.getTime())) {
     return '';
   }
-  return dateObj.toLocaleDateString('en-IN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  return dateObj.toDateString();
 };
