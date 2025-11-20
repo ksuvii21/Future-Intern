@@ -97,7 +97,7 @@ const ProductCard = ({ product }) => {
         </p>
         <div className="flex justify-between items-center mb-5">
           <span className="text-3xl font-extrabold text-orange-600">
-            ₹{product.price.toLocaleString('en-IN')}
+            {formatCurrency(product.price)}
           </span>
           <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
             Stock: {product.stock}
