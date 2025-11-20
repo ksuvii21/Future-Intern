@@ -80,7 +80,7 @@ const WishlistPage = () => {
         return;
       }
 
-      await axios.post('/api/cart', {
+      await axios.post('http://localhost:5000/api/cart', {
         productId: product._id,
         quantity: 1,
         selectedColor: product.variants?.[0]?.color || 'Default',
