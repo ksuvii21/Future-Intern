@@ -55,7 +55,7 @@ const Cart = () => {
         return;
       }
 
-      await axios.delete(`http://localhost:5000/api/cart/${itemId}`, {
+      await axios.delete(`/api/cart/${itemId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
