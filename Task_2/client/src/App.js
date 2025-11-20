@@ -55,7 +55,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await axios.get('/api/cart', {
+          const response = await axios.get('http://localhost:5000/api/cart', {
             headers: { Authorization: `Bearer ${token}` }
           });
           const count = response.data.items.reduce((total, item) => total + item.quantity, 0);
