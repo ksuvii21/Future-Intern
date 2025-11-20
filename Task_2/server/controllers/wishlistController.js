@@ -1,131 +1,123 @@
+const asyncHandler = require('express-async-handler');
 const Wishlist = require('../models/Wishlist');
-const Cart = require('../models/Cart');
-const Product = require('../models/Product');
-const asyncHandler = require('./asyncHandler');
+const Cart = require('../models/Cart'); // Assuming Cart model exists
+const Product = require('../models/Product'); // Assuming Product model exists
 
-/**
- * @desc    Get user's wishlist
- * @route   GET /api/wishlist
- * @access  Private
- */
-exports.getWishlist = asyncHandler(async (req, res) => {
-  const wishlist = await Wishlist.findOne({ user: req.user.userId }).populate('items.product');
-  if (!wishlist) {
-    // If no wishlist, create one
-    const newWishlist = await Wishlist.create({ user: req.user.userId, items: [] });
-    return res.json(newWishlist);
+// @desc    Get user wishlist
+// @route   GET /api/wishlist
+// @access  Private
+const getWishlist = asyncHandler(async (req, res) => {
+  const wishlist = await Wishlist.findOne({ user: req.user._id }).populate('items.product');
+  if (wishlist) {
+    res.json(wishlist);
+  } else {
+    res.json({ items: [] }); // Return empty array if no wishlist found
   }
-  res.json(wishlist);
 });
 
-/**
- * @desc    Add item to wishlist
- * @route   POST /api/wishlist
- * @access  Private
- */
-exports.addToWishlist = asyncHandler(async (req, res) => {
+// @desc    Add item to wishlist
+// @route   POST /api/wishlist
+// @access  Private
+const addToWishlist = asyncHandler(async (req, res) => {
   const { productId } = req.body;
-  const userId = req.user.userId;
 
-  const product = await Product.findById(productId);
-  if (!product) {
+  let wishlist = await Wishlist.findOne({ user: req.user._id });
+
+  if (!wishlist) {
+    wishlist = new Wishlist({ user: req.user._id, items: [] });
+  }
+
+  const productExists = await Product.findById(productId);
+  if (!productExists) {
     res.status(404);
     throw new Error('Product not found');
   }
 
-  let wishlist = await Wishlist.findOne({ user: userId });
-
-  if (!wishlist) {
-    wishlist = new Wishlist({ user: userId, items: [] });
-  }
-
-  const existingItemIndex = wishlist.items.findIndex(
-    item => item.product.toString() === productId
+  const itemExists = wishlist.items.find(
+    (item) => item.product.toString() === productId
   );
 
-  if (existingItemIndex > -1) {
-    // Item already in wishlist
-    return res.status(400).json({ message: 'Product already in wishlist' });
+  if (itemExists) {
+    res.status(400);
+    throw new Error('Product already in wishlist');
   } else {
-    // Add new item
     wishlist.items.push({ product: productId });
   }
 
   await wishlist.save();
-  const populatedWishlist = await Wishlist.findById(wishlist._id).populate('items.product');
-  res.status(200).json(populatedWishlist);
+  res.status(201).json(wishlist);
 });
 
-/**
- * @desc    Remove item from wishlist
- * @route   DELETE /api/wishlist/:productId
- * @access  Private
- */
-exports.removeFromWishlist = asyncHandler(async (req, res) => {
-  const { productId } = req.params;
-  const userId = req.user.userId;
+// @desc    Remove item from wishlist
+// @route   DELETE /api/wishlist/:id
+// @access  Private
+const removeFromWishlist = asyncHandler(async (req, res) => {
+  const { id } = req.params; // This 'id' is the productId
 
-  const wishlist = await Wishlist.findOneAndUpdate(
-    { user: userId },
-    { $pull: { items: { product: productId } } },
-    { new: true }
-  ).populate('items.product');
+  let wishlist = await Wishlist.findOne({ user: req.user._id });
 
   if (!wishlist) {
     res.status(404);
     throw new Error('Wishlist not found');
   }
 
-  res.json(wishlist);
+  wishlist.items = wishlist.items.filter(
+    (item) => item.product.toString() !== id
+  );
+
+  await wishlist.save();
+  res.json({ message: 'Item removed from wishlist' });
 });
 
-/**
- * @desc    Move item from wishlist to cart
- * @route   POST /api/wishlist/move-to-cart
- * @access  Private
- */
-exports.moveToCart = asyncHandler(async (req, res) => {
-  const { productId, quantity = 1, selectedColor, selectedSize } = req.body;
-  const userId = req.user.userId;
+// @desc    Move item from wishlist to cart
+// @route   POST /api/wishlist/move-to-cart
+// @access  Private
+const moveToCart = asyncHandler(async (req, res) => {
+  const { productId, quantity, selectedColor, selectedSize } = req.body;
 
-  // Check if product exists
+  // 1. Validate product existence
   const product = await Product.findById(productId);
   if (!product) {
     res.status(404);
     throw new Error('Product not found');
   }
 
-  // Remove from wishlist
-  const wishlist = await Wishlist.findOneAndUpdate(
-    { user: userId },
-    { $pull: { items: { product: productId } } },
-    { new: true }
-  ).populate('items.product');
-
-  if (!wishlist) {
-    res.status(404);
-    throw new Error('Wishlist not found');
+  // 2. Remove from wishlist
+  let wishlist = await Wishlist.findOne({ user: req.user._id });
+  if (wishlist) {
+    wishlist.items = wishlist.items.filter(
+      (item) => item.product.toString() !== productId
+    );
+    await wishlist.save();
   }
 
-  // Add to cart
-  let cart = await Cart.findOne({ user: userId });
+  // 3. Add to cart
+  let cart = await Cart.findOne({ user: req.user._id });
+
   if (!cart) {
-    cart = new Cart({ user: userId, items: [] });
+    cart = new Cart({ user: req.user._id, items: [] });
   }
 
-  const existingItemIndex = cart.items.findIndex(
-    item => item.product.toString() === productId && item.selectedColor === selectedColor && item.selectedSize === selectedSize
+  const cartItemExists = cart.items.find(
+    (item) => item.product.toString() === productId &&
+               item.selectedColor === selectedColor &&
+               item.selectedSize === selectedSize
   );
 
-  if (existingItemIndex > -1) {
-    // Update quantity if item already exists in cart
-    cart.items[existingItemIndex].quantity += quantity;
+  if (cartItemExists) {
+    cartItemExists.quantity += quantity;
   } else {
-    // Add new item to cart
     cart.items.push({ product: productId, quantity, selectedColor, selectedSize });
   }
 
   await cart.save();
 
-  res.json(wishlist);
+  res.json({ message: 'Item moved to cart successfully', cart, wishlist });
 });
+
+module.exports = {
+  getWishlist,
+  addToWishlist,
+  removeFromWishlist,
+  moveToCart,
+};
