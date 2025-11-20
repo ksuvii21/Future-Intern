@@ -46,6 +46,12 @@ mongoose.connect(mongoURI, {
 .catch(err => console.log('MongoDB connection error:', err));
 
 // Routes
+
+// Root route for health check
+app.get('/', (req, res) => {
+  res.send('Backend API is running!');
+});
+
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
