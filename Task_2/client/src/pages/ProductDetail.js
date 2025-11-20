@@ -7,7 +7,7 @@ import "yet-another-react-lightbox/styles.css";
 import axios from 'axios';
 import RecentlyViewedProducts from '../components/RecentlyViewedProducts';
 import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
-import { formatCurrency, formatDate } from '../utils/formatters';
+import { formatCurrency, formatDate } from './formatters';
 
 const ProductDetail = () => {
   const { id } = useParams();
