@@ -1,22 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const { protect } = require('../middleware/authMiddleware'); // Assuming this path is correct
 const {
   getWishlist,
   addToWishlist,
-  removeFromWishlist
+  removeFromWishlist,
+  moveToCart, // Import the new function
 } = require('../controllers/wishlistController');
-const auth = require('../middleware/auth');
 
-// @route   GET /api/wishlist
-// @desc    Get user's wishlist
-router.get('/', auth, getWishlist);
-
-// @route   POST /api/wishlist
-// @desc    Add item to wishlist
-router.post('/', auth, addToWishlist);
-
-// @route   DELETE /api/wishlist/:productId
-// @desc    Remove item from wishlist
-router.delete('/:productId', auth, removeFromWishlist);
+router.route('/').get(protect, getWishlist).post(protect, addToWishlist);
+router.route('/:id').delete(protect, removeFromWishlist);
+router.route('/move-to-cart').post(protect, moveToCart); // Add the new route
 
 module.exports = router;
