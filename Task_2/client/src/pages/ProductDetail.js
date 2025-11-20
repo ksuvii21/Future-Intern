@@ -7,7 +7,7 @@ import "yet-another-react-lightbox/styles.css";
 import axios from 'axios';
 import RecentlyViewedProducts from '../components/RecentlyViewedProducts';
 import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
-import { formatCurrency, formatDate } from './formatters';
+import { formatCurrency, formatDate } from '../utils/formatters';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -424,7 +424,7 @@ const ProductDetail = () => {
                 {product.rating && (
                   <div className="flex items-center gap-1">
                     <Star className="w-4 h-4 fill-[#ea698b] text-[#ea698b]" />
-                    <span className="text-sm text-gray-400">{product.rating.toFixed(1)} ({product.numReviews} reviews)</span>
+                    <span className="text-sm text-gray-400">{(product.rating || 0).toFixed(1)} ({product.numReviews || 0} reviews)</span>
                   </div>
                 )}
               </div>
