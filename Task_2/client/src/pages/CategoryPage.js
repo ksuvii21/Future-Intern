@@ -308,15 +308,16 @@ const CategoryPage = () => {
                     onClick={async (e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-                      const existingItem = cart.find(item => item._id === product._id);
+                      const cart = JSON.parse(localStorage.getItem('cart') || '[]'); // Expects an array of items
+                      const selectedColor = product.variants?.[0]?.color || 'Default';
+                      const selectedSize = 'M'; // Default size
+                      const existingItemIndex = cart.findIndex(item => item.product._id === product._id && item.selectedColor === selectedColor && item.selectedSize === selectedSize);
 
-                      if (existingItem) {
-                        existingItem.quantity = (existingItem.quantity || 1) + 1;
+                      if (existingItemIndex > -1) {
+                        cart[existingItemIndex].quantity += 1;
                       } else {
-                        cart.push({ ...product, quantity: 1, selectedSize: 'M', selectedColor: product.variants?.[0]?.color || 'Default' });
+                        cart.push({ product, quantity: 1, selectedSize, selectedColor });
                       }
-
                       localStorage.setItem('cart', JSON.stringify(cart));
                       window.dispatchEvent(new Event('storage'));
                       alert('Added to cart!');
