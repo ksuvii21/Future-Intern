@@ -20,7 +20,7 @@ const WishlistPage = () => {
         return;
       }
 
-      const response = await axios.get('http://localhost:5000/api/wishlist', {
+      const response = await axios.get('/api/wishlist', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setWishlistItems(response.data.items || []);
@@ -61,10 +61,11 @@ const WishlistPage = () => {
   const removeFromWishlist = async (productId) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.delete(`/api/wishlist/${productId}`, {
+      await axios.delete(`/api/wishlist/${productId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setWishlistItems(response.data.items || []);
+      // Filter out the removed item from the local state
+      setWishlistItems(prevItems => prevItems.filter(item => item.product._id !== productId));
     } catch (err) {
       console.error('Error removing from wishlist:', err);
       setError('Failed to remove item from wishlist');
@@ -79,11 +80,11 @@ const WishlistPage = () => {
         return;
       }
 
-      await axios.post('http://localhost:5000/api/cart', {
+      await axios.post('/api/cart', {
         productId: product._id,
         quantity: 1,
-        selectedColor: product.selectedColor || '',
-        selectedSize: product.selectedSize || 'M'
+        selectedColor: product.variants?.[0]?.color || 'Default',
+        selectedSize: 'M',
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -107,11 +108,11 @@ const WishlistPage = () => {
         return;
       }
 
-      await axios.post('http://localhost:5000/api/wishlist/move-to-cart', {
+      await axios.post('/api/wishlist/move-to-cart', {
         productId: product._id,
         quantity: 1,
-        selectedColor: product.selectedColor || '',
-        selectedSize: product.selectedSize || 'M'
+        selectedColor: product.variants?.[0]?.color || 'Default',
+        selectedSize: 'M',
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -131,6 +132,10 @@ const WishlistPage = () => {
 
   const renderProductCard = (item, showRemove = false, showSharedInfo = false) => {
     const product = item.product || item; // Handle both populated and non-populated data
+    if (!product?._id) {
+      return null; // Don't render if product data is invalid
+    }
+
     return (
       <div
         key={product._id || product.id}
@@ -143,7 +148,7 @@ const WishlistPage = () => {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjZWNlZmYxIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjY2FkNmU0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPg==';
+              e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMWEwYTJlIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5Y2E0YjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
             }}
           />
           {showRemove && (
@@ -154,39 +159,43 @@ const WishlistPage = () => {
               <X className="w-4 h-4" />
             </button>
           )}
-        </div>
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 hover:text-[#ea698b] transition-colors">
-            {product.name}
-          </h3>
-          <p className="text-gray-400 mb-4 line-clamp-3 text-sm leading-relaxed">
-            {product.description}
-          </p>
-          <div className="flex justify-between items-center mb-5">
-            <span className="text-3xl font-extrabold text-[#ea698b]">
-              ₹{product.price?.toLocaleString('en-IN') || 'N/A'}
-            </span>
-            <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-              Stock: {product.stock || 0}
-            </span>
-          </div>
-          <div className="flex space-x-3">
+          <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
             <Link
               to={`/product/${product._id}`}
-              className="flex-1 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 py-3 px-4 rounded-xl hover:from-gray-200 hover:to-gray-300 transition-all duration-300 text-center font-semibold shadow-md hover:shadow-lg"
+              className="block w-full py-3 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all text-center"
             >
-              View Details
+              Quick View
             </Link>
+          </div>
+        </div>
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-[#ea698b] font-medium px-3 py-1 bg-[#ea698b]/10 rounded-full">
+              {product.category}
+            </span>
+            <div className="flex items-center gap-1">
+              <Star className="w-4 h-4 fill-[#ea698b] text-[#ea698b]" />
+              <span className="text-sm text-gray-400">{product.rating || 4.5}</span>
+              <span className="text-xs text-gray-500">({product.numReviews || 0})</span>
+            </div>
+          </div>
+          <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#ea698b] transition-colors">
+            {product.name}
+          </h3>
+          <div className="flex items-center justify-between">
+            <span className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
+              ₹{product.price}
+            </span>
             <button
               onClick={() => showRemove ? moveToCart(product) : addToCart(product)}
               disabled={product.stock === 0}
-              className={`flex-1 py-3 px-4 rounded-xl transition-all duration-300 font-semibold shadow-md hover:shadow-lg ${
+              className={`p-2 rounded-lg transition-all duration-300 ${
                 product.stock === 0
                   ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   : 'bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white hover:shadow-lg hover:shadow-[#ea698b]/50'
               }`}
             >
-              {product.stock === 0 ? 'Out of Stock' : (showRemove ? 'Move to Cart' : 'Add to Cart')}
+              <ShoppingBag className="w-5 h-5" />
             </button>
           </div>
         </div>
