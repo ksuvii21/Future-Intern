@@ -17,7 +17,7 @@ cloudinary.config({
 });
 
 // Passport config
-require('../client/src/pages/passport')(passport);
+require('./config/passport')(passport);
 
 const app = express();
 
