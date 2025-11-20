@@ -117,7 +117,7 @@ const SearchPage = () => {
         return;
       }
 
-      await axios.post('/api/wishlist', {
+      await axios.post('http://localhost:5000/api/wishlist', {
         productId: productId
       }, {
         headers: { Authorization: `Bearer ${token}` }
