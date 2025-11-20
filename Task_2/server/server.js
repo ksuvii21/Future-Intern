@@ -60,6 +60,7 @@ app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/seller', require('./routes/sellerRoutes'));
+app.use('/api/users', require('./routes/userRoutes')); // Add this line
 app.use('/api/cart', require('./routes/cartRoutes'));
 app.use('/api/wishlist', require('./routes/wishlistRoutes'));
 app.use('/api/notifications', require('./routes/notificationRoutes'));
