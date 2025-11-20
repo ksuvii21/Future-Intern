@@ -240,7 +240,7 @@ const Cart = () => {
                   <div className="flex justify-between text-xl font-bold">
                     <span className="text-white">Total</span>
                     <span className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                      ₹{finalTotal.toLocaleString('en-IN')}
+                      {formatCurrency(finalTotal)}
                     </span>
                   </div>
                 </div>
