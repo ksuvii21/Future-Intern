@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Heart, Share2, Eye, Star, ShoppingBag, X, Loader } from 'lucide-react';
 import axios from 'axios';
 
+
 const WishlistPage = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [sharedItems, setSharedItems] = useState([]);
