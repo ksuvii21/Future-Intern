@@ -150,14 +150,6 @@ const ProductDetail = () => {
       return;
     }
     try {
-      await axios.post('/api/cart', {
-        productId: product._id,
-        quantity: quantity,
-        selectedColor: selectedColor,
-        selectedSize: selectedSize
-      }, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
       alert('Product added to cart!');
       // Trigger cart count update
       window.dispatchEvent(new Event('storage'));
