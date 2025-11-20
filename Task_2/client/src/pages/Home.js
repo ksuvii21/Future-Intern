@@ -64,7 +64,7 @@ const Home = () => {
       try {
         setLoading(true);
         // Fetch all products without pagination for proper category filtering
-        const response = await axios.get('http://localhost:5000/api/products?limit=100');
+        const response = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products?limit=100');
         // Ensure that products is always an array
         setProducts(response.data.products || []);
       } catch (error) {
@@ -274,7 +274,7 @@ const Home = () => {
                             }
 
                             try {
-                              await axios.post('http://localhost:5000/api/wishlist', {
+                              await axios.post('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/wishlist', {
                                 productId: product._id
                               }, {
                                 headers: { Authorization: `Bearer ${token}` }
@@ -330,7 +330,7 @@ const Home = () => {
                               return;
                             }
                             try {
-                              await axios.post('http://localhost:5000/api/cart', {
+                              await axios.post('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart', {
                                 productId: product._id,
                                 quantity: 1,
                                 selectedColor: product.variants?.[0]?.color || 'Default',
