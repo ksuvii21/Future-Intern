@@ -82,7 +82,7 @@ const Register = ({ onLogin }) => {
 
     try {
       const response = await axios.post(
-        '${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/register',
+        `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/register`,
         {
           username: formData.username,
           email: formData.email,
@@ -107,7 +107,7 @@ const Register = ({ onLogin }) => {
 
   const handleGoogleLogin = () => {
     // Redirect to the backend Google OAuth route
-    window.location.href = '${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/google';
+    window.location.href = `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/google`;
   };
 
   if (success) {
