@@ -77,7 +77,7 @@ const Cart = () => {
         return;
       }
 
-      await axios.put(`http://localhost:5000/api/cart/${itemId}`, {
+      await axios.put(`/api/cart/${itemId}`, {
         quantity: newQuantity
       }, {
         headers: { Authorization: `Bearer ${token}` }
