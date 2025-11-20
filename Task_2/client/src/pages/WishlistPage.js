@@ -61,7 +61,7 @@ const WishlistPage = () => {
   const removeFromWishlist = async (productId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/wishlist/${productId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/wishlist/${productId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Filter out the removed item from the local state
