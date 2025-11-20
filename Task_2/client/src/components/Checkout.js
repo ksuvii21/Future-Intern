@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CreditCard, Smartphone, Truck, MapPin, User, Mail, Home, Award } from 'lucide-react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { formatCurrency } from '../pages/formatters';
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -249,7 +250,7 @@ const Checkout = () => {
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">Qty: {item.quantity}</span>
-                        <span className="text-[#ea698b] font-semibold">₹{((item.product?.price || item.price || 0) * item.quantity).toLocaleString('en-IN')}</span>
+                        <span className="text-[#ea698b] font-semibold">{formatCurrency((item.product?.price || item.price || 0) * item.quantity)}</span>
                       </div>
                     </div>
                   </div>
@@ -267,13 +268,13 @@ const Checkout = () => {
                 </div>
                 <div className="flex justify-between text-gray-400">
                   <span>Tax:</span>
-                  <span>₹{(totalPrice * 0.08).toLocaleString('en-IN')}</span>
+                  <span>{formatCurrency(totalPrice * 0.08)}</span>
                 </div>
                 <div className="border-t border-[#571089]/30 pt-2 mt-4">
                 <div className="flex justify-between text-xl font-bold text-white">
                   <span>Total:</span>
                   <span className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                    ₹{(totalPrice + (totalPrice * 0.08)).toLocaleString('en-IN')}
+                    {formatCurrency(totalPrice + (totalPrice * 0.08))}
                   </span>
                 </div>
                 </div>
@@ -581,7 +582,7 @@ const Checkout = () => {
                 disabled={isProcessing || !stripe}
                 className="px-12 py-4 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-[#ea698b]/50 transform hover:scale-105 transition-all duration-300 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isProcessing ? 'Processing...' : `Place Order - ₹${(totalPrice + (totalPrice * 0.08)).toLocaleString('en-IN')}`}
+                {isProcessing ? 'Processing...' : `Place Order - ${formatCurrency(totalPrice + (totalPrice * 0.08))}`}
               </button>
             </div>
           </div>
