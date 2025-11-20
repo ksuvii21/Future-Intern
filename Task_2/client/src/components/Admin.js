@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Users, ShoppingBag, Package, DollarSign, Edit, Trash2, Search, Star} from 'lucide-react';
+import { formatCurrency } from '../pages/formatters';
 
 const Admin = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -698,7 +699,7 @@ const Admin = () => {
                 <td className="p-3 font-mono text-sm">#{order._id.slice(-8)}</td>
                 <td className="p-3">{order.user?.username || 'N/A'}</td>
                 <td className="p-3">{new Date(order.createdAt).toLocaleDateString()}</td>
-                <td className="p-3 font-semibold text-green-400">₹{order.totalAmount.toLocaleString('en-IN')}</td>
+                <td className="p-3 font-semibold text-green-400">{formatCurrency(order.totalAmount)}</td>
                 <td className="p-3 capitalize">{order.status}</td>
                 <td className="p-3 text-right">
                   <select
