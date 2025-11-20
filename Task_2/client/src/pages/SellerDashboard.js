@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Package, DollarSign, BarChart2, Edit, Trash2, Search, AlertTriangle, CheckCircle, Clock, TrendingUp, Plus, Tag, Truck } from 'lucide-react';
 
 const SellerDashboard = () => {
+
   const [activeTab, setActiveTab] = useState('dashboard');
   const [products, setProducts] = useState([]);
   const [stats, setStats] = useState({
