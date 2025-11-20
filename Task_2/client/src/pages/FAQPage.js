@@ -4,6 +4,7 @@ import { HelpCircle, ChevronDown } from 'lucide-react';
 const faqs = [
   {
     question: 'How do I track my order?',
+
     answer: 'Once your order is shipped, you will receive an email with a tracking number and a link to the courier\'s website. You can also find the tracking information in your order history on your profile page.',
   },
   {
