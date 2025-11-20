@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, TrendingUp } from 'lucide-react';
 import axios from 'axios';
+import { formatCurrency } from '../pages/formatters';
 
 const PersonalizedRecommendations = ({ currentProduct }) => {
   const [recommendations, setRecommendations] = useState([]);
