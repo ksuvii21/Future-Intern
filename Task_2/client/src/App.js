@@ -373,7 +373,10 @@ function AppLayout({
       )}
 
       {/* Main Content Area */}
-      <main className={`flex-1 ${isAuthPage ? '' : 'pt-[170px] md:pt-[130px] lg:pt-[190px]'}`}>
+      <main className={`flex-1 transition-all duration-300 ease-in-out ${
+        isAuthPage ? '' : 
+        (isHeaderHovered || scrolled ? 'pt-[190px]' : 'pt-[130px]')
+      }`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<SearchPage />} />
