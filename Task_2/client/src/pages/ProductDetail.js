@@ -47,9 +47,7 @@ const ProductDetail = () => {
 
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/${id}`
-        );
+        const response = await axios.get(`/api/products/${id}`);
         setProduct(response.data);
 
         // Check URL parameters for color selection
@@ -207,7 +205,7 @@ const ProductDetail = () => {
         return;
       }
 
-      await axios.post('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/wishlist', {
+      await axios.post('/api/wishlist', {
         productId: product._id
       }, {
         headers: { Authorization: `Bearer ${token}` }
