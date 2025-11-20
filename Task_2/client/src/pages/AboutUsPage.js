@@ -4,6 +4,7 @@ import { Heart, Users, Award, Globe } from 'lucide-react';
 const AboutUsPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+
   }, []);
 
   return (
