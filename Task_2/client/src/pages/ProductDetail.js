@@ -170,10 +170,29 @@ const ProductDetail = () => {
   };
 
   const buyNow = async () => {
-    // First, add the item to the cart and wait for it to complete
-    await addToCart();
-    // Then, navigate to the checkout page
-    navigate('/checkout');
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Please log in to add items to your cart.');
+      return;
+    }
+
+    try {
+      // Directly set the cart with the current product
+      const cartItem = {
+        product: product,
+        quantity: quantity,
+        selectedColor: selectedColor,
+        selectedSize: selectedSize
+      };
+      localStorage.setItem('cart', JSON.stringify([cartItem]));
+      window.dispatchEvent(new Event('storage'));
+
+      // Then, navigate to the checkout page
+      navigate('/checkout');
+    } catch (error) {
+      console.error("Error during buy now process", error);
+      alert('Failed to proceed to checkout.');
+    }
   };
 
   const addToWishlist = async () => {
