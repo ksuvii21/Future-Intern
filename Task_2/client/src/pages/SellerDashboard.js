@@ -73,7 +73,7 @@ const SellerDashboard = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      const productsRes = await axios.get('http://localhost:5000/api/products/seller', config);
+      const productsRes = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/seller', config);
       setProducts(productsRes.data);
 
       // Calculate stats
@@ -94,10 +94,10 @@ const SellerDashboard = () => {
       });
 
       // Fetch coupons and shipping options from the backend
-      const couponsRes = await axios.get('http://localhost:5000/api/coupons/seller', config);
+      const couponsRes = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/coupons/seller', config);
       setCoupons(couponsRes.data);
 
-      const shippingRes = await axios.get('http://localhost:5000/api/shipping/seller', config);
+      const shippingRes = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/shipping/seller', config);
       setShippingOptions(shippingRes.data);
 
 
@@ -148,7 +148,7 @@ const SellerDashboard = () => {
           stock: newProduct.stock,
         };
         await axios.put(
-          `http://localhost:5000/api/products/${editingProduct._id}`,
+          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/${editingProduct._id}`,
           updateData,
           config
         );
@@ -161,7 +161,7 @@ const SellerDashboard = () => {
 
         config.headers['Content-Type'] = 'multipart/form-data';
         await axios.post(
-          'http://localhost:5000/api/products',
+          '${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products',
           formData,
           config
         );
@@ -199,7 +199,7 @@ const SellerDashboard = () => {
       try {
         const token = localStorage.getItem('token');
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        await axios.delete(`http://localhost:5000/api/products/${id}`, config);
+        await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/${id}`, config);
         fetchDashboardData();
       } catch (error) {
         console.error('Error deleting product:', error);
@@ -258,9 +258,9 @@ const SellerDashboard = () => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       
       if (editingCoupon) {
-        await axios.put(`http://localhost:5000/api/coupons/${editingCoupon._id}`, newCoupon, config);
+        await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/coupons/${editingCoupon._id}`, newCoupon, config);
       } else {
-        await axios.post('http://localhost:5000/api/coupons', newCoupon, config);
+        await axios.post('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/coupons', newCoupon, config);
       }
 
       setNewCoupon({ code: '', discountType: 'percentage', value: '', expiryDate: '' });
@@ -282,7 +282,7 @@ const SellerDashboard = () => {
       try {
         const token = localStorage.getItem('token');
         const config = { headers: { Authorization: `Bearer ${token}` } };
-        await axios.delete(`http://localhost:5000/api/coupons/${id}`, config);
+        await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/coupons/${id}`, config);
         fetchDashboardData();
       } catch (error) {
         console.error('Error deleting coupon:', error);
@@ -297,9 +297,9 @@ const SellerDashboard = () => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
       if (editingShippingOption) {
-        await axios.put(`http://localhost:5000/api/shipping/${editingShippingOption._id}`, newShippingOption, config);
+        await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/shipping/${editingShippingOption._id}`, newShippingOption, config);
       } else {
-        await axios.post('http://localhost:5000/api/shipping', newShippingOption, config);
+        await axios.post('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/shipping', newShippingOption, config);
       }
       setNewShippingOption({ name: '', cost: '', estimatedDelivery: '' });
       setEditingShippingOption(null);
@@ -317,7 +317,7 @@ const SellerDashboard = () => {
     if (window.confirm('Are you sure you want to delete this shipping option?')) {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.delete(`http://localhost:5000/api/shipping/${id}`, config);
+      await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/shipping/${id}`, config);
       fetchDashboardData();
     }
   };
