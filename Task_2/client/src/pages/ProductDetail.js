@@ -433,7 +433,7 @@ const ProductDetail = () => {
 
             <div className="flex items-center gap-4">
               <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                ₹{product.price.toLocaleString('en-IN')}
+                ₹{product.price ? product.price.toLocaleString('en-IN') : 'N/A'}
               </span>
             </div>
             
