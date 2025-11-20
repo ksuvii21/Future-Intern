@@ -1,13 +1,14 @@
 const Order = require('../models/Order');
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'dummy_key');
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Initialize Stripe
+const asyncHandler = require('./asyncHandler'); // Import asyncHandler
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { sendOrderConfirmationEmail, sendLowStockAlert } = require('./emailService');
 
 const LOW_STOCK_THRESHOLD = 10;
 
 // Create a new order
+// The asyncHandler wrapper was missing here, which is crucial for error handling.
 exports.createOrder = asyncHandler(async (req, res) => {
   const session = await mongoose.startSession();
   session.startTransaction();
