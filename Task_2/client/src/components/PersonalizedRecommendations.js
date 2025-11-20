@@ -15,7 +15,7 @@ const PersonalizedRecommendations = ({ currentProduct }) => {
         const wishlistItems = JSON.parse(localStorage.getItem('wishlist') || '[]');
 
         // Get all products
-        const response = await axios.get('http://localhost:5000/api/products');
+        const response = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products');
         const allProducts = response.data.products;
 
         // Simple recommendation algorithm
