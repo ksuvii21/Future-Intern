@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const Product = require('./models/Product');
+require('dotenv').config();
 
 async function checkProducts() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/shophub');
+    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/shophub';
+    await mongoose.connect(mongoURI);
     const count = await Product.countDocuments();
     console.log('Total products in database:', count);
 
