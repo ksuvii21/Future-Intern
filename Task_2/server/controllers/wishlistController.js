@@ -1,4 +1,4 @@
-const asyncHandler = require('express-async-handler');
+const asyncHandler = require('express-async-handler'); // Ensure this imports the package, not a local file
 const Wishlist = require('../models/Wishlist');
 const Cart = require('../models/Cart'); // Assuming Cart model exists
 const Product = require('../models/Product'); // Assuming Product model exists
