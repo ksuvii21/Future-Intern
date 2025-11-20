@@ -52,27 +52,23 @@ function App() {
     }
 
     const updateCartCount = async () => {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
+      const token = localStorage.getItem('token');
+      if (token) {
         try {
-          const token = localStorage.getItem('token');
-          if (token) {
-            const response = await axios.get('http://localhost:5000/api/cart', {
-              headers: { Authorization: `Bearer ${token}` }
-            });
-            const count = response.data.items.reduce((total, item) => total + item.quantity, 0);
-            setCartCount(count);
-          }
+          const response = await axios.get('http://localhost:5000/api/cart', {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          const count = response.data.items.reduce((total, item) => total + item.quantity, 0);
+          setCartCount(count);
         } catch (error) {
           console.error('Error fetching cart count:', error);
-          // Fallback to localStorage if API fails
-          const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-          const count = cart.reduce((total, item) => total + item.quantity, 0);
-          setCartCount(count);
+          // If API fails (e.g., token expired), clear local cart and set count to 0
+          localStorage.removeItem('cart');
+          setCartCount(0);
         }
       } else {
         // For non-logged in users, use localStorage
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cart = JSON.parse(localStorage.getItem('cart') || '{"items":[]}');
         const count = cart.reduce((total, item) => total + item.quantity, 0);
         setCartCount(count);
       }
