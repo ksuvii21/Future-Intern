@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Send, Mail, Phone, MapPin } from 'lucide-react';
 
 const ContactUsPage = () => {
+
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
