@@ -60,7 +60,7 @@ const Login = ({ onLogin }) => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/auth/login',
+        '${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/login',
         formData
       );
       
@@ -97,7 +97,7 @@ const Login = ({ onLogin }) => {
 
   const handleGoogleLogin = () => {
     // Redirect to the backend Google OAuth route
-    window.location.href = 'http://localhost:5000/api/auth/google';
+    window.location.href = '${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/google';
   };
 
   return (
