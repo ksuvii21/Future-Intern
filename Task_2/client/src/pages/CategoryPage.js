@@ -28,14 +28,11 @@ const CategoryPage = () => {
       setLoading(true);
       try {
         const params = new URLSearchParams();
-
         if (searchQuery) params.append('search', searchQuery);
-
-        if (selectedCategory && selectedCategory.toLowerCase() === 'new arrivals'.toLowerCase()) {
+        if (selectedCategory && selectedCategory.toLowerCase() === 'new arrivals') {
           params.append('isNewArrival', 'true');
         } else if (selectedCategory && selectedCategory.toLowerCase() !== 'all categories' && selectedCategory.toLowerCase() !== 'all') {
           params.append('category', selectedCategory);
-
         }
 
         if (priceRange < maxPrice) params.append('maxPrice', priceRange);
@@ -43,7 +40,6 @@ const CategoryPage = () => {
         params.append('sortOrder', sortOrder);
   
         const response = await axios.get(`http://localhost:5000/api/products?${params.toString()}`);
-
         // Ensure products is always an array, even if the response is unexpected
         setProducts(response.data.products || []);
         if (response.data.maxProductPrice > maxPrice) {
@@ -308,16 +304,16 @@ const CategoryPage = () => {
                     onClick={async (e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      const cart = JSON.parse(localStorage.getItem('cart') || '[]'); // Expects an array of items
-                      const selectedColor = product.variants?.[0]?.color || 'Default';
-                      const selectedSize = 'M'; // Default size
-                      const existingItemIndex = cart.findIndex(item => item.product._id === product._id && item.selectedColor === selectedColor && item.selectedSize === selectedSize);
+                      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                      const existingItem = cart.find(item => item._id === product._id);
 
-                      if (existingItemIndex > -1) {
-                        cart[existingItemIndex].quantity += 1;
+                      if (existingItem) {
+                        existingItem.quantity = (existingItem.quantity || 1) + 1;
                       } else {
-                        cart.push({ product, quantity: 1, selectedSize, selectedColor });
+                        // Use the correct structure: { product, quantity, ... }
+                        cart.push({ product: product, quantity: 1, selectedSize: 'M', selectedColor: product.variants?.[0]?.color || 'Default' });
                       }
+
                       localStorage.setItem('cart', JSON.stringify(cart));
                       window.dispatchEvent(new Event('storage'));
                       alert('Added to cart!');
