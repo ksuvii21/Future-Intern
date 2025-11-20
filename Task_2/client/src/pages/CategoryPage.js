@@ -28,11 +28,14 @@ const CategoryPage = () => {
       setLoading(true);
       try {
         const params = new URLSearchParams();
+
         if (searchQuery) params.append('search', searchQuery);
-        if (selectedCategory && selectedCategory.toLowerCase() === 'new arrivals') {
+
+        if (selectedCategory && selectedCategory.toLowerCase() === 'new arrivals'.toLowerCase()) {
           params.append('isNewArrival', 'true');
         } else if (selectedCategory && selectedCategory.toLowerCase() !== 'all categories' && selectedCategory.toLowerCase() !== 'all') {
           params.append('category', selectedCategory);
+
         }
 
         if (priceRange < maxPrice) params.append('maxPrice', priceRange);
@@ -40,6 +43,7 @@ const CategoryPage = () => {
         params.append('sortOrder', sortOrder);
   
         const response = await axios.get(`http://localhost:5000/api/products?${params.toString()}`);
+
         // Ensure products is always an array, even if the response is unexpected
         setProducts(response.data.products || []);
         if (response.data.maxProductPrice > maxPrice) {
