@@ -47,7 +47,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/${id}`
+          `/api/products/${id}`
         );
         setProduct(response.data);
 
@@ -74,7 +74,7 @@ const ProductDetail = () => {
         }
 
         // Fetch similar products
-        const allProductsResponse = await axios.get('http://localhost:5000/api/products');
+        const allProductsResponse = await axios.get('/api/products');
         const similar = allProductsResponse.data.products.filter(p => p &&
           p.category === response.data.category && p._id !== response.data._id
         ).slice(0, 4);
@@ -148,7 +148,7 @@ const ProductDetail = () => {
       return;
     }
     try {
-      await axios.post('http://localhost:5000/api/cart', {
+      await axios.post('/api/cart', {
         productId: product._id,
         quantity: quantity,
         selectedColor: selectedColor,
@@ -184,7 +184,7 @@ const ProductDetail = () => {
         return;
       }
 
-      await axios.post('http://localhost:5000/api/wishlist', {
+      await axios.post('/api/wishlist', {
         productId: product._id
       }, {
         headers: { Authorization: `Bearer ${token}` }
@@ -256,7 +256,7 @@ const ProductDetail = () => {
         reviewImages.forEach((image, index) => {
           reviewData.append('images', image);
         });
-        await axios.post(`http://localhost:5000/api/products/${id}/reviews`, reviewData, config);
+        await axios.post(`/api/products/${id}/reviews`, reviewData, config);
 
       setReviewSuccess('Review submitted successfully! It will be visible after refreshing.');
       setReviewRating(0);
