@@ -14,7 +14,7 @@ const CategoryPage = () => {
   const navigate = useNavigate();
 
   // Filters state derived from URL search params
-  const selectedCategory = category || 'All';
+  const selectedCategory = category ? category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'All';
   const sortBy = searchParams.get('sortBy') || 'name';
   const sortOrder = searchParams.get('sortOrder') || 'asc';
   const searchQuery = searchParams.get('search') || '';
