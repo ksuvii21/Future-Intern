@@ -47,7 +47,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `/api/products/${id}`
+          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/${id}`
         );
         setProduct(response.data);
 
