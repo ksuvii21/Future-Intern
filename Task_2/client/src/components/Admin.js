@@ -73,15 +73,15 @@ const Admin = () => {
       console.log('Fetching dashboard data...');
 
       // Fetch products (simplified for now)
-      const productsRes = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products?limit=1000');
+      const productsRes = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products?limit=1000`);
       console.log('Products response:', productsRes.data);
 
       // Fetch users
-      const usersRes = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/users', config);
+      const usersRes = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/users`, config);
       console.log('Users response:', usersRes.data);
 
       // Fetch orders
-      const ordersRes = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/all', config);
+      const ordersRes = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/all`, config);
       console.log('Orders response:', ordersRes.data);
 
       setProducts(productsRes.data.products || []);
@@ -117,7 +117,7 @@ const Admin = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/reviews/pending', config);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/reviews/pending`, config);
       setPendingReviews(response.data);
     } catch (error) {
       console.error('Error fetching pending reviews:', error);
@@ -181,7 +181,7 @@ const Admin = () => {
         }
 
         await axios.post(
-          '${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/admin',
+          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/admin`,
           dataToSend,
           { headers }
         );
