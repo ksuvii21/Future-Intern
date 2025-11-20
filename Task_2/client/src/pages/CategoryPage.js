@@ -40,16 +40,18 @@ const CategoryPage = () => {
         params.append('sortOrder', sortOrder);
   
         const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products?${params.toString()}`);
-        // Ensure products is always an array, even if the response is unexpected
-        setProducts(response.data.products || []);
-        if (response.data.maxProductPrice > maxPrice) {
-          setMaxPrice(response.data.maxProductPrice);
-          setPriceRange(response.data.maxProductPrice);
-        }
+        // The API sends an array directly, not an object with a 'products' property.
+        setProducts(response.data || []);
+        
+        // Since maxProductPrice is not part of the response, we'll calculate it from the products.
+        const maxPriceFromProducts = Math.max(...(response.data || []).map(p => p.price), 1000);
+        setMaxPrice(maxPriceFromProducts);
+        setPriceRange(maxPriceFromProducts);
+
         // Fetch all unique categories for the filter bar
         if (allCategories.length === 0) {
           const allProdsResponse = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products`);
-          const productList = allProdsResponse.data.products || [];
+          const productList = allProdsResponse.data || [];
           setAllCategories(['All Categories', ...new Set(productList.map(p => p.category))]);
         }
       } catch (error) {
