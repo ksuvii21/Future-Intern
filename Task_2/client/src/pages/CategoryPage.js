@@ -308,12 +308,13 @@ const CategoryPage = () => {
                       const existingItem = cart.find(item => item._id === product._id);
 
                       if (existingItem) {
-                        existingItem.quantity += 1;
+                        existingItem.quantity = (existingItem.quantity || 1) + 1;
                       } else {
-                        cart.push({ ...product, quantity: 1 });
+                        cart.push({ ...product, quantity: 1, selectedSize: 'M', selectedColor: product.variants?.[0]?.color || 'Default' });
                       }
 
                       localStorage.setItem('cart', JSON.stringify(cart));
+                      window.dispatchEvent(new Event('storage'));
                       alert('Added to cart!');
                     }}
                     className="p-2 bg-gradient-to-r from-[#ea698b] to-[#d55d92] text-white rounded-lg hover:shadow-lg hover:shadow-[#ea698b]/50 transition-all"
