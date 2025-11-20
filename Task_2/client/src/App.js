@@ -57,7 +57,7 @@ function App() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await axios.get('http://localhost:5000/api/cart', {
+          const response = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart', {
             headers: { Authorization: `Bearer ${token}` }
           });
           const count = response.data.items.reduce((total, item) => total + item.quantity, 0);
@@ -180,7 +180,7 @@ function AppLayout({
     const fetchSuggestions = async () => {
       if (searchQuery.trim().length > 1) {
         try {
-          const response = await axios.get(`http://localhost:5000/api/products/suggestions?q=${searchQuery}`);
+          const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/suggestions?q=${searchQuery}`);
           setSuggestions(response.data);
           setIsSuggestionsVisible(true);
         } catch (error) {
