@@ -3,6 +3,7 @@ import { Send, Mail, Phone, MapPin, MessageCircle, HelpCircle, ChevronDown, Chev
 
 const CustomerSupportPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [expandedFAQ, setExpandedFAQ] = useState(null);
