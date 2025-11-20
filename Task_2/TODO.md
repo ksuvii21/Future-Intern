@@ -1,13 +1,21 @@
-# TODO: Implement Footer Pages and Customer Support
+# Deployment to Vercel TODO List
 
-## Tasks
-- [ ] Create ReturnPolicyPage.js
-- [ ] Create RefundPolicyPage.js
-- [ ] Create PrivacyPolicyPage.js
-- [ ] Create DisclaimerPage.js
-- [ ] Create AboutUsPage.js
-- [ ] Create CustomerSupportPage.js (with FAQ and live chat)
-- [ ] Update App.js: Add imports for new pages
-- [ ] Update App.js: Add routes for new pages
-- [ ] Update App.js: Update footer links to correct routes
-- [ ] Test navigation and pages
+## Frontend Changes
+- [ ] Update all hardcoded localhost:5000 API calls to use REACT_APP_API_URL environment variable
+- [ ] Create .env file for client with development API URL
+- [ ] Create vercel.json for client deployment configuration
+- [ ] Update setupProxy.js to use environment variable
+
+## Backend Changes
+- [ ] Modify server.js for Vercel serverless compatibility (export app, handle port)
+- [ ] Create vercel.json for server deployment configuration
+- [ ] Ensure all dependencies are compatible with Vercel
+
+## Documentation
+- [ ] Update README.md with deployment instructions and roadmap
+- [ ] Add environment variables setup guide
+
+## Testing
+- [ ] Test localhost development setup
+- [ ] Test production builds
+- [ ] Verify API calls work in both environments
