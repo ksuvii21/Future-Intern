@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Plus, Minus, X, CreditCard, Truck, Shield } from 'lucide-react';
 import axios from 'axios';
+import { formatCurrency } from '../pages/formatters';
 
 const Cart = () => {
   const [cart, setCart] = useState(null);
@@ -182,7 +183,7 @@ const Cart = () => {
                       <p className="text-gray-400 mb-4">{item.product.category}</p>
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                          ₹{item.product.price.toLocaleString('en-IN')}
+                          {formatCurrency(item.product.price)}
                         </span>
                         <div className="flex items-center gap-3">
                           <div className="flex items-center bg-white/5 border border-[#571089]/30 rounded-lg">
@@ -223,17 +224,17 @@ const Cart = () => {
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between text-gray-300">
                   <span>Subtotal ({validCartItems.length} items)</span>
-                  <span>₹{totalPrice.toLocaleString('en-IN')}</span>
+                  <span>{formatCurrency(totalPrice)}</span>
                 </div>
                 <div className="flex justify-between text-gray-300">
                   <span>Shipping</span>
                   <span className={shipping === 0 ? 'text-green-400' : ''}>
-                    {shipping === 0 ? 'FREE' : `₹${(shipping * 85).toLocaleString('en-IN')}`}
+                    {shipping === 0 ? 'FREE' : formatCurrency(shipping * 85)}
                   </span>
                 </div>
                 <div className="flex justify-between text-gray-300">
                   <span>Tax</span>
-                  <span>₹{tax.toLocaleString('en-IN')}</span>
+                  <span>{formatCurrency(tax)}</span>
                 </div>
                 <div className="border-t border-[#571089]/30 pt-4">
                   <div className="flex justify-between text-xl font-bold">
