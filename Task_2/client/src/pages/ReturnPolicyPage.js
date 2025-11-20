@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 const ReturnPolicyPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+
   }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015] py-12">
