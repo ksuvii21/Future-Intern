@@ -168,7 +168,7 @@ function AppLayout({
     const fetchSuggestions = async () => {
       if (searchQuery.trim().length > 1) {
         try {
-          const response = await axios.get(`/api/products/suggestions?q=${searchQuery}`);
+          const response = await axios.get(`http://localhost:5000/api/products/suggestions?q=${searchQuery}`);
           setSuggestions(response.data);
           setIsSuggestionsVisible(true);
         } catch (error) {
