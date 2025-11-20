@@ -7,6 +7,7 @@ import "yet-another-react-lightbox/styles.css";
 import axios from 'axios';
 import RecentlyViewedProducts from '../components/RecentlyViewedProducts';
 import PersonalizedRecommendations from '../components/PersonalizedRecommendations';
+import { formatCurrency, formatDate } from '../utils/formatters';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -251,7 +252,7 @@ const ProductDetail = () => {
       deliveryDate.setDate(deliveryDate.getDate() + Math.floor(Math.random() * 7) + 2);
       setDeliveryInfo({
         available: true,
-        date: deliveryDate.toLocaleDateString(),
+        date: formatDate(deliveryDate),
         location: 'Your Area'
       });
     }
@@ -433,7 +434,7 @@ const ProductDetail = () => {
 
             <div className="flex items-center gap-4">
               <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                ₹{product.price || 'N/A'}
+                {formatCurrency(product.price)}
               </span>
             </div>
             
@@ -879,7 +880,9 @@ const ProductDetail = () => {
                           </div>
                         )}
                       </div>
-                      <span className="text-xs text-gray-500 ml-auto">{new Date(review.createdAt).toLocaleDateString()}</span>
+                      <span className="text-xs text-gray-500 ml-auto">{formatDate(review.createdAt)}</span>
+
+
                     </div>
                     <p className="text-gray-300 text-sm leading-relaxed mb-2">{review.comment}</p>
                     {review.images && review.images.length > 0 && (
@@ -943,7 +946,7 @@ const ProductDetail = () => {
                     <p className="text-gray-400 text-sm mb-3 line-clamp-2">{p.description}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                        ₹{p.price || 'N/A'}</span>
+                        {formatCurrency(p.price)}</span>
                       <Link
                         to={`/product/${p._id}`}
                         className="px-4 py-2 bg-[#ea698b] text-white text-sm rounded-lg hover:bg-[#d55d92] transition-all"
