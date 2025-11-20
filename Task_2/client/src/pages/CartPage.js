@@ -3,6 +3,7 @@ import Cart from '../components/Cart';
 
 const CartPage = () => {
   useEffect(() => {
+
     window.scrollTo(0, 0);
   }, []);
 
