@@ -184,7 +184,7 @@ const ProductDetail = () => {
         return;
       }
 
-      await axios.post('/api/wishlist', {
+      await axios.post('http://localhost:5000/api/wishlist', {
         productId: product._id
       }, {
         headers: { Authorization: `Bearer ${token}` }
