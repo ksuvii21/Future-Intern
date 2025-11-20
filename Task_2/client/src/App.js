@@ -26,6 +26,7 @@ import RefundPolicyPage from './pages/RefundPolicyPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import AboutUsPage from './pages/AboutUsPage';
+import ScrollToTop from './components/ScrollToTop'; // Import ScrollToTop
 import CustomerSupportPage from './pages/CustomerSupportPage';
 import './App.css';
 
@@ -204,6 +205,7 @@ function AppLayout({
 
   return (
     <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
+      <ScrollToTop /> {/* Add ScrollToTop component here */}
       {/* Elegant Header - Only show if not on auth pages */}
       {!isAuthPage && (
         <header
