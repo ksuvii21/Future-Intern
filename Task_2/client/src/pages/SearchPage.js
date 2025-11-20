@@ -64,7 +64,7 @@ const SearchPage = () => {
       params.append('page', currentPage);
       params.append('limit', '12');
 
-      const response = await axios.get(`/api/products?${params}`);
+      const response = await axios.get(`http://localhost:5000/api/products?${params}`);
       setProducts(response.data.products);
       setMaxProductPrice(response.data.maxProductPrice);
       setTotalPages(response.data.totalPages);
