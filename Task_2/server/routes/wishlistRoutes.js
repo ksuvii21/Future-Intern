@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { protect } = require('../middleware/auth'); // Corrected path to auth middleware
+const { protect } = require('../middleware/auth');
 const {
   getWishlist,
   addToWishlist,
   removeFromWishlist,
-  moveToCart, // Import the new function
+  moveToCart
 } = require('../controllers/wishlistController');
 
 router.route('/').get(protect, getWishlist).post(protect, addToWishlist);
 router.route('/:id').delete(protect, removeFromWishlist);
-router.route('/move-to-cart').post(protect, moveToCart); // Add the new route
+router.route('/move-to-cart').post(protect, moveToCart);
 
 module.exports = router;
