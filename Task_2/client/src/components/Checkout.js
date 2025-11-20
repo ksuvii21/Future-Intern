@@ -36,7 +36,7 @@ const Checkout = () => {
         return;
       }
       try {
-        const response = await fetch('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -123,7 +123,7 @@ const Checkout = () => {
 
     try {
       // 1. Create Payment Intent on the server
-      const paymentIntentRes = await fetch('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/create-payment-intent', {
+      const paymentIntentRes = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/create-payment-intent`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -164,7 +164,7 @@ const Checkout = () => {
       if (paymentResult.paymentIntent.status === 'succeeded') {
         orderData.paymentDetails.stripePaymentIntentId = paymentResult.paymentIntent.id;
 
-        const orderCreationRes = await fetch('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/create', {
+        const orderCreationRes = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/create`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
