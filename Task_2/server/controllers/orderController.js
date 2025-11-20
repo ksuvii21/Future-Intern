@@ -120,9 +120,12 @@ exports.createPaymentIntent = asyncHandler(async (req, res) => {
       }
     }
 
+    // Add 8% tax to the total amount, consistent with the frontend calculation
+    const finalAmount = totalAmount * 1.08;
+
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(totalAmount * 100), // Stripe expects amount in cents
+      amount: Math.round(finalAmount * 100), // Stripe expects amount in cents
       currency: 'inr', // Assuming INR, adjust if needed
       metadata: { userId: req.user.userId },
     });
