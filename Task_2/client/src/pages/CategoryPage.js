@@ -48,7 +48,7 @@ const CategoryPage = () => {
         }
         // Fetch all unique categories for the filter bar
         if (allCategories.length === 0) {
-          const allProdsResponse = await axios.get('/api/products');
+          const allProdsResponse = await axios.get('http://localhost:5000/api/products');
           const productList = allProdsResponse.data.products || [];
           setAllCategories(['All Categories', ...new Set(productList.map(p => p.category))]);
         }
