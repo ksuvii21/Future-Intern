@@ -2,8 +2,7 @@ const Order = require('../models/Order');
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
 // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'dummy_key');
-const stripe = null; // Temporarily disable stripe for testing
-const asyncHandler = require('./asyncHandler');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Initialize Stripe
 const { sendOrderConfirmationEmail, sendLowStockAlert } = require('./emailService');
 
 const LOW_STOCK_THRESHOLD = 10;
@@ -120,8 +119,14 @@ exports.createPaymentIntent = asyncHandler(async (req, res) => {
       }
     }
 
-    // Temporarily return dummy client secret for testing
-    res.json({ clientSecret: 'dummy_client_secret_for_testing' });
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(totalAmount * 100), // Stripe expects amount in cents
+      currency: 'inr', // Assuming INR, adjust if needed
+      metadata: { userId: req.user.userId },
+    });
+
+    res.json({ clientSecret: paymentIntent.client_secret });
 });
 
 // Get user's orders
