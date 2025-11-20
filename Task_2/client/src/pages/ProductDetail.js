@@ -753,11 +753,11 @@ const ProductDetail = () => {
               <div className="flex items-center gap-4">
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`w-6 h-6 ${i < Math.round(product.rating) ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
+                    <Star key={i} className={`w-6 h-6 ${i < Math.round(product.rating || 0) ? 'fill-[#ea698b] text-[#ea698b]' : 'text-gray-600'}`} />
                   ))}
                 </div>
-                <span className="text-white font-medium text-lg">{product.rating.toFixed(1)} out of 5</span>
-                <span className="text-gray-400">({product.numReviews} reviews)</span>
+                <span className="text-white font-medium text-lg">{(product.rating || 0).toFixed(1)} out of 5</span>
+                <span className="text-gray-400">({product.numReviews || 0} reviews)</span>
               </div>
 
               <div className="space-y-2">
