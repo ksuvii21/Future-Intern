@@ -219,7 +219,7 @@ const OrderDetail = () => {
                   {getStatusIcon(order.status)}
                   <div>
                     <p className="text-white font-semibold capitalize">{order.status}</p>
-                    <p className="text-gray-400 text-sm">Last updated: {new Date(order.updatedAt).toLocaleDateString()}</p>
+                    <p className="text-gray-400 text-sm">Last updated: {new Date(order.updatedAt).toDateString()}</p>
                   </div>
                 </div>
               </div>
@@ -290,7 +290,7 @@ const OrderDetail = () => {
                       </p>
                       <div className="flex justify-between items-center">
                         <span className="text-gray-400">Qty: {item.quantity}</span>
-                        <span className="text-[#ea698b] font-semibold">₹{(item.price * item.quantity).toLocaleString('en-IN')}</span>
+                        <span className="text-[#ea698b] font-semibold">₹{(item.price * item.quantity)}</span>
                       </div>
                     </div>
                   </div>
@@ -301,7 +301,7 @@ const OrderDetail = () => {
                 <div className="flex justify-between text-xl font-bold text-white">
                   <span>Total:</span>
                   <span className="bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                    ₹{order.totalAmount.toLocaleString('en-IN')}
+                    ₹{order.totalAmount}
                   </span>
                 </div>
               </div>
@@ -359,11 +359,11 @@ const OrderDetail = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  <span>Ordered on: {new Date(order.createdAt).toLocaleDateString()}</span>
+                  <span>Ordered on: {new Date(order.createdAt).toDateString()}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <DollarSign className="w-4 h-4" />
-                  <span>Total: ₹{order.totalAmount.toLocaleString('en-IN')}</span>
+                  <span>Total: ₹{order.totalAmount}</span>
                 </div>
               </div>
             </div>
