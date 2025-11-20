@@ -29,7 +29,7 @@ const CategoryPage = () => {
       try {
         const params = new URLSearchParams();
         if (searchQuery) params.append('search', searchQuery);
-        if (selectedCategory.toLowerCase() === 'new arrivals') {
+        if (selectedCategory && selectedCategory.toLowerCase() === 'new arrivals') {
           params.append('isNewArrival', 'true');
         } else if (selectedCategory && selectedCategory.toLowerCase() !== 'all categories' && selectedCategory.toLowerCase() !== 'all') {
           params.append('category', selectedCategory);
@@ -96,7 +96,7 @@ const CategoryPage = () => {
       case 'new arrivals':
         return 'New Arrivals';
       case 'all categories':
-        return 'All Categories';
+        return 'All Products';
       case 'all':
         return 'All Categories';
       default:
