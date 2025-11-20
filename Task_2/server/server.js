@@ -22,7 +22,12 @@ require('./config/passport')(passport);
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Allow requests from your frontend
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow cookies to be sent back and forth
+  optionsSuccessStatus: 204, // Some legacy browsers choke on 204
+}));
 app.use(express.json());
 
 // Express session
