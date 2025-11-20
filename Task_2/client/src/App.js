@@ -41,6 +41,7 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isHeaderHovered, setIsHeaderHovered] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   // Define auth pages where header/footer should be hidden
   const authPages = ['/login', '/register', '/forgot-password', '/admin', '/profile', '/seller-dashboard', '/become-seller'];
@@ -91,6 +92,13 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // After initial render, remove the class after a delay
+    setTimeout(() => {
+      setIsInitialLoad(false);
+    }, 500); // Adjust the delay as needed
+  }, []);
+
+  useEffect(() => {
     // Apply dark mode to document
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -122,7 +130,7 @@ function App() {
 
   return (
     <Router>
-      {/* AppLayout is a descendant of Router and can use useLocation() */}
+      {/* AppLayout is a descendant of Router and can use useLocation() */}      
       <AppLayout
         cartCount={cartCount}
         setCartCount={setCartCount}
@@ -139,6 +147,7 @@ function App() {
         authPages={authPages}
         isHeaderHovered={isHeaderHovered}
         setIsHeaderHovered={setIsHeaderHovered}
+        isInitialLoad={isInitialLoad}
       />
     </Router>
   );
@@ -155,7 +164,8 @@ function AppLayout({
   handleLogout,
   handleLogin,
   authPages,
-  isHeaderHovered,
+  isHeaderHovered,  
+  isInitialLoad,
   setIsHeaderHovered
 }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -205,7 +215,7 @@ function AppLayout({
 
   return (
     <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
-      <ScrollToTop /> {/* Add ScrollToTop component here */}
+      <ScrollToTop />
       {/* Elegant Header - Only show if not on auth pages */}
       {!isAuthPage && (
         <header
@@ -213,6 +223,7 @@ function AppLayout({
             scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-[#0a0015]/95 backdrop-blur-lg'
           }`}
           onMouseEnter={() => setIsHeaderHovered(true)}
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isInitialLoad ? 'header-expanded' : ''} ${
           onMouseLeave={() => setIsHeaderHovered(false)}
         >
           {/* Top Announcement Bar */}
