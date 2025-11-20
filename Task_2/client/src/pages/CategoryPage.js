@@ -29,7 +29,12 @@ const CategoryPage = () => {
       try {
         const params = new URLSearchParams();
         if (searchQuery) params.append('search', searchQuery);
-        if (selectedCategory && selectedCategory.toLowerCase() !== 'all categories') params.append('category', selectedCategory);
+        if (selectedCategory.toLowerCase() === 'new arrivals') {
+          params.append('isNewArrival', 'true');
+        } else if (selectedCategory && selectedCategory.toLowerCase() !== 'all categories' && selectedCategory.toLowerCase() !== 'all') {
+          params.append('category', selectedCategory);
+        }
+
         if (priceRange < maxPrice) params.append('maxPrice', priceRange);
         params.append('sortBy', sortBy);
         params.append('sortOrder', sortOrder);
