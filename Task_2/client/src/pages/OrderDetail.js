@@ -34,7 +34,7 @@ const OrderDetail = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -74,7 +74,7 @@ const OrderDetail = () => {
     const token = localStorage.getItem('token');
 
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/${id}/cancel`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/${id}/cancel`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`
