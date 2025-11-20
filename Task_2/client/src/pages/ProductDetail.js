@@ -130,7 +130,7 @@ const ProductDetail = () => {
     if (!token) {
       // Guest user cart logic
       const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const existingItemIndex = cart.findIndex(item => item._id === product._id && item.selectedColor === selectedColor && item.selectedSize === selectedSize);
+      const existingItemIndex = cart.findIndex(item => item.product._id === product._id && item.selectedColor === selectedColor && item.selectedSize === selectedSize);
 
       if (existingItemIndex > -1) {
         cart[existingItemIndex].quantity += quantity;
