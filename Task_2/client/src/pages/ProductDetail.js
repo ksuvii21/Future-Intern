@@ -256,7 +256,7 @@ const ProductDetail = () => {
         reviewImages.forEach((image, index) => {
           reviewData.append('images', image);
         });
-        await axios.post(`/api/products/${id}/reviews`, reviewData, config);
+        await axios.post(`http://localhost:5000/api/products/${id}/reviews`, reviewData, config);
 
       setReviewSuccess('Review submitted successfully! It will be visible after refreshing.');
       setReviewRating(0);
