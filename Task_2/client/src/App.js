@@ -68,7 +68,7 @@ function App() {
         }
       } else {
         // For non-logged in users, use localStorage
-        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]') || [];
         const count = cart.reduce((total, item) => total + item.quantity, 0);
         setCartCount(count);
       }
