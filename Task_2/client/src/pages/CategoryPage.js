@@ -3,6 +3,7 @@ import { useParams, Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { Star, Heart, ShoppingBag } from 'lucide-react';
 import axios from 'axios';
 
+
 const CategoryPage = () => {
   const { category } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
