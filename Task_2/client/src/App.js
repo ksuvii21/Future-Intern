@@ -39,6 +39,7 @@ function App() {
   });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isHeaderHovered, setIsHeaderHovered] = useState(false);
 
   // Define auth pages where header/footer should be hidden
   const authPages = ['/login', '/register', '/forgot-password', '/admin', '/profile', '/seller-dashboard', '/become-seller'];
@@ -139,6 +140,8 @@ function App() {
         handleLogin={handleLogin}
         toggleDarkMode={toggleDarkMode}
         authPages={authPages}
+        isHeaderHovered={isHeaderHovered}
+        setIsHeaderHovered={setIsHeaderHovered}
       />
     </Router>
   );
@@ -154,7 +157,9 @@ function AppLayout({
   scrolled,
   handleLogout,
   handleLogin,
-  authPages
+  authPages,
+  isHeaderHovered,
+  setIsHeaderHovered
 }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -205,9 +210,13 @@ function AppLayout({
     <div className={`App min-h-screen ${darkMode ? 'bg-gradient-to-br from-[#0a0015] via-[#1a0a2e] to-[#0a0015]' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
       {/* Elegant Header - Only show if not on auth pages */}
       {!isAuthPage && (
-        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-[#0a0015]/95 backdrop-blur-lg'
-        }`}>
+        <header
+          className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+            scrolled ? 'bg-[#0a0015]/95 backdrop-blur-lg shadow-xl border-b border-[#571089]/30' : 'bg-[#0a0015]/95 backdrop-blur-lg'
+          }`}
+          onMouseEnter={() => setIsHeaderHovered(true)}
+          onMouseLeave={() => setIsHeaderHovered(false)}
+        >
           {/* Top Announcement Bar */}
           <div className="bg-gradient-to-r from-[#ea698b] via-[#ac46a1] to-[#822faf] text-white text-sm py-2">
             <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
@@ -308,7 +317,11 @@ function AppLayout({
             </div>
 
             {/* Category Navigation */}
-            <nav className="hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-[#571089]/20">
+            <nav
+              className={`hidden lg:flex items-center justify-center gap-8 mt-4 pt-4 border-t border-[#571089]/20 transition-all duration-300 ease-in-out ${
+                isHeaderHovered || scrolled ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0 invisible'
+              }`}
+            >
               {['All Categories', 'Dresses', 'Jewelry', 'Accessories', 'New Arrivals'].map((item) => (
                 <Link
                   key={item}
