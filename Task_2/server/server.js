@@ -49,6 +49,13 @@ app.get('/', (req, res) => {
   res.send('Backend API is running!');
 });
 
+// API root route
+app.get('/api', (req, res) => {
+  res.json({
+    message: 'Welcome to the E-commerce API. See documentation for available endpoints.'
+  });
+});
+
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
