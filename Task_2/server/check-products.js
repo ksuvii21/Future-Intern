@@ -3,7 +3,7 @@ const Product = require('./models/Product');
 
 async function checkProducts() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/fansee-rebel');
+    await mongoose.connect('mongodb://localhost:27017/shophub');
     const count = await Product.countDocuments();
     console.log('Total products in database:', count);
 
