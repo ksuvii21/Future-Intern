@@ -73,15 +73,15 @@ const Admin = () => {
       console.log('Fetching dashboard data...');
 
       // Fetch products (simplified for now)
-      const productsRes = await axios.get('http://localhost:5000/api/products?limit=1000');
+      const productsRes = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products?limit=1000');
       console.log('Products response:', productsRes.data);
 
       // Fetch users
-      const usersRes = await axios.get('http://localhost:5000/api/auth/users', config);
+      const usersRes = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/users', config);
       console.log('Users response:', usersRes.data);
 
       // Fetch orders
-      const ordersRes = await axios.get('http://localhost:5000/api/orders/all', config);
+      const ordersRes = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/all', config);
       console.log('Orders response:', ordersRes.data);
 
       setProducts(productsRes.data.products || []);
@@ -117,7 +117,7 @@ const Admin = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const response = await axios.get('http://localhost:5000/api/products/reviews/pending', config);
+      const response = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/reviews/pending', config);
       setPendingReviews(response.data);
     } catch (error) {
       console.error('Error fetching pending reviews:', error);
@@ -158,7 +158,7 @@ const Admin = () => {
           // If a new image is needed, the URL should be updated.
         };
         await axios.put(
-          `http://localhost:5000/api/products/admin/${editingProduct._id}`,
+          `${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/admin/${editingProduct._id}`,
           updateData,
           config
         );
@@ -181,7 +181,7 @@ const Admin = () => {
         }
 
         await axios.post(
-          'http://localhost:5000/api/products/admin',
+          '${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/admin',
           dataToSend,
           { headers }
         );
@@ -221,7 +221,7 @@ const Admin = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.delete(`http://localhost:5000/api/products/admin/${id}`, config);
+      await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/admin/${id}`, config);
       fetchDashboardData(); // Refetch all data to keep dashboard consistent
     } catch (error) {
       console.error('Error deleting product:', error);
@@ -232,7 +232,7 @@ const Admin = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.put(`http://localhost:5000/api/orders/${orderId}/status`, { status: newStatus }, config);
+      await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/${orderId}/status`, { status: newStatus }, config);
       fetchDashboardData(); // Refetch to show updated status
     } catch (error) {
       console.error('Error updating order status:', error);
@@ -243,7 +243,7 @@ const Admin = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.put(`http://localhost:5000/api/auth/users/${userId}/role`, { role: newRole }, config);
+      await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/auth/users/${userId}/role`, { role: newRole }, config);
       fetchDashboardData(); // Refetch to show updated role
     } catch (error) {
       console.error('Error updating user role:', error);
@@ -254,7 +254,7 @@ const Admin = () => {
     try {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.put(`http://localhost:5000/api/products/${productId}/reviews/${reviewId}/moderate`, { action }, config);
+      await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/${productId}/reviews/${reviewId}/moderate`, { action }, config);
       fetchPendingReviews(); // Refetch pending reviews
       alert(`Review ${action}d successfully`);
     } catch (error) {
