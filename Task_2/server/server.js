@@ -21,21 +21,20 @@ require('./config/passport')(passport);
 
 const app = express();
 
+// Define allowed origins
+const allowedOrigins = [
+  process.env.FRONTEND_URL, // Your production frontend URL from .env
+  'http://localhost:3000',    // Your local frontend
+  'https://fanseerebel.netlify.app' // Explicitly add your Netlify URL
+].filter(Boolean); // Filter out any undefined values
+
 // Middleware
 app.use(cors({
-  origin: function(origin, callback) {
-    const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:3000'].filter(Boolean);
-    // allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },  
+  origin: allowedOrigins,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow cookies to be sent back and forth
 }));
+
 app.use(express.json());
 
 // Express session
