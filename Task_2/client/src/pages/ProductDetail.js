@@ -136,8 +136,8 @@ const ProductDetail = () => {
         cart[existingItemIndex].quantity += quantity;
       } else {
         cart.push({
-          ...product,
-          quantity: quantity,
+          product: product,
+          quantity,
           selectedColor: selectedColor,
           selectedSize: selectedSize
         });
