@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Store, CheckCircle, Sparkles } from 'lucide-react';
 
+
 const BecomeSellerPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
