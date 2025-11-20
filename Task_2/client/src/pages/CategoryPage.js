@@ -181,7 +181,7 @@ const CategoryPage = () => {
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto">
               <div className="w-full sm:w-auto">
-                <label className="text-gray-300 text-sm mb-2 block">Price up to: <span className="font-bold text-[#ea698b]">₹{priceRange.toLocaleString('en-IN')}</span></label>
+                <label className="text-gray-300 text-sm mb-2 block">Price up to: <span className="font-bold text-[#ea698b]">₹{priceRange}</span></label>
                 <input
                   type="range"
                   min="0"
@@ -300,7 +300,7 @@ const CategoryPage = () => {
                   </h3>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold bg-gradient-to-r from-[#ea698b] to-[#d55d92] bg-clip-text text-transparent">
-                      ₹{product.price.toLocaleString('en-IN')}
+                      ₹{product.price}
                     </span>
                     <button
                     onClick={async (e) => {
