@@ -60,7 +60,7 @@ function App() {
           const response = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart', {
             headers: { Authorization: `Bearer ${token}` }
           });
-          const count = response.data.items.reduce((total, item) => total + item.quantity, 0);
+          const count = response.data.items?.reduce((total, item) => total + item.quantity, 0) || 0;
           setCartCount(count);
         } catch (error) {
           console.error('Error fetching cart count:', error);
@@ -71,7 +71,7 @@ function App() {
       } else {
         // For non-logged in users, use localStorage
         const cart = JSON.parse(localStorage.getItem('cart') || '[]') || [];
-        const count = cart.reduce((total, item) => total + item.quantity, 0);
+        const count = cart.reduce((total, item) => total + (item.quantity || 0), 0);
         setCartCount(count);
       }
     };
