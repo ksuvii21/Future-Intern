@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Search, Filter, X, Star, ShoppingBag, Heart, SlidersHorizontal } from 'lucide-react';
 import axios from 'axios';
 
+
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
