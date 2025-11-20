@@ -22,11 +22,24 @@ require('./config/passport')(passport);
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  process.env.FRONTEND_URL, 
+  `${process.env.FRONTEND_URL}/`, 
+  'http://localhost:3000'
+].filter(Boolean); // filter(Boolean) removes any undefined/null values
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Allow requests from your frontend
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow cookies to be sent back and forth
-  optionsSuccessStatus: 204, // Some legacy browsers choke on 204
 }));
 app.use(express.json());
 
