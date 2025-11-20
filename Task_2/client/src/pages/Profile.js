@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { User, Mail, Lock, Edit, Save, X, ShoppingBag, Heart, Calendar, Eye, EyeOff, Store, MapPin, Trash2, PlusCircle } from 'lucide-react';
+import { User, Mail, Lock, Edit, Save, X, ShoppingBag, Heart, Calendar, Eye, EyeOff, Store, MapPin, Trash2, PlusCircle, LogOut } from 'lucide-react';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -166,6 +166,15 @@ const Profile = () => {
     setEditing(false);
     setError('');
     setSuccess('');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    // Dispatch a storage event to notify other components (like the header) of the logout
+    window.dispatchEvent(new Event('storage'));
+    // Navigate to the home page after logout
+    navigate('/');
   };
   
   const handleAddressInputChange = (e) => {
@@ -547,6 +556,17 @@ const Profile = () => {
                   <span className="text-green-400">Yes</span>
                 </div>
               </div>
+            </div>
+
+            {/* Logout Button */}
+            <div className="bg-[#1a0a2e] border border-[#571089]/30 rounded-2xl p-6">
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-400 hover:bg-red-500/30 hover:text-red-300 transition-all"
+              >
+                <LogOut className="w-5 h-5" />
+                Logout
+              </button>
             </div>
           </div>
         </div>
