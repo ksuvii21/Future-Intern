@@ -9,7 +9,9 @@ const RecentlyViewedProducts = ({ currentProductId }) => {
   useEffect(() => {
     const viewedItems = JSON.parse(localStorage.getItem('viewedItems') || '[]');
     // Filter out the current product and limit to 4 items
-    const filtered = viewedItems.filter(item => item._id !== currentProductId).slice(0, 4);
+    const filtered = viewedItems
+      .filter(item => item && item._id && item._id !== currentProductId) // Ensure item and item._id exist
+      .slice(0, 4);
     setRecentlyViewed(filtered);
   }, [currentProductId]);
 
