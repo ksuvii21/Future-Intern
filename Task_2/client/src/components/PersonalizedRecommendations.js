@@ -17,7 +17,7 @@ const PersonalizedRecommendations = ({ currentProduct }) => {
 
         // Get all products
         const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products`);
-        const allProducts = response.data.products;
+        const allProducts = Array.isArray(response.data.products) ? response.data.products : [];
 
         // Simple recommendation algorithm
         let recommended = [];
