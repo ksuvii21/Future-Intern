@@ -119,7 +119,7 @@ const Admin = () => {
       const token = localStorage.getItem('token');
       const config = { headers: { Authorization: `Bearer ${token}` } };
       const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/reviews/pending`, config);
-      setPendingReviews(response.data);
+      setPendingReviews(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Error fetching pending reviews:', error);
     }
