@@ -65,12 +65,13 @@ const Profile = () => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
       // Fetch orders
-      const ordersResponse = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders', config);
-      setOrders(ordersResponse.data.slice(0, 5)); // Get last 5 orders
+      const ordersResponse = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/orders/my-orders`, config);
+      const fetchedOrders = Array.isArray(ordersResponse.data) ? ordersResponse.data : [];
+      setOrders(fetchedOrders.slice(0, 5)); // Get last 5 orders
 
       // Calculate stats
-      const totalOrders = ordersResponse.data.length;
-      const totalSpent = ordersResponse.data.reduce((sum, order) => sum + order.totalAmount, 0);
+      const totalOrders = fetchedOrders.length;
+      const totalSpent = fetchedOrders.reduce((sum, order) => sum + order.totalAmount, 0);
 
       // Fetch wishlist count from API
       let wishlistCount = 0;
@@ -80,7 +81,8 @@ const Profile = () => {
           const wishlistResponse = await axios.get('${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/wishlist', {
             headers: { Authorization: `Bearer ${token}` }
           });
-          wishlistCount = wishlistResponse.data.items.length;
+          const fetchedWishlistItems = Array.isArray(wishlistResponse.data.items) ? wishlistResponse.data.items : [];
+          wishlistCount = fetchedWishlistItems.length;
         } catch (error) {
           console.error('Error fetching wishlist count:', error);
           wishlistCount = 0;
