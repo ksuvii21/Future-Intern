@@ -47,7 +47,7 @@ const ProductDetail = () => {
 
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`/api/products/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/${id}`);
         setProduct(response.data);
 
         // Check URL parameters for color selection
@@ -73,7 +73,7 @@ const ProductDetail = () => {
         }
 
         // Fetch similar products
-        const allProductsResponse = await axios.get('/api/products');
+        const allProductsResponse = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products`);
         // The API response for all products is inconsistent. This handles both array and object responses.
         const allProducts = Array.isArray(allProductsResponse.data) ? allProductsResponse.data : allProductsResponse.data.products;
         
@@ -272,7 +272,7 @@ const ProductDetail = () => {
         reviewImages.forEach((image, index) => {
           reviewData.append('images', image);
         });
-        await axios.post(`/api/products/${id}/reviews`, reviewData, config);
+        await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/products/${id}/reviews`, reviewData, config);
 
       setReviewSuccess('Review submitted successfully! It will be visible after refreshing.');
       setReviewRating(0);
