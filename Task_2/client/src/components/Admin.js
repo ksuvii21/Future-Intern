@@ -168,7 +168,7 @@ const Admin = () => {
         // and FormData (for seller with file upload).
         let dataToSend;
         let headers = { ...config.headers };
-
+ 
         if (newProduct.imageFile) {
           dataToSend = new FormData();
           Object.keys(newProduct).forEach(key => {
