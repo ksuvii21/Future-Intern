@@ -36,7 +36,7 @@ const Cart = () => {
       }
       
       // Fetch cart for logged-in user
-      const response = await axios.get('/api/cart', {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCart(response.data);
@@ -56,7 +56,7 @@ const Cart = () => {
         return;
       }
 
-      await axios.delete(`/api/cart/${itemId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart/${itemId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -78,7 +78,7 @@ const Cart = () => {
         return;
       }
 
-      await axios.put(`/api/cart/${itemId}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL || "http://localhost:5000"}/api/cart/${itemId}`, {
         quantity: newQuantity
       }, {
         headers: { Authorization: `Bearer ${token}` }
