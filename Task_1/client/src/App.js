@@ -55,10 +55,9 @@ const About = () => (
         <h2>About Me</h2>
       </div>
       <div className="about-content">
-        {/* You can add an image here if you have one in client/public/assets */}
-        {/* <div className="about-img">
-          <img src="/assets/profile.jpg" alt="Kritika Gupta" />
-        </div> */}
+        <div className="about-img">
+          <img src={profileImage} alt="Kritika Gupta" />
+        </div>
         <div className="about-text">
           <h3>MERN Stack Developer & Graphics Designer</h3>
           <p>
@@ -70,6 +69,84 @@ const About = () => (
   </section>
 );
 
+const Skills = () => {
+  const skillsList = [
+    "JavaScript",
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "HTML5",
+    "CSS3",
+    "Git",
+    "Docker",
+    "AWS"
+  ];
+
+  return (
+    <section id="skills" className="skills-section">
+      <div className="container">
+        <div className="section-title">
+          <h2>Skills</h2>
+        </div>
+        <ul style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', listStyle: 'none', padding: 0 }}>
+          {skillsList.map(skill => (
+            <li key={skill} style={{ margin: '10px 20px', fontSize: '1.2rem', color: '#FFA500' }}>
+              {skill}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+};
+
+const Education = () => {
+  const educationItems = [
+    { degree: "Bachelor of Science in Computer Science", institution: "XYZ University", year: "2021" },
+    { degree: "Full Stack Web Development Bootcamp", institution: "ABC Academy", year: "2022" }
+  ];
+
+  return (
+    <section id="education" className="education">
+      <div className="container">
+        <div className="section-title">
+          <h2>Education</h2>
+        </div>
+        {educationItems.map((edu, index) => (
+          <div key={index} className="education-item">
+            <h4>{edu.degree}</h4>
+            <h5>{edu.institution} | {edu.year}</h5>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const Certifications = () => {
+  const certifications = [
+    { title: "Certified React Developer", issuer: "React Certification Authority", year: "2023" },
+    { title: "AWS Certified Solutions Architect", issuer: "Amazon Web Services", year: "2024" }
+  ];
+
+  return (
+    <section id="certifications" className="certifications">
+      <div className="container">
+        <div className="section-title">
+          <h2>Certifications</h2>
+        </div>
+        {certifications.map((cert, index) => (
+          <div key={index} className="certification-item">
+            <h4>{cert.title}</h4>
+            <h5>{cert.issuer} | {cert.year}</h5>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
 const Projects = () => (
   <section id="projects" className="portfolio">
     <div className="container">
@@ -79,11 +156,13 @@ const Projects = () => (
       </div>
       <div className="portfolio-grid">
         <div className="portfolio-item">
+          <img src={project1Image} alt="MERN Stack Excel Analytics Platform" className="portfolio-img" />
           <h3>MERN Stack Excel Analytics Platform</h3>
           <p>An analytics platform to upload Excel files, analyze data, and generate interactive 2D/3D charts. Features user authentication with JWT, a dynamic UI, and chart downloads.</p>
           <a href="https://xlsx-analytics21.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn-outline">Check it out</a>
         </div>
         <div className="portfolio-item">
+          <img src={project2Image} alt="MERN Stack Blogging Platform" className="portfolio-img" />
           <h3>MERN Stack Blogging Platform</h3>
           <p>A full-stack blogging app where users can create, edit, and delete blogs. Includes a rich text editor, comments, likes, user authentication, and an admin dashboard for post management.</p>
           <a href="https://writely-log.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn-outline">Check it out</a>
@@ -131,6 +210,20 @@ const Contact = () => (
           <p>LinkedIn: <a href="https://www.linkedin.com/in/kritika-gupta2106" target="_blank" rel="noopener noreferrer">in/kritika-gupta2106</a></p>
           <p>GitHub: <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">github.com/ksuvii21</a></p>
       </div>
+      <div className="contact-form" style={{marginTop: '40px'}}>
+        <form onSubmit={(e) => { e.preventDefault(); alert("Message sent!"); }}>
+          <div className="form-group">
+            <input type="text" name="name" placeholder="Your Name" className="form-control" required />
+          </div>
+          <div className="form-group">
+            <input type="email" name="email" placeholder="Your Email" className="form-control" required />
+          </div>
+          <div className="form-group">
+            <textarea name="message" placeholder="Your Message" className="form-control" rows="4" required />
+          </div>
+          <button type="submit" className="btn">Send Message</button>
+        </form>
+      </div>
     </div>
   </section>
 );
@@ -152,6 +245,9 @@ function App() {
       <main>
         <Hero />
         <About />
+        <Skills />
+        <Education />
+        <Certifications />
         <Projects />
         <Experience />
         <Contact />
