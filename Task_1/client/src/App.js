@@ -1,20 +1,17 @@
 import React from 'react';
 import './App.css';
-import favicon from '../assets/favicon.png';
-import Preview from '../assets/Preview.png';
-import resume from '../assets/resume.pdf';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={favicon} className="App-logo" alt="logo" />
+        <img src="./assets/favicon.png" className="App-logo" alt="logo" />
         <h1>My Portfolio</h1>
       </header>
       <section id="about">
         <h2>About Me</h2>
         <p>Welcome to my portfolio! I am a passionate developer with experience in React and Node.js.</p>
-        <img src={Preview} alt="Preview" className="preview-image" />
+        <img src="./assets/Preview.png" alt="Preview" className="preview-image" />
       </section>
       <section id="projects">
         <h2>Projects</h2>
@@ -26,7 +23,7 @@ function App() {
       </section>
       <section id="resume">
         <h2>Resume</h2>
-        <a href={resume} target="_blank" rel="noopener noreferrer">View Resume (PDF)</a>
+        <a href="./assets/resume.pdf" target="_blank" rel="noopener noreferrer">View Resume (PDF)</a>
       </section>
       <section id="contact">
         <h2>Contact</h2>
