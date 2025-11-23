@@ -4,11 +4,6 @@ import profileImage from './assets/profile.png';
 import project1Image from './assets/project1.png';
 import project2Image from './assets/project2.png';
 
-
-
-// You can move these components to their own files in a 'components' folder
-// For simplicity, I'm defining them here.
-
 const Header = () => (
   <header>
     <div className="container">
@@ -95,9 +90,9 @@ const Skills = () => {
         <div className="section-title">
           <h2>Skills</h2>
         </div>
-        <ul style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', listStyle: 'none', padding: 0 }}>
+        <ul className="skills-list">
           {skillsList.map(skill => (
-            <li key={skill} style={{ margin: '10px 20px', fontSize: '1.2rem', color: '#FFA500' }}>
+            <li key={skill} className="skill-item">
               {skill}
             </li>
           ))}
@@ -184,7 +179,7 @@ const Experience = () => (
       <div className="section-title">
         <h2>Work Experience</h2>
       </div>
-      <div className="experience-item" style={{borderLeftColor: '#ff69b4'}}>
+      <div className="experience-item">
         <h4>Web Development Intern</h4>
         <h5>Zidio Development (Remote) | Aug 2025 - Oct 2025</h5>
         <ul>
@@ -193,7 +188,7 @@ const Experience = () => (
           <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
         </ul>
       </div>
-       <div className="experience-item" style={{borderLeftColor: '#ff69b4'}}>
+       <div className="experience-item">
         <h4>Software Development Intern</h4>
         <h5>Cognifyz Technologies (Remote) | Jun 2025 - Jul 2025</h5>
         <ul>
@@ -206,31 +201,34 @@ const Experience = () => (
 
 const Contact = () => (
   <section id="contact" className="contact">
-    <div className="container contact-container">
-      <div className="contact-info">
-        <div className="section-title">
-          <h2>Contact</h2>
-          <p>Feel free to reach out!</p>
-        </div>
-        <div style={{textAlign: 'center'}}>
-          <p>Email: <a href="mailto:k21ritikasuvi2106@gmail.com">k21ritikasuvi2106@gmail.com</a></p>
-          <p>LinkedIn: <a href="https://www.linkedin.com/in/kritika-gupta2106" target="_blank" rel="noopener noreferrer">in/kritika-gupta2106</a></p>
-          <p>GitHub: <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">github.com/ksuvii21</a></p>
-        </div>
+    <div className="container">
+      <div className="section-title">
+        <h2>Contact</h2>
+        <p>Feel free to reach out!</p>
       </div>
-      <div className="contact-form" style={{marginTop: '0'}}>
-        <form onSubmit={(e) => { e.preventDefault(); alert("Message sent!"); }}>
-          <div className="form-group">
-            <input type="text" name="name" placeholder="Your Name" className="form-control" required />
+      <div className="contact-container">
+        <div className="contact-info">
+          <div className="contact-details">
+            <h3>Get in Touch</h3>
+            <p><strong>Email:</strong> <a href="mailto:k21ritikasuvi2106@gmail.com">k21ritikasuvi2106@gmail.com</a></p>
+            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/kritika-gupta2106" target="_blank" rel="noopener noreferrer">in/kritika-gupta2106</a></p>
+            <p><strong>GitHub:</strong> <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">github.com/ksuvii21</a></p>
           </div>
-          <div className="form-group">
-            <input type="email" name="email" placeholder="Your Email" className="form-control" required />
-          </div>
-          <div className="form-group">
-            <textarea name="message" placeholder="Your Message" className="form-control" rows="4" required />
-          </div>
-          <button type="submit" className="btn">Send Message</button>
-        </form>
+        </div>
+        <div className="contact-form">
+          <form onSubmit={(e) => { e.preventDefault(); alert("Message sent!"); }}>
+            <div className="form-group">
+              <input type="text" name="name" placeholder="Your Name" className="form-control" required />
+            </div>
+            <div className="form-group">
+              <input type="email" name="email" placeholder="Your Email" className="form-control" required />
+            </div>
+            <div className="form-group">
+              <textarea name="message" placeholder="Your Message" className="form-control" rows="4" required />
+            </div>
+            <button type="submit" className="btn">Send Message</button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -253,12 +251,12 @@ function App() {
       <main>
         <Hero />
         <About />
-        <Skills />
-        <Education />
-        <Certifications />
         <Projects />
         <Experience />
         <Contact />
+        <Skills />
+        <Education />
+        <Certifications />
       </main>
       <Footer />
     </div>
