@@ -1,5 +1,10 @@
 import React from 'react';
 
+import profileImage from './assets/profile.jpg';
+import project1Image from './assets/project1.png';
+import project2Image from './assets/project2.png';
+
+
 // You can move these components to their own files in a 'components' folder
 // For simplicity, I'm defining them here.
 
@@ -12,6 +17,9 @@ const Header = () => (
         </a>
         <ul className="nav-links">
           <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#certifications">Certifications</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#contact">Contact</a></li>
