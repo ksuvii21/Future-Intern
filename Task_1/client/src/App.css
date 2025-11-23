@@ -1,0 +1,27 @@
+.App-header {
+  background-color: #282c34;
+  padding: 20px 0;
+  color: white;
+  text-align: center;
+}
+
+.App-logo {
+  height: 60px;
+}
+
+section {
+  margin: 40px 0;
+}
+
+.preview-image {
+  max-width: 100%;
+  height: auto;
+}
+
+footer {
+  text-align: center;
+  padding: 15px 0;
+  border-top: 1px solid #ccc;
+  color: #666;
+  font-size: 0.9em;
+}
