@@ -1,8 +1,9 @@
 import React from 'react';
 
-import profileImage from './assets/profile.jpg';
+import profileImage from './assets/profile.png';
 import project1Image from './assets/project1.png';
 import project2Image from './assets/project2.png';
+
 
 
 // You can move these components to their own files in a 'components' folder
