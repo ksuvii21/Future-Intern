@@ -37,10 +37,10 @@ const Header = () => (
 
 const Hero = () => (
   <section id="home" className="hero">
+    <FloatingLines />
     <div className="container">
-      <FloatingLines />
       <div className="hero-content">
-        <h1>I'm Kritika Gupta, a <span>Full-Stack Developer</span></h1>
+        <h1>I&apos;m Kritika Gupta, a <span>Full-Stack Developer</span></h1>
         <p>Passionate MERN stack developer building scalable applications and growing through hands-on experience in collaborative environments.</p>
         <div className="hero-btns">
           <a href="#projects" className="btn btn-primary">View My Projects</a>
