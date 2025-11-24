@@ -351,8 +351,10 @@ const Education = () => {
 
 const Certifications = () => {
   const certifications = [
-    { title: "Certified React Developer", issuer: "React Certification Authority", year: "2023" },
-    { title: "AWS Certified Solutions Architect", issuer: "Amazon Web Services", year: "2024" }
+    { title: "MERN Stack Internship Completion Certificate", issuer: "Future Intens", year: "2025", pdf: "./assets/Future_Intens_Internship_Certificate.pdf" },
+    { title: "Zidio Development - Internship Completion Certificate", issuer: "Zidio Development", year: "Aug 2025", pdf: "./assets/Zidio_Development_Internship_Certificate.pdf" },
+    { title: "Internship Completion Certificate", issuer: "Cognifyz Technologies", year: "Jun 2025", pdf: "./assets/Cognifyz_Technologies_Internship_Certificate.pdf" },
+    { title: "Graphics Designer", issuer: "InAmigos Foundation (IAF)", year: "Jun 2025", pdf: null }
   ];
 
   return (
@@ -365,6 +367,15 @@ const Certifications = () => {
           <div key={index} className="certification-item glass">
             <h4>{cert.title}</h4>
             <h5>{cert.issuer} | {cert.year}</h5>
+            {cert.pdf ? (
+              <a href={cert.pdf} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{marginTop: "10px", display: "inline-block"}}>
+                View Certificate
+              </a>
+            ) : (
+              <span style={{color: "gray", marginTop: "10px", display: "inline-block", fontStyle: "italic"}}>
+                Certificate not available
+              </span>
+            )}
           </div>
         ))}
       </div>
