@@ -7,7 +7,7 @@ import project1Image from './assets/project1.png';
 import project2Image from './assets/project2.png';
 
 import FloatingLines from './components/FloatingLines';
-import ScrollVelocity from './components/ScrollVelocity';
+// import ScrollVelocity from './components/ScrollVelocity';
 import LogoLoop from './components/LogoLoop';
 
 const Header = () => (
