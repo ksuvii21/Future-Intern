@@ -1088,86 +1088,178 @@ footer {
   animation: glow 2s infinite;
 }
 
-/* CSS for Infinite Scrolling Logo Section */
+.skills-section {
+    padding-bottom: 50px;
+    min-height: auto;
+}
 
 .logo-loop-container {
-    overflow: hidden; /* Crucial to hide the duplicated content outside the visible area */
+    overflow: hidden;
     margin: 40px 0;
     padding: 20px 0;
-    /* Added for better visual separation and to constrain the scrolling area */
     border-top: 1px solid rgba(255, 255, 255, 0.1); 
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative; /* Needed for z-index if other elements overlap */
-    background: rgba(0, 0, 0, 0.2); /* A subtle background for contrast */
+    position: relative; 
+    background: rgba(0, 0, 0, 0.1); 
+    /* Gradient mask to fade out logos at the edges */
+    webkit-mask-image: linear-gradient(to right, 
+        transparent 0%, 
+        black 10%, 
+        black 90%, 
+        transparent 100%);
 }
 
 .logo-line {
     display: flex;
-    white-space: nowrap; /* Keep all logos on one line */
-    /*
-     * We use min-width: max-content to ensure the container is wide enough
-     * to hold all the duplicated logos without wrapping.
-     * This is key for the infinite loop calculation to work.
-     */
-    min-width: max-content; 
-    margin: 20px 0;
-    will-change: transform; /* Hint to browsers for smoother animation */
+    white-space: nowrap; 
+    min-width: max-content; /* Critical for seamless loop */
+    margin: 15px 0;
+    will-change: transform; 
 }
 
 /* Base styles for the logos */
 .skill-logo {
-    width: 70px; /* Slightly larger logos */
+    width: 70px; 
     height: 70px;
-    margin: 0 30px; /* More space between logos */
-    /* Removed grayscale filter for colorful display */
-    transition: transform 0.3s ease; /* Only scale transition now */
+    margin: 0 30px; 
+    transition: transform 0.3s ease; 
     cursor: pointer;
-    flex-shrink: 0; /* Prevent shrinking in flex container */
-    object-fit: contain; /* Ensures logos fit within their bounds */
+    flex-shrink: 0; 
+    object-fit: contain;
 }
 
-/* Scale-only Hover Effect */
+/* Styling to fix visibility issues for black icons (Flask, Express.js, Three.js) */
+.black-icon-fix {
+    padding: 8px; /* Slightly larger padding for the background */
+    background-color: rgba(255, 255, 255, 0.2); /* White translucent background */
+    border-radius: 10px; /* Rounded corners for the background */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    box-sizing: content-box; /* Ensure padding doesn't affect logo size */
+}
+
+
+/* Scale-only Hover Effect (since logos are already colorful) */
 .skill-logo:hover {
-    transform: scale(1.25); /* Scale up on hover */
+    transform: scale(1.25); 
 }
 
 /* Animation setup */
-/* * The 'to' value in `translateX` needs to be exactly -50% to move the entire
- * duplicated content (which is 200% width) back to the start of the original content.
- * This creates a perfect loop.
+
+/*
+ * Note: Because the content is duplicated three times, we must adjust the 
+ * keyframes to move exactly 1/3 (33.3333%) of the total width for a single cycle.
  */
 @keyframes scroll-left {
     from {
         transform: translateX(0);
     }
     to {
-        transform: translateX(-50%); /* Moves left by half the total content width */
+        transform: translateX(-33.3333%); 
     }
 }
 
 @keyframes scroll-right {
     from {
-        transform: translateX(-50%); /* Starts from the end of the first set of duplicated content */
+        transform: translateX(-33.3333%); 
     }
     to {
-        transform: translateX(0); /* Moves right back to the start */
+        transform: translateX(0); 
     }
 }
 
 /* Apply animations to the lines */
 .logo-line-1 {
-    /* Adjust the duration to change the speed (e.g., 20s for slower, 10s for faster) */
-    animation: scroll-left 30s linear infinite; /* Increased duration for a smoother, slower loop */
+    /* Adjust the duration (e.g., 20s or 40s) to change the speed */
+    animation: scroll-left 35s linear infinite; 
 }
 
 .logo-line-2 {
     /* Runs in the opposite direction */
-    /* Adjust the duration to change the speed */
-    animation: scroll-right 30s linear infinite; /* Same duration for consistent speed */
+    animation: scroll-right 35s linear infinite; 
 }
 
-/* To prevent the animation from stopping on hover, we pause it */
+/* Pause animation on hover */
 .logo-line-1:hover,
 .logo-line-2:hover {
     animation-play-state: paused;
+}
+
+
+/* Media Queries for Responsiveness */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 3em;
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .about-img {
+        margin-bottom: 20px;
+    }
+
+    .contact-container {
+        flex-direction: column;
+    }
+    .contact-form, .contact-info {
+        padding: 20px;
+    }
+    
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5em;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: rgba(26, 26, 46, 0.95);
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-links li {
+        margin: 5px 0;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-social {
+        margin-top: 15px;
+    }
+
+    .hero-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .hero-btns a {
+        margin: 0;
+    }
+    
+    .logo-loop-container {
+        /* Reduce padding for smaller screens */
+        padding: 10px 0;
+    }
+
+    .skill-logo {
+        width: 50px;
+        height: 50px;
+        margin: 0 15px;
+    }
 }
