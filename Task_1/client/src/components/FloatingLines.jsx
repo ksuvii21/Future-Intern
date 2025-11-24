@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   Scene,
   OrthographicCamera,
@@ -10,6 +10,7 @@ import {
   Vector2,
   Clock
 } from 'three';
+import PropTypes from 'prop-types';
 
 import './FloatingLines.css';
 
@@ -229,7 +230,7 @@ function hexToVec3(hex) {
   return new Vector3(r / 255, g / 255, b / 255);
 }
 
-export default function FloatingLines({
+function FloatingLines({
   linesGradient,
   enabledWaves = ['top', 'middle', 'bottom'],
   lineCount = [6],
@@ -365,6 +366,7 @@ export default function FloatingLines({
 
     const setSize = () => {
       const el = containerRef.current;
+      if (!el) return;
       const width = el.clientWidth || 1;
       const height = el.clientHeight || 1;
 
@@ -473,9 +475,35 @@ export default function FloatingLines({
     <div
       ref={containerRef}
       className="floating-lines-container"
-      style={{
-        mixBlendMode: mixBlendMode
-      }}
+      style={{ mixBlendMode: mixBlendMode, pointerEvents: 'none' }}
     />
   );
 }
+
+FloatingLines.propTypes = {
+  linesGradient: PropTypes.arrayOf(PropTypes.string),
+  enabledWaves: PropTypes.arrayOf(PropTypes.oneOf(['top', 'middle', 'bottom'])),
+  lineCount: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+  lineDistance: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+  topWavePosition: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+    rotate: PropTypes.number
+  }),
+  middleWavePosition: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+    rotate: PropTypes.number
+  }),
+  bottomWavePosition: PropTypes.shape({ x: PropTypes.number, y: PropTypes.number, rotate: PropTypes.number }),
+  animationSpeed: PropTypes.number,
+  interactive: PropTypes.bool,
+  bendRadius: PropTypes.number,
+  bendStrength: PropTypes.number,
+  mouseDamping: PropTypes.number,
+  parallax: PropTypes.bool,
+  parallaxStrength: PropTypes.number,
+  mixBlendMode: PropTypes.string
+};
+
+export default FloatingLines;
