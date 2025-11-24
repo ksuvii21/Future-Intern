@@ -114,7 +114,7 @@ const Experience = () => (
             <li>Collaborated with team members to implement new features and fix bugs.</li>
             <li>Participated in code reviews and agile development processes.</li>
           </ul>
-          <h3>Certificate: <a href="../assets/Cognifyz_Technologies_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Cognifyz Technologies</a></h3>
+          <h2>Certificate: <a href="../assets/Cognifyz_Technologies_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Cognifyz Technologies</a></h2>
         </div>
       </div>
     </div>
