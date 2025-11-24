@@ -94,7 +94,7 @@ const Experience = () => (
             <li>Collaborated with team members to implement new features and fix bugs.</li>
             <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
             </ul>
-            <h3>Certificate: <a href="./assets/Future_Intens_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Future Intens</a></h3>
+            <h5>Certificate: <a href="./assets/Future_Intens_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Future Intens</a></h5>
         </div>
         <div className="experience-item glass">
           <h4>Web Development Intern</h4>
@@ -104,7 +104,7 @@ const Experience = () => (
             <li>Created responsive, user-friendly interfaces with React.js, HTML, and CSS.</li>
             <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
             </ul>
-            <h3>Certificate: <a href="./assets/Zidio_Development_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Zidio Development</a></h3>
+            <h5>Certificate: <a href="./assets/Zidio_Development_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Zidio Development</a></h5>
         </div>
         <div className="experience-item glass">
           <h4>Software Development Intern</h4>
@@ -114,7 +114,7 @@ const Experience = () => (
             <li>Collaborated with team members to implement new features and fix bugs.</li>
             <li>Participated in code reviews and agile development processes.</li>
           </ul>
-          <h2>Certificate: <a href="./assets/Cognifyz_Technologies_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Cognifyz Technologies</a></h2>
+          <h5>Certificate: <a href="./assets/Cognifyz_Technologies_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Cognifyz Technologies</a></h5>
         </div>
       </div>
     </div>
