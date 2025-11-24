@@ -504,4 +504,4 @@ FloatingLines.propTypes = {
   parallaxStrength: PropTypes.number
 };
 
-export default FloatingLines;
+export default React.memo(FloatingLines);
