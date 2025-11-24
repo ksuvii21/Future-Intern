@@ -1595,3 +1595,71 @@ footer {
         margin: 0 15px;
     }
 }
+
+/* ============================
+   CERTIFICATIONS SECTION
+============================ */
+.certifications {
+  padding: 80px 20px;
+  color: white;
+  background: linear-gradient(135deg, #8b5cf6, #4a90e2);
+  box-shadow: 0 10px 40px rgba(74, 144, 226, 0.6);
+  border-radius: 20px;
+}
+
+.certifications .section-title {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.certifications .section-title h2 {
+  font-size: 42px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #d8b4fe, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.certifications .certification-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  padding: 30px 40px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certifications .certification-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.certifications .certification-item h4 {
+  color: #d8b4fe;
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.certifications .certification-item h5 {
+  color: #a5b4fc;
+  margin-bottom: 15px;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.certifications .certification-item a.btn-outline {
+  border-color: #d8b4fe;
+  color: #d8b4fe;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.certifications .certification-item a.btn-outline:hover {
+  background-color: rgba(216, 180, 254, 0.15);
+  color: #a78bfa;
+}
+
