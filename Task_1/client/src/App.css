@@ -1091,64 +1091,83 @@ footer {
 /* CSS for Infinite Scrolling Logo Section */
 
 .logo-loop-container {
-    overflow: hidden; /* Hide the duplicated content outside the view */
+    overflow: hidden; /* Crucial to hide the duplicated content outside the visible area */
     margin: 40px 0;
     padding: 20px 0;
+    /* Added for better visual separation and to constrain the scrolling area */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative; /* Needed for z-index if other elements overlap */
+    background: rgba(0, 0, 0, 0.2); /* A subtle background for contrast */
 }
 
 .logo-line {
     display: flex;
     white-space: nowrap; /* Keep all logos on one line */
-    width: fit-content; /* Ensure the container is wide enough for duplicated content */
+    /*
+     * We use min-width: max-content to ensure the container is wide enough
+     * to hold all the duplicated logos without wrapping.
+     * This is key for the infinite loop calculation to work.
+     */
+    min-width: max-content; 
     margin: 20px 0;
+    will-change: transform; /* Hint to browsers for smoother animation */
 }
 
 /* Base styles for the logos */
 .skill-logo {
-    width: 60px;
-    height: 60px;
-    margin: 0 20px; /* Space between logos */
-    filter: grayscale(100%); /* Default: Grayscale */
-    transition: filter 0.3s ease, transform 0.3s ease;
+    width: 70px; /* Slightly larger logos */
+    height: 70px;
+    margin: 0 30px; /* More space between logos */
+    /* Removed grayscale filter for colorful display */
+    transition: transform 0.3s ease; /* Only scale transition now */
     cursor: pointer;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent shrinking in flex container */
+    object-fit: contain; /* Ensures logos fit within their bounds */
 }
 
-/* Grayscale/Scale Hover Effect */
+/* Scale-only Hover Effect */
 .skill-logo:hover {
-    filter: none; /* Color on hover */
-    transform: scale(1.15); /* Scale up on hover */
+    transform: scale(1.25); /* Scale up on hover */
 }
 
 /* Animation setup */
+/* * The 'to' value in `translateX` needs to be exactly -50% to move the entire
+ * duplicated content (which is 200% width) back to the start of the original content.
+ * This creates a perfect loop.
+ */
 @keyframes scroll-left {
     from {
         transform: translateX(0);
     }
     to {
-        /* Move exactly the width of the original content */
-        transform: translateX(-50%); 
+        transform: translateX(-50%); /* Moves left by half the total content width */
     }
 }
 
 @keyframes scroll-right {
     from {
-        /* Start from the position of the duplicated content */
-        transform: translateX(-50%); 
+        transform: translateX(-50%); /* Starts from the end of the first set of duplicated content */
     }
     to {
-        transform: translateX(0);
+        transform: translateX(0); /* Moves right back to the start */
     }
 }
 
 /* Apply animations to the lines */
 .logo-line-1 {
     /* Adjust the duration to change the speed (e.g., 20s for slower, 10s for faster) */
-    animation: scroll-left 25s linear infinite; 
+    animation: scroll-left 30s linear infinite; /* Increased duration for a smoother, slower loop */
 }
 
 .logo-line-2 {
     /* Runs in the opposite direction */
     /* Adjust the duration to change the speed */
-    animation: scroll-right 25s linear infinite; 
+    animation: scroll-right 30s linear infinite; /* Same duration for consistent speed */
+}
+
+/* To prevent the animation from stopping on hover, we pause it */
+.logo-line-1:hover,
+.logo-line-2:hover {
+    animation-play-state: paused;
 }
