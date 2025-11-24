@@ -8,7 +8,7 @@ import project2Image from './assets/project2.png';
 
 import FloatingLines from './components/FloatingLines';
 // import ScrollVelocity from './components/ScrollVelocity';
-// import LogoLoop from './components/LogoLoop';
+// import LogoLoop from './components/LogoLoop'; // LogoLoop import removed
 
 const Header = () => (
   <header id="header">
@@ -88,7 +88,7 @@ const Experience = () => (
             <li>Developed and maintained web applications using the MERN stack.</li>
             <li>Created responsive, user-friendly interfaces with React.js, HTML, and CSS.</li>
             <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
-          </ul>
+            </ul>
         </div>
         <div className="experience-item glass">
           <h4>Software Development Intern</h4>
@@ -204,18 +204,26 @@ const Skills = () => {
     { name: "CSS3", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" }
   ];
 
-  const skillLogos = skillLogosData.map(skill => (
+  // Split data into two halves
+  const halfIndex = Math.ceil(skillLogosData.length / 2);
+  const firstHalf = skillLogosData.slice(0, halfIndex);
+  const secondHalf = skillLogosData.slice(halfIndex);
+
+  // Function to create logo elements
+  const createLogos = (data) => data.map(skill => (
     <img
       key={skill.name}
       src={skill.badge}
       alt={skill.name}
       title={skill.name}
       className="skill-logo"
-      style={{ filter: 'grayscale(100%)', transition: 'filter 0.3s ease, transform 0.3s ease' }}
-      onMouseEnter={e => { e.currentTarget.style.filter = 'none'; e.currentTarget.style.transform = 'scale(1.2)'; }}
-      onMouseLeave={e => { e.currentTarget.style.filter = 'grayscale(100%)'; e.currentTarget.style.transform = 'scale(1)'; }}
     />
   ));
+
+  // Create the looping content (Duplicated for infinite effect)
+  const firstLineContent = [...createLogos(firstHalf), ...createLogos(firstHalf)];
+  const secondLineContent = [...createLogos(secondHalf), ...createLogos(secondHalf)];
+
 
   return (
     <section id="skills" className="skills-section">
@@ -223,24 +231,23 @@ const Skills = () => {
         <div className="section-title">
           <h2>Skills</h2>
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-          {skillLogos.map((logo, index) => (
-            <div key={index} title={logo.title}>
-              {logo.node}
-            </div>
-          ))}
+        
+        <div className="logo-loop-container">
+          {/* First Line: Scrolls Left (or right, as set in CSS) */}
+          <div className="logo-line logo-line-1">
+            {firstLineContent}
+          </div>
+
+          {/* Second Line: Scrolls Right (or opposite of line 1) */}
+          <div className="logo-line logo-line-2">
+            {secondLineContent}
+          </div>
         </div>
 
-        {/*<LogoLoop
-          logos={skillLogos}
-          speed={40}
-          direction="left"
-          logoHeight={70}
-          gap={20}
-          pauseOnHover={true}
-          scaleOnHover={true}
-          className="skills-logo-loop"
-        />*/}
+        <p style={{ marginTop: '20px', textAlign: 'center', fontSize: '0.9em' }}>
+          **Note:** The scrolling speed and direction for these skill lines can be adjusted in the **`client/src/App.css`** file.
+        </p>
+
       </div>
     </section>
   );
