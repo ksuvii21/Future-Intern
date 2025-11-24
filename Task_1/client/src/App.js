@@ -7,6 +7,8 @@ import project1Image from './assets/project1.png';
 import project2Image from './assets/project2.png';
 
 import FloatingLines from './components/FloatingLines';
+import ScrollVelocity from './components/ScrollVelocity';
+import LogoLoop from './components/LogoLoop';
 
 const Header = () => (
   <header id="header">
@@ -197,18 +199,16 @@ const Skills = () => {
           ))}
         </div> */}
 
-        <ScrollVelocity velocity={100}>
-          <LogoLoop
-            logos={skillLogos}
-            speed={100}
-            direction="left"
-            logoHeight={50}
-            gap={20}
-            pauseOnHover={true}
-            scaleOnHover={true}
-            className="skills-logo-loop"
-          />
-        </ScrollVelocity>
+        <LogoLoop
+          logos={skillLogos}
+          speed={100}
+          direction="left"
+          logoHeight={50}
+          gap={20}
+          pauseOnHover={true}
+          scaleOnHover={true}
+          className="skills-logo-loop"
+        />
       </div>
     </section>
   );
