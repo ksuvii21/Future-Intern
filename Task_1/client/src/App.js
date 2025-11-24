@@ -423,10 +423,10 @@ const educationData = [
 const Education = () => {
   return (
     <section id="education" className="education-section">
-      <div className="edu-title">
+      <div className="education-title">
         <h2>Education</h2>
         <p>Academic qualifications and journey of continuous learning</p>
-        <div className="edu-separator"></div>
+        <div className="education-separator"></div>
       </div>
 
       <div className="edu-grid">
