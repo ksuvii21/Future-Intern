@@ -1087,3 +1087,68 @@ footer {
 .neon-glow {
   animation: glow 2s infinite;
 }
+
+/* CSS for Infinite Scrolling Logo Section */
+
+.logo-loop-container {
+    overflow: hidden; /* Hide the duplicated content outside the view */
+    margin: 40px 0;
+    padding: 20px 0;
+}
+
+.logo-line {
+    display: flex;
+    white-space: nowrap; /* Keep all logos on one line */
+    width: fit-content; /* Ensure the container is wide enough for duplicated content */
+    margin: 20px 0;
+}
+
+/* Base styles for the logos */
+.skill-logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 20px; /* Space between logos */
+    filter: grayscale(100%); /* Default: Grayscale */
+    transition: filter 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* Grayscale/Scale Hover Effect */
+.skill-logo:hover {
+    filter: none; /* Color on hover */
+    transform: scale(1.15); /* Scale up on hover */
+}
+
+/* Animation setup */
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* Move exactly the width of the original content */
+        transform: translateX(-50%); 
+    }
+}
+
+@keyframes scroll-right {
+    from {
+        /* Start from the position of the duplicated content */
+        transform: translateX(-50%); 
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Apply animations to the lines */
+.logo-line-1 {
+    /* Adjust the duration to change the speed (e.g., 20s for slower, 10s for faster) */
+    animation: scroll-left 25s linear infinite; 
+}
+
+.logo-line-2 {
+    /* Runs in the opposite direction */
+    /* Adjust the duration to change the speed */
+    animation: scroll-right 25s linear infinite; 
+}
