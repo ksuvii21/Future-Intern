@@ -7,10 +7,11 @@ import project1Image from './assets/project1.png';
 import project2Image from './assets/project2.png';
 
 import FloatingLines from './components/FloatingLines';
+import ScrollVelocity from './components/ScrollVelocity';
 
 const Header = () => (
   <header id="header">
-    <div className="container">
+    <div className="container"> 
       <nav>
         <a href="#home" className="logo">Kritika Gupta</a>
         <ul className="nav-links">
@@ -64,7 +65,8 @@ const About = () => (
         <div className="about-text">
           <h3>MERN Stack Developer & Graphics Designer</h3>
           <p>I am a skilled and passionate full-stack web developer with expertise in the MERN stack (MongoDB, Express.js, React.js, Node.js). I have hands-on experience developing and maintaining web applications, creating responsive user interfaces, and assisting in backend development.</p>
-          <p>I am a quick learner, a collaborative team player, and I am always eager to apply modern web technologies to build scalable and impactful solutions. My background in graphics design allows me to create visually appealing and user-friendly interfaces.</p>
+          <p>I share my projects on GitHub, where I keep track of my progress and learning journey: <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">GitHub Profile</a>. Before starting my journey into web development, I worked on various small-scale technical projects and self-learning exercises, which helped me build a foundation in problem-solving, clean coding practices, and UI development.</p>
+          <p>Currently, I&apos;m continuing to learn and create, aiming to take on projects that challenge my skills and help me grow into a well-rounded full-stack developer.</p>
         </div>
       </div>
     </div>
@@ -174,6 +176,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="skills-section">
+      <ScrollVelocity />
       <div className="container">
         <div className="section-title">
           <h2>Skills</h2>
