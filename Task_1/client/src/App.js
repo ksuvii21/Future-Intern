@@ -77,9 +77,6 @@ const About = () => (
   </section>
 );
 
-import React from "react";
-import "./Experience.css"; // Import the CSS file
-
 const experiences = [
   {
     role: "Full Stack Web Development Intern",
