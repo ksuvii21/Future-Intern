@@ -209,19 +209,23 @@ const Skills = () => {
   const secondHalf = skillLogosData.slice(halfIndex);
 
   // Function to create logo elements
-  const createLogos = (data) => data.map(skill => (
-    <img
-      key={skill.name}
-      src={skill.badge}
-      alt={skill.name}
-      title={skill.name}
-      className="skill-logo" // Apply className for CSS styling
-      // No inline styles for filter or transform here, handled by CSS
-    />
-  ));
+  const createLogos = (data) => data.map(skill => {
+    // Check if the logo needs a white background fix
+    const requiresBackground = ["Flask", "Express.js", "Three.js"].includes(skill.name);
 
-  // Create the looping content (Duplicated for infinite effect)
-  // Ensure enough duplicates for a smooth loop across varying screen sizes
+    return (
+      <img
+        key={skill.name}
+        src={skill.badge}
+        alt={skill.name}
+        title={skill.name}
+        // Conditionally apply the fix class
+        className={`skill-logo ${requiresBackground ? 'black-icon-fix' : ''}`} 
+      />
+    );
+  });
+
+  // Create the looping content (Duplicated three times for robust infinite effect)
   const firstLineContent = [...createLogos(firstHalf), ...createLogos(firstHalf), ...createLogos(firstHalf)];
   const secondLineContent = [...createLogos(secondHalf), ...createLogos(secondHalf), ...createLogos(secondHalf)];
 
