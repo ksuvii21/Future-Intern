@@ -37,7 +37,15 @@ const Header = () => (
 
 const Hero = () => (
   <section id="home" className="hero">
-    <FloatingLines />
+    <FloatingLines 
+          enabledWaves={['top', 'middle', 'bottom']}
+          lineCount={[10, 15, 20]}
+          lineDistance={[8, 6, 4]}
+          bendRadius={5.0}
+          bendStrength={-0.5}
+          interactive={true}
+          parallax={true}
+        />
     <div className="container">
       <div className="hero-content">
         <h1>I&apos;m Kritika Gupta, a <span>Full-Stack Developer</span></h1>
