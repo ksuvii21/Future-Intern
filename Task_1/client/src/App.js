@@ -85,7 +85,7 @@ const Experience = () => (
       </div>
       <div className="experience-items">
         <div className="experience-item glass">
-          <h4>Web Development Intern</h4>
+          <h4>Full Stack Web Development Intern</h4>
           <h5>Future Intens (Remote) | Nov 2025 - Dec 2025</h5>
           <ul>
             <li>Developed and maintained web applications using the MERN stack.</li>
