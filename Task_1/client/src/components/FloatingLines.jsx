@@ -12,7 +12,7 @@ import {
 } from 'three';
 import PropTypes from 'prop-types';
 
-import './FloatingLines.css';
+import '../App.css';
 
 const vertexShader = `
 precision highp float;
