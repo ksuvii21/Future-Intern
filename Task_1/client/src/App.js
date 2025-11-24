@@ -86,6 +86,17 @@ const Experience = () => (
       <div className="experience-items">
         <div className="experience-item glass">
           <h4>Web Development Intern</h4>
+          <h5>Future Intens (Remote) | Nov 2025 - Dec 2025</h5>
+          <ul>
+            <li>Developed and maintained web applications using the MERN stack.</li>
+            <li>Made responsive, user-friendly interfaces with React.js, HTML, and CSS.</li>
+            <li>Participated in code reviews and agile development processes.</li>
+            <li>Collaborated with team members to implement new features and fix bugs.</li>
+            <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
+            </ul>
+        </div>
+        <div className="experience-item glass">
+          <h4>Web Development Intern</h4>
           <h5>Zidio Development (Remote) | Aug 2025 - Oct 2025</h5>
           <ul>
             <li>Developed and maintained web applications using the MERN stack.</li>
