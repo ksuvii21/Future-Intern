@@ -5,10 +5,13 @@ import './App.css';
 import profileImage from './assets/profile.png';
 import project1Image from './assets/project1.png';
 import project2Image from './assets/project2.png';
+// New Project Image Placeholders (Add these images to your assets folder)
+import project3Image from './assets/project3.png'; 
+import project4Image from './assets/project4.png';
+import project5Image from './assets/project5.png';
+import project6Image from './assets/project6.avif';
 
 import FloatingLines from './components/FloatingLines';
-// import ScrollVelocity from './components/ScrollVelocity';
-// import LogoLoop from './components/LogoLoop'; // LogoLoop import removed
 
 const Header = () => (
   <header id="header">
@@ -68,6 +71,144 @@ const About = () => (
           <p>I am a skilled and passionate full-stack web developer with expertise in the MERN stack (MongoDB, Express.js, React.js, Node.js). I have hands-on experience developing and maintaining web applications, creating responsive user interfaces, and assisting in backend development.</p>
           <p>I share my projects on GitHub, where I keep track of my progress and learning journey: <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">GitHub Profile</a>. Before starting my journey into web development, I worked on various small-scale technical projects and self-learning exercises, which helped me build a foundation in problem-solving, clean coding practices, and UI development.</p>
           <p>Currently, I&apos;m continuing to learn and create, aiming to take on projects that challenge my skills and help me grow into a well-rounded full-stack developer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const Experience = () => (
+  <section id="experience" className="experience">
+    <div className="container">
+      <div className="section-title">
+        <h2>Work Experience</h2>
+      </div>
+      <div className="experience-items">
+        <div className="experience-item glass">
+          <h4>Web Development Intern</h4>
+          <h5>Zidio Development (Remote) | Aug 2025 - Oct 2025</h5>
+          <ul>
+            <li>Developed and maintained web applications using the MERN stack.</li>
+            <li>Created responsive, user-friendly interfaces with React.js, HTML, and CSS.</li>
+            <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
+            </ul>
+        </div>
+        <div className="experience-item glass">
+          <h4>Software Development Intern</h4>
+          <h5>Cognifyz Technologies (Remote) | Jun 2025 - Jul 2025</h5>
+          <ul>
+            <li>Built projects based on Frontend user interface, CRUD Operations in MySQL and MS-Excel with Python Flask and Pandas.</li>
+            <li>Collaborated with team members to implement new features and fix bugs.</li>
+            <li>Participated in code reviews and agile development processes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const Projects = () => (
+  <section id="projects" className="portfolio">
+    <div className="container">
+      <div className="section-title">
+        <h2>Projects</h2>
+        <p>A selection of my work</p>
+      </div>
+      <div className="portfolio-grid">
+        {/* Project 1: MERN Stack Excel Analytics Platform (Existing) */}
+        <div className="portfolio-item glass">
+          <img src={project1Image} alt="MERN Stack Excel Analytics Platform" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>MERN Stack Excel Analytics Platform</h3>
+            <p>An analytics platform to upload Excel files, analyze data, and generate interactive 2D/3D charts. Features user authentication with JWT, a dynamic UI, and chart downloads.</p>
+            <a href="https://xlsx-analytics21.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
+          </div>
+        </div>
+        
+        {/* Project 2: MERN Stack Blogging Platform (Existing) */}
+        <div className="portfolio-item glass">
+          <img src={project2Image} alt="MERN Stack Blogging Platform" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>MERN Stack Blogging Platform</h3>
+            <p>A full-stack blogging app where users can create, edit, and delete blogs. Includes a rich text editor, comments, likes, user authentication, and an admin dashboard for post management.</p>
+            <a href="https://writely-log.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
+          </div>
+        </div>
+        
+        {/* Project 3: Sharvan Vision (New) */}
+        <div className="portfolio-item glass">
+          <img src={project3Image} alt="Sharvan Vision - AI Sign Language Translator" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>Sharvan Vision - AI Sign Language Translator</h3>
+            <p>An AI-powered Indian Sign Language (ISL) translation application using real-time gesture recognition (MediaPipe & OpenCV) to bridge communication gaps. Built with Flutter, TensorFlow Lite, and Firebase.</p>
+            <a href="https://sharvan-vision.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
+          </div>
+        </div>
+
+        {/* Project 4: CareerFlow.io (New) */}
+        <div className="portfolio-item glass">
+          <img src={project4Image} alt="CareerFlow.io - AI Resume & Career Ecosystem" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>CareerFlow.io - AI Resume & Career Ecosystem</h3>
+            <p>A full-stack MERN application with a dynamic resume builder, an AI Career Assistant (for ATS summaries, comparisons, and cover letters), and a visual Job Application Tracker.</p>
+            <a href="https://careerflowio.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
+          </div>
+        </div>
+        
+        {/* Project 5: Fansee Rebel (New) */}
+        <div className="portfolio-item glass">
+          <img src={project5Image} alt="Fansee Rebel - E-Commerce Website" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>Fansee Rebel - E-Commerce Website</h3>
+            <p>A stylish e-commerce platform showcasing western dresses, jewelry, and accessories. Features responsive design, secure payments (placeholder), and a modern user interface.</p>
+            <a href="https://fanseerebel.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
+          </div>
+        </div>
+
+        {/* Project 6: ERP Management System (New) */}
+        <div className="portfolio-item glass">
+          <img src={project6Image} alt="ERP Management System (MERN Stack)" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>ERP Management System (MERN Stack)</h3>
+            <p>A full-featured ERP web application to manage core business operations: Products, Customers, Suppliers, Sales/Purchase Orders, Invoices, and secure role-based access control (JWT).</p>
+            <a href="#projects" className="btn btn-outline">View Details (No Live Demo)</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+);
+
+const Contact = () => (
+  <section id="contact" className="contact">
+    <div className="container">
+      <div className="section-title">
+        <h2>Contact</h2>
+      </div>
+      <div className="contact-container">
+        <div className="contact-info glass">
+          <div className="contact-details">
+            <h3>Get in Touch</h3>
+            <p><i className="fas fa-envelope"></i> <a href="mailto:k21ritikasuvi2106@gmail.com">k21ritikasuvi2106@gmail.com</a></p>
+            <p><i className="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/kritika-gupta2106" target="_blank" rel="noopener noreferrer">in/kritika-gupta2106</a></p>
+            <p><i className="fab fa-github"></i> <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">github.com/ksuvii21</a></p>
+            <p><i className="fas fa-map-marker-alt"></i> Remote / On-site Opportunities</p>
+          </div>
+        </div>
+        <div className="contact-form glass">
+          <form onSubmit={(e) => { e.preventDefault(); alert("Message sent!"); }}>
+            <div className="form-group">
+              <input type="text" name="name" placeholder="Your Name" className="form-control" required />
+            </div>
+            <div className="form-group">
+              <input type="email" name="email" placeholder="Your Email" className="form-control" required />
+            </div>
+            <div className="form-group">
+              <textarea name="message" placeholder="Your Message" className="form-control" rows="4" required></textarea>
+            </div>
+            <button type="submit" className="btn btn-primary">Send Message</button>
+          </form>
         </div>
       </div>
     </div>
@@ -159,65 +300,6 @@ const Skills = () => {
   );
 };
 
-const Projects = () => (
-  <section id="projects" className="portfolio">
-    <div className="container">
-      <div className="section-title">
-        <h2>Projects</h2>
-        <p>A selection of my work</p>
-      </div>
-      <div className="portfolio-grid">
-        <div className="portfolio-item glass">
-          <img src={project1Image} alt="MERN Stack Excel Analytics Platform" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>MERN Stack Excel Analytics Platform</h3>
-            <p>An analytics platform to upload Excel files, analyze data, and generate interactive 2D/3D charts. Features user authentication with JWT, a dynamic UI, and chart downloads.</p>
-            <a href="https://xlsx-analytics21.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
-        <div className="portfolio-item glass">
-          <img src={project2Image} alt="MERN Stack Blogging Platform" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>MERN Stack Blogging Platform</h3>
-            <p>A full-stack blogging app where users can create, edit, and delete blogs. Includes a rich text editor, comments, likes, user authentication, and an admin dashboard for post management.</p>
-            <a href="https://writely-log.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-const Experience = () => (
-  <section id="experience" className="experience">
-    <div className="container">
-      <div className="section-title">
-        <h2>Work Experience</h2>
-      </div>
-      <div className="experience-items">
-        <div className="experience-item glass">
-          <h4>Web Development Intern</h4>
-          <h5>Zidio Development (Remote) | Aug 2025 - Oct 2025</h5>
-          <ul>
-            <li>Developed and maintained web applications using the MERN stack.</li>
-            <li>Created responsive, user-friendly interfaces with React.js, HTML, and CSS.</li>
-            <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
-            </ul>
-        </div>
-        <div className="experience-item glass">
-          <h4>Software Development Intern</h4>
-          <h5>Cognifyz Technologies (Remote) | Jun 2025 - Jul 2025</h5>
-          <ul>
-            <li>Built projects based on Frontend user interface, CRUD Operations in MySQL and MS-Excel with Python Flask and Pandas.</li>
-            <li>Collaborated with team members to implement new features and fix bugs.</li>
-            <li>Participated in code reviews and agile development processes.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Education = () => {
   const educationItems = [
     { degree: "Bachelor of Science in Computer Science", institution: "XYZ University", year: "2021" },
@@ -264,41 +346,6 @@ const Certifications = () => {
   );
 };
 
-const Contact = () => (
-  <section id="contact" className="contact">
-    <div className="container">
-      <div className="section-title">
-        <h2>Contact</h2>
-      </div>
-      <div className="contact-container">
-        <div className="contact-info glass">
-          <div className="contact-details">
-            <h3>Get in Touch</h3>
-            <p><i className="fas fa-envelope"></i> <a href="mailto:k21ritikasuvi2106@gmail.com">k21ritikasuvi2106@gmail.com</a></p>
-            <p><i className="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/kritika-gupta2106" target="_blank" rel="noopener noreferrer">in/kritika-gupta2106</a></p>
-            <p><i className="fab fa-github"></i> <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">github.com/ksuvii21</a></p>
-            <p><i className="fas fa-map-marker-alt"></i> Remote / On-site Opportunities</p>
-          </div>
-        </div>
-        <div className="contact-form glass">
-          <form onSubmit={(e) => { e.preventDefault(); alert("Message sent!"); }}>
-            <div className="form-group">
-              <input type="text" name="name" placeholder="Your Name" className="form-control" required />
-            </div>
-            <div className="form-group">
-              <input type="email" name="email" placeholder="Your Email" className="form-control" required />
-            </div>
-            <div className="form-group">
-              <textarea name="message" placeholder="Your Message" className="form-control" rows="4" required></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Footer = () => (
   <footer>
     <div className="container">
@@ -330,7 +377,7 @@ function App() {
       const header = document.getElementById('header');
       if (window.scrollY > 50) {
         header.classList.add('scrolled');
-      } else {  
+      } else {
         header.classList.remove('scrolled');
       }
     };
