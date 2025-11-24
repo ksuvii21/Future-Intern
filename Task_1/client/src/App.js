@@ -269,14 +269,14 @@ const Skills = () => {
   const firstHalf = skillLogosData.slice(0, halfIndex);
   const secondHalf = skillLogosData.slice(halfIndex);
 
-  // Function to create logo elements
-  const createLogos = (data) => data.map(skill => {
+  // Function to create logo elements with unique key using an offset
+  const createLogos = (data, offset=0) => data.map((skill, index) => {
     // Check if the logo needs a white background fix
     const requiresBackground = ["Flask", "Express.js", "Three.js"].includes(skill.name);
 
     return (
       <img
-        key={skill.name}
+        key={`${skill.name}-${index + offset}`}
         src={skill.badge}
         alt={skill.name}
         title={skill.name}
@@ -286,9 +286,17 @@ const Skills = () => {
     );
   });
 
-  // Create the looping content (Duplicated three times for robust infinite effect)
-  const firstLineContent = [...createLogos(firstHalf), ...createLogos(firstHalf), ...createLogos(firstHalf)];
-  const secondLineContent = [...createLogos(secondHalf), ...createLogos(secondHalf), ...createLogos(secondHalf)];
+  // Create the looping content (Duplicated three times for robust infinite effect) with unique keys
+  const firstLineContent = [
+    ...createLogos(firstHalf, 0),
+    ...createLogos(firstHalf, firstHalf.length),
+    ...createLogos(firstHalf, firstHalf.length * 2)
+  ];
+  const secondLineContent = [
+    ...createLogos(secondHalf, 0),
+    ...createLogos(secondHalf, secondHalf.length),
+    ...createLogos(secondHalf, secondHalf.length * 2)
+  ];
 
 
   return (
