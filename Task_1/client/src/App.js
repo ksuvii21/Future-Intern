@@ -6,6 +6,8 @@ import profileImage from './assets/profile.png';
 import project1Image from './assets/project1.png';
 import project2Image from './assets/project2.png';
 
+import FloatingLines from './components/FloatingLines';
+
 const Header = () => (
   <header id="header">
     <div className="container">
