@@ -358,6 +358,148 @@ section {
   margin-top: 15px;
 }
 
+.experience-section {
+  padding: 80px 20px;
+  color: white;
+}
+
+.title-wrapper {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.title-wrapper h2 {
+  font-size: 42px;
+  font-weight: bold;
+  color: #a78bfa;
+}
+
+.title-wrapper p {
+  color: #b3b3b3;
+  margin-top: 12px;
+}
+
+.separator {
+  width: 70px;
+  height: 4px;
+  background: #a78bfa;
+  border-radius: 10px;
+  margin: 15px auto 0;
+}
+
+.experience-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+  gap: 40px;
+}
+
+.experience-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  webkit-backdrop-filter: blur(12px);
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.experience-card:hover {
+  transform: scale(1.02);
+}
+
+.company-logo {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0.9;
+}
+
+.company-name {
+  color: #b3b3b3;
+}
+
+.badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.badge {
+  padding: 6px 12px;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.badge-purple {
+  background: rgba(167, 139, 250, 0.2);
+  border-color: rgba(167, 139, 250, 0.4);
+  color: #c4b5fd;
+}
+
+.sub-heading {
+  margin-top: 20px;
+  font-weight: 600;
+  color: #d1d1d1;
+}
+
+.tech-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.tech-item {
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 8px;
+  font-size: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.achievement-list {
+  margin-top: 12px;
+  color: #d1d1d1;
+  list-style: none;
+  padding-left: 0;
+}
+
+.achievement-list li {
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 16px;
+}
+
+.achievement-list li::before {
+  content: "•";
+  color: #a78bfa;
+  position: absolute;
+  left: 0;
+}
+
+.certificate-link {
+  margin-top: 20px;
+}
+
+.certificate-link a {
+  color: #a78bfa;
+  text-decoration: underline;
+  transition: 0.2s;
+}
+
+.certificate-link a:hover {
+  color: #c4b5fd;
+}
+
 /* 🧊 Glass Effect Utility */
 .glass {
   background: var(--glass-bg);
@@ -634,13 +776,16 @@ nav {
 .experience-items {
   position: relative;
   z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px 20px;
 }
 
 .experience-item {
   background: var(--card-bg);
   border-radius: 15px;
-  padding: 30px;
-  margin-bottom: 30px;
+  padding: 20px;
+  margin-bottom: 20px;
   border: 1px solid rgba(255, 105, 180, 0.1);
   transition: var(--transition);
   position: relative;
