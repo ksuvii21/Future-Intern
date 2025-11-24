@@ -323,23 +323,39 @@ const Skills = () => {
 };
 
 const Education = () => {
-  const educationItems = [
-    { degree: "Bachelor of Science in Computer Science", institution: "XYZ University", year: "2021" },
-    { degree: "Full Stack Web Development Bootcamp", institution: "ABC Academy", year: "2022" }
-  ];
-
   return (
     <section id="education" className="education">
       <div className="container">
         <div className="section-title">
           <h2>Education</h2>
         </div>
-        {educationItems.map((edu, index) => (
-          <div key={index} className="education-item glass">
-            <h4>{edu.degree}</h4>
-            <h5>{edu.institution} | {edu.year}</h5>
+        <div className="education-card fade-in" style={{ textAlign: "center" }}>
+          <div className="education-icon">
+            <i className="fas fa-graduation-cap"></i>
           </div>
-        ))}
+          <h3>Bachelor of Computer Applications (BCA)</h3>
+          <h4>Microtek College of Management &amp; Technology</h4>
+          <p>Computer Science focus, building strong foundation in programming, web development, and software engineering</p>
+          <span className="education-year">2024 - 2027</span>
+        </div>
+        <div className="education-card fade-in" style={{ textAlign: "center" }}>
+          <div className="education-icon">
+            <i className="fas fa-graduation-cap"></i>
+          </div>
+          <h3>Senior Secondary (XII), CBSE (Science)</h3>
+          <h4>Jeevan Jyoti Higher Secondary School, Varanasi</h4>
+          <p>Completed with 84.40% in Science stream, preparing for advanced studies in computer science</p>
+          <span className="education-year">2024</span>
+        </div>
+        <div className="education-card fade-in" style={{ textAlign: "center" }}>
+          <div className="education-icon">
+            <i className="fas fa-graduation-cap"></i>
+          </div>
+          <h3>Intermediate School (X), CBSE Board</h3>
+          <h4>Jeevan Jyoti Higher Secondary School, Varanasi</h4>
+          <p>Completed with 80% with a strong focus on Science, preparing for advanced studies in computer science</p>
+          <span className="education-year">2022</span>
+        </div>
       </div>
     </section>
   );
