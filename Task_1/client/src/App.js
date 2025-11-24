@@ -90,9 +90,9 @@ const experiences = [
       "Developed and maintained MERN-stack web applications",
       "Built responsive and user-friendly UI with React.js",
       "Participated in code reviews & agile processes",
-      "Implemented backend APIs using Node.js & MongoDB",
+      "Implemented backend APIs using Node.js & MongoDB"
     ],
-    certificate: require("./assets/Future_Intens_Internship_Certificate.pdf"),
+    certificate: require("./assets/Future_Intens_Internship_Certificate.pdf")
   },
   {
     role: "Web Development Intern",
@@ -105,9 +105,9 @@ const experiences = [
     achievements: [
       "Developed and maintained web applications",
       "Created responsive UI with React.js, HTML & CSS",
-      "Assisted in backend development",
+      "Assisted in backend development"
     ],
-    certificate: "./assets/Zidio_Development_Internship_Certificate.pdf",
+    certificate: "./assets/Zidio_Development_Internship_Certificate.pdf"
   },
   {
     role: "Software Development Intern",
@@ -120,69 +120,59 @@ const experiences = [
     achievements: [
       "Built projects using Python Flask & CRUD operations",
       "Worked with Pandas & MS-Excel tools",
-      "Collaborated in feature development and code reviews",
+      "Collaborated in feature development and code reviews"
     ],
-    certificate: require("./assets/Cognifyz_Technologies_Internship_Certificate.pdf"),
-  },
+    certificate: require("./assets/Cognifyz_Technologies_Internship_Certificate.pdf")
+  }
 ];
 
 const Experience = () => (
-  <section id="experience">
-    <div className="section-title">
+  <section id="experience" className="experience-section">
+    <div className="title-wrapper">
       <h2>Experience</h2>
-      <p>Professional journey building real-world skills and contributing to innovative projects</p>
-      <div className="edu-separator"></div>
+      <p>
+        Professional journey building real-world skills and contributing to innovative projects
+      </p>
+      <div className="separator"></div>
     </div>
 
-    <div className="experience-items">
+    <div className="experience-grid">
       {experiences.map((exp, index) => (
-        <div key={index} className="experience-item">
+        <div key={index} className="experience-card">
           
-          {/* Left Corner Icon */}
-          <div className="exp-icon">
-            <i className="fas fa-briefcase"></i>
+          <img src={exp.logo} className="company-logo" alt="logo" />
+
+          <h3>{exp.role}</h3>
+          <p className="company-name">{exp.company}</p>
+
+          <div className="badges">
+            <span className="badge">{exp.duration}</span>
+            <span className="badge">{exp.mode}</span>
+            <span className="badge badge-purple">{exp.type}</span>
           </div>
 
-          {/* Company Logo - Top Right */}
-          <div className="exp-logo">
-            <img src={exp.logo} alt="Company Logo" style={{ width: "70%", borderRadius: "6px" }} />
-          </div>
-
-          <h4>{exp.role}</h4>
-          <h5>{exp.company}</h5>
-
-          {/* Duration + Mode + Type */}
-          <div className="exp-details">
-            <span>{exp.duration}</span>
-            <span>{exp.mode}</span>
-            <span>{exp.type}</span>
-          </div>
-
-          {/* Technologies */}
-          <div className="exp-tags">
+          <h4 className="sub-heading">Technologies</h4>
+          <div className="tech-list">
             {exp.technologies.map((tech, i) => (
-              <span key={i} className="exp-tag">{tech}</span>
+              <span key={i} className="tech-item">{tech}</span>
             ))}
           </div>
 
-          {/* Achievements */}
-          <ul className="exp-list">
+          <h4 className="sub-heading">Key Achievements</h4>
+          <ul className="achievement-list">
             {exp.achievements.map((ach, i) => (
               <li key={i}>{ach}</li>
             ))}
           </ul>
 
-          {/* Certificate */}
-          <a className="cert-link" href={exp.certificate} target="_blank" rel="noopener noreferrer">
-            View Certificate →
-          </a>
-
+          <div className="certificate-link">
+            <a href={exp.certificate} target="_blank" rel="noopener noreferrer">View Certificate →</a>
+          </div>
         </div>
       ))}
     </div>
   </section>
 );
-
 
 const Projects = () => (
   <section id="projects" className="portfolio">
