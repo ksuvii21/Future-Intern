@@ -475,7 +475,7 @@ function FloatingLines({
     <div
       ref={containerRef}
       className="floating-lines-container"
-      style={{ mixBlendMode: mixBlendMode, pointerEvents: 'none' }}
+      style={{ pointerEvents: 'none' }}
     />
   );
 }
