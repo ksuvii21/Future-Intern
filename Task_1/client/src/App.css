@@ -64,6 +64,7 @@ header {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  isolation: isolate; /* This is the fix */
 }
 
 .hero-content {
