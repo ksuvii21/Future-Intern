@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 // Import assets (make sure these files exist in your assets folder)
 import profileImage from './assets/profile.png';
