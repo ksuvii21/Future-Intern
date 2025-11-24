@@ -351,10 +351,10 @@ const Education = () => {
 
 const Certifications = () => {
   const certifications = [
-    { title: "MERN Stack Internship Completion Certificate", issuer: "Future Intens", year: "2025", pdf: "/assets/Future_Intens_Internship_Certificate.pdf" },
-    { title: "Zidio Development - Internship Completion Certificate", issuer: "Zidio Development", year: "Aug 2025", pdf: "/assets/Zidio_Development_Internship_Certificate.pdf" },
-    { title: "Internship Completion Certificate", issuer: "Cognifyz Technologies", year: "Jun 2025", pdf: "/assets/Cognifyz_Technologies_Internship_Certificate.pdf" },
-    { title: "Graphics Designer", issuer: "InAmigos Foundation (IAF)", year: "Jun 2025", pdf: "/assets/Certificate_InAmigos.png" }
+    { title: "MERN Stack Internship Completion Certificate", issuer: "Future Intens", year: "2025", pdf: require("./assets/Future_Intens_Internship_Certificate.pdf") },
+    { title: "Zidio Development - Internship Completion Certificate", issuer: "Zidio Development", year: "Aug 2025", pdf: require("./assets/Zidio_Development_Internship_Certificate.pdf") },
+    { title: "Internship Completion Certificate", issuer: "Cognifyz Technologies", year: "Jun 2025", pdf: require("./assets/Cognifyz_Technologies_Internship_Certificate.pdf") },
+    { title: "Graphics Designer", issuer: "InAmigos Foundation (IAF)", year: "Jun 2025", pdf: require("./assets/Certificate_InAmigos.png") }
   ];
 
   return (
