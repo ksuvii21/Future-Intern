@@ -308,12 +308,12 @@ function App() {
       <main>
         <Hero />
         <About />
-        <Experience />
-        <Projects />
-        <Contact />
         <Skills />
+        <Projects />
+        <Experience />
         <Education />
         <Certifications />
+        <Contact />
       </main>
       <Footer />
     </div>
