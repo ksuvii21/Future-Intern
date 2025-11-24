@@ -77,46 +77,102 @@ const About = () => (
   </section>
 );
 
+import React from "react";
+import "./Experience.css"; // Import the CSS file
+
+const experiences = [
+  {
+    role: "Full Stack Web Development Intern",
+    company: "Future Intens",
+    duration: "Nov 2025 - Dec 2025",
+    mode: "Remote",
+    type: "Internship",
+    logo: "/assets/futureintens_logo.png",
+    technologies: ["React.js", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
+    achievements: [
+      "Developed and maintained MERN-stack web applications",
+      "Built responsive and user-friendly UI with React.js",
+      "Participated in code reviews & agile processes",
+      "Implemented backend APIs using Node.js & MongoDB"
+    ],
+    certificate: "./assets/Future_Intens_Internship_Certificate.pdf"
+  },
+  {
+    role: "Web Development Intern",
+    company: "Zidio Development",
+    duration: "Aug 2025 - Oct 2025",
+    mode: "Remote",
+    type: "Internship",
+    logo: "/assets/zidio_logo.png",
+    technologies: ["React.js", "HTML", "CSS", "Node.js", "MongoDB"],
+    achievements: [
+      "Developed and maintained web applications",
+      "Created responsive UI with React.js, HTML & CSS",
+      "Assisted in backend development"
+    ],
+    certificate: "./assets/Zidio_Development_Internship_Certificate.pdf"
+  },
+  {
+    role: "Software Development Intern",
+    company: "Cognifyz Technologies",
+    duration: "Jun 2025 - Jul 2025",
+    mode: "Remote",
+    type: "Internship",
+    logo: "/assets/cognifyz_logo.png",
+    technologies: ["Flask", "Python", "MySQL", "Pandas", "Frontend UI"],
+    achievements: [
+      "Built projects using Python Flask & CRUD operations",
+      "Worked with Pandas & MS-Excel tools",
+      "Collaborated in feature development and code reviews"
+    ],
+    certificate: "./assets/Cognifyz_Technologies_Internship_Certificate.pdf"
+  }
+];
+
 const Experience = () => (
-  <section id="experience" className="experience">
-    <div className="container">
-      <div className="section-title">
-        <h2>Work Experience</h2>
-      </div>
-      <div className="experience-items">
-        <div className="experience-item glass">
-          <h4>Full Stack Web Development Intern</h4>
-          <h5>Future Intens (Remote) | Nov 2025 - Dec 2025</h5>
-          <ul>
-            <li>Developed and maintained web applications using the MERN stack.</li>
-            <li>Made responsive, user-friendly interfaces with React.js, HTML, and CSS.</li>
-            <li>Participated in code reviews and agile development processes.</li>
-            <li>Collaborated with team members to implement new features and fix bugs.</li>
-            <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
-            </ul>
-            <h5>Certificate: <a href="./assets/Future_Intens_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Future Intens</a></h5>
-        </div>
-        <div className="experience-item glass">
-          <h4>Web Development Intern</h4>
-          <h5>Zidio Development (Remote) | Aug 2025 - Oct 2025</h5>
-          <ul>
-            <li>Developed and maintained web applications using the MERN stack.</li>
-            <li>Created responsive, user-friendly interfaces with React.js, HTML, and CSS.</li>
-            <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
-            </ul>
-            <h5>Certificate: <a href="./assets/Zidio_Development_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Zidio Development</a></h5>
-        </div>
-        <div className="experience-item glass">
-          <h4>Software Development Intern</h4>
-          <h5>Cognifyz Technologies (Remote) | Jun 2025 - Jul 2025</h5>
-          <ul>
-            <li>Built projects based on Frontend user interface, CRUD Operations in MySQL and MS-Excel with Python Flask and Pandas.</li>
-            <li>Collaborated with team members to implement new features and fix bugs.</li>
-            <li>Participated in code reviews and agile development processes.</li>
+  <section id="experience" className="experience-section">
+    <div className="title-wrapper">
+      <h2>Experience</h2>
+      <p>
+        Professional journey building real-world skills and contributing to innovative projects
+      </p>
+      <div className="separator"></div>
+    </div>
+
+    <div className="experience-grid">
+      {experiences.map((exp, index) => (
+        <div key={index} className="experience-card">
+          
+          <img src={exp.logo} className="company-logo" alt="logo" />
+
+          <h3>{exp.role}</h3>
+          <p className="company-name">{exp.company}</p>
+
+          <div className="badges">
+            <span className="badge">{exp.duration}</span>
+            <span className="badge">{exp.mode}</span>
+            <span className="badge badge-purple">{exp.type}</span>
+          </div>
+
+          <h4 className="sub-heading">Technologies</h4>
+          <div className="tech-list">
+            {exp.technologies.map((tech, i) => (
+              <span key={i} className="tech-item">{tech}</span>
+            ))}
+          </div>
+
+          <h4 className="sub-heading">Key Achievements</h4>
+          <ul className="achievement-list">
+            {exp.achievements.map((ach, i) => (
+              <li key={i}>{ach}</li>
+            ))}
           </ul>
-          <h5>Certificate: <a href="./assets/Cognifyz_Technologies_Internship_Certificate.pdf" target="_blank" rel="noopener noreferrer">Cognifyz Technologies</a></h5>
+
+          <div className="certificate-link">
+            <a href={exp.certificate} target="_blank" rel="noopener noreferrer">View Certificate →</a>
+          </div>
         </div>
-      </div>
+      ))}
     </div>
   </section>
 );
