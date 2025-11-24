@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
 import './LogoLoop.css';
 
@@ -315,5 +317,23 @@ export const LogoLoop = memo(
 );
 
 LogoLoop.displayName = 'LogoLoop';
+
+LogoLoop.propTypes = {
+  logos: PropTypes.array.isRequired,
+  speed: PropTypes.number,
+  direction: PropTypes.oneOf(['left', 'right', 'up', 'down']),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  logoHeight: PropTypes.number,
+  gap: PropTypes.number,
+  pauseOnHover: PropTypes.bool,
+  hoverSpeed: PropTypes.number,
+  fadeOut: PropTypes.bool,
+  fadeOutColor: PropTypes.string,
+  scaleOnHover: PropTypes.bool,
+  renderItem: PropTypes.func,
+  ariaLabel: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object
+};
 
 export default LogoLoop;
