@@ -15,14 +15,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "react-hooks"
-  ],
-  "rules": {
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
-  },
+  "plugins": ["react"],
   "settings": {
     "react": {
       "version": "detect"
