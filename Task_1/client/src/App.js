@@ -329,32 +329,20 @@ const Education = () => {
         <div className="section-title">
           <h2>Education</h2>
         </div>
-        <div className="education-card fade-in" style={{ textAlign: "center" }}>
-          <div className="education-icon">
-            <i className="fas fa-graduation-cap"></i>
-          </div>
-          <h3>Bachelor of Computer Applications (BCA)</h3>
-          <h4>Microtek College of Management &amp; Technology</h4>
+        <div className="education-item glass">
+          <h4>Bachelor of Computer Applications (BCA)</h4>
+          <h5>Microtek College of Management &amp; Technology | 2024 - 2027</h5>
           <p>Computer Science focus, building strong foundation in programming, web development, and software engineering</p>
-          <span className="education-year">2024 - 2027</span>
         </div>
-        <div className="education-card fade-in" style={{ textAlign: "center" }}>
-          <div className="education-icon">
-            <i className="fas fa-graduation-cap"></i>
-          </div>
-          <h3>Senior Secondary (XII), CBSE (Science)</h3>
-          <h4>Jeevan Jyoti Higher Secondary School, Varanasi</h4>
+        <div className="education-item glass">
+          <h4>Senior Secondary (XII), CBSE (Science)</h4>
+          <h5>Jeevan Jyoti Higher Secondary School, Varanasi | 2024</h5>
           <p>Completed with 84.40% in Science stream, preparing for advanced studies in computer science</p>
-          <span className="education-year">2024</span>
         </div>
-        <div className="education-card fade-in" style={{ textAlign: "center" }}>
-          <div className="education-icon">
-            <i className="fas fa-graduation-cap"></i>
-          </div>
-          <h3>Intermediate School (X), CBSE Board</h3>
-          <h4>Jeevan Jyoti Higher Secondary School, Varanasi</h4>
+        <div className="education-item glass">
+          <h4>Intermediate School (X), CBSE Board</h4>
+          <h5>Jeevan Jyoti Higher Secondary School, Varanasi | 2022</h5>
           <p>Completed with 80% with a strong focus on Science, preparing for advanced studies in computer science</p>
-          <span className="education-year">2022</span>
         </div>
       </div>
     </section>
