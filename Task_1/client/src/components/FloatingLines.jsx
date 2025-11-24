@@ -244,8 +244,7 @@ function FloatingLines({
   bendStrength = -0.5,
   mouseDamping = 0.05,
   parallax = true,
-  parallaxStrength = 0.2,
-  mixBlendMode = 'screen'
+  parallaxStrength = 0.2
 }) {
   const containerRef = useRef(null);
   const targetMouseRef = useRef(new Vector2(-1000, -1000));
@@ -502,8 +501,7 @@ FloatingLines.propTypes = {
   bendStrength: PropTypes.number,
   mouseDamping: PropTypes.number,
   parallax: PropTypes.bool,
-  parallaxStrength: PropTypes.number,
-  mixBlendMode: PropTypes.string
+  parallaxStrength: PropTypes.number
 };
 
 export default FloatingLines;
