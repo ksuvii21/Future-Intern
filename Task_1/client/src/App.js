@@ -375,28 +375,90 @@ const Skills = () => {
   );
 };
 
+const educationData = [
+  {
+    institute: "Microtek College of Management & Technology",
+    degree: "Bachelor of Computer Applications (BCA)",
+    field: "Computer Science",
+    duration: "2024 - 2027",
+    location: "Varanasi, India",
+    score: "8.7 CGPA",
+    specialization: ["Programming", "Web Development", "Software Engineering"],
+    achievements: [
+      "Built strong foundation in computer science",
+      "Developed multiple tech projects",
+      "Active participation in coding competitions"
+    ]
+  },
+  {
+    institute: "Jeevan Jyoti Higher Secondary School, Varanasi",
+    degree: "Senior Secondary (XII), CBSE",
+    field: "Science",
+    duration: "2024",
+    location: "Varanasi, India",
+    score: "84.40%",
+    specialization: ["Physics", "Chemistry", "Mathematics"],
+    achievements: [
+      "Excelled in science subjects",
+      "Strong analytical and logical reasoning",
+      "Participated in science exhibitions"
+    ]
+  },
+  {
+    institute: "Jeevan Jyoti Higher Secondary School, Varanasi",
+    degree: "Intermediate School (X), CBSE",
+    field: "Science",
+    duration: "2022",
+    location: "Varanasi, India",
+    score: "80%",
+    specialization: ["Science Basics"],
+    achievements: [
+      "Developed interest in programming",
+      "Performed well academically",
+      "Built strong foundational knowledge"
+    ]
+  }
+];
+
 const Education = () => {
   return (
-    <section id="education" className="education">
-      <div className="container">
-        <div className="section-title">
-          <h2>Education</h2>
-        </div>
-        <div className="education-item glass">
-          <h4>Bachelor of Computer Applications (BCA)</h4>
-          <h5>Microtek College of Management &amp; Technology | 2024 - 2027</h5>
-          <p>Computer Science focus, building strong foundation in programming, web development, and software engineering</p>
-        </div>
-        <div className="education-item glass">
-          <h4>Senior Secondary (XII), CBSE (Science)</h4>
-          <h5>Jeevan Jyoti Higher Secondary School, Varanasi | 2024</h5>
-          <p>Completed with 84.40% in Science stream, preparing for advanced studies in computer science</p>
-        </div>
-        <div className="education-item glass">
-          <h4>Intermediate School (X), CBSE Board</h4>
-          <h5>Jeevan Jyoti Higher Secondary School, Varanasi | 2022</h5>
-          <p>Completed with 80% with a strong focus on Science, preparing for advanced studies in computer science</p>
-        </div>
+    <section id="education" className="education-section">
+      <div className="edu-title">
+        <h2>Education</h2>
+        <p>Academic qualifications and journey of continuous learning</p>
+        <div className="edu-separator"></div>
+      </div>
+
+      <div className="edu-grid">
+        {educationData.map((edu, index) => (
+          <div className="edu-card" key={index}>
+            <div className="edu-icon">
+              <FaGraduationCap size={26} />
+            </div>
+
+            <span className="edu-badge">{edu.institute}</span>
+
+            <h3>{edu.degree}</h3>
+            <h4 className="edu-field">{edu.field}</h4>
+
+            <div className="edu-info">
+              <span><FaCalendarAlt /> {edu.duration}</span>
+              <span><FaMapMarkerAlt /> {edu.location}</span>
+            </div>
+
+            <div className="edu-score">{edu.score}</div>
+
+            <h5>Specialization:</h5>
+            <p className="edu-specialization">{edu.specialization.join(", ")}</p>
+
+            <h5>Key Achievements:</h5>
+            <ul className="edu-list">
+              {edu.achievements.map((ach, i) => (
+                <li key={i}>{ach}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </section>
   );
