@@ -171,18 +171,18 @@ const Contact = () => (
 
 const Skills = () => {
   const skillLogos = [
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="js"><circle cx="12" cy="12" r="10" fill="#F0DB4F" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#000" textAnchor="middle">JS</text></svg>, title: 'JavaScript' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="react"><rect width="24" height="24" fill="#61DBFB" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#000" textAnchor="middle">R</text></svg>, title: 'React' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="node"><rect width="24" height="24" fill="#68A063" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">N</text></svg>, title: 'Node.js' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="express"><rect width="24" height="24" fill="#4DB33D" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Ex</text></svg>, title: 'Express' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="mongodb"><rect width="24" height="24" fill="#4DB33D" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">MDB</text></svg>, title: 'MongoDB' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="html"><rect width="24" height="24" fill="#E34C26" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">HTML</text></svg>, title: 'HTML5' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="css"><rect width="24" height="24" fill="#2965f1" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">CSS</text></svg>, title: 'CSS3' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="git"><circle cx="12" cy="12" r="10" fill="#F1502F" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Git</text></svg>, title: 'Git' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="docker"><rect width="24" height="24" fill="#0db7ed" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Docker</text></svg>, title: 'Docker' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="aws"><rect width="24" height="24" fill="#ff9900" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#000" textAnchor="middle">AWS</text></svg>, title: 'AWS' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="python"><rect width="24" height="24" fill="#306998" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Py</text></svg>, title: 'Python' },
-    { node: <svg width="40" height="40" viewBox="0 0 24 24" key="graphicdesign"><rect width="24" height="24" fill="#a259ff" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">GD</text></svg>, title: 'Graphic Design' }
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="js"><circle cx="12" cy="12" r="10" fill="#F0DB4F" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#000" textAnchor="middle">JS</text></svg></span>, title: 'JavaScript' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="react"><rect width="24" height="24" fill="#61DBFB" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#000" textAnchor="middle">R</text></svg></span>, title: 'React' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="node"><rect width="24" height="24" fill="#68A063" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">N</text></svg></span>, title: 'Node.js' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="express"><rect width="24" height="24" fill="#4DB33D" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Ex</text></svg></span>, title: 'Express' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="mongodb"><rect width="24" height="24" fill="#4DB33D" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">MDB</text></svg></span>, title: 'MongoDB' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="html"><rect width="24" height="24" fill="#E34C26" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">HTML</text></svg></span>, title: 'HTML5' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="css"><rect width="24" height="24" fill="#2965f1" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">CSS</text></svg></span>, title: 'CSS3' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="git"><circle cx="12" cy="12" r="10" fill="#F1502F" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Git</text></svg></span>, title: 'Git' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="docker"><rect width="24" height="24" fill="#0db7ed" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Docker</text></svg></span>, title: 'Docker' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="aws"><rect width="24" height="24" fill="#ff9900" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#000" textAnchor="middle">AWS</text></svg></span>, title: 'AWS' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="python"><rect width="24" height="24" fill="#306998" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Py</text></svg></span>, title: 'Python' },
+    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="graphicdesign"><rect width="24" height="24" fill="#a259ff" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">GD</text></svg></span>, title: 'Graphic Design' }
   ];
 
   return (
@@ -201,9 +201,9 @@ const Skills = () => {
 
         <LogoLoop
           logos={skillLogos}
-          speed={100}
+          speed={40}
           direction="left"
-          logoHeight={50}
+          logoHeight={70}
           gap={20}
           pauseOnHover={true}
           scaleOnHover={true}
