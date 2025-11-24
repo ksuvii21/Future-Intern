@@ -84,7 +84,7 @@ const experiences = [
     duration: "Nov 2025 - Dec 2025",
     mode: "Remote",
     type: "Internship",
-    logo: "/assets/futureintens_logo.png",
+    logo: require("./assets/futureinterns_logo.jpeg"),
     technologies: ["React.js", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
     achievements: [
       "Developed and maintained MERN-stack web applications",
@@ -92,7 +92,7 @@ const experiences = [
       "Participated in code reviews & agile processes",
       "Implemented backend APIs using Node.js & MongoDB"
     ],
-    certificate: "./assets/Future_Intens_Internship_Certificate.pdf"
+    certificate: require("./assets/Future_Intens_Internship_Certificate.pdf")
   },
   {
     role: "Web Development Intern",
@@ -100,7 +100,7 @@ const experiences = [
     duration: "Aug 2025 - Oct 2025",
     mode: "Remote",
     type: "Internship",
-    logo: "/assets/zidio_logo.png",
+    logo: require("./assets/zidio_logo.png"),
     technologies: ["React.js", "HTML", "CSS", "Node.js", "MongoDB"],
     achievements: [
       "Developed and maintained web applications",
@@ -115,14 +115,14 @@ const experiences = [
     duration: "Jun 2025 - Jul 2025",
     mode: "Remote",
     type: "Internship",
-    logo: "/assets/cognifyz_logo.png",
+    logo: require("./assets/cognifyz_logo.webp"),
     technologies: ["Flask", "Python", "MySQL", "Pandas", "Frontend UI"],
     achievements: [
       "Built projects using Python Flask & CRUD operations",
       "Worked with Pandas & MS-Excel tools",
       "Collaborated in feature development and code reviews"
     ],
-    certificate: "./assets/Cognifyz_Technologies_Internship_Certificate.pdf"
+    certificate: require("./assets/Cognifyz_Technologies_Internship_Certificate.pdf")
   }
 ];
 
