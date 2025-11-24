@@ -74,100 +74,6 @@ const About = () => (
   </section>
 );
 
-const Experience = () => (
-  <section id="experience" className="experience">
-    <div className="container">
-      <div className="section-title">
-        <h2>Work Experience</h2>
-      </div>
-      <div className="experience-items">
-        <div className="experience-item glass">
-          <h4>Web Development Intern</h4>
-          <h5>Zidio Development (Remote) | Aug 2025 - Oct 2025</h5>
-          <ul>
-            <li>Developed and maintained web applications using the MERN stack.</li>
-            <li>Created responsive, user-friendly interfaces with React.js, HTML, and CSS.</li>
-            <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
-            </ul>
-        </div>
-        <div className="experience-item glass">
-          <h4>Software Development Intern</h4>
-          <h5>Cognifyz Technologies (Remote) | Jun 2025 - Jul 2025</h5>
-          <ul>
-            <li>Built projects based on Frontend user interface, CRUD Operations in MySQL and MS-Excel with Python Flask and Pandas.</li>
-            <li>Collaborated with team members to implement new features and fix bugs.</li>
-            <li>Participated in code reviews and agile development processes.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-const Projects = () => (
-  <section id="projects" className="portfolio">
-    <div className="container">
-      <div className="section-title">
-        <h2>Projects</h2>
-        <p>A selection of my work</p>
-      </div>
-      <div className="portfolio-grid">
-        <div className="portfolio-item glass">
-          <img src={project1Image} alt="MERN Stack Excel Analytics Platform" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>MERN Stack Excel Analytics Platform</h3>
-            <p>An analytics platform to upload Excel files, analyze data, and generate interactive 2D/3D charts. Features user authentication with JWT, a dynamic UI, and chart downloads.</p>
-            <a href="https://xlsx-analytics21.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
-        <div className="portfolio-item glass">
-          <img src={project2Image} alt="MERN Stack Blogging Platform" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>MERN Stack Blogging Platform</h3>
-            <p>A full-stack blogging app where users can create, edit, and delete blogs. Includes a rich text editor, comments, likes, user authentication, and an admin dashboard for post management.</p>
-            <a href="https://writely-log.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-const Contact = () => (
-  <section id="contact" className="contact">
-    <div className="container">
-      <div className="section-title">
-        <h2>Contact</h2>
-      </div>
-      <div className="contact-container">
-        <div className="contact-info glass">
-          <div className="contact-details">
-            <h3>Get in Touch</h3>
-            <p><i className="fas fa-envelope"></i> <a href="mailto:k21ritikasuvi2106@gmail.com">k21ritikasuvi2106@gmail.com</a></p>
-            <p><i className="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/kritika-gupta2106" target="_blank" rel="noopener noreferrer">in/kritika-gupta2106</a></p>
-            <p><i className="fab fa-github"></i> <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">github.com/ksuvii21</a></p>
-            <p><i className="fas fa-map-marker-alt"></i> Remote / On-site Opportunities</p>
-          </div>
-        </div>
-        <div className="contact-form glass">
-          <form onSubmit={(e) => { e.preventDefault(); alert("Message sent!"); }}>
-            <div className="form-group">
-              <input type="text" name="name" placeholder="Your Name" className="form-control" required />
-            </div>
-            <div className="form-group">
-              <input type="email" name="email" placeholder="Your Email" className="form-control" required />
-            </div>
-            <div className="form-group">
-              <textarea name="message" placeholder="Your Message" className="form-control" rows="4" required></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const Skills = () => {
   const skillLogosData = [
     { name: "C", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
@@ -253,6 +159,65 @@ const Skills = () => {
   );
 };
 
+const Projects = () => (
+  <section id="projects" className="portfolio">
+    <div className="container">
+      <div className="section-title">
+        <h2>Projects</h2>
+        <p>A selection of my work</p>
+      </div>
+      <div className="portfolio-grid">
+        <div className="portfolio-item glass">
+          <img src={project1Image} alt="MERN Stack Excel Analytics Platform" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>MERN Stack Excel Analytics Platform</h3>
+            <p>An analytics platform to upload Excel files, analyze data, and generate interactive 2D/3D charts. Features user authentication with JWT, a dynamic UI, and chart downloads.</p>
+            <a href="https://xlsx-analytics21.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
+          </div>
+        </div>
+        <div className="portfolio-item glass">
+          <img src={project2Image} alt="MERN Stack Blogging Platform" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>MERN Stack Blogging Platform</h3>
+            <p>A full-stack blogging app where users can create, edit, and delete blogs. Includes a rich text editor, comments, likes, user authentication, and an admin dashboard for post management.</p>
+            <a href="https://writely-log.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const Experience = () => (
+  <section id="experience" className="experience">
+    <div className="container">
+      <div className="section-title">
+        <h2>Work Experience</h2>
+      </div>
+      <div className="experience-items">
+        <div className="experience-item glass">
+          <h4>Web Development Intern</h4>
+          <h5>Zidio Development (Remote) | Aug 2025 - Oct 2025</h5>
+          <ul>
+            <li>Developed and maintained web applications using the MERN stack.</li>
+            <li>Created responsive, user-friendly interfaces with React.js, HTML, and CSS.</li>
+            <li>Assisted in backend development with Node.js and MongoDB/MySQL.</li>
+            </ul>
+        </div>
+        <div className="experience-item glass">
+          <h4>Software Development Intern</h4>
+          <h5>Cognifyz Technologies (Remote) | Jun 2025 - Jul 2025</h5>
+          <ul>
+            <li>Built projects based on Frontend user interface, CRUD Operations in MySQL and MS-Excel with Python Flask and Pandas.</li>
+            <li>Collaborated with team members to implement new features and fix bugs.</li>
+            <li>Participated in code reviews and agile development processes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 const Education = () => {
   const educationItems = [
     { degree: "Bachelor of Science in Computer Science", institution: "XYZ University", year: "2021" },
@@ -298,6 +263,41 @@ const Certifications = () => {
     </section>
   );
 };
+
+const Contact = () => (
+  <section id="contact" className="contact">
+    <div className="container">
+      <div className="section-title">
+        <h2>Contact</h2>
+      </div>
+      <div className="contact-container">
+        <div className="contact-info glass">
+          <div className="contact-details">
+            <h3>Get in Touch</h3>
+            <p><i className="fas fa-envelope"></i> <a href="mailto:k21ritikasuvi2106@gmail.com">k21ritikasuvi2106@gmail.com</a></p>
+            <p><i className="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/kritika-gupta2106" target="_blank" rel="noopener noreferrer">in/kritika-gupta2106</a></p>
+            <p><i className="fab fa-github"></i> <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">github.com/ksuvii21</a></p>
+            <p><i className="fas fa-map-marker-alt"></i> Remote / On-site Opportunities</p>
+          </div>
+        </div>
+        <div className="contact-form glass">
+          <form onSubmit={(e) => { e.preventDefault(); alert("Message sent!"); }}>
+            <div className="form-group">
+              <input type="text" name="name" placeholder="Your Name" className="form-control" required />
+            </div>
+            <div className="form-group">
+              <input type="email" name="email" placeholder="Your Email" className="form-control" required />
+            </div>
+            <div className="form-group">
+              <textarea name="message" placeholder="Your Message" className="form-control" rows="4" required></textarea>
+            </div>
+            <button type="submit" className="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+);
 
 const Footer = () => (
   <footer>
