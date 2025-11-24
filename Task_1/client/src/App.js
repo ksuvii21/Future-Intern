@@ -244,11 +244,6 @@ const Skills = () => {
             {secondLineContent}
           </div>
         </div>
-
-        <p style={{ marginTop: '20px', textAlign: 'center', fontSize: '0.9em', color: '#ccc' }}>
-          **Note:** You can adjust the scrolling speed of the skill lines by changing the `animation-duration` in the **`client/src/App.css`** file. Look for `scroll-left` and `scroll-right` keyframes.
-        </p>
-
       </div>
     </section>
   );
@@ -331,7 +326,7 @@ function App() {
       const header = document.getElementById('header');
       if (window.scrollY > 50) {
         header.classList.add('scrolled');
-      } else {
+      } else {  
         header.classList.remove('scrolled');
       }
     };
