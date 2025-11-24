@@ -13,6 +13,17 @@
   --transition: all 0.3s ease;
 }
 
+.floating-lines-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
 * {
   margin: 0;
   padding: 0;
