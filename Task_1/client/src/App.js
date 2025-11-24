@@ -8,7 +8,7 @@ import project2Image from './assets/project2.png';
 
 import FloatingLines from './components/FloatingLines';
 // import ScrollVelocity from './components/ScrollVelocity';
-import LogoLoop from './components/LogoLoop';
+// import LogoLoop from './components/LogoLoop';
 
 const Header = () => (
   <header id="header">
@@ -191,15 +191,15 @@ const Skills = () => {
         <div className="section-title">
           <h2>Skills</h2>
         </div>
-        {/* <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
           {skillLogos.map((logo, index) => (
             <div key={index} title={logo.title}>
               {logo.node}
             </div>
           ))}
-        </div> */}
+        </div>
 
-        <LogoLoop
+        {/* <LogoLoop
           logos={skillLogos}
           speed={40}
           direction="left"
@@ -208,7 +208,7 @@ const Skills = () => {
           pauseOnHover={true}
           scaleOnHover={true}
           className="skills-logo-loop"
-        />
+        />*/}
       </div>
     </section>
   );
