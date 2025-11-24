@@ -138,7 +138,6 @@ const Contact = () => (
     <div className="container">
       <div className="section-title">
         <h2>Contact</h2>
-        <p>Feel free to reach out!</p>
       </div>
       <div className="contact-container">
         <div className="contact-info glass">
@@ -216,13 +215,15 @@ const Skills = () => {
       src={skill.badge}
       alt={skill.name}
       title={skill.name}
-      className="skill-logo"
+      className="skill-logo" // Apply className for CSS styling
+      // No inline styles for filter or transform here, handled by CSS
     />
   ));
 
   // Create the looping content (Duplicated for infinite effect)
-  const firstLineContent = [...createLogos(firstHalf), ...createLogos(firstHalf)];
-  const secondLineContent = [...createLogos(secondHalf), ...createLogos(secondHalf)];
+  // Ensure enough duplicates for a smooth loop across varying screen sizes
+  const firstLineContent = [...createLogos(firstHalf), ...createLogos(firstHalf), ...createLogos(firstHalf)];
+  const secondLineContent = [...createLogos(secondHalf), ...createLogos(secondHalf), ...createLogos(secondHalf)];
 
 
   return (
@@ -233,19 +234,19 @@ const Skills = () => {
         </div>
         
         <div className="logo-loop-container">
-          {/* First Line: Scrolls Left (or right, as set in CSS) */}
+          {/* First Line: Scrolls Left */}
           <div className="logo-line logo-line-1">
             {firstLineContent}
           </div>
 
-          {/* Second Line: Scrolls Right (or opposite of line 1) */}
+          {/* Second Line: Scrolls Right */}
           <div className="logo-line logo-line-2">
             {secondLineContent}
           </div>
         </div>
 
-        <p style={{ marginTop: '20px', textAlign: 'center', fontSize: '0.9em' }}>
-          **Note:** The scrolling speed and direction for these skill lines can be adjusted in the **`client/src/App.css`** file.
+        <p style={{ marginTop: '20px', textAlign: 'center', fontSize: '0.9em', color: '#ccc' }}>
+          **Note:** You can adjust the scrolling speed of the skill lines by changing the `animation-duration` in the **`client/src/App.css`** file. Look for `scroll-left` and `scroll-right` keyframes.
         </p>
 
       </div>
