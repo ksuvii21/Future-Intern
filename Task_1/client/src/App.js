@@ -170,20 +170,52 @@ const Contact = () => (
 );
 
 const Skills = () => {
-  const skillLogos = [
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="js"><circle cx="12" cy="12" r="10" fill="#F0DB4F" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#000" textAnchor="middle">JS</text></svg></span>, title: 'JavaScript' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="react"><rect width="24" height="24" fill="#61DBFB" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#000" textAnchor="middle">R</text></svg></span>, title: 'React' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="node"><rect width="24" height="24" fill="#68A063" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">N</text></svg></span>, title: 'Node.js' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="express"><rect width="24" height="24" fill="#4DB33D" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Ex</text></svg></span>, title: 'Express' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="mongodb"><rect width="24" height="24" fill="#4DB33D" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">MDB</text></svg></span>, title: 'MongoDB' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="html"><rect width="24" height="24" fill="#E34C26" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">HTML</text></svg></span>, title: 'HTML5' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="css"><rect width="24" height="24" fill="#2965f1" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">CSS</text></svg></span>, title: 'CSS3' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="git"><circle cx="12" cy="12" r="10" fill="#F1502F" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Git</text></svg></span>, title: 'Git' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="docker"><rect width="24" height="24" fill="#0db7ed" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Docker</text></svg></span>, title: 'Docker' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="aws"><rect width="24" height="24" fill="#ff9900" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#000" textAnchor="middle">AWS</text></svg></span>, title: 'AWS' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="python"><rect width="24" height="24" fill="#306998" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">Py</text></svg></span>, title: 'Python' },
-    { node: <span className="skill-logo"><svg width="40" height="40" viewBox="0 0 24 24" key="graphicdesign"><rect width="24" height="24" fill="#a259ff" /><text x="12" y="16" fontSize="12" fontWeight="bold" fill="#FFF" textAnchor="middle">GD</text></svg></span>, title: 'Graphic Design' }
+  const skillLogosData = [
+    { name: "C", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
+    { name: "C++", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+    { name: "Java", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+    { name: "JavaScript", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "Python", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "TypeScript", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+    { name: "Vue.js", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" },
+    { name: "React", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "Angular.js", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" },
+    { name: "Bootstrap", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" },
+    { name: "TailwindCSS", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+    { name: "Node.js", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+    { name: "Express.js", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+    { name: "GraphQL", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
+    { name: "OpenCV", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" },
+    { name: "Pandas", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
+    { name: "TensorFlow", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
+    { name: "Turtle", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+    { name: "Flask", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" },
+    { name: "MongoDB", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+    { name: "MySQL", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "SQL", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+    { name: "Chart.js", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chartjs/chartjs-original.svg" },
+    { name: "Three.js", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg" },
+    { name: "Firebase", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+    { name: "Figma", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+    { name: "Postman", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" },
+    { name: "Linux", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
+    { name: "Git", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+    { name: "HTML5", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "CSS3", badge: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" }
   ];
+
+  const skillLogos = skillLogosData.map(skill => (
+    <img
+      key={skill.name}
+      src={skill.badge}
+      alt={skill.name}
+      title={skill.name}
+      className="skill-logo"
+      style={{ filter: 'grayscale(100%)', transition: 'filter 0.3s ease, transform 0.3s ease' }}
+      onMouseEnter={e => { e.currentTarget.style.filter = 'none'; e.currentTarget.style.transform = 'scale(1.2)'; }}
+      onMouseLeave={e => { e.currentTarget.style.filter = 'grayscale(100%)'; e.currentTarget.style.transform = 'scale(1)'; }}
+    />
+  ));
 
   return (
     <section id="skills" className="skills-section">
@@ -199,7 +231,7 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* <LogoLoop
+        {/*<LogoLoop
           logos={skillLogos}
           speed={40}
           direction="left"
