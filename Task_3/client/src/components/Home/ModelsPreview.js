@@ -1,88 +1,136 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-const ModelsSection = styled.section`
+const Section = styled.section`
   padding: 100px 0;
   background: white;
 `;
 
 const SectionTitle = styled.h2`
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 50px;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: ${props => props.theme.colors.primary};
+`;
+
+const SectionSubtitle = styled.p`
+  text-align: center;
+  font-size: 1.2rem;
+  color: ${props => props.theme.colors.gray};
+  margin-bottom: 60px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const ModelsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 `;
 
-const ModelCard = styled.div`
-  background: #f5f5f5;
-  border-radius: 10px;
-  overflow: hidden;
+const ViewAllButton = styled(motion(Link))`
+  display: block;
+  width: 200px;
+  margin: 50px auto 0;
+  background: transparent;
+  color: ${props => props.theme.colors.primary};
+  border: 2px solid ${props => props.theme.colors.primary};
   text-align: center;
-`;
-
-const ModelImage = styled.img`
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-`;
-
-const ModelName = styled.h3`
-  font-size: 1.5rem;
-  margin: 20px 0 10px;
-`;
-
-const ModelButton = styled(Link)`
-  display: inline-block;
-  background: black;
-  color: white;
-  padding: 10px 20px;
+  padding: 15px 0;
   text-decoration: none;
-  border-radius: 5px;
-  margin: 20px 0;
-  transition: background 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  transition: all 0.3s ease;
 
   &:hover {
-    background: ${props => props.theme.colors.secondary};
+    background: ${props => props.theme.colors.primary};
+    color: white;
   }
 `;
 
-const ModelsPreview = () => {
-  // For now, we'll use static data. In a real app, you might fetch this.
-  const featuredCars = [
-    {
-      _id: '1',
-      name: 'Chiron Super Sport',
-      images: ['/images/chiron-1.jpg'],
-    },
-    {
-      _id: '2',
-      name: 'Divo',
-      images: ['/images/divo-1.jpg'],
-    },
-  ];
+// Temporary data - replace with actual API call
+const featuredCars = [
+  {
+    _id: '1',
+    name: 'Chiron Super Sport',
+    price: '$3,800,000',
+    horsepower: 1578,
+    topSpeed: 440,
+    images: ['/images/chiron.jpg']
+  },
+  {
+    _id: '2',
+    name: 'Divo',
+    price: '$5,800,000',
+    horsepower: 1479,
+    topSpeed: 380,
+    images: ['/images/divo.jpg']
+  }
+];
 
+const ModelsPreview = () => {
   return (
-    <ModelsSection>
-      <SectionTitle>Our Models</SectionTitle>
+    <Section>
+      <SectionTitle>MASTERPIECES</SectionTitle>
+      <SectionSubtitle>
+        Each Bugatti is a unique work of art, representing the pinnacle of automotive excellence and craftsmanship.
+      </SectionSubtitle>
+      
       <ModelsGrid>
-        {featuredCars.map(car => (
-          <ModelCard key={car._id}>
-            <ModelImage src={car.images[0]} alt={car.name} />
-            <ModelName>{car.name}</ModelName>
-            <ModelButton to={`/models/${car._id}`}>Discover</ModelButton>
-          </ModelCard>
+        {featuredCars.map((car, index) => (
+          <motion.div
+            key={car._id}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+          >
+            {/* We'll create a simplified card for preview */}
+            <div style={{
+              background: '#f5f5f5',
+              padding: '30px',
+              borderRadius: '10px',
+              textAlign: 'center',
+              height: '300px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center'
+            }}>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>{car.name}</h3>
+              <p style={{ color: '#BE0F34', fontSize: '1.2rem', marginBottom: '20px' }}>{car.price}</p>
+              <p style={{ marginBottom: '20px' }}>{car.horsepower} HP • {car.topSpeed} km/h</p>
+              <Link 
+                to={`/models/${car._id}`}
+                style={{
+                  display: 'inline-block',
+                  background: 'black',
+                  color: 'white',
+                  padding: '10px 20px',
+                  textDecoration: 'none',
+                  borderRadius: '5px'
+                }}
+              >
+                DISCOVER
+              </Link>
+            </div>
+          </motion.div>
         ))}
       </ModelsGrid>
-    </ModelsSection>
+
+      <ViewAllButton
+        to="/models"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        VIEW ALL MODELS
+      </ViewAllButton>
+    </Section>
   );
 };
 
