@@ -87,7 +87,7 @@ const Models = () => {
   return (
     <ModelsContainer>
       <ModelsHero $image={heroImage.replace('-1', '')}>
-        <HeroImage $image={heroImage} />
+        <HeroImage $image={heroImage.replace('-1', '')} />
         <HeroText>
           <HeroTitle>Our Models</HeroTitle>
           <HeroSubtitle>
