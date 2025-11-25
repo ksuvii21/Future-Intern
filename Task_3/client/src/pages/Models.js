@@ -10,17 +10,44 @@ const ModelsContainer = styled.div`
 `;
 
 const ModelsHero = styled.div`
-  height: 60vh;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-              url('/images/chiron.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  color: white;
+  min-height: 60vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 40px;
+`;
+
+const HeroImage = styled.div`
+  flex: 1;
+  height: 400px;
+  background-image: url(${props => props.image});
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+`;
+
+const HeroText = styled.div`
+  flex: 1;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const HeroTitle = styled.h1`
   font-size: 3rem;
-  font-weight: bold;
-  letter-spacing: 3px;
+  margin-bottom: 20px;
+  color: #111;
+`;
+
+const HeroSubtitle = styled.p`
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #444;
 `;
 
 const ModelsGrid = styled.div`
@@ -30,13 +57,6 @@ const ModelsGrid = styled.div`
   padding: 50px 20px;
   max-width: 1200px;
   margin: 0 auto;
-`;
-
-const PageTitle = styled.h1`
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 50px;
-  padding-top: 50px;
 `;
 
 const Models = () => {
@@ -62,9 +82,20 @@ const Models = () => {
     return <div>Loading...</div>;
   }
 
+  const heroImage = cars.length > 0 ? cars[0].images[0] : '/images/chiron.jpg';
+
   return (
     <ModelsContainer>
-      <ModelsHero>Our Models</ModelsHero>
+      <ModelsHero>
+        <HeroImage image={heroImage} />
+        <HeroText>
+          <HeroTitle>Our Models</HeroTitle>
+          <HeroSubtitle>
+            Explore our exclusive collection of high-performance automobiles,
+            engineered for speed, luxury, and innovation.
+          </HeroSubtitle>
+        </HeroText>
+      </ModelsHero>
       <ModelsGrid>
         {cars.map(car => (
           <CarCard key={car._id} car={car} />
