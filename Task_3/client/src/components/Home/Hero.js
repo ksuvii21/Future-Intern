@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 const HeroSection = styled.section`
   height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('/images/hero-bg.jpg') center/cover;
+              url('/images/hero-bg.mp4') center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
