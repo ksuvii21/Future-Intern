@@ -48,7 +48,7 @@ const Hero = () => (
     <FloatingLines />
     <div className="container">
       <div className="hero-content">
-        <h1>I&apos;m Kritika Gupta, a <br> </br><span>Full-Stack Developer</span></h1>
+        <h1>I&apos;m Kritika Gupta, a <br /><span>Full-Stack Developer</span></h1>
         <p>Passionate MERN stack developer building scalable applications and growing through hands-on experience in collaborative environments.</p>
         <div className="hero-btns">
           <a href="#projects" className="btn btn-primary">View My Projects</a>
@@ -201,7 +201,7 @@ const Projects = () => (
           </div>
         </div>
         
-        {/* Project 3: Sharvan Vision (New) */}
+        {/* Project 3: Sharvan Vision */}
         <div className="portfolio-item glass">
           <img src={project3Image} alt="Sharvan Vision - AI Sign Language Translator" className="portfolio-img" />
           <div className="portfolio-content">
@@ -211,7 +211,7 @@ const Projects = () => (
           </div>
         </div>
 
-        {/* Project 4: CareerFlow.io (New) */}
+        {/* Project 4: CareerFlow.io*/}
         <div className="portfolio-item glass">
           <img src={project4Image} alt="CareerFlow.io - AI Resume & Career Ecosystem" className="portfolio-img" />
           <div className="portfolio-content">
@@ -221,7 +221,7 @@ const Projects = () => (
           </div>
         </div>
         
-        {/* Project 5: Fansee Rebel (New) */}
+        {/* Project 5: Fansee Rebel */}
         <div className="portfolio-item glass">
           <img src={project5Image} alt="Fansee Rebel - E-Commerce Website" className="portfolio-img" />
           <div className="portfolio-content">
@@ -231,7 +231,7 @@ const Projects = () => (
           </div>
         </div>
 
-        {/* Project 6: ERP Management System (New) */}
+        {/* Project 6: ERP Management System */}
         <div className="portfolio-item glass">
           <img src={project6Image} alt="ERP Management System (MERN Stack)" className="portfolio-img" />
           <div className="portfolio-content">
