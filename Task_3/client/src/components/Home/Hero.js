@@ -3,14 +3,35 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const HeroSection = styled.section`
+  position: relative;
   height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('/images/hero-bg.mp4') center/cover;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: white;
+`;
+
+const VideoBackground = styled.video`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -2;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+  z-index: -1;
 `;
 
 const HeroContent = styled(motion.div)`
@@ -52,6 +73,15 @@ const CTAButton = styled(motion.button)`
 const Hero = () => {
   return (
     <HeroSection>
+      <VideoBackground
+        autoPlay
+        loop
+        muted
+        playsInline
+        src="/images/hero-bg.mp4"
+        type="video/mp4"
+      />
+      <Overlay />
       <HeroContent
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
