@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import * as THREE from 'three';
 import { BloomEffect, EffectComposer, EffectPass, RenderPass, SMAAEffect, SMAAPreset } from 'postprocessing';
 
@@ -43,6 +44,10 @@ const Hyperspeed = ({
     }
   }
 }) => {
+
+Hyperspeed.propTypes = {
+  effectOptions: PropTypes.object
+};
   const hyperspeed = useRef(null);
   const appRef = useRef(null);
 
