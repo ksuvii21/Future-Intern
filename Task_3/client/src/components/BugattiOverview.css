@@ -7,7 +7,7 @@ body, html {
 }
 
 .background-container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -36,9 +36,15 @@ body, html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #fff;
   padding: 2rem;
+  padding-bottom: 8rem; /* add bottom padding to allow footer space */
   max-width: 1200px;
   margin: 0 auto;
   background: transparent;
+}
+
+.overview-footer {
+  position: relative;
+  z-index: 2; /* make sure footer is above background */
 }
 
 .overview-header {
