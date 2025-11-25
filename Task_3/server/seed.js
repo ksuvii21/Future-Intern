@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Car = require('./models/Car');
 
-const cars = [ 
+const cars = [ //Seed data for Bugatti cars
   {
     name: "Chiron Super Sport",
     model: "Chiron",
