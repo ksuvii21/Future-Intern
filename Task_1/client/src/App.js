@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa"; 
 
@@ -12,6 +12,7 @@ import project5Image from './assets/project5.png';
 import project6Image from './assets/project6.avif';
 
 import FloatingLines from './components/FloatingLines';
+import Spinner from './components/Spinner';
 
 const Header = () => (
   <header id="header">
@@ -39,6 +40,7 @@ const Header = () => (
     </div>
   </header>
 );
+
 
 const Hero = () => (
   <section id="home" className="hero">
@@ -582,7 +584,14 @@ const Footer = () => (
 );
 
 function App() {
+  const [loading, setLoading] = React.useState(true);
+
   React.useEffect(() => {
+    // Simulate loading for 2 seconds
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
     // Navbar scroll effect
     const handleScroll = () => {
       const header = document.getElementById('header');
@@ -620,6 +629,7 @@ function App() {
     document.querySelector('.hamburger').addEventListener('click', handleHamburgerClick);
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.removeEventListener('click', smoothScroll);
@@ -627,6 +637,10 @@ function App() {
       document.querySelector('.hamburger').removeEventListener('click', handleHamburgerClick);
     };
   }, []);
+  
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="App">
