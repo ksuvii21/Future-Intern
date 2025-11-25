@@ -538,7 +538,10 @@ const Contact = () => (
             <p><i className="fas fa-envelope"></i> <a href="mailto:k21ritikasuvi2106@gmail.com">k21ritikasuvi2106@gmail.com</a></p>
             <p><i className="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/kritika-gupta2106" target="_blank" rel="noopener noreferrer">in/kritika-gupta2106</a></p>
             <p><i className="fab fa-github"></i> <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">github.com/ksuvii21</a></p>
-            <p><i className="fab fa-leetcode"></i> <a href="https://leetcode.com/u/KrSUVII/" target="_blank" rel="noopener noreferrer">leetcode.com/u/KrSUVII</a></p>
+            <p>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.svg" alt="Leetcode" className="leetcode-icon" />
+              <a href="https://leetcode.com/u/KrSUVII/" target="_blank" rel="noopener noreferrer">leetcode.com/u/KrSUVII</a>
+            </p>
             <p><i className="fas fa-map-marker-alt"></i> Remote / On-site Opportunities</p>
           </div>
         </div>
