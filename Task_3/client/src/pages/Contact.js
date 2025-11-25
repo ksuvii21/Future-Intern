@@ -11,15 +11,16 @@ const ContactContainer = styled.div`
 const ContactForm = styled.form`
   max-width: 600px;
   margin: 0 auto;
-  padding: 50px 20px;
+  padding: 50px;
   background: white;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 `;
 
 const FormTitle = styled.h1`
   text-align: center;
   margin-bottom: 30px;
+  color: ${props => props.theme.colors.primary};
 `;
 
 const FormGroup = styled.div`
@@ -30,40 +31,67 @@ const Label = styled.label`
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: ${props => props.theme.colors.primary};
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: ${props => props.theme.colors.secondary};
+  }
 `;
 
 const TextArea = styled.textarea`
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
   height: 150px;
   resize: vertical;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: ${props => props.theme.colors.secondary};
+  }
 `;
 
 const SubmitButton = styled.button`
-  background: ${props => props.theme.colors.secondary};
+  width: 100%;
+  background: ${props => props.theme.colors.primary};
   color: white;
   border: none;
-  padding: 15px 30px;
+  padding: 15px;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
-  width: 100%;
   transition: background 0.3s ease;
 
   &:hover {
-    background: #a00d2a;
+    background: ${props => props.theme.colors.secondary};
   }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+`;
+
+const SuccessMessage = styled.div`
+  background: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
 `;
 
 const Contact = () => {
@@ -73,8 +101,8 @@ const Contact = () => {
     phone: '',
     message: ''
   });
-
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -85,31 +113,33 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    
     try {
       await axios.post('/api/contact', formData);
       setSubmitted(true);
+      setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
       console.error('Error sending message:', error);
+      alert('Error sending message. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
-
-  if (submitted) {
-    return (
-      <ContactContainer>
-        <ContactForm>
-          <FormTitle>Thank You!</FormTitle>
-          <p>Your message has been sent successfully. We will get back to you soon.</p>
-        </ContactForm>
-      </ContactContainer>
-    );
-  }
 
   return (
     <ContactContainer>
       <ContactForm onSubmit={handleSubmit}>
-        <FormTitle>Contact Us</FormTitle>
+        <FormTitle>CONTACT BUGATTI</FormTitle>
+        
+        {submitted && (
+          <SuccessMessage>
+            Thank you for your message. We will get back to you soon.
+          </SuccessMessage>
+        )}
+
         <FormGroup>
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">Full Name</Label>
           <Input
             type="text"
             id="name"
@@ -119,8 +149,9 @@ const Contact = () => {
             required
           />
         </FormGroup>
+
         <FormGroup>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">Email Address</Label>
           <Input
             type="email"
             id="email"
@@ -130,8 +161,9 @@ const Contact = () => {
             required
           />
         </FormGroup>
+
         <FormGroup>
-          <Label htmlFor="phone">Phone</Label>
+          <Label htmlFor="phone">Phone Number</Label>
           <Input
             type="tel"
             id="phone"
@@ -140,6 +172,7 @@ const Contact = () => {
             onChange={handleChange}
           />
         </FormGroup>
+
         <FormGroup>
           <Label htmlFor="message">Message</Label>
           <TextArea
@@ -150,7 +183,10 @@ const Contact = () => {
             required
           />
         </FormGroup>
-        <SubmitButton type="submit">Send Message</SubmitButton>
+
+        <SubmitButton type="submit" disabled={loading}>
+          {loading ? 'SENDING...' : 'SEND MESSAGE'}
+        </SubmitButton>
       </ContactForm>
     </ContactContainer>
   );
