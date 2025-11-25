@@ -1662,3 +1662,133 @@ footer {
   color: #c4b5fd;
 }
 
+.certifications {
+  padding: 60px 20px;
+  background: #0a0a0f;
+  color: white;
+}
+
+.section-title h2 {
+  text-align: center;
+  font-size: 2.4rem;
+  color: #4a9fff;
+  margin-bottom: 40px;
+}
+
+/* ==== GRID ==== */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.cert-card {
+  padding: 15px;
+  border-radius: 14px;
+  background: rgba(20, 20, 40, 0.6);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  text-align: center;
+  transition: 0.25s;
+  box-shadow: 0 0 15px rgba(78, 121, 255, 0.4);
+}
+
+.cert-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(78, 121, 255, 0.7);
+}
+
+.cert-thumb {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  background: white;
+  border-radius: 10px;
+}
+
+.cert-card h4 {
+  margin-top: 12px;
+  font-size: 1.1rem;
+  color: #ff69b4;
+}
+
+.cert-card h5 {
+  margin-top: 4px;
+  color: #bbb;
+}
+
+/* ==== MODAL ==== */
+.cert-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1200;
+  backdrop-filter: blur(6px);
+}
+
+.cert-modal-content {
+  background: #11131a;
+  padding: 25px;
+  border-radius: 18px;
+  max-width: 900px;
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 0 20px rgba(80,80,255,0.6);
+}
+
+.cert-preview {
+  width: 50%;
+  border-radius: 10px;
+}
+
+.cert-details {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cert-details h3 {
+  color: #4a9fff;
+  font-size: 1.7rem;
+}
+
+.view-btn {
+  margin-top: 20px;
+  padding: 12px 16px;
+  background: #9d4dff;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.1rem;
+  transition: 0.2s;
+}
+
+.view-btn:hover {
+  background: #bf6bff;
+}
+
+.no-cert {
+  color: gray;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* Responsive */
+@media(max-width: 850px) {
+  .cert-modal-content {
+    flex-direction: column;
+    width: 92%;
+  }
+
+  .cert-preview, .cert-details {
+    width: 100%;
+  }
+}
