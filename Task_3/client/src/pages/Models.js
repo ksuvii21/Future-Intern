@@ -23,7 +23,7 @@ const ModelsHero = styled.div`
 const HeroImage = styled.div`
   flex: 1;
   height: 400px;
-  background-image: url(${props => props.image});
+  background-image: url(${props => props.$image});
   background-size: cover;
   background-position: center;
   border-radius: 15px;
@@ -66,7 +66,7 @@ const Models = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await axios.get('/api/cars');
+        const response = await axios.get('http://localhost:5000/api/cars');
         setCars(response.data);
       } catch (error) {
         console.error('Error fetching cars:', error);
@@ -87,7 +87,7 @@ const Models = () => {
   return (
     <ModelsContainer>
       <ModelsHero>
-        <HeroImage image={heroImage} />
+        <HeroImage $image={heroImage} />
         <HeroText>
           <HeroTitle>Our Models</HeroTitle>
           <HeroSubtitle>
