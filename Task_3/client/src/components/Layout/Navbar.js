@@ -7,7 +7,7 @@ const Nav = styled.nav`
   position: fixed;
   top: 0;
   width: 100%;
-  background: ${props => props.scrolled ? 'rgba(0, 0, 0, 0.95)' : 'transparent'};
+  background: ${props => props.$scrolled ? 'rgba(0, 0, 0, 0.95)' : 'transparent'};
   padding: 20px 0;
   transition: all 0.3s ease;
   z-index: 1000;
@@ -38,7 +38,7 @@ const NavMenu = styled.ul`
   @media (max-width: 768px) {
     position: fixed;
     top: 0;
-    left: ${props => props.isOpen ? '0' : '-100%'};
+    left: ${props => props.$isOpen ? '0' : '-100%'};
     width: 100%;
     height: 100vh;
     background: black;
@@ -93,11 +93,11 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <Nav scrolled={scrolled}>
+    <Nav $scrolled={scrolled}>
       <NavContainer>
         <Logo to="/">BUGATTI</Logo>
         
-        <NavMenu isOpen={isOpen}>
+        <NavMenu $isOpen={isOpen}>
           <NavItem><NavLink to="/">Home</NavLink></NavItem>
           <NavItem><NavLink to="/models">Models</NavLink></NavItem>
           <NavItem><NavLink to="/heritage">Heritage</NavLink></NavItem>
