@@ -3,21 +3,21 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-const DetailContainer = styled.div\`
+const DetailContainer = styled.div`
   padding-top: 100px;
   min-height: 100vh;
-\`;
+`;
 
-const HeroSection = styled.div\`
+const HeroSection = styled.div`
   height: 70vh;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url(\${props => props.\$bgImage}) center/cover;
+              url(${props => props.$bgImage}) center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: white;
-\`;
+`;
 
 const ModelDetail = () => {
   const { id } = useParams();
