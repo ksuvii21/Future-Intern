@@ -1,6 +1,6 @@
 import React from 'react';
 import Hyperspeed from './Hyperspeed.jsx';
-import GridScan from './GridScan.jsx';
+import { GridScan } from './GridScan.jsx';
 import './BugattiOverview.css';
 
 const BugattiOverview = () => {
