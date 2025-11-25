@@ -1,11 +1,13 @@
 import React from 'react';
 import Hyperspeed from './Hyperspeed.jsx';
+import GridScan from './GridScan.jsx';
 import './BugattiOverview.css';
 
 const BugattiOverview = () => {
   return (
     <>
       <Hyperspeed />
+      <GridScan />
       <div className="overview-container">
         <header className="overview-header">
           <h1>BUGATTI</h1>
