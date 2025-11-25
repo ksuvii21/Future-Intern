@@ -1,3 +1,10 @@
+body, html {
+  background: #000 !important;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 .overview-container {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #fff;
