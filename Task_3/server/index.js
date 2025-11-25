@@ -16,10 +16,7 @@ app.use('/api/cars', require('./routes/cars'));
 app.use('/api/contact', require('./routes/contact'));
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/bugatti-clone', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/bugatti-clone');
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
