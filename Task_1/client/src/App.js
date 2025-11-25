@@ -465,11 +465,37 @@ const Education = () => {
 };
 
 const Certifications = () => {
+  const [selectedCert, setSelectedCert] = useState(null);
+
   const certifications = [
-    { title: "MERN Stack Internship Completion Certificate", issuer: "Future Intens", year: "2025", pdf: require("./assets/Future_Intens_Internship_Certificate.pdf") },
-    { title: "Zidio Development - Internship Completion Certificate", issuer: "Zidio Development", year: "Aug 2025", pdf: require("./assets/Zidio_Development_Internship_Certificate.pdf") },
-    { title: "Internship Completion Certificate", issuer: "Cognifyz Technologies", year: "Jun 2025", pdf: require("./assets/Cognifyz_Technologies_Internship_Certificate.pdf") },
-    { title: "Graphics Designer", issuer: "InAmigos Foundation (IAF)", year: "Jun 2025", pdf: require("./assets/Certificate_InAmigos.png") }
+    { 
+      title: "MERN Stack Internship Completion Certificate", 
+      issuer: "Future Intens", 
+      year: "2025", 
+      image: require("./assets/Future_Intens_Internship_Certificate.png"),
+      pdf: require("./assets/Future_Intens_Internship_Certificate.pdf") 
+    },
+    { 
+      title: "Zidio Development - Internship Completion Certificate", 
+      issuer: "Zidio Development", 
+      year: "Aug 2025", 
+      image: require("./assets/Zidio_Development_Internship_Certificate.png"),
+      pdf: require("./assets/Zidio_Development_Internship_Certificate.pdf") 
+    },
+    { 
+      title: "Internship Completion Certificate", 
+      issuer: "Cognifyz Technologies", 
+      year: "Jun 2025", 
+      image: require("./assets/Cognifyz_Technologies_Internship_Certificate.png"),
+      pdf: require("./assets/Cognifyz_Technologies_Internship_Certificate.pdf") 
+    },
+    { 
+      title: "Graphics Designer", 
+      issuer: "InAmigos Foundation (IAF)", 
+      year: "Jun 2025", 
+      image: require("./assets/Certificate_InAmigos.png"),
+      pdf: require("./assets/Certificate_InAmigos.png") 
+    }
   ];
 
   return (
@@ -478,21 +504,54 @@ const Certifications = () => {
         <div className="section-title">
           <h2>Certifications</h2>
         </div>
-        {certifications.map((cert, index) => (
-          <div key={index} className="certification-item glass">
-            <h4>{cert.title}</h4>
-            <h5>{cert.issuer} | {cert.year}</h5>
-            {cert.pdf ? (
-              <a href={cert.pdf} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{marginTop: "10px", display: "inline-block"}}>
-                View Certificate
-              </a>
-            ) : (
-              <span style={{color: "gray", marginTop: "10px", display: "inline-block", fontStyle: "italic"}}>
-                Certificate not available
-              </span>
-            )}
+
+        {/* Grid Display */}
+        <div className="cert-grid">
+          {certifications.map((cert, index) => (
+            <div 
+              key={index} 
+              className="cert-card glass"
+              onClick={() => setSelectedCert(cert)}
+            >
+              <img src={cert.image} alt={cert.title} className="cert-thumb" />
+              <h4>{cert.title}</h4>
+              <h5>{cert.issuer} | {cert.year}</h5>
+            </div>
+          ))}
+        </div>
+
+        {/* Modal */}
+        {selectedCert && (
+          <div className="cert-modal" onClick={() => setSelectedCert(null)}>
+            <div className="cert-modal-content" onClick={(e) => e.stopPropagation()}>
+              <img 
+                src={selectedCert.image} 
+                alt={selectedCert.title} 
+                className="cert-preview" 
+              />
+
+              <div className="cert-details">
+                <h3>{selectedCert.title}</h3>
+                <p><strong>Issued By:</strong> {selectedCert.issuer}</p>
+                <p><strong>Year:</strong> {selectedCert.year}</p>
+
+                {selectedCert.pdf ? (
+                  <a 
+                    href={selectedCert.pdf} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="view-btn"
+                  >
+                    View Certificate
+                  </a>
+                ) : (
+                  <span className="no-cert">Certificate Not Available</span>
+                )}
+              </div>
+            </div>
           </div>
-        ))}
+        )}
+
       </div>
     </section>
   );
