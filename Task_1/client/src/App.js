@@ -1,8 +1,8 @@
-import React from 'react';
+import {React, useState} from 'react';
 import './App.css';
-import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa"; 
 
-// Import assets (make sure these files exist in your assets folder)
+// Import assets
 import profileImage from './assets/profile.png';
 import project1Image from './assets/project1.png';
 import project2Image from './assets/project2.png';
