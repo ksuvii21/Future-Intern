@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Hyperspeed from './Hyperspeed.jsx';
 import { GridScan } from './GridScan.jsx';
 import './BugattiOverview.css';
 
 const BugattiOverview = () => {
+  const [showGridScan, setShowGridScan] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowGridScan(true);
+    }, 20000); // 20 seconds delay for Hyperspeed to end
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
-      <div className="hyperspeed-container">
+      {/* Background containers */}
+      <div className={`background-container hyperspeed-bg ${showGridScan ? 'hidden' : ''}`}>
         <Hyperspeed />
       </div>
-      <div className="gridscan-container">
+      <div className={`background-container gridscan-bg ${showGridScan ? '' : 'hidden'}`}>
         <GridScan enableWebcam={false} />
       </div>
+      
+      {/* Main content overlay */}
       <div className="overview-container">
         <header className="overview-header">
           <h1>BUGATTI</h1>
