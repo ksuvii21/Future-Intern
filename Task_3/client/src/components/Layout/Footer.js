@@ -99,6 +99,7 @@ const Footer = () => {
           <ul>
             <li><Link to="/heritage">Heritage</Link></li>
             <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/bugatti-overview">Bugatti Overview</Link></li>
             <li><a href="#">Careers</a></li>
             <li><a href="#">Press</a></li>
           </ul>
