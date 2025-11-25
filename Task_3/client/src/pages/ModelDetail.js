@@ -3,65 +3,20 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
-const ModelDetailContainer = styled.div`
+const DetailContainer = styled.div`
   padding-top: 100px;
   min-height: 100vh;
 `;
 
-const CarDetail = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-`;
-
-const CarImage = styled.img`
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-  margin-bottom: 30px;
-`;
-
-const CarName = styled.h1`
-  font-size: 3rem;
-  margin-bottom: 20px;
-`;
-
-const CarPrice = styled.h2`
-  font-size: 2rem;
-  color: ${props => props.theme.colors.secondary};
-  margin-bottom: 20px;
-`;
-
-const CarDescription = styled.p`
-  font-size: 1.1rem;
-  margin-bottom: 30px;
-  line-height: 1.6;
-`;
-
-const SpecsSection = styled.div`
-  margin-top: 40px;
-`;
-
-const SpecsTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-`;
-
-const SpecsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-`;
-
-const SpecItem = styled.div`
-  background: #f5f5f5;
-  padding: 20px;
-  border-radius: 5px;
-`;
-
-const SpecLabel = styled.strong`
-  display: block;
-  margin-bottom: 5px;
+const HeroSection = styled.div`
+  height: 70vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url(${props => props.bgImage}) center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
 `;
 
 const ModelDetail = () => {
@@ -70,76 +25,84 @@ const ModelDetail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCar = async () => {
-      try {
-        const response = await axios.get(`/api/cars/${id}`);
-        setCar(response.data);
-      } catch (error) {
-        console.error('Error fetching car:', error);
-      } finally {
-        setLoading(false);
+    // For now, use mock data. Replace with actual API call
+    const mockCar = {
+      _id: id,
+      name: 'Chiron Super Sport',
+      model: 'Chiron',
+      price: '$3,800,000',
+      horsepower: 1578,
+      topSpeed: 440,
+      acceleration: '0-100 km/h in 2.4 seconds',
+      description: 'The ultimate hyper sports car, representing the pinnacle of automotive engineering.',
+      images: ['/images/chiron-hero.jpg'],
+      features: [
+        '8.0-liter quad-turbo W16 engine',
+        'Carbon fiber monocoque',
+        'Advanced aerodynamics',
+        'Customizable interior'
+      ],
+      technicalSpecs: {
+        engine: '8.0L W16 Quad-Turbo',
+        transmission: '7-speed dual-clutch',
+        drivetrain: 'AWD',
+        fuelEconomy: 'City 8 / Highway 15 mpg'
       }
     };
-
-    fetchCar();
+    
+    setCar(mockCar);
+    setLoading(false);
   }, [id]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!car) {
-    return <div>Car not found</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (!car) return <div>Car not found</div>;
 
   return (
-    <ModelDetailContainer>
-      <CarDetail>
-        <CarImage src={car.images[0]} alt={car.name} />
-        <CarName>{car.name}</CarName>
-        <CarPrice>{car.price}</CarPrice>
-        <CarDescription>{car.description}</CarDescription>
+    <DetailContainer>
+      <HeroSection bgImage={car.images[0]}>
+        <div style={{ textAlign: 'center' }}>
+          <h1 style={{ fontSize: '4rem', marginBottom: '20px' }}>{car.name}</h1>
+          <p style={{ fontSize: '1.5rem' }}>{car.price}</p>
+        </div>
+      </HeroSection>
+      
+      <div style={{ padding: '50px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '50px', marginBottom: '50px' }}>
+          <div>
+            <h2 style={{ marginBottom: '20px' }}>Overview</h2>
+            <p style={{ lineHeight: '1.6', fontSize: '1.1rem' }}>{car.description}</p>
+          </div>
+          <div>
+            <h2 style={{ marginBottom: '20px' }}>Key Specifications</h2>
+            <div style={{ display: 'grid', gap: '15px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', padding: '10px 0' }}>
+                <span>Horsepower</span>
+                <strong>{car.horsepower} HP</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', padding: '10px 0' }}>
+                <span>Top Speed</span>
+                <strong>{car.topSpeed} km/h</strong>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', padding: '10px 0' }}>
+                <span>Acceleration</span>
+                <strong>{car.acceleration}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <SpecsSection>
-          <SpecsTitle>Technical Specifications</SpecsTitle>
-          <SpecsGrid>
-            <SpecItem>
-              <SpecLabel>Engine:</SpecLabel>
-              {car.technicalSpecs.engine}
-            </SpecItem>
-            <SpecItem>
-              <SpecLabel>Horsepower:</SpecLabel>
-              {car.horsepower} HP
-            </SpecItem>
-            <SpecItem>
-              <SpecLabel>Top Speed:</SpecLabel>
-              {car.topSpeed} km/h
-            </SpecItem>
-            <SpecItem>
-              <SpecLabel>Acceleration (0-100 km/h):</SpecLabel>
-              {car.acceleration}
-            </SpecItem>
-            <SpecItem>
-              <SpecLabel>Transmission:</SpecLabel>
-              {car.technicalSpecs.transmission}
-            </SpecItem>
-            <SpecItem>
-              <SpecLabel>Drivetrain:</SpecLabel>
-              {car.technicalSpecs.drivetrain}
-            </SpecItem>
-          </SpecsGrid>
-        </SpecsSection>
-
-        <SpecsSection>
-          <SpecsTitle>Features</SpecsTitle>
-          <ul>
+        <div style={{ marginBottom: '50px' }}>
+          <h2 style={{ marginBottom: '20px' }}>Features</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
             {car.features.map((feature, index) => (
-              <li key={index}>{feature}</li>
+              <div key={index} style={{ background: '#f5f5f5', padding: '20px', borderRadius: '5px' }}>
+                {feature}
+              </div>
             ))}
-          </ul>
-        </SpecsSection>
-      </CarDetail>
-    </ModelDetailContainer>
+          </div>
+        </div>
+      </div>
+    </DetailContainer>
   );
 };
 
