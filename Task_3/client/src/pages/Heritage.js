@@ -100,6 +100,8 @@ const GalleryItem = styled.div`
 
   img {
     width: 100%;
+    height: 250px;
+    object-fit: cover;
     display: block;
     border-radius: 10px;
   }
