@@ -6,61 +6,129 @@ const HeritageContainer = styled.div`
   min-height: 100vh;
 `;
 
-const HeritageContent = styled.div`
-  max-width: 1200px;
+const HeroSection = styled.div`
+  height: 60vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+              url('/images/heritage-bg.jpg') center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+`;
+
+const ContentSection = styled.div`
+  max-width: 1000px;
   margin: 0 auto;
   padding: 50px 20px;
 `;
 
-const Title = styled.h1`
-  font-size: 3rem;
+const Timeline = styled.div`
+  position: relative;
+  max-width: 800px;
+  margin: 50px auto;
+`;
+
+const TimelineItem = styled.div`
+  display: flex;
+  margin-bottom: 50px;
+  
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+    
+    .content {
+      text-align: right;
+      margin-right: 30px;
+      margin-left: 0;
+    }
+  }
+`;
+
+const Year = styled.div`
+  background: #BE0F34;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  min-width: 100px;
   text-align: center;
-  margin-bottom: 50px;
 `;
 
-const HistorySection = styled.section`
-  margin-bottom: 50px;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: ${props => props.theme.colors.secondary};
-`;
-
-const Paragraph = styled.p`
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+const Content = styled.div`
+  margin-left: 30px;
+  flex: 1;
+  
+  h3 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  p {
+    line-height: 1.6;
+    color: #666;
+  }
 `;
 
 const Heritage = () => {
+  const timelineEvents = [
+    {
+      year: '1909',
+      title: 'Foundation',
+      description: 'Ettore Bugatti establishes Automobiles E. Bugatti in Molsheim, France.'
+    },
+    {
+      year: '1910',
+      title: 'First Production Car',
+      description: 'The Type 13 begins production, marking the start of Bugatti\'s legacy.'
+    },
+    {
+      year: '1924',
+      title: 'Racing Dominance',
+      description: 'Type 35 begins its legendary racing career, winning over 2,000 races.'
+    },
+    {
+      year: '1931',
+      title: 'Royale',
+      description: 'Type 41 Royale represents the pinnacle of luxury and automotive excellence.'
+    },
+    {
+      year: '2005',
+      title: 'Modern Era',
+      description: 'Veyron 16.4 redefines hyper sports cars with 1,001 horsepower.'
+    },
+    {
+      year: '2016',
+      title: 'Chiron',
+      description: 'The Chiron continues the legacy with unprecedented performance and luxury.'
+    }
+  ];
+
   return (
     <HeritageContainer>
-      <HeritageContent>
-        <Title>BUGATTI HERITAGE</Title>
+      <HeroSection>
+        <div>
+          <h1 style={{ fontSize: '4rem', marginBottom: '20px' }}>HERITAGE</h1>
+          <p style={{ fontSize: '1.2rem' }}>A century of automotive excellence</p>
+        </div>
+      </HeroSection>
+
+      <ContentSection>
+        <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '50px' }}>
+          THE BUGATTI LEGACY
+        </h2>
         
-        <HistorySection>
-          <SectionTitle>The Beginning</SectionTitle>
-          <Paragraph>
-            Founded in 1909 by Italian-born Ettore Bugatti, the brand quickly established itself as a manufacturer of high-performance automobiles. The company's reputation was built on the success of its racing cars and the unparalleled luxury of its road cars.
-          </Paragraph>
-        </HistorySection>
-
-        <HistorySection>
-          <SectionTitle>The Golden Era</SectionTitle>
-          <Paragraph>
-            The 1920s and 1930s were the golden era for Bugatti, with the Type 35 becoming one of the most successful racing cars in history. The Type 41 Royale represented the pinnacle of automotive luxury, while the Type 57 became a classic of the 1930s.
-          </Paragraph>
-        </HistorySection>
-
-        <HistorySection>
-          <SectionTitle>Revival</SectionTitle>
-          <Paragraph>
-            After several decades of dormancy, the brand was revived in the 1990s and later acquired by the Volkswagen Group. The Veyron, introduced in 2005, redefined the hyper sports car segment with its staggering performance figures. It was followed by the Chiron in 2016, pushing the boundaries even further.
-          </Paragraph>
-        </HistorySection>
-      </HeritageContent>
+        <Timeline>
+          {timelineEvents.map((event, index) => (
+            <TimelineItem key={index}>
+              <Year>{event.year}</Year>
+              <Content className="content">
+                <h3>{event.title}</h3>
+                <p>{event.description}</p>
+              </Content>
+            </TimelineItem>
+          ))}
+        </Timeline>
+      </ContentSection>
     </HeritageContainer>
   );
 };
