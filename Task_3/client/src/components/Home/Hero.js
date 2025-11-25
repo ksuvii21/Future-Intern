@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = styled.section`
   position: relative;
@@ -109,10 +110,15 @@ const CTAButton = styled(motion.button)`
 
 const Hero = () => {
   const videoRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Future logic can go here
   }, []);
+
+  const onDiscoverMoreClick = () => {
+    navigate('/bugatti-overview');
+  };
 
   return (
     <HeroSection>
@@ -151,6 +157,7 @@ const Hero = () => {
         <CTAButton
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={onDiscoverMoreClick}
         >
           <span>DISCOVER MORE</span>
         </CTAButton>
