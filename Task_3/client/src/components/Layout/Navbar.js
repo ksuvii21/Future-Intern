@@ -7,7 +7,7 @@ const Nav = styled.nav`
   position: fixed;
   top: 0;
   width: 100%;
-  background: ${props => props.$scrolled ? 'rgba(0, 0, 0, 0.95)' : 'transparent'};
+  background: ${props => props.$scrolled || props.$modelsPage ? 'rgba(0, 0, 0, 0.95)' : 'transparent'};
   padding: 20px 0;
   transition: all 0.3s ease;
   z-index: 1000;
@@ -78,6 +78,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const isModelsPage = location.pathname === "/models";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,7 +94,7 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <Nav $scrolled={scrolled}>
+    <Nav $scrolled={scrolled} $modelsPage={isModelsPage}>
       <NavContainer>
         <Logo to="/">BUGATTI</Logo>
         
