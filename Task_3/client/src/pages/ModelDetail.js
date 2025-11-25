@@ -110,7 +110,7 @@ const ModelDetail = () => {
 
   return (
     <DetailContainer>
-      <HeroSection $bgImage={car.images[0]}>
+      <HeroSection $bgImage={`http://localhost:5000${car.images[0]}`}>
         <HeroContent>
           <HeroTitle>{car.name}</HeroTitle>
           <HeroPrice>{car.price}</HeroPrice>
