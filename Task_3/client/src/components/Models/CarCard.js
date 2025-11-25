@@ -18,8 +18,8 @@ const Card = styled(motion.div)`
 
 const CardImage = styled.div`
   width: 100%;
-  height: 300px;
-  background-image: url(${props => props.image});
+  height: 400px;
+  background-image: url(${props => props.$image});
   background-size: cover;
   background-position: center;
   position: relative;
@@ -30,40 +30,40 @@ const CardContent = styled.div`
 `;
 
 const CardTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
   color: ${props => props.theme.colors.primary};
 `;
 
 const CardPrice = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: ${props => props.theme.colors.secondary};
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-weight: bold;
 `;
 
 const CardSpecs = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 15px;
+  margin-bottom: 25px;
 `;
 
 const SpecItem = styled.div`
   text-align: center;
-  padding: 10px;
+  padding: 15px;
   background: ${props => props.theme.colors.lightGray};
   border-radius: 5px;
 `;
 
 const SpecValue = styled.div`
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: bold;
   color: ${props => props.theme.colors.primary};
 `;
 
 const SpecLabel = styled.div`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: ${props => props.theme.colors.gray};
   text-transform: uppercase;
 `;
@@ -73,7 +73,7 @@ const CardButton = styled(Link)`
   background: ${props => props.theme.colors.primary};
   color: white;
   text-align: center;
-  padding: 12px 0;
+  padding: 14px 0;
   text-decoration: none;
   border-radius: 5px;
   transition: background 0.3s ease;
@@ -89,7 +89,7 @@ const CarCard = ({ car }) => {
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <CardImage image={car.images[0]} />
+      <CardImage $image={car.images[0]} />
       <CardContent>
         <CardTitle>{car.name}</CardTitle>
         <CardPrice>{car.price}</CardPrice>
