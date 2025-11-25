@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "A New Era of Performance",
+    "date": "2025-10-26",
+    "imageUrl": "/images/news1.jpg",
+    "summary": "We look back at the record-breaking run that redefined what a hypercar can achieve."
+  },
+  {
+    "id": 2,
+    "title": "The Art of Aerodynamics",
+    "date": "2025-09-15",
+    "imageUrl": "/images/news2.jpg",
+    "summary": "An inside look at how our engineers sculpt air to create unparalleled stability and speed."
+  }
+]
