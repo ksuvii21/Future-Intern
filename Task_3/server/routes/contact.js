@@ -6,7 +6,18 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
-    
+
+    // Basic validation
+    if (!name || !email || !message) {
+      return res.status(400).json({ message: 'Name, email, and message are required' });
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: 'Invalid email format' });
+    }
+
     const contact = new Contact({
       name,
       email,
@@ -17,7 +28,8 @@ router.post('/', async (req, res) => {
     await contact.save();
     res.status(201).json({ message: 'Message sent successfully' });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error('Error saving contact message:', error);
+    res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 });
 
