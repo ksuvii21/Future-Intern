@@ -100,9 +100,22 @@ const ModelsPreview = () => {
               height: '300px',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              position: 'relative'
             }}>
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>{car.name}</h3>
+              <img 
+                src={car.images[0]} 
+                alt={car.name} 
+                style={{
+                  position: 'absolute',
+                  top: '10px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  maxHeight: '140px',
+                  objectFit: 'contain'
+                }} 
+              />
+              <h3 style={{ fontSize: '1.5rem', marginTop: '160px', marginBottom: '10px' }}>{car.name}</h3>
               <p style={{ color: '#BE0F34', fontSize: '1.2rem', marginBottom: '20px' }}>{car.price}</p>
               <p style={{ marginBottom: '20px' }}>{car.horsepower} HP • {car.topSpeed} km/h</p>
               <Link 
