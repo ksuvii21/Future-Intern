@@ -139,7 +139,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const isSpecialPage = location.pathname.startsWith('/models') || location.pathname.startsWith('/heritage');
+  const isSpecialPage = location.pathname.startsWith('/models') || location.pathname.startsWith('/heritage') || location.pathname.startsWith('/contact');
 
   useEffect(() => {
     const handleScroll = () => {
