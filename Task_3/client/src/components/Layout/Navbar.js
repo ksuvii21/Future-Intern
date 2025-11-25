@@ -78,7 +78,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const isModelsPage = location.pathname === "/models";
+  const isModelsPage = location.pathname.startsWith("/models");
 
   useEffect(() => {
     const handleScroll = () => {
