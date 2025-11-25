@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Car = require('./models/Car');
 
-const cars = [ // added news cars 
+const cars = [ 
   {
     name: "Chiron Super Sport",
     model: "Chiron",
