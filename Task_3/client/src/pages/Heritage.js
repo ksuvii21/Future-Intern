@@ -69,6 +69,87 @@ const Content = styled.div`
   }
 `;
 
+const GallerySection = styled.div`
+  max-width: 900px;
+  margin: 50px auto;
+  text-align: center;
+`;
+
+const GalleryTitle = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #111;
+`;
+
+const GalleryGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+`;
+
+const GalleryItem = styled.div`
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+  }
+
+  p {
+    margin-top: 10px;
+    color: #444;
+    font-weight: 600;
+  }
+`;
+
+const FoundersSection = styled.div`
+  max-width: 900px;
+  margin: 50px auto 100px;
+  text-align: center;
+`;
+
+const FoundersTitle = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #111;
+`;
+
+const FounderCard = styled.div`
+  display: inline-block;
+  width: 250px;
+  margin: 10px 15px;
+  text-align: center;
+  vertical-align: top;
+
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin-bottom: 15px;
+  }
+
+  h3 {
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: #666;
+    font-size: 0.95rem;
+  }
+`;
+
 const Heritage = () => {
   const timelineEvents = [
     {
@@ -92,6 +173,16 @@ const Heritage = () => {
       description: 'Type 41 Royale represents the pinnacle of luxury and automotive excellence.'
     },
     {
+      year: '1952',
+      title: 'Post-War Revival',
+      description: 'Bugatti resumes limited production, focusing on innovation.'
+    },
+    {
+      year: '1987',
+      title: 'Veyron Development Begins',
+      description: 'Work commences on a new hypercar that will redefine performance standards.'
+    },
+    {
       year: '2005',
       title: 'Modern Era',
       description: 'Veyron 16.4 redefines hyper sports cars with 1,001 horsepower.'
@@ -100,6 +191,37 @@ const Heritage = () => {
       year: '2016',
       title: 'Chiron',
       description: 'The Chiron continues the legacy with unprecedented performance and luxury.'
+    },
+    {
+      year: '2020',
+      title: 'Divo Introduction',
+      description: 'Divo ensures cutting-edge aerodynamics and handling technology.'
+    }
+  ];
+
+  const galleryItems = [
+    { src: '/images/heritage1.jpg', caption: 'Vintage Bugatti Type 35' },
+    { src: '/images/heritage2.jpg', caption: 'Bugatti Royale in Classic Showroom' },
+    { src: '/images/heritage3.jpg', caption: 'Ettore Bugatti Portrait' },
+    { src: '/images/heritage4.jpg', caption: 'Classic Bugatti Workshop' },
+    { src: '/images/heritage5.jpg', caption: 'Bugatti Racing Legacy' }
+  ];
+
+  const founders = [
+    {
+      name: 'Ettore Bugatti',
+      image: '/images/ettore.jpg',
+      bio: 'Founder and visionary behind the Bugatti brand, renowned for engineering excellence.'
+    },
+    {
+      name: 'Jean Bugatti',
+      image: '/images/jean.jpg',
+      bio: 'Ettore’s son, contributed to design and innovation including the iconic Type 57SC Atlantic.'
+    },
+    {
+      name: 'Wolfgang Dürheimer',
+      image: '/images/wolfgang.jpg',
+      bio: 'Former Bugatti CEO who led the development of the modern hypercar era.'
     }
   ];
 
@@ -129,6 +251,30 @@ const Heritage = () => {
           ))}
         </Timeline>
       </ContentSection>
+
+      <GallerySection>
+        <GalleryTitle>Vintage Bugatti Gallery</GalleryTitle>
+        <GalleryGrid>
+          {galleryItems.map((item, idx) => (
+            <GalleryItem key={idx}>
+              <img src={item.src} alt={item.caption} />
+              <p>{item.caption}</p>
+            </GalleryItem>
+          ))}
+        </GalleryGrid>
+      </GallerySection>
+
+      <FoundersSection>
+        <FoundersTitle>Founders & Legends</FoundersTitle>
+        {founders.map((founder, idx) => (
+          <FounderCard key={idx}>
+            <img src={founder.image} alt={founder.name} />
+            <h3>{founder.name}</h3>
+            <p>{founder.bio}</p>
+          </FounderCard>
+        ))}
+      </FoundersSection>
+
     </HeritageContainer>
   );
 };
