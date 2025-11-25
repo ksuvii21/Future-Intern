@@ -4,36 +4,36 @@ import styled, { keyframes } from 'styled-components';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
 // Glassmorphism background with shadow on scroll
-const Nav = styled.nav\`
+const Nav = styled.nav`
   position: fixed;
   top: 0;
   width: 100%;
-  background: \${props =>
+  background: ${props =>
     props.$scrolled || props.$isSpecialPage
       ? 'rgba(0, 0, 0, 0.85)'
       : 'transparent'};
-  backdrop-filter: \${props => (props.$scrolled || props.$isSpecialPage ? 'blur(10px)' : 'none')};
-  box-shadow: \${props =>
+  backdrop-filter: ${props => (props.$scrolled || props.$isSpecialPage ? 'blur(10px)' : 'none')};
+  box-shadow: ${props =>
     props.$scrolled || props.$isSpecialPage
       ? '0 4px 30px rgba(0, 0, 0, 0.5)'
       : 'none'};
   padding: 20px 0;
   transition: all 0.4s ease;
   z-index: 1000;
-\`;
+`;
 
 // Container keeps nav items centered with max width
-const NavContainer = styled.div\`
+const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-\`;
+`;
 
 // Gradient animation for Logo text color
-const gradientAnimation = keyframes\`
+const gradientAnimation = keyframes`
   0% {
     background-position: 0% 50%;
   }
@@ -43,14 +43,14 @@ const gradientAnimation = keyframes\`
   100% {
     background-position: 0% 50%;
   }
-\`;
+`;
 
 // Stylish Logo with gradient and letter-spacing
-const Logo = styled(Link)\`
+const Logo = styled(Link)`
   font-family: 'Helvetica Neue', Arial, sans-serif;
   background: linear-gradient(270deg, #BE0F34, #FFFFFF, #BE0F34);
   background-size: 600% 600%;
-  animation: \${gradientAnimation} 6s ease infinite;
+  animation: ${gradientAnimation} 6s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
@@ -64,9 +64,9 @@ const Logo = styled(Link)\`
   &:hover {
     filter: brightness(1.2);
   }
-\`;
+`;
 
-const NavMenu = styled.ul\`
+const NavMenu = styled.ul`
   display: flex;
   list-style: none;
   gap: 48px;
@@ -75,7 +75,7 @@ const NavMenu = styled.ul\`
   @media (max-width: 768px) {
     position: fixed;
     top: 0;
-    left: \${props => (props.$isOpen ? '0' : '-100%')};
+    left: ${props => (props.$isOpen ? '0' : '-100%')};
     width: 100%;
     height: 100vh;
     background: rgba(0, 0, 0, 0.95);
@@ -87,13 +87,13 @@ const NavMenu = styled.ul\`
     gap: 32px;
     font-size: 18px;
   }
-\`;
+`;
 
 // NavItem styling remains the same
 const NavItem = styled.li``;
 
 // Animated underline on hover using Bugatti red
-const NavLink = styled(Link)\`
+const NavLink = styled(Link)`
   color: white;
   text-decoration: none;
   font-size: 16px;
@@ -120,9 +120,9 @@ const NavLink = styled(Link)\`
   &:hover:after {
     width: 100%;
   }
-\`;
+`;
 
-const MobileMenu = styled.div\`
+const MobileMenu = styled.div`
   display: none;
   color: white;
   font-size: 28px;
@@ -132,7 +132,7 @@ const MobileMenu = styled.div\`
   @media (max-width: 768px) {
     display: block;
   }
-\`;
+`;
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
