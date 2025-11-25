@@ -12,7 +12,8 @@ import project5Image from './assets/project5.png';
 import project6Image from './assets/project6.avif';
 
 import FloatingLines from './components/FloatingLines';
-import Hyperspeed, { hyperspeedPresets } from './components/Hyperspeed';
+import Hyperspeed from './components/Hyperspeed';
+import { hyperspeedPresets } from './components/HyperSpeedPresets';
 
 const Header = () => (
   <header id="header">
