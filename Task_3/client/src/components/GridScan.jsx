@@ -248,8 +248,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
   vec3 gridCol = uLinesColor * lineVis * fade;
   vec3 scanCol = uScanColor * combinedPulse;
   vec3 scanAura = uScanColor * combinedAura;
-
-    color = gridCol + scanCol + scanAura;
+  color = gridCol + scanCol + scanAura;
 
   float n = fract(sin(dot(gl_FragCoord.xy + vec2(iTime * 123.4), vec2(12.9898,78.233))) * 43758.5453123);
   color += (n - 0.5) * uNoise;
