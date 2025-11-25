@@ -595,10 +595,12 @@ function App() {
     // Navbar scroll effect
     const handleScroll = () => {
       const header = document.getElementById('header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
+      if (header) {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
       }
     };
 
@@ -617,7 +619,9 @@ function App() {
     // Mobile menu toggle
     const handleHamburgerClick = () => {
       const navLinks = document.querySelector('.nav-links');
-      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+      if (navLinks) {
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -626,7 +630,10 @@ function App() {
       anchor.addEventListener('click', smoothScroll);
     });
 
-    document.querySelector('.hamburger').addEventListener('click', handleHamburgerClick);
+    const hamburger = document.querySelector('.hamburger');
+    if (hamburger) {
+      hamburger.addEventListener('click', handleHamburgerClick);
+    }
 
     return () => {
       clearTimeout(timer);
@@ -634,7 +641,9 @@ function App() {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.removeEventListener('click', smoothScroll);
       });
-      document.querySelector('.hamburger').removeEventListener('click', handleHamburgerClick);
+      if (hamburger) {
+        hamburger.removeEventListener('click', handleHamburgerClick);
+      }
     };
   }, []);
   
