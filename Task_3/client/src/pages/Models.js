@@ -9,6 +9,20 @@ const ModelsContainer = styled.div`
   background: #f5f5f5;
 `;
 
+const ModelsHero = styled.div`
+  height: 60vh;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url('/images/chiron.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+`;
+
 const ModelsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -50,7 +64,7 @@ const Models = () => {
 
   return (
     <ModelsContainer>
-      <PageTitle>OUR MODELS</PageTitle>
+      <ModelsHero>Our Models</ModelsHero>
       <ModelsGrid>
         {cars.map(car => (
           <CarCard key={car._id} car={car} />
