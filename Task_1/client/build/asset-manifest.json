@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7a659096.css",
+    "main.js": "/static/js/main.db392ce5.js",
+    "static/media/Zidio_Development_Internship_Certificate.jpg": "/static/media/Zidio_Development_Internship_Certificate.ce9cdf727c7c3ae5bdf4.jpg",
+    "static/media/project5.png": "/static/media/project5.67f9aa3f42235be12cb5.png",
+    "static/media/Zidio_Development_Internship_Certificate.pdf": "/static/media/Zidio_Development_Internship_Certificate.839fda7d33081acb29ae.pdf",
+    "static/media/project2.png": "/static/media/project2.9e974b2d9e8140b236a9.png",
+    "static/media/profile.png": "/static/media/profile.33ea452e577703b3739a.png",
+    "static/media/project3.png": "/static/media/project3.1f26bc08f43f2b59a943.png",
+    "static/media/project1.png": "/static/media/project1.41a9fc443dc30b61773d.png",
+    "static/media/Future_Intens_Internship_Certificate.jpg": "/static/media/Future_Intens_Internship_Certificate.0f0a37e8fdc79bdd56f3.jpg",
+    "static/media/Cognifyz_Technologies_Internship_Certificate.jpg": "/static/media/Cognifyz_Technologies_Internship_Certificate.198f7a99f8f2d5c6cd43.jpg",
+    "static/media/project4.png": "/static/media/project4.60c36aa06472c8fad5c2.png",
+    "static/media/Future_Intens_Internship_Certificate.pdf": "/static/media/Future_Intens_Internship_Certificate.e9d712d938839ae9ae6a.pdf",
+    "static/media/Cognifyz_Technologies_Internship_Certificate.pdf": "/static/media/Cognifyz_Technologies_Internship_Certificate.492adfa3cabdad5f48b6.pdf",
+    "static/media/Certificate_InAmigos.png": "/static/media/Certificate_InAmigos.5f2aa53c0037fe5c63f4.png",
+    "static/media/cognifyz_logo.webp": "/static/media/cognifyz_logo.1766bdaecb6ab4955ce4.webp",
+    "static/media/project6.avif": "/static/media/project6.20e91082fd00c5cccdd9.avif",
+    "index.html": "/index.html",
+    "main.7a659096.css.map": "/static/css/main.7a659096.css.map",
+    "main.db392ce5.js.map": "/static/js/main.db392ce5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7a659096.css",
+    "static/js/main.db392ce5.js"
+  ]
+}
