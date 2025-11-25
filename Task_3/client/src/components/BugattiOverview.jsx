@@ -7,7 +7,7 @@ const BugattiOverview = () => {
   return (
     <>
       <Hyperspeed />
-      <GridScan />
+      <GridScan enableWebcam={false} />
       <div className="overview-container">
         <header className="overview-header">
           <h1>BUGATTI</h1>
