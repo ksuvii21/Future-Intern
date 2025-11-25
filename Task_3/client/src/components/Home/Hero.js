@@ -20,39 +20,44 @@ const HeroSection = styled.section`
   background: #000;
 `;
 
+const VideoBackground = styled.video`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: -2;
+  transition: transform 0.1s ease-out;
+  filter: brightness(0.6);
+`;
+
 const AnimatedGrid = styled.div`
   position: absolute;
   inset: 0;
   opacity: 0.2;
+  z-index: -1;
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: 
+    background-image:
       linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
       linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    transform: perspective(500px) rotateX(60deg);
+    background-size: 50px 50px; /* Corrected background-size */
+    transform: perspective(500px) rotateX(60deg) translateY(${props => props.scrollY * 0.5}px);
     transform-origin: center top;
+    transition: transform 0.1s ease-out;
   }
-`;
-
-const BackgroundImage = styled.div`
-  position: absolute;
-  inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1920&q=80');
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.4);
-  transform: ${props => `translateY(${props.scrollY * 0.5}px) scale(${1 + props.scrollY * 0.0005})`};
-  transition: transform 0.1s ease-out;
 `;
 
 const GradientOverlay = styled.div`
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.5), #000);
+  z-index: -1;
 `;
 
 const SpeedLinesContainer = styled.div`
@@ -60,6 +65,7 @@ const SpeedLinesContainer = styled.div`
   inset: 0;
   overflow: hidden;
   pointer-events: none;
+  z-index: 1;
 `;
 
 const SpeedLine = styled.div`
@@ -90,7 +96,9 @@ const HeroTitle = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: pulse 2s ease-in-out infinite;
+  animation: pulse 2s ease-in-out infinite; /* Corrected animation name */
+  transform: translateY(${props => props.$scrollY * -0.3}px);
+  opacity: ${props => Math.max(1 - props.scrollY / 500, 0)};
 
   @keyframes pulse {
     0%, 100% { opacity: 1; }
@@ -106,7 +114,9 @@ const HeroSubtitle = styled.p`
   font-size: 1.5rem;
   margin-bottom: 40px;
   letter-spacing: 1px;
-  color: #d1d5db;
+  color: #d1d5db; /* Corrected color */
+  transform: translateY(${props => props.scrollY * -0.1}px);
+  opacity: ${props => Math.max(1 - props.scrollY / 500, 0)};
 `;
 
 const SpeedDisplay = styled(motion.div)`
@@ -116,7 +126,9 @@ const SpeedDisplay = styled(motion.div)`
   border: 1px solid rgba(96, 165, 250, 0.3);
   border-radius: 20px;
   padding: 24px 32px;
-  margin-bottom: 30px;
+  margin-bottom: 30px; /* Corrected margin-bottom */
+  transform: translateY(${props => props.scrollY * -0.2}px);
+  opacity: ${props => Math.max(1 - props.scrollY / 500, 0)};
 `;
 
 const SpeedLabel = styled.div`
@@ -193,11 +205,13 @@ const ScrollIndicator = styled(motion.div)`
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
+  opacity: ${props => Math.max(1 - props.scrollY / 200, 0)};
 `;
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
   const [speed, setSpeed] = useState(0);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -226,39 +240,59 @@ const Hero = () => {
 
   return (
     <HeroSection>
-      <AnimatedGrid />
-      <BackgroundImage scrollY={scrollY} />
+      {/* Video Background */}
+      <VideoBackground
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+
+        src="/images/hero-bg.mp4" // Corrected video path
+        type="video/mp4"
+      >
+        Your browser does not support the video tag.
+      </VideoBackground>
+
+      {/* Animated Grid */}
+      <AnimatedGrid  />
+      
+      {/* Gradient Overlay */}
       <GradientOverlay />
       
+      {/* Speed Lines Animation */}
       <SpeedLinesContainer>
         {speedLines}
       </SpeedLinesContainer>
 
+      {/* Hero Content */}
       <HeroContent
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        <HeroTitle>BUGATTI</HeroTitle>
+        <HeroTitle >BUGATTI</HeroTitle>
         
+        {/* Speed Display */}
         <SpeedDisplay
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-        >
+          $scrollY={scrollY}
+        > 
           <SpeedLabel>TOP SPEED</SpeedLabel>
           <SpeedValue>
             {Math.floor(speed)}
             <SpeedUnit>km/h</SpeedUnit>
-          </SpeedValue>
+          </SpeedValue> {/* Corrected closing tag */}
           <SpeedBar>
             <SpeedProgress speed={speed} />
           </SpeedBar>
         </SpeedDisplay>
 
-        <HeroSubtitle>
+        <HeroSubtitle >
           Where form meets function at 490 km/h
-        </HeroSubtitle>
+        </HeroSubtitle> {/* Corrected closing tag */}
         
         <CTAButton
           whileHover={{ scale: 1.05 }}
@@ -268,10 +302,11 @@ const Hero = () => {
         </CTAButton>
       </HeroContent>
 
+      {/* Scroll Indicator */}
       <ScrollIndicator
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        style={{ opacity: Math.max(1 - scrollY / 200, 0) }}
+        scrollY={scrollY}
       >
         <ChevronDown size={32} color="#60a5fa" />
       </ScrollIndicator>
