@@ -6,6 +6,8 @@ import axios from 'axios';
 const DetailContainer = styled.div`
   padding-top: 100px;
   min-height: 100vh;
+  background: #fff;
+  color: #333;
 `;
 
 const HeroSection = styled.div`
@@ -19,6 +21,69 @@ const HeroSection = styled.div`
   color: white;
 `;
 
+const HeroContent = styled.div`
+  text-align: center;
+`;
+
+const HeroTitle = styled.h1`
+  font-size: 4rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+`;
+
+const HeroPrice = styled.p`
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
+
+const ContentSection = styled.div`
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-align: center;
+  color: ${props => props.theme.colors.primary};
+`;
+
+const OverviewGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 50px;
+  margin-bottom: 80px;
+  align-items: center;
+`;
+
+const OverviewText = styled.p`
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: #555;
+`;
+
+const SpecsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+`;
+
+const SpecItem = styled.div`
+  background: #f5f5f5;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 5px solid ${props => props.theme.colors.secondary};
+`;
+
+const SpecLabel = styled.div`
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 10px;
+`;
+
 const ModelDetail = () => {
   const { id } = useParams();
   const [car, setCar] = useState(null);
@@ -26,32 +91,18 @@ const ModelDetail = () => {
 
   useEffect(() => {
     // For now, use mock data. Replace with actual API call
-    const mockCar = {
-      _id: id,
-      name: 'Chiron Super Sport',
-      model: 'Chiron',
-      price: '$3,800,000',
-      horsepower: 1578,
-      topSpeed: 440,
-      acceleration: '0-100 km/h in 2.4 seconds',
-      description: 'The ultimate hyper sports car, representing the pinnacle of automotive engineering.',
-      images: ['/images/chiron-hero.jpg'],
-      features: [
-        '8.0-liter quad-turbo W16 engine',
-        'Carbon fiber monocoque',
-        'Advanced aerodynamics',
-        'Customizable interior'
-      ],
-      technicalSpecs: {
-        engine: '8.0L W16 Quad-Turbo',
-        transmission: '7-speed dual-clutch',
-        drivetrain: 'AWD',
-        fuelEconomy: 'City 8 / Highway 15 mpg'
+    const fetchCar = async () => {
+      try {
+        const { data } = await axios.get(`http://localhost:5000/api/cars/${id}`);
+        setCar(data);
+      } catch (error) {
+        console.error("Error fetching car details:", error);
+      } finally {
+        setLoading(false);
       }
     };
-    
-    setCar(mockCar);
-    setLoading(false);
+
+    fetchCar();
   }, [id]);
 
   if (loading) return <div>Loading...</div>;
@@ -60,48 +111,30 @@ const ModelDetail = () => {
   return (
     <DetailContainer>
       <HeroSection $bgImage={car.images[0]}>
-        <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: '4rem', marginBottom: '20px' }}>{car.name}</h1>
-          <p style={{ fontSize: '1.5rem' }}>{car.price}</p>
-        </div>
+        <HeroContent>
+          <HeroTitle>{car.name}</HeroTitle>
+          <HeroPrice>{car.price}</HeroPrice>
+        </HeroContent>
       </HeroSection>
       
-      <div style={{ padding: '50px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '50px', marginBottom: '50px' }}>
+      <ContentSection>
+        <OverviewGrid>
           <div>
-            <h2 style={{ marginBottom: '20px' }}>Overview</h2>
-            <p style={{ lineHeight: '1.6', fontSize: '1.1rem' }}>{car.description}</p>
+            <SectionTitle>OVERVIEW</SectionTitle>
+            <OverviewText>{car.description}</OverviewText>
           </div>
-          <div>
-            <h2 style={{ marginBottom: '20px' }}>Key Specifications</h2>
-            <div style={{ display: 'grid', gap: '15px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', padding: '10px 0' }}>
-                <span>Horsepower</span>
-                <strong>{car.horsepower} HP</strong>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', padding: '10px 0' }}>
-                <span>Top Speed</span>
-                <strong>{car.topSpeed} km/h</strong>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #eee', padding: '10px 0' }}>
-                <span>Acceleration</span>
-                <strong>{car.acceleration}</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div style={{ marginBottom: '50px' }}>
-          <h2 style={{ marginBottom: '20px' }}>Features</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
-            {car.features.map((feature, index) => (
-              <div key={index} style={{ background: '#f5f5f5', padding: '20px', borderRadius: '5px' }}>
-                {feature}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+          <SpecsGrid>
+            <SpecItem>
+              <SpecLabel>Power</SpecLabel>
+              <HeroPrice>{car.horsepower} HP</HeroPrice>
+            </SpecItem>
+            <SpecItem>
+              <SpecLabel>Top Speed</SpecLabel>
+              <HeroPrice>{car.topSpeed} km/h</HeroPrice>
+            </SpecItem>
+          </SpecsGrid>
+        </OverviewGrid>
+      </ContentSection>
     </DetailContainer>
   );
 };
