@@ -136,7 +136,7 @@ const MobileMenu = styled.div`
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);//
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const isSpecialPage = location.pathname.startsWith('/models') || location.pathname.startsWith('/heritage') || location.pathname.startsWith('/contact');
