@@ -148,7 +148,7 @@ header {
 /* 🧭 Navigation Menu */
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   position: relative;
 }
@@ -156,7 +156,7 @@ nav {
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 30px;
+  gap: 10px;
 }
 
 .nav-links li {
@@ -195,6 +195,7 @@ nav {
 /* Dropdown Menu */
 .dropdown {
   position: relative;
+  display: inline-block;
 }
 
 .dropdown-menu {
