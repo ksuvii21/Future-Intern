@@ -52,7 +52,7 @@ const Hero = () => (
         <p>Passionate MERN stack developer building scalable applications and growing through hands-on experience in collaborative environments.</p>
         <div className="hero-btns">
           <a href="#projects" className="btn btn-primary">View My Projects</a>
-          <a href="./resume.pdf" className="btn btn-outline" target="_blank" rel="noopener noreferrer">View Resume</a>
+          <a href="./assets/resume.pdf" className="btn btn-outline" target="_blank" rel="noopener noreferrer">View Resume</a>
         </div>
       </div>
     </div>
