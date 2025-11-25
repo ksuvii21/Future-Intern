@@ -1,0 +1,141 @@
+/* 1. Design System & Variables */
+:root {
+  --primary-blue: #051c2c;
+  --accent-red: #e60000;
+  --text-light: #f0f0f0;
+  --text-dark: #333;
+  --bg-dark: #111;
+  --bg-light: #fff;
+  --font-main: 'Montserrat', sans-serif;
+  --font-serif: 'Lora', serif;
+}
+
+/* 2. Global Styles */
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  min-height: calc(100vh - 120px); /* Full height minus header/footer */
+  padding-top: 60px; /* Space for fixed header */
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+}
+
+a {
+  color: var(--accent-red);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* 3. Component Styles */
+
+/* Header & Footer */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 60px;
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  z-index: 100;
+}
+.main-header .logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.main-header nav a {
+  color: var(--text-light);
+  margin-left: 1.5rem;
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+}
+.main-header nav a.active {
+  border-bottom-color: var(--accent-red);
+}
+
+.main-footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  height: 60px;
+}
+
+/* Hero Section */
+.hero {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url('/images/hero-bg.jpg') no-repeat center center/cover;
+  color: var(--text-light);
+}
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--accent-red);
+  color: var(--text-light);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Grid & Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+.card {
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.card-content {
+  padding: 1rem;
+}
+
+/* Form */
+.contact-form { display: flex; flex-direction: column; gap: 1rem; max-width: 500px; }
+.contact-form input, .contact-form textarea { padding: 0.75rem; border: 1px solid #ccc; border-radius: 3px; }
+.form-status { margin-top: 1rem; font-weight: bold; }
