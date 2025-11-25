@@ -86,7 +86,7 @@ const Models = () => {
 
   return (
     <ModelsContainer>
-      <ModelsHero $image={`http://localhost:5000${heroImage}`}>
+      <ModelsHero>
         <HeroImage $image={heroImage} />
         <HeroText>
           <HeroTitle>Our Models</HeroTitle>
