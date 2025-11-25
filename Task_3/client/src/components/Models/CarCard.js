@@ -89,7 +89,7 @@ const CarCard = ({ car }) => {
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <CardImage $image={car.images[0]} />
+      <CardImage $image={`http://localhost:5000${car.images[0]}`} />
       <CardContent>
         <CardTitle>{car.name}</CardTitle>
         <CardPrice>{car.price}</CardPrice>
