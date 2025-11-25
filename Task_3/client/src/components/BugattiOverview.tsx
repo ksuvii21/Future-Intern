@@ -1,5 +1,5 @@
 import React from 'react';
-import Hyperspeed from './Hyperspeed';
+import Hyperspeed from './Hyperspeed.jsx';
 import './BugattiOverview.css';
 
 const BugattiOverview: React.FC = () => {
