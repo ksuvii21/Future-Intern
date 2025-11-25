@@ -6,8 +6,12 @@ import './BugattiOverview.css';
 const BugattiOverview = () => {
   return (
     <>
-      <Hyperspeed />
-      <GridScan enableWebcam={false} />
+      <div className="hyperspeed-container">
+        <Hyperspeed />
+      </div>
+      <div className="gridscan-container">
+        <GridScan enableWebcam={false} />
+      </div>
       <div className="overview-container">
         <header className="overview-header">
           <h1>BUGATTI</h1>
