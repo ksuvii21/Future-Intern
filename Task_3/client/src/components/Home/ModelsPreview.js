@@ -34,7 +34,7 @@ const ModelsGrid = styled.div`
   padding: 0 20px;
 `;
 
-const ViewAllButton = styled(motion(Link))`
+const ViewAllButton = styled(motion.a)`
   display: block;
   width: 200px;
   margin: 50px auto 0;
@@ -134,6 +134,7 @@ const ModelsPreview = () => {
       </ModelsGrid>
 
       <ViewAllButton
+        as={Link}
         to="/models"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
