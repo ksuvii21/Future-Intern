@@ -371,8 +371,8 @@ const educationData = [
       "Strong analytical and logical reasoning",
       "Participated in science exhibitions"
     ]
-  },
-  {
+  }
+  /*{
     institute: "Jeevan Jyoti Higher Secondary School, Varanasi",
     degree: "Intermediate School (X), CBSE",
     field: "Science",
@@ -385,7 +385,7 @@ const educationData = [
       "Performed well academically",
       "Built strong foundational knowledge"
     ]
-  }
+  }*/
 ];
 
 const Education = () => {
@@ -416,10 +416,10 @@ const Education = () => {
 
             <div className="edu-score">{edu.score}</div>
 
-            <h5>Specialization:</h5>
+            <h4>Specialization:</h4>
             <p className="edu-specialization">{edu.specialization.join(", ")}</p>
 
-            <h5>Key Achievements:</h5>
+            <h4>Key Achievements:</h4>
             <ul className="edu-list">
               {edu.achievements.map((ach, i) => (
                 <li key={i}>{ach}</li>
@@ -538,6 +538,7 @@ const Contact = () => (
             <p><i className="fas fa-envelope"></i> <a href="mailto:k21ritikasuvi2106@gmail.com">k21ritikasuvi2106@gmail.com</a></p>
             <p><i className="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/kritika-gupta2106" target="_blank" rel="noopener noreferrer">in/kritika-gupta2106</a></p>
             <p><i className="fab fa-github"></i> <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">github.com/ksuvii21</a></p>
+            <p><i className="fab fa-leetcode"></i> <a href="https://leetcode.com/u/KrSUVII/" target="_blank" rel="noopener noreferrer">leetcode.com/u/KrSUVII</a></p>
             <p><i className="fas fa-map-marker-alt"></i> Remote / On-site Opportunities</p>
           </div>
         </div>
