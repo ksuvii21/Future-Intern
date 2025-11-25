@@ -35,7 +35,7 @@ const ModelsGrid = styled.div`
   padding: 0 20px;
 `;
 
-const ViewAllButton = styled(motion.a)`
+const ViewAllButton = styled(Link)`
   display: block;
   width: 200px;
   margin: 50px auto 0;
@@ -102,7 +102,7 @@ const ModelsPreview = () => {
               justifyContent: 'flex-start'
             }}>
               <img
-                src={car.images[0]}
+                src={`http://localhost:5000${car.images[0]}`}
                 alt={car.name}
                 style={{
                   width: '100%',
@@ -133,14 +133,15 @@ const ModelsPreview = () => {
         ))}
       </ModelsGrid>
 
-      <ViewAllButton
-        as={Link}
-        to="/models"
+      <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
+        style={{ width: '200px', margin: '50px auto 0' }}
       >
-        VIEW ALL MODELS
-      </ViewAllButton>
+        <ViewAllButton
+        to="/models"
+        >VIEW ALL MODELS</ViewAllButton>
+      </motion.div>
     </Section>
   );
 };
