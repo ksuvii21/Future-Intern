@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@react-three/fiber": "^9.4.0",
+    "axios": "^1.13.2",
     "chart.js": "^4.5.1",
     "cloudinary": "^2.8.0",
     "html2canvas": "^1.4.1",
@@ -9,6 +10,7 @@
     "lucide-react": "^0.553.0",
     "multer": "^2.0.2",
     "react-chartjs-2": "^5.3.1",
+    "react-router-dom": "^7.9.6",
     "recharts": "^3.4.1",
     "three": "^0.181.1"
   }
