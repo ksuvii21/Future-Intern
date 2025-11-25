@@ -582,13 +582,14 @@ section {
   color: #c4b5fd;
   font-size: 14px;
   display: inline-block;
+  margin-bottom: 15px;
 }
 
 /* TITLE */
 .education-card h3 {
   font-size: 26px;
   font-weight: 700;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 /* FIELD OF STUDY */
@@ -597,6 +598,7 @@ section {
   font-weight: 500;
   color: #a78bfa;
   margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 /* DATE + LOCATION */
