@@ -110,7 +110,7 @@ const ModelDetail = () => {
 
   return (
     <DetailContainer>
-      <HeroSection $bgImage={car.images[0]}>
+      <HeroSection $bgImage={car.images[0].replace('-1', '')}>
         <HeroContent>
           <HeroTitle>{car.name}</HeroTitle>
           <HeroPrice>{car.price}</HeroPrice>
