@@ -269,6 +269,35 @@ void main(){
 }
 `;
 
+import React, { useEffect, useRef, useState } from 'react';
+
+export class GridScanErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, info) {
+    console.error('GridScan Error Boundary caught an error:', error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ color: 'red', padding: '1em', backgroundColor: '#ffeeee' }}>
+          <h2>GridScan encountered an error.</h2>
+          <pre>{this.state.error?.toString()}</pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export const GridScan = ({
   enableWebcam = false,
   showPreview = false,
@@ -371,19 +400,19 @@ export const GridScan = ({
       lookTarget.current.set(nx, ny);
     };
     const onClick = async () => {
-      const nowSec = performance.now() / 1000;
-      if (scanOnClick) pushScan(nowSec);
-      if (
-        enableGyro &&
-        typeof window !== 'undefined' &&
-        window.DeviceOrientationEvent &&
-        DeviceOrientationEvent.requestPermission
-      ) {
-        try {
+      try {
+        const nowSec = performance.now() / 1000;
+        if (scanOnClick) pushScan(nowSec);
+        if (
+          enableGyro &&
+          typeof window !== 'undefined' &&
+          window.DeviceOrientationEvent &&
+          DeviceOrientationEvent.requestPermission
+        ) {
           await DeviceOrientationEvent.requestPermission();
-        } catch {
-          // noop
         }
+      } catch (error) {
+        console.error('Error while requesting device orientation permission:', error);
       }
     };
     const onEnter = () => {
