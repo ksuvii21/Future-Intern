@@ -12,7 +12,7 @@ import project5Image from './assets/project5.png';
 import project6Image from './assets/project6.avif';
 
 import FloatingLines from './components/FloatingLines';
-import Spinner from './components/Spinner';
+import Hyperspeed, { hyperspeedPresets } from './components/Hyperspeed';
 
 const Header = () => (
   <header id="header">
@@ -648,7 +648,7 @@ function App() {
   }, []);
   
   if (loading) {
-    return <Spinner />;
+    return <Hyperspeed effectOptions={hyperspeedPresets.one} />;
   }
 
   return (
