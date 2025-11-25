@@ -22,7 +22,7 @@ const AnimatedBackground = styled.div`
 const FloatingDot = styled.div`
   position: absolute;
   border-radius: 50%;
-  background: #3b82f6;
+  background: #BE0F34; /* Bugatti Red */
   animation: float ${props => props.duration || '15s'} ease-in-out infinite;
   animation-delay: ${props => props.delay || '0s'};
   
@@ -48,7 +48,7 @@ const SectionTitle = styled.h2`
 `;
 
 const GradientText = styled.span`
-  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  background: linear-gradient(135deg, #BE0F34, #A00020); /* Bugatti Red Gradient */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -95,15 +95,15 @@ const FeatureCard = styled(motion.div)`
     top: 0;
     right: 0;
     width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, transparent, rgba(6, 182, 212, 0.1));
+    height: 80px; /* Bugatti Red Gradient */
+    background: linear-gradient(135deg, transparent, rgba(190, 15, 52, 0.1));
     border-bottom-left-radius: 100%;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
 
   &:hover::before {
-    opacity: 1;
+    opacity: 1; /* Bugatti Red Gradient */
   }
 `;
 
@@ -117,15 +117,15 @@ const IconWrapper = styled.div`
   height: 80px;
   margin: 0 auto;
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+  background: linear-gradient(135deg, rgba(190, 15, 52, 0.2), rgba(160, 0, 32, 0.2)); /* Bugatti Red Gradient */
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
 
   ${FeatureCard}:hover & {
-    transform: scale(1.1) rotate(5deg);
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.3), rgba(59, 130, 246, 0.3));
+    transform: scale(1.1) rotate(5deg); /* Bugatti Red Gradient */
+    background: linear-gradient(135deg, rgba(190, 15, 52, 0.3), rgba(160, 0, 32, 0.3));
   }
 `;
 
@@ -133,7 +133,7 @@ const IconGlow = styled.div`
   position: absolute;
   inset: 0;
   background: rgba(6, 182, 212, 0.2);
-  border-radius: 50%;
+  background: rgba(190, 15, 52, 0.2); /* Bugatti Red */
   filter: blur(20px);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -151,7 +151,7 @@ const FeatureTitle = styled.h3`
   transition: color 0.3s ease;
 
   ${FeatureCard}:hover & {
-    color: #06b6d4;
+    color: #BE0F34; /* Bugatti Red */
   }
 `;
 
