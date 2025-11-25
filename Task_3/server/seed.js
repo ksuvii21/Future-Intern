@@ -45,6 +45,50 @@ const cars = [
       drivetrain: "AWD",
       fuelEconomy: "City 7 / Highway 14 mpg"
     }
+  },
+  {
+    name: "La Voiture Noire",
+    model: "La Voiture Noire",
+    price: "$18,700,000",
+    horsepower: 1500,
+    topSpeed: 420,
+    acceleration: "0-100 km/h in 2.5 seconds",
+    description: "A one-off masterpiece combining performance with exclusive elegance.",
+    images: ["/images/lvn-1.jpg", "/images/lvn-2.jpg"],
+    features: [
+      "Unique design",
+      "Exceptional luxury",
+      "Carbon fiber body",
+      "Handcrafted interior"
+    ],
+    technicalSpecs: {
+      engine: "8.0L W16 Quad-Turbo",
+      transmission: "7-speed dual-clutch",
+      drivetrain: "AWD",
+      fuelEconomy: "City 7 / Highway 14 mpg"
+    }
+  },
+  {
+    name: "Centodieci",
+    model: "Centodieci",
+    price: "$9,000,000",
+    horsepower: 1600,
+    topSpeed: 380,
+    acceleration: "0-100 km/h in 2.4 seconds",
+    description: "A tribute to the EB110 with modern hypercar technology and design.",
+    images: ["/images/centodieci-1.jpg", "/images/centodieci-2.jpg"],
+    features: [
+      "Lightweight construction",
+      "High power output",
+      "Aerodynamic enhancements",
+      "Limited to 10 units"
+    ],
+    technicalSpecs: {
+      engine: "8.0L W16 Quad-Turbo",
+      transmission: "7-speed dual-clutch",
+      drivetrain: "AWD",
+      fuelEconomy: "City 7 / Highway 14 mpg"
+    }
   }
 ];
 
