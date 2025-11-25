@@ -18,7 +18,7 @@ const Card = styled(motion.div)`
 
 const CardImage = styled.div`
   width: 100%;
-  height: 250px;
+  height: 300px;
   background-image: url(${props => props.image});
   background-size: cover;
   background-position: center;
