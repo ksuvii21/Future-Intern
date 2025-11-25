@@ -102,7 +102,7 @@ const ModelsPreview = () => {
               justifyContent: 'flex-start'
             }}>
               <img
-                src={car.images[0].replace('-1', '')}
+                src={car.images[0].replace(/-\d+/, '')}
                 alt={car.name}
                 style={{
                   width: '100%',
