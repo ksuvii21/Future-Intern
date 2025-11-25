@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const Section = styled.section`
   padding: 100px 0;
@@ -55,27 +56,26 @@ const ViewAllButton = styled(motion.a)`
   }
 `;
 
-// Temporary data - replace with actual API call
-const featuredCars = [
-  {
-    _id: '1',
-    name: 'Chiron Super Sport',
-    price: '$3,800,000',
-    horsepower: 1578,
-    topSpeed: 440,
-    images: ['/images/chiron.jpg']
-  },
-  {
-    _id: '2',
-    name: 'Divo',
-    price: '$5,800,000',
-    horsepower: 1479,
-    topSpeed: 380,
-    images: ['/images/divo.jpg']
-  }
-];
-
 const ModelsPreview = () => {
+  const [featuredCars, setFeaturedCars] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFeaturedCars = async () => {
+      try {
+        // Fetch all cars and take the first two as featured
+        const { data } = await axios.get('http://localhost:5000/api/cars');
+        setFeaturedCars(data.slice(0, 2));
+      } catch (error) {
+        console.error("Error fetching featured cars:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeaturedCars();
+  }, []);
+
   return (
     <Section>
       <SectionTitle>MASTERPIECES</SectionTitle>
@@ -84,7 +84,7 @@ const ModelsPreview = () => {
       </SectionSubtitle>
       
       <ModelsGrid>
-        {featuredCars.map((car, index) => (
+        {loading ? <p>Loading models...</p> : featuredCars.map((car, index) => (
           <motion.div
             key={car._id}
             initial={{ opacity: 0, y: 50 }}
