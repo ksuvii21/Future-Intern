@@ -12,6 +12,7 @@ import Models from './pages/Models';
 import ModelDetail from './pages/ModelDetail';
 import Heritage from './pages/Heritage';
 import Contact from './pages/Contact';
+import BugattiOverviewPage from './pages/BugattiOverview';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/models/:id" element={<ModelDetail />} />
             <Route path="/heritage" element={<Heritage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/bugatti-overview" element={<BugattiOverviewPage />} />
           </Routes>
           <Footer />
         </div>
