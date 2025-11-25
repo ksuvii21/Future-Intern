@@ -89,7 +89,7 @@ const CarCard = ({ car }) => {
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <CardImage $image={car.images[0]} />
+      <CardImage $image={car.images[0].replace('-1', '')} />
       <CardContent>
         <CardTitle>{car.name}</CardTitle>
         <CardPrice>{car.price}</CardPrice>
