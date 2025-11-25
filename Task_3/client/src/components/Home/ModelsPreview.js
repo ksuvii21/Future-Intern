@@ -102,7 +102,7 @@ const ModelsPreview = () => {
               justifyContent: 'flex-start'
             }}>
               <img
-                src={`http://localhost:5000${car.images[0]}`}
+                src={car.images[0]}
                 alt={car.name}
                 style={{
                   width: '100%',
