@@ -116,7 +116,7 @@ const Contact = () => {
     setLoading(true);
     
     try {
-      await axios.post('/api/contact', formData);
+      await axios.post('http://localhost:5000/api/contact', formData);
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
