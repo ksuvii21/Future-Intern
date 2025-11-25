@@ -51,7 +51,7 @@ const HeroTitle = styled.h1`
   margin-bottom: 20px;
   letter-spacing: 4px;
   font-weight: 900;
-  background: linear-gradient(135deg, #BE0F34, #FF4500, #BE0F34); /* Bugatti Red Gradient */
+  background: linear-gradient(135deg, #ffffffff, #ffffff7c, #ffffffff); /* Bugatti Red Gradient */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -75,8 +75,8 @@ const HeroSubtitle = styled.p`
 `;
 
 const CTAButton = styled(motion.button)`
-  background: linear-gradient(135deg, #BE0F34, #A00020); /* Bugatti Red Gradient */
-  color: white;
+  background: linear-gradient(135deg, #ffffffff, #ffffff89); /* Bugatti Red Gradient */
+  color: black;
   border: none;
   padding: 18px 48px;
   font-size: 1.125rem;
@@ -91,6 +91,7 @@ const CTAButton = styled(motion.button)`
     content: '';
     position: absolute;
     inset: 0; /* Bugatti Red Gradient for hover */
+    color: white;
     background: linear-gradient(135deg, #A00020, #BE0F34);
     opacity: 0;
     transition: opacity 0.3s ease;
