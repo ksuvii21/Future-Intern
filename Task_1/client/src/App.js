@@ -472,21 +472,21 @@ const Certifications = () => {
       title: "MERN Stack Internship Completion Certificate", 
       issuer: "Future Intens", 
       year: "2025", 
-      image: require("./assets/Future_Intens_Internship_Certificate.png"),
+      image: require("./assets/Future_Intens_Internship_Certificate.jpg"),
       pdf: require("./assets/Future_Intens_Internship_Certificate.pdf") 
     },
     { 
       title: "Zidio Development - Internship Completion Certificate", 
       issuer: "Zidio Development", 
       year: "Aug 2025", 
-      image: require("./assets/Zidio_Development_Internship_Certificate.png"),
+      image: require("./assets/Zidio_Development_Internship_Certificate.jpg"),
       pdf: require("./assets/Zidio_Development_Internship_Certificate.pdf") 
     },
     { 
       title: "Internship Completion Certificate", 
       issuer: "Cognifyz Technologies", 
       year: "Jun 2025", 
-      image: require("./assets/Cognifyz_Technologies_Internship_Certificate.png"),
+      image: require("./assets/Cognifyz_Technologies_Internship_Certificate.jpg"),
       pdf: require("./assets/Cognifyz_Technologies_Internship_Certificate.pdf") 
     },
     { 
