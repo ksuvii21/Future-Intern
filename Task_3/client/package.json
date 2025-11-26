@@ -33,7 +33,7 @@
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:5000",
-  "homepage": "https://ksuvii-bugatti-clone.netlify.app",
+  "homepage": ".",
   "eslintConfig": {
     "extends": [
       "react-app",
