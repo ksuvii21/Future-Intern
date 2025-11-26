@@ -133,6 +133,10 @@ const Models = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fetchCars = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/cars');
