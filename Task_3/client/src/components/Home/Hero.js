@@ -36,7 +36,7 @@ const AnimatedGrid = styled.div`
 const GradientOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.5), #000);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.17), #000);
   z-index: 1;
 `;
 
@@ -128,7 +128,7 @@ const Hero = () => {
         muted
         playsInline
 
-        src="/images/hero-bg.mp4" // Corrected video path
+        src="/images/hero4-bg.mp4" // Corrected video path
         type="video/mp4"
       >
         Your browser does not support the video tag.
