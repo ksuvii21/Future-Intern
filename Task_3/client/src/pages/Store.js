@@ -169,6 +169,27 @@ const PriceDisplay = styled.div`
   border-left: 3px solid #BE0F34;
 `;
 
+const ClearButton = styled.button`
+  width: 100%;
+  background: transparent;
+  color: #BE0F34;
+  border: 2px solid #BE0F34;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  margin-top: 20px;
+
+  &:hover {
+    background: #BE0F34;
+    color: white;
+  }
+`;
+
 const ProductsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -636,6 +657,11 @@ const Store = () => {
     setWishlistItems(newWishlist);
   };
 
+  const clearFilters = () => {
+    setSelectedCategories([]);
+    setPriceRange([0, 20000]);
+  };
+
   const filteredProducts = storeProducts.filter(product => {
     const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(product.category);
     const priceMatch = product.price >= priceRange[0] && product.price <= priceRange[1];
@@ -712,6 +738,7 @@ const Store = () => {
             <PriceDisplay>
               $0 - ${priceRange[1].toLocaleString()}
             </PriceDisplay>
+            <ClearButton onClick={clearFilters}>Clear Filters</ClearButton>
           </FilterGroup>
         </Sidebar>
 
