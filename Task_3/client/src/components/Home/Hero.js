@@ -24,7 +24,7 @@ const VideoBackground = styled.video`
   transform: translate(-50%, -50%);
   z-index: 0;
   transition: transform 0.1s ease-out;
-  filter: brightness(0.6);
+  filter: brightness(0.85);
 `;
 
 const AnimatedGrid = styled.div`
