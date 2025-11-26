@@ -335,7 +335,9 @@ const Contact = () => {
     setError('');
 
     try {
-      await axios.post('http://localhost:5000/api/contact', formData);
+      const API_BASE = process.env.REACT_APP_API_URL;
+      const url = API_BASE ? `${API_BASE}/api/contact` : `/api/contact`;
+      await axios.post(url, formData);
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
       setTimeout(() => setSubmitted(false), 5000);
