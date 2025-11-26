@@ -8,6 +8,7 @@ import theme from './styles/theme';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
+import About from './pages/About';
 import Models from './pages/Models';
 import ModelDetail from './pages/ModelDetail';
 import Heritage from './pages/Heritage';
