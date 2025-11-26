@@ -13,6 +13,7 @@ import ModelDetail from './pages/ModelDetail';
 import Heritage from './pages/Heritage';
 import Contact from './pages/Contact';
 import BugattiOverviewPage from './pages/BugattiOverview';
+import Store from './pages/Store';
 
 function App() {
   return (
