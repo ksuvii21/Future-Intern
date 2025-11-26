@@ -324,10 +324,14 @@ const ModelsPreview = () => {
   useEffect(() => {
     const fetchFeaturedCars = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/cars');
-        setFeaturedCars(data.slice(0, 3));
+        const API_BASE = (process.env.REACT_APP_API_URL || '').replace(/\/$/, '');
+        const url = API_BASE ? `${API_BASE}/api/cars` : `/api/cars`;
+        const { data } = await axios.get(url);
+        setFeaturedCars(Array.isArray(data) ? data.slice(0, 3) : []);
       } catch (error) {
-        console.error("Error fetching featured cars:", error);
+        // normalize error message
+        const msg = error && error.message ? error.message : String(error);
+        console.error('Error fetching featured cars:', msg);
       } finally {
         setLoading(false);
       }
