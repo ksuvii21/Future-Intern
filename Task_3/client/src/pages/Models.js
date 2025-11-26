@@ -1,62 +1,131 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import CarCard from '../components/Models/CarCard';
 
 const ModelsContainer = styled.div`
-  padding-top: 100px;
+  padding-top: 80px;
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #000000;
+  position: relative;
 `;
 
-const ModelsHero = styled.div`
-  display: flex;
+const ModelsHero = styled(motion.div)`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  max-width: 1200px;
+  min-height: 70vh;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
-  gap: 40px;
+  padding: 60px 40px;
+  gap: 60px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding: 40px 20px;
+    gap: 40px;
+  }
 `;
 
-const HeroImage = styled.div`
-  flex: 1;
-  height: 400px;
+const HeroImage = styled(motion.div)`
+  height: 500px;
   background-image: url(${props => props.$image});
   background-size: cover;
   background-position: center;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(190, 15, 52, 0.3);
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(190, 15, 52, 0.1), transparent);
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    height: 350px;
+  }
 `;
 
-const HeroText = styled.div`
-  flex: 1;
-  color: #333;
+const HeroText = styled(motion.div)`
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 20px;
-  color: #111;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const HeroSubtitle = styled.p`
   font-size: 1.2rem;
-  line-height: 1.6;
-  color: #444;
+  line-height: 1.8;
+  color: #cccccc;
+  margin-bottom: 40px;
+`;
+
+const RedAccent = styled.span`
+  color: #BE0F34;
+  font-weight: 700;
 `;
 
 const ModelsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-  padding: 50px 20px;
-  max-width: 1200px;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 40px;
+  padding: 80px 40px;
+  max-width: 1400px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding: 50px 20px;
+    gap: 30px;
+  }
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 3rem;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+
+  span {
+    color: #BE0F34;
+  }
+`;
+
+const SectionSubtitle = styled.p`
+  text-align: center;
+  color: #999999;
+  font-size: 1.1rem;
+  margin-bottom: 60px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const Models = () => {
@@ -79,26 +148,85 @@ const Models = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <ModelsContainer>
+        <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>
+          Loading...</div>
+      </ModelsContainer>
+    );
   }
 
   const heroImage = cars.length > 0 ? cars[0].images[0] : '/images/chiron.jpg';
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: 'easeOut' },
+    },
+  };
+
   return (
     <ModelsContainer>
-      <ModelsHero>
-        <HeroImage $image={heroImage.replace(/-\d+/, '')} />
-        <HeroText>
-          <HeroTitle>Our Models</HeroTitle>
+      <ModelsHero
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <HeroImage
+          $image={heroImage}
+          initial={{ scale: 1.05 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        />
+        <HeroText
+          initial={{ x: 50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <HeroTitle>
+            Engineered <RedAccent>Excellence</RedAccent>
+          </HeroTitle>
           <HeroSubtitle>
-            Explore our exclusive collection of high-performance automobiles,
-            engineered for speed, luxury, and innovation.
+            Explore our exclusive collection of hypercars, where <RedAccent>performance</RedAccent> meets unparalleled luxury. 
+            Each model represents the pinnacle of automotive engineering and design.
           </HeroSubtitle>
         </HeroText>
       </ModelsHero>
-      <ModelsGrid>
-        {cars.map(car => (
-          <CarCard key={car._id} car={car} />
+
+      <SectionTitle>
+        Our <RedAccent>Legendary</RedAccent> Collection
+      </SectionTitle>
+      <SectionSubtitle>
+        Discover the world's most exclusive and powerful hypercars
+      </SectionSubtitle>
+
+      <ModelsGrid
+        as={motion.div}
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {cars.map((car, index) => (
+          <motion.div key={car._id} variants={itemVariants}>
+            <CarCard car={car} index={index} />
+          </motion.div>
         ))}
       </ModelsGrid>
     </ModelsContainer>
