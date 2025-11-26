@@ -16,10 +16,11 @@ const BugattiOverview = () => {
 
   return (
     <>
-      {/* GridScan background, below Hyperspeed */}
-      <div className="background-container gridscan-bg">
+      {/* GridScan background, below Hyperspeed - only render if needed */}
+      {/* Disabled for now to prevent 404 errors from face-api model loading */}
+      {/* <div className="background-container gridscan-bg">
         <GridScan enableWebcam={false} />
-      </div>
+      </div> */}
 
       {/* Hyperspeed background on top, faded out after timer */}
       <div className={`background-container hyperspeed-bg ${hyperspeedVisible ? '' : 'hidden'}`}>
