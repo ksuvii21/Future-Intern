@@ -28,7 +28,7 @@ const OverlayTextLeft = styled.div`
   position: absolute;
   bottom: 40px;
   left: 40px;
-  font-size: 1.5rem;
+  font-size: 50px;
   max-width: 40%;
   text-transform: uppercase;
   font-weight: 600;
@@ -38,9 +38,9 @@ const OverlayTextLeft = styled.div`
 
 const OverlayTextRight = styled.div`
   position: absolute;
-  bottom: 40px;
+  bottom: 100px;
   right: 40px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   max-width: 40%;
   font-weight: 400;
   letter-spacing: 1.2px;
@@ -50,8 +50,8 @@ const OverlayTextRight = styled.div`
 const HeroSecond = () => {
   return (
     <Section>
-      <VideoBackground autoPlay loop muted playsInline src="/images/---.mp4" type="video/mp4" />
-      <OverlayTextLeft>A RECORD-BREAKING FORCE OF NATURE</OverlayTextLeft>
+      <VideoBackground autoPlay loop muted playsInline src="/images/hero2 -bg.mp4" type="video/mp4" />
+      <OverlayTextLeft>A RECORD-BREAKING<br/>FORCE OF NATURE</OverlayTextLeft>
       <OverlayTextRight>
         Setting a new benchmark at 453.91 Km/h. A triumph of passion, precision, and performance.
       </OverlayTextRight>
