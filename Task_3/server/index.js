@@ -18,21 +18,22 @@ app.use('/api/contact', require('./routes/contact'));
 // Database connection
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/bugatti-clone';
-    console.log('Connecting to MongoDB...');
-    
+    if (!process.env.MONGODB_URI) {
+      console.log("❌ MONGODB_URI is NOT loaded!! Render ENV missing!");
+    }
+
+    const mongoURI = process.env.MONGODB_URI;
+    console.log("Connecting to:", mongoURI);
+
     await mongoose.connect(mongoURI, {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
     });
-    
-    console.log('✅ MongoDB connected successfully');
+
+    console.log("✅ MongoDB connected successfully");
   } catch (error) {
-    console.error('❌ MongoDB connection failed:', error.message);
-    console.error('Make sure MONGODB_URI is set in environment variables');
-    if (process.env.NODE_ENV === 'production') {
-      process.exit(1);
-    }
+    console.error("❌ MongoDB connection failed:", error.message);
+    process.exit(1);
   }
 };
 
