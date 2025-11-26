@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const Card = styled(motion.div)`
+const Card = styled.div`
   background: white;
   border-radius: 10px;
   overflow: hidden;
@@ -85,10 +85,7 @@ const CardButton = styled(Link)`
 
 const CarCard = ({ car }) => {
   return (
-    <Card
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 300 }}
-    >
+    <Card>
       <CardImage $image={car.images[0].replace(/-\d+/, '')} />
       <CardContent>
         <CardTitle>{car.name}</CardTitle>
