@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { EffectComposer, RenderPass, EffectPass, BloomEffect, ChromaticAberrationEffect } from 'postprocessing';
 import * as THREE from 'three';
+import * as faceapi from 'face-api.js';
 import './GridScan.css';
 
 const vert = `
@@ -268,12 +269,13 @@ void main(){
 `;
 
 export const GridScan = ({
+  enableWebcam = false,
+  showPreview = false,
+  modelsPath = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/weights',
   sensitivity = 0.55,
   lineThickness = 1,
   linesColor = '#392e4e',
   scanColor = '#FF9FFC',
-  //linesColor = '#193876ff',
-  //scanColor = '#000dffff',
   scanOpacity = 0.4,
   gridScale = 0.1,
   lineStyle = 'solid',
@@ -297,6 +299,7 @@ export const GridScan = ({
   style
 }) => {
   const containerRef = useRef(null);
+  const videoRef = useRef(null);
 
   const rendererRef = useRef(null);
   const materialRef = useRef(null);
@@ -336,7 +339,10 @@ export const GridScan = ({
     }
   };
 
-
+  const bufX = useRef([]);
+  const bufY = useRef([]);
+  const bufT = useRef([]);
+  const bufYaw = useRef([]);
 
   const s = THREE.MathUtils.clamp(sensitivity, 0, 1);
   const skewScale = THREE.MathUtils.lerp(0.06, 0.2, s);
@@ -656,7 +662,24 @@ export const GridScan = ({
     };
   }, [enableGyro, uiFaceActive]);
 
-
+  useEffect(() => {
+    let canceled = false;
+    const load = async () => {
+      try {
+        await Promise.all([
+          faceapi.nets.tinyFaceDetector.loadFromUri(modelsPath),
+          faceapi.nets.faceLandmark68TinyNet.loadFromUri(modelsPath)
+        ]);
+        if (!canceled) setModelsReady(true);
+      } catch {
+        if (!canceled) setModelsReady(false);
+      }
+    };
+    load();
+    return () => {
+      canceled = true;
+    };
+  }, [modelsPath]);
 
   useEffect(() => {
     let stop = false;
