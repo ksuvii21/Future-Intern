@@ -13,6 +13,25 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet" />
     <title>KSUVII Buggati Clone</title>
+      <!-- Set webpack public path early to avoid "Automatic publicPath" runtime errors -->
+      <script>
+        (function () {
+          try {
+            var publicUrl = "%PUBLIC_URL%";
+            if (publicUrl && publicUrl !== "%PUBLIC_URL%") {
+              // %PUBLIC_URL% is replaced by CRA at build time
+              // ensure it ends with a slash
+              window.__webpack_public_path__ = publicUrl.replace(/\/$/, '') + '/';
+            } else if (window.location && window.location.origin) {
+              window.__webpack_public_path__ = window.location.origin + '/';
+            } else {
+              window.__webpack_public_path__ = '/';
+            }
+          } catch (e) {
+            // best-effort only
+          }
+        })();
+      </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
