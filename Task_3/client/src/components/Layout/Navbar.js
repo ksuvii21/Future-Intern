@@ -122,7 +122,7 @@ const Navbar = () => {
           )}
         </MenuButton>
         <Logo to="/">BUGGATI</Logo>
-        <StoreLink to="/store">
+        <StoreLink to="../../pages/Store">
           <FiShoppingCart />
           STORE
         </StoreLink>
