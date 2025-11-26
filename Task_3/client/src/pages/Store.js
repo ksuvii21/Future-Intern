@@ -590,7 +590,7 @@ const storeProducts = [
     rating: 4.7,
     reviews: 145,
     description: 'Premium leather gloves designed for performance and comfort',
-    image: 'https://images.unsplash.com/photo-1582452402894-97b25acb22f9?w=500&h=500&fit=crop'
+    image: '/images/leather_driving_gloves.jpg'
   },
   {
     id: 12,
@@ -602,7 +602,7 @@ const storeProducts = [
     rating: 4.9,
     reviews: 167,
     description: 'Swiss-made chronograph inspired by W16 engineering precision',
-    image: 'https://images.unsplash.com/photo-1548690596-f3a1e7c17c73?w=500&h=500&fit=crop'
+    image: '/images/chiron_chronograph_watch.jpg'
   }
 ];
 
