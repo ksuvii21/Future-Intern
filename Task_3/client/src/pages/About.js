@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaCheck, FaGlobeAmericas, FaTrophy, FaUsers, FaBuilding } from 'react-icons/fa';
@@ -280,6 +280,10 @@ const ValueItem = styled(motion.li)`
 `;
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
