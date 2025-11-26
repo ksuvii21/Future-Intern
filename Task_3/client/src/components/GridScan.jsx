@@ -271,6 +271,7 @@ void main(){
 export const GridScan = ({
   enableWebcam = false,
   showPreview = false,
+  // default to CDN weights but allow a local relative path like 'models'
   modelsPath = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/weights',
   sensitivity = 0.55,
   lineThickness = 1,
@@ -353,6 +354,10 @@ export const GridScan = ({
   const maxSpeed = Infinity;
 
   const yBoost = THREE.MathUtils.lerp(1.2, 1.6, s);
+  // normalize modelsPath once at component scope so it can be used in multiple effects
+  const effectiveModelsPath = (typeof modelsPath === 'string' && /^https?:\/\//i.test(modelsPath))
+    ? modelsPath
+    : (typeof modelsPath === 'string' ? modelsPath.replace(/^\/+/, '') : modelsPath);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -667,8 +672,8 @@ export const GridScan = ({
     const load = async () => {
       try {
         await Promise.all([
-          faceapi.nets.tinyFaceDetector.loadFromUri(modelsPath),
-          faceapi.nets.faceLandmark68TinyNet.loadFromUri(modelsPath)
+          faceapi.nets.tinyFaceDetector.loadFromUri(effectiveModelsPath),
+          faceapi.nets.faceLandmark68TinyNet.loadFromUri(effectiveModelsPath)
         ]);
         if (!canceled) setModelsReady(true);
       } catch {
