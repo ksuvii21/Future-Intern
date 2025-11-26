@@ -1,153 +1,296 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { FaPlay } from 'react-icons/fa';
 
 const HeritageContainer = styled.div`
-  padding-top: 100px;
+  background: linear-gradient(to bottom, #000000, #0a0a0a);
+  color: white;
   min-height: 100vh;
 `;
 
 const HeroSection = styled.div`
-  height: 60vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  position: relative;
+  height: 80vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
               url('/images/heritage-bg.jpg') center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: white;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(190, 15, 52, 0.1) 0%, transparent 100%);
+    pointer-events: none;
+  }
 `;
 
-const ContentSection = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 50px 20px;
-`;
-
-const Timeline = styled.div`
+const HeroContent = styled(motion.div)`
   position: relative;
-  max-width: 800px;
-  margin: 50px auto;
+  z-index: 2;
+
+  h1 {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffffff, #BE0F34);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  p {
+    font-size: 1.3rem;
+    color: #d1d5db;
+  }
 `;
 
-const TimelineItem = styled.div`
-  display: flex;
-  margin-bottom: 50px;
-  
-  &:nth-child(even) {
-    flex-direction: row-reverse;
-    
-    .content {
-      text-align: right;
-      margin-right: 30px;
-      margin-left: 0;
+const ContentSection = styled.section`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 20px;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 3.5rem;
+  margin-bottom: 60px;
+  color: white;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+const TimelineContainer = styled.div`
+  position: relative;
+  padding: 40px 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #BE0F34, transparent);
+    transform: translateX(-50%);
+
+    @media (max-width: 768px) {
+      left: 30px;
     }
   }
 `;
 
-const Year = styled.div`
+const TimelineItem = styled(motion.div)`
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+
+  ${props => props.$alternate && `
+    > div:first-child {
+      order: 2;
+    }
+    > div:last-child {
+      order: 1;
+    }
+  `}
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    ${props => props.$alternate && `
+      > div:first-child {
+        order: 1;
+      }
+      > div:last-child {
+        order: 2;
+      }
+    `}
+  }
+`;
+
+const TimelineMarker = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const TimelineCircle = styled.div`
+  width: 30px;
+  height: 30px;
   background: #BE0F34;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: bold;
-  min-width: 100px;
-  text-align: center;
+  border-radius: 50%;
+  border: 3px solid #0a0a0a;
+  position: relative;
+  z-index: 2;
 `;
 
-const Content = styled.div`
-  margin-left: 30px;
-  flex: 1;
-  
+const TimelineContent = styled.div`
+  background: linear-gradient(135deg, #1f2937, #111827);
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 30px;
+  border-left: 4px solid #BE0F34;
+
   h3 {
+    font-size: 1.5rem;
+    color: #BE0F34;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    color: white;
     margin-bottom: 10px;
-    color: #333;
+    font-weight: 700;
   }
-  
+
   p {
-    line-height: 1.6;
-    color: #666;
+    color: #d1d5db;
+    line-height: 1.8;
   }
 `;
 
-const GallerySection = styled.div`
-  max-width: 900px;
-  margin: 50px auto;
-  text-align: center;
+const GallerySection = styled.section`
+  padding: 100px 20px;
+  background: rgba(190, 15, 52, 0.05);
 `;
 
-const GalleryTitle = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #111;
+const GalleryContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
 const GalleryGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  margin-top: 50px;
 `;
 
-const GalleryItem = styled.div`
-  border-radius: 10px;
+const GalleryItem = styled(motion.div)`
+  position: relative;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  height: 350px;
+  background: linear-gradient(135deg, #1f2937, #111827);
+  border: 1px solid #374151;
   cursor: pointer;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
+  group;
 
   img {
     width: 100%;
-    height: 250px;
+    height: 100%;
     object-fit: cover;
-    display: block;
-    border-radius: 10px;
+    transition: transform 0.5s ease;
   }
 
-  p {
-    margin-top: 10px;
-    color: #444;
-    font-weight: 600;
+  &:hover img {
+    transform: scale(1.08);
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    color: white;
+    padding: 30px 20px 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
   }
 `;
 
-const FoundersSection = styled.div`
-  max-width: 900px;
-  margin: 50px auto 100px;
-  text-align: center;
+const FoundersSection = styled.section`
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
-const FoundersTitle = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #111;
+const FoundersGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
 `;
 
-const FounderCard = styled.div`
-  display: inline-block;
-  width: 250px;
-  margin: 10px 15px;
+const FounderCard = styled(motion.div)`
   text-align: center;
-  vertical-align: top;
+  background: linear-gradient(135deg, #1f2937, #111827);
+  border: 1px solid #374151;
+  border-radius: 15px;
+  padding: 40px 30px;
+  transition: all 0.3s ease;
 
-  img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    margin-bottom: 15px;
+  &:hover {
+    border-color: rgba(190, 15, 52, 0.5);
+    box-shadow: 0 0 30px rgba(190, 15, 52, 0.2);
+    transform: translateY(-10px);
+  }
+
+  .image-wrapper {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 25px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 3px solid #BE0F34;
+    background: linear-gradient(135deg, #374151, #1f2937);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.1);
+    }
   }
 
   h3 {
-    color: #333;
-    margin-bottom: 8px;
+    font-size: 1.5rem;
+    color: #BE0F34;
+    margin-bottom: 10px;
+    font-weight: 700;
   }
 
   p {
-    color: #666;
+    color: #d1d5db;
+    line-height: 1.8;
     font-size: 0.95rem;
   }
 `;
