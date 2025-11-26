@@ -297,7 +297,6 @@ export const GridScan = ({
   style
 }) => {
   const containerRef = useRef(null);
-  const videoRef = useRef(null);
 
   const rendererRef = useRef(null);
   const materialRef = useRef(null);
