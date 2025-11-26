@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FaCogs, FaRocket, FaCrown, FaPaintBrush } from 'react-icons/fa';
 import { Gauge, Zap, Wind, Trophy } from 'lucide-react';
 
 const Section = styled.section`
