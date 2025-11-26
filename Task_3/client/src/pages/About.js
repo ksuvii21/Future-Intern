@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { FaCheck, FaGlobeAmericas, FaTrophy, FaUsers, FaBuilding } from 'react-icons/fa';
