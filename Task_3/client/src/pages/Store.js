@@ -566,7 +566,7 @@ const storeProducts = [
     rating: 4.8,
     reviews: 102,
     description: 'Sophisticated titanium cufflinks with precision Bugatti craftsmanship',
-    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop'
+    image: '/images/titanium_cufflinks_set.jpg'
   },
   {
     id: 10,
@@ -578,7 +578,7 @@ const storeProducts = [
     rating: 4.6,
     reviews: 218,
     description: 'Premium motorsport-inspired cap with embroidered Bugatti logo',
-    image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&h=500&fit=crop'
+    image: '/images/bugatti_motorsport_cap.jpg'
   },
   {
     id: 11,
