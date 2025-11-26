@@ -27,7 +27,7 @@ const BugattiOverview = () => {
       </div>
 
       {/* Main overview content */}
-      <div className="overview-container">
+      <div className="overview-container" style={{ paddingTop: '100px' }}>
         <header className="overview-header">
           <h1>BUGATTI</h1>
           <p>"If comparable, it is no longer Bugatti."</p>
