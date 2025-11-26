@@ -90,6 +90,7 @@ const CTAButton = styled(motion.button)`
 
   &::before {
     content: '';
+    border-radius: 50px;
     position: absolute;
     inset: 0; /* Bugatti Red Gradient for hover */
     color: white;
