@@ -1,3 +1,18 @@
+/* eslint-disable import/first */
+// Ensure webpack publicPath works in environments where
+// `document.currentScript` is not available (some browsers/embed contexts).
+// This prevents the runtime error: "Automatic publicPath is not supported in this browser"
+try {
+  if (typeof document !== 'undefined' && !document.currentScript) {
+    // eslint-disable-next-line no-undef
+    __webpack_public_path__ = (process.env.PUBLIC_URL && process.env.PUBLIC_URL !== '')
+      ? process.env.PUBLIC_URL + '/'
+      : '/';
+  }
+} catch (e) {
+  // ignore - best-effort fallback only
+}
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
