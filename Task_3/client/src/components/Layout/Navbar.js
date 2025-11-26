@@ -37,7 +37,7 @@ const MenuButton = styled.div`
   gap: 10px;
   font-weight: 700;
   font-size: 16px;
-  text-transform: lowercase;
+  text-transform: uppercase;
 `;
 
 const DropdownMenu = styled.div`
@@ -111,7 +111,7 @@ const Navbar = () => {
       <NavContainer>
         <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
           <FaBars />
-          menu
+          MENU
           {menuOpen && (
             <DropdownMenu>
               <MenuLink to="/about">About</MenuLink>
