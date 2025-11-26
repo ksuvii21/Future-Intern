@@ -470,7 +470,7 @@ const storeProducts = [
     rating: 4.8,
     reviews: 245,
     description: 'Luxury timepiece inspired by the W16 engine\'s precision and power',
-    image: 'https://images.unsplash.com/photo-1523170335684-f042f1c82f8f?w=500&h=500&fit=crop'
+    image: '/images/chiron_limited_edition_watch.jpg'
   },
   {
     id: 2,
@@ -482,7 +482,7 @@ const storeProducts = [
     rating: 4.9,
     reviews: 156,
     description: '200-page illustrated history documenting 115 years of Bugatti excellence',
-    image: 'https://images.unsplash.com/photo-1507842217343-583f20270319?w=500&h=500&fit=crop'
+    image: '/images/bugatti_heritage_collection_book.jpg'
   },
   {
     id: 3,
@@ -494,7 +494,7 @@ const storeProducts = [
     rating: 4.7,
     reviews: 312,
     description: 'Precision die-cast replica with authentic details and opening parts',
-    image: 'https://images.unsplash.com/photo-1609708536965-3eb88f835b90?w=500&h=500&fit=crop'
+    image: '/images/veyron_Diecast_Model.jpg'
   },
   {
     id: 4,
@@ -506,7 +506,7 @@ const storeProducts = [
     rating: 4.6,
     reviews: 128,
     description: 'Premium racing apparel with Bugatti branding and professional materials',
-    image: 'https://images.unsplash.com/photo-1591028097728-8c4eef1d10fe?w=500&h=500&fit=crop'
+    image: '/images/bugatti_racing_suit.jpg'
   },
   {
     id: 5,
@@ -518,7 +518,7 @@ const storeProducts = [
     rating: 4.9,
     reviews: 287,
     description: 'Authentic carbon fiber construction with precision-machined Bugatti emblem',
-    image: 'https://images.unsplash.com/photo-1591737989029-a86b60f9b4cc?w=500&h=500&fit=crop'
+    image: '/images/carbon_fiber_key_holder.jpg'
   },
   {
     id: 6,
@@ -530,7 +530,7 @@ const storeProducts = [
     rating: 4.8,
     reviews: 94,
     description: '3-piece luxury luggage collection crafted from premium materials',
-    image: 'https://images.unsplash.com/photo-1534224039826-c60a0ff4b569?w=500&h=500&fit=crop'
+    image: '/images/limited_edition_luggage_set.jpg'
   },
   {
     id: 7,
@@ -542,7 +542,7 @@ const storeProducts = [
     rating: 4.5,
     reviews: 73,
     description: 'Fine art print of the legendary Chiron with museum-quality materials',
-    image: 'https://images.unsplash.com/photo-1572365992253-3cb3e56dd362?w=500&h=500&fit=crop'
+    image: ''
   },
   {
     id: 8,
