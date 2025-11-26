@@ -306,9 +306,9 @@ const storeProducts = [
     originalPrice: 15000,
     discount: 17,
     rating: 4.8,
-    reviews: 45,
-    description: 'Luxury timepiece inspired by the W16 engine\'s precision',
-    image: null
+    reviews: 245,
+    description: 'Luxury timepiece inspired by the W16 engine\'s precision and power',
+    image: 'https://images.unsplash.com/photo-1523170335684-f042f1c82f8f?w=500&h=500&fit=crop'
   },
   {
     id: 2,
@@ -318,9 +318,9 @@ const storeProducts = [
     originalPrice: 350,
     discount: 29,
     rating: 4.9,
-    reviews: 32,
-    description: '200-page illustrated history of Bugatti excellence',
-    image: null
+    reviews: 156,
+    description: '200-page illustrated history documenting 115 years of Bugatti excellence',
+    image: 'https://images.unsplash.com/photo-1507842217343-583f20270319?w=500&h=500&fit=crop'
   },
   {
     id: 3,
@@ -330,9 +330,9 @@ const storeProducts = [
     originalPrice: 799,
     discount: 25,
     rating: 4.7,
-    reviews: 61,
-    description: 'Precision die-cast replica with authentic details',
-    image: null
+    reviews: 312,
+    description: 'Precision die-cast replica with authentic details and opening parts',
+    image: 'https://images.unsplash.com/photo-1609708536965-3eb88f835b90?w=500&h=500&fit=crop'
   },
   {
     id: 4,
@@ -342,9 +342,9 @@ const storeProducts = [
     originalPrice: 2400,
     discount: 25,
     rating: 4.6,
-    reviews: 28,
-    description: 'Premium racing apparel with Bugatti branding',
-    image: null
+    reviews: 128,
+    description: 'Premium racing apparel with Bugatti branding and professional materials',
+    image: 'https://images.unsplash.com/photo-1591028097728-8c4eef1d10fe?w=500&h=500&fit=crop'
   },
   {
     id: 5,
@@ -354,9 +354,9 @@ const storeProducts = [
     originalPrice: 600,
     discount: 25,
     rating: 4.9,
-    reviews: 52,
-    description: 'Authentic carbon fiber with Bugatti logo',
-    image: null
+    reviews: 287,
+    description: 'Authentic carbon fiber construction with precision-machined Bugatti emblem',
+    image: 'https://images.unsplash.com/photo-1591737989029-a86b60f9b4cc?w=500&h=500&fit=crop'
   },
   {
     id: 6,
@@ -366,9 +366,9 @@ const storeProducts = [
     originalPrice: 4500,
     discount: 22,
     rating: 4.8,
-    reviews: 19,
-    description: '3-piece luxury luggage collection',
-    image: null
+    reviews: 94,
+    description: '3-piece luxury luggage collection crafted from premium materials',
+    image: 'https://images.unsplash.com/photo-1534224039826-c60a0ff4b569?w=500&h=500&fit=crop'
   },
   {
     id: 7,
@@ -378,9 +378,9 @@ const storeProducts = [
     originalPrice: 250,
     discount: 28,
     rating: 4.5,
-    reviews: 37,
-    description: 'Fine art print of the legendary Chiron',
-    image: null
+    reviews: 73,
+    description: 'Fine art print of the legendary Chiron with museum-quality materials',
+    image: 'https://images.unsplash.com/photo-1572365992253-3cb3e56dd362?w=500&h=500&fit=crop'
   },
   {
     id: 8,
@@ -390,9 +390,57 @@ const storeProducts = [
     originalPrice: 400,
     discount: 20,
     rating: 4.7,
-    reviews: 44,
-    description: 'Exclusive Bugatti signature fragrance',
-    image: null
+    reviews: 189,
+    description: 'Exclusive signature fragrance capturing the essence of Bugatti luxury',
+    image: 'https://images.unsplash.com/photo-1594787318286-11b905e08622?w=500&h=500&fit=crop'
+  },
+  {
+    id: 9,
+    name: 'Titanium Cufflinks Set',
+    category: 'Accessories',
+    price: 850,
+    originalPrice: 1200,
+    discount: 29,
+    rating: 4.8,
+    reviews: 102,
+    description: 'Sophisticated titanium cufflinks with precision Bugatti craftsmanship',
+    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop'
+  },
+  {
+    id: 10,
+    name: 'Bugatti Motorsport Cap',
+    category: 'Apparel',
+    price: 120,
+    originalPrice: 180,
+    discount: 33,
+    rating: 4.6,
+    reviews: 218,
+    description: 'Premium motorsport-inspired cap with embroidered Bugatti logo',
+    image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&h=500&fit=crop'
+  },
+  {
+    id: 11,
+    name: 'Leather Driving Gloves',
+    category: 'Accessories',
+    price: 380,
+    originalPrice: 500,
+    discount: 24,
+    rating: 4.7,
+    reviews: 145,
+    description: 'Premium leather gloves designed for performance and comfort',
+    image: 'https://images.unsplash.com/photo-1582452402894-97b25acb22f9?w=500&h=500&fit=crop'
+  },
+  {
+    id: 12,
+    name: 'Chiron Chronograph Watch',
+    category: 'Accessories',
+    price: 8900,
+    originalPrice: 12000,
+    discount: 26,
+    rating: 4.9,
+    reviews: 167,
+    description: 'Swiss-made chronograph inspired by W16 engineering precision',
+    image: 'https://images.unsplash.com/photo-1548690596-f3a1e7c17c73?w=500&h=500&fit=crop'
   }
 ];
 
