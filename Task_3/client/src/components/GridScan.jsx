@@ -657,24 +657,7 @@ export const GridScan = ({
     };
   }, [enableGyro, uiFaceActive]);
 
-  useEffect(() => {
-    let canceled = false;
-    const load = async () => {
-      try {
-        await Promise.all([
-          faceapi.nets.tinyFaceDetector.loadFromUri(modelsPath),
-          faceapi.nets.faceLandmark68TinyNet.loadFromUri(modelsPath)
-        ]);
-        if (!canceled) setModelsReady(true);
-      } catch {
-        if (!canceled) setModelsReady(false);
-      }
-    };
-    load();
-    return () => {
-      canceled = true;
-    };
-  }, [modelsPath]);
+
 
   useEffect(() => {
     let stop = false;
