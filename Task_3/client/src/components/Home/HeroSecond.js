@@ -50,7 +50,7 @@ const OverlayTextRight = styled.div`
 const HeroSecond = () => {
   return (
     <Section>
-      <VideoBackground autoPlay loop muted playsInline src="/images/hero2 -bg.mp4" type="video/mp4" />
+      <VideoBackground autoPlay loop muted playsInline src="/images/hero2-bg.mp4" type="video/mp4" />
       <OverlayTextLeft>A RECORD-BREAKING<br/>FORCE OF NATURE</OverlayTextLeft>
       <OverlayTextRight>
         Setting a new benchmark at 453.91 Km/h. A triumph of passion, precision, and performance.
