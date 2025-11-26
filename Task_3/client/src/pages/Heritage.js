@@ -295,6 +295,10 @@ const FounderCard = styled(motion.div)`
 `;
 
 const Heritage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const timelineEvents = [
     {
       year: '1909',
