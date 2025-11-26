@@ -133,15 +133,9 @@ const ModelsPreview = () => {
         ))}
       </ModelsGrid>
 
-      <motion.div
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        style={{ width: '200px', margin: '50px auto 0' }}
-      >
-        <ViewAllButton
+      <ViewAllButton
         to="/models"
-        >VIEW ALL MODELS</ViewAllButton>
-      </motion.div>
+      >VIEW ALL MODELS</ViewAllButton>
     </Section>
   );
 };
