@@ -75,7 +75,8 @@ const HeroSubtitle = styled.p`
   color: #d1d5db;
 `;
 
-const CTAButton = styled(motion.button)`
+const CTAButton = styled(Link)`
+  display: inline-block;
   background: linear-gradient(135deg, #ffffffff, #ffffff89); /* Bugatti Red Gradient */
   color: black;
   border: none;
@@ -87,6 +88,7 @@ const CTAButton = styled(motion.button)`
   border-radius: 50px;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
 
   &::before {
     content: '';
@@ -151,9 +153,6 @@ const Hero = () => {
         </HeroSubtitle>
         
         <CTAButton
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          as={Link}
           to="/bugatti-overview"
         >
           <span>DISCOVER MORE</span>
