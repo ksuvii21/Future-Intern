@@ -29,6 +29,7 @@ function App() {
             <Route path="/heritage" element={<Heritage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/bugatti-overview" element={<BugattiOverviewPage />} />
+            <Route path="/store" element={<Store />} />
           </Routes>
           <Footer />
         </div>
