@@ -2,6 +2,9 @@ const path = require('path');
 
 module.exports = {
   // Your existing webpack configuration here, add or adjust as needed to merge below
+  output: {
+    publicPath: '/',
+  },
   module: {
     rules: [
       // Other rules you may have
