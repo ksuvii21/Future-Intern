@@ -289,7 +289,7 @@ const ModelDetail = () => {
   useEffect(() => {
     const fetchCar = async () => {
       try {
-        const API_BASE = process.env.REACT_APP_API_URL;
+        const API_BASE = (process.env.REACT_APP_API_URL || '').replace(/\/$/, '');
         const url = API_BASE ? `${API_BASE}/api/cars/${id}` : `/api/cars/${id}`;
         const { data } = await axios.get(url);
         setCar(data);
