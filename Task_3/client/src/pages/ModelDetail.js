@@ -289,7 +289,9 @@ const ModelDetail = () => {
   useEffect(() => {
     const fetchCar = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/cars/${id}`);
+        const API_BASE = process.env.REACT_APP_API_URL;
+        const url = API_BASE ? `${API_BASE}/api/cars/${id}` : `/api/cars/${id}`;
+        const { data } = await axios.get(url);
         setCar(data);
       } catch (error) {
         console.error("Error fetching car details:", error);
