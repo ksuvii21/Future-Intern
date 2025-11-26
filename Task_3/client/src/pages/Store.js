@@ -399,8 +399,12 @@ const storeProducts = [
 const Store = () => {
   const [products, setProducts] = useState(storeProducts);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [priceRange, setPriceRange] = useState([0, 50000]);
   const [wishlistItems, setWishlistItems] = useState(new Set());
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const categories = [...new Set(storeProducts.map(p => p.category))];
 
