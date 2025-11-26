@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
+import { FiShoppingCart } from 'react-icons/fi';
 
 const Nav = styled.nav`
   position: fixed;
@@ -20,8 +21,9 @@ const NavContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  /* Use space-around to shift logo slightly right for visual center */
+  justify-content: space-around;
 `;
 
 const MenuButton = styled.div`
@@ -32,6 +34,10 @@ const MenuButton = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: lowercase;
 `;
 
 const DropdownMenu = styled.div`
@@ -86,16 +92,15 @@ const StoreLink = styled(Link)`
   user-select: none;
   transition: background 0.3s ease, color 0.3s ease;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 
   &:hover {
     background: #BE0F34;
     border-color: #BE0F34;
     color: black;
   }
-`;
-
-const Spacer = styled.div`
-  flex: 1;
 `;
 
 const Navbar = () => {
@@ -106,6 +111,7 @@ const Navbar = () => {
       <NavContainer>
         <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
           <FaBars />
+          menu
           {menuOpen && (
             <DropdownMenu>
               <MenuLink to="/about">About</MenuLink>
@@ -116,8 +122,10 @@ const Navbar = () => {
           )}
         </MenuButton>
         <Logo to="/">BUGGATI</Logo>
-        <Spacer />
-        <StoreLink to="/store">STORE</StoreLink>
+        <StoreLink to="/store">
+          <FiShoppingCart />
+          STORE
+        </StoreLink>
       </NavContainer>
     </Nav>
   );
