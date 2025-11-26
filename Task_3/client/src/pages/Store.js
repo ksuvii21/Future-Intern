@@ -554,7 +554,7 @@ const storeProducts = [
     rating: 4.7,
     reviews: 189,
     description: 'Exclusive signature fragrance capturing the essence of Bugatti luxury',
-    image: 'https://images.unsplash.com/photo-1594787318286-11b905e08622?w=500&h=500&fit=crop'
+    image: '/images/bugatti_heritage_fragrance.jpg'
   },
   {
     id: 9,
