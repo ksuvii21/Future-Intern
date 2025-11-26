@@ -139,10 +139,13 @@ const Models = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/cars');
-        setCars(response.data);
+        const API_BASE = (process.env.REACT_APP_API_URL || '').replace(/\/$/, '');
+        const url = API_BASE ? `${API_BASE}/api/cars` : `/api/cars`;
+        const response = await axios.get(url);
+        setCars(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
-        console.error('Error fetching cars:', error);
+        const msg = error && error.message ? error.message : String(error);
+        console.error('Error fetching cars:', msg);
       } finally {
         setLoading(false);
       }
