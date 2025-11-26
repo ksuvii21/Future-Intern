@@ -335,7 +335,7 @@ const Contact = () => {
     setError('');
 
     try {
-      const API_BASE = process.env.REACT_APP_API_URL;
+      const API_BASE = (process.env.REACT_APP_API_URL || '').replace(/\/$/, '');
       const url = API_BASE ? `${API_BASE}/api/contact` : `/api/contact`;
       await axios.post(url, formData);
       setSubmitted(true);
