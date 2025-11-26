@@ -268,9 +268,6 @@ void main(){
 `;
 
 export const GridScan = ({
-  enableWebcam = false,
-  showPreview = false,
-  modelsPath = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/weights',
   sensitivity = 0.55,
   lineThickness = 1,
   linesColor = '#392e4e',
@@ -340,10 +337,7 @@ export const GridScan = ({
     }
   };
 
-  const bufX = useRef([]);
-  const bufY = useRef([]);
-  const bufT = useRef([]);
-  const bufYaw = useRef([]);
+
 
   const s = THREE.MathUtils.clamp(sensitivity, 0, 1);
   const skewScale = THREE.MathUtils.lerp(0.06, 0.2, s);
