@@ -762,7 +762,10 @@ const Store = () => {
                       onClick={() => toggleWishlist(product.id)}
                       className={wishlistItems.has(product.id) ? 'active' : ''}
                     >
-                      <FaHeart fill={wishlistItems.has(product.id) ? 'currentColor' : 'none'} />
+                      <FaHeart 
+                        fill={wishlistItems.has(product.id) ? '#BE0F34' : 'none'} 
+                        stroke={wishlistItems.has(product.id) ? '#BE0F34' : 'white'} 
+                      />
                     </WishlistButton>
                   </ProductImageWrapper>
                   <ProductInfo>
