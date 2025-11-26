@@ -628,9 +628,9 @@ const storeProducts = [
 ];
 
 const Store = () => {
-  const [products, setProducts] = useState(storeProducts);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 20000]);
+  const maxProductPrice = Math.max(...storeProducts.map(p => p.price));
+  const [priceRange, setPriceRange] = useState([0, maxProductPrice]);
   const [wishlistItems, setWishlistItems] = useState(new Set());
 
   useEffect(() => {
@@ -659,7 +659,7 @@ const Store = () => {
 
   const clearFilters = () => {
     setSelectedCategories([]);
-    setPriceRange([0, 20000]);
+    setPriceRange([0, maxProductPrice]);
   };
 
   const filteredProducts = storeProducts.filter(product => {
@@ -730,7 +730,7 @@ const Store = () => {
             <PriceRangeInput
               type="range"
               min="0"
-              max="20000"
+              max={maxProductPrice}
               step="100"
               value={priceRange[1]}
               onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
