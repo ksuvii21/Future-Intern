@@ -190,7 +190,6 @@ const GalleryItem = styled(motion.div)`
   background: linear-gradient(135deg, #1f2937, #111827);
   border: 1px solid #374151;
   cursor: pointer;
-  group;
 
   img {
     width: 100%;
@@ -213,10 +212,10 @@ const GalleryItem = styled(motion.div)`
     justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease;
+  }
 
-    &:hover {
-      opacity: 1;
-    }
+  &:hover .overlay {
+    opacity: 1;
   }
 
   .caption {
@@ -300,126 +299,177 @@ const Heritage = () => {
     {
       year: '1909',
       title: 'Foundation',
-      description: 'Ettore Bugatti establishes Automobiles E. Bugatti in Molsheim, France.'
+      subtitle: 'The Beginning of an Era',
+      description: 'Ettore Bugatti establishes Automobiles E. Bugatti in Molsheim, Alsace. With a revolutionary approach to automotive engineering, he combines artistic vision with technical precision, setting new standards for the industry.'
     },
     {
       year: '1910',
-      title: 'First Production Car',
-      description: 'The Type 13 begins production, marking the start of Bugatti\'s legacy.'
+      title: 'First Production',
+      subtitle: 'Type 13 Debuts',
+      description: 'The Type 13 marks the beginning of Bugatti production, establishing the brand\'s reputation for quality and innovation. Early models showcase Ettore\'s unique engineering philosophy.'
     },
     {
       year: '1924',
-      title: 'Racing Dominance',
-      description: 'Type 35 begins its legendary racing career, winning over 2,000 races.'
+      title: 'Racing Glory',
+      subtitle: 'Type 35 Dominance',
+      description: 'The legendary Type 35 racing car emerges as the most successful race car ever built, winning over 2,000 races and establishing Bugatti as the dominant force in motorsport.'
     },
     {
       year: '1931',
-      title: 'Royale',
-      description: 'Type 41 Royale represents the pinnacle of luxury and automotive excellence.'
+      title: 'Luxury Icon',
+      subtitle: 'Type 41 Royale',
+      description: 'The Type 41 Royale represents the pinnacle of luxury and engineering. This automotive masterpiece features an 12.7-liter engine and is considered one of the most magnificent cars ever created.'
     },
     {
-      year: '1952',
-      title: 'Post-War Revival',
-      description: 'Bugatti resumes limited production, focusing on innovation.'
+      year: '1947',
+      title: 'Legacy Continues',
+      subtitle: 'Ettore\'s Passing',
+      description: 'Ettore Bugatti passes away, leaving behind a legendary legacy of innovation, craftsmanship, and automotive excellence that would influence generations.'
     },
     {
-      year: '1987',
-      title: 'Veyron Development Begins',
-      description: 'Work commences on a new hypercar that will redefine performance standards.'
+      year: '1998',
+      title: 'Brand Revival',
+      subtitle: 'Volkswagen Group',
+      description: 'Bugatti is revived under the Volkswagen Group. The brand is reborn with a commitment to producing hypercars that honor the original spirit while embracing modern technology.'
     },
     {
       year: '2005',
       title: 'Modern Era',
-      description: 'Veyron 16.4 redefines hyper sports cars with 1,001 horsepower.'
+      subtitle: 'Veyron 16.4',
+      description: 'The Bugatti Veyron 16.4 debuts as the world\'s fastest production car, featuring a quad-turbocharged 8.0-liter W16 engine producing 1,001 horsepower and reaching speeds of 407 km/h.'
     },
     {
       year: '2016',
-      title: 'Chiron',
-      description: 'The Chiron continues the legacy with unprecedented performance and luxury.'
+      title: 'Next Generation',
+      subtitle: 'Chiron Launch',
+      description: 'The Chiron succeeds the Veyron with enhanced performance, featuring 1,479 horsepower, advanced aerodynamics, and cutting-edge technology while maintaining Bugatti\'s uncompromising standards.'
     },
     {
-      year: '2020',
-      title: 'Divo Introduction',
-      description: 'Divo ensures cutting-edge aerodynamics and handling technology.'
+      year: '2023',
+      title: 'Present Day',
+      subtitle: 'Ongoing Excellence',
+      description: 'Bugatti continues to produce exclusive hypercars, maintaining its position as the ultimate symbol of automotive luxury, performance, and innovation for discerning collectors worldwide.'
     }
   ];
 
   const galleryItems = [
-    { src: '/images/heritage1.jpg', caption: 'Vintage Bugatti Type 35' },
-    { src: '/images/heritage2.jpg', caption: 'Bugatti Royale in Classic Showroom' },
-    { src: '/images/heritage3.jpg', caption: 'Ettore Bugatti Portrait' },
-    { src: '/images/heritage4.jpg', caption: 'Classic Bugatti Workshop' },
-    { src: '/images/heritage5.jpg', caption: 'Bugatti Racing Legacy' }
+    { src: '/images/heritage1.jpg', caption: 'Vintage Type 35 Racing Car' },
+    { src: '/images/heritage2.jpg', caption: 'Bugatti Royale Heritage' },
+    { src: '/images/heritage3.jpg', caption: 'Historic Workshop' },
+    { src: '/images/heritage4.jpg', caption: 'Classic Bugatti Legacy' },
+    { src: '/images/heritage5.jpg', caption: 'Racing Tradition' },
+    { src: '/images/chiron.jpg', caption: 'Modern Hypercar Era' }
   ];
 
   const founders = [
     {
       name: 'Ettore Bugatti',
       image: '/images/ettore.jpg',
-      bio: 'Founder and visionary behind the Bugatti brand, renowned for engineering excellence.'
+      period: '1881-1947',
+      bio: 'Founder and visionary. Ettore revolutionized automotive engineering by merging artistic design with technical excellence, creating the philosophy: "If comparable, it is no longer Bugatti."'
     },
     {
       name: 'Jean Bugatti',
       image: '/images/jean.jpg',
-      bio: 'Ettore’s son, contributed to design and innovation including the iconic Type 57SC Atlantic.'
+      period: '1909-1939',
+      bio: 'Ettore\'s son and design successor. Jean contributed revolutionary designs including the iconic Type 57SC Atlantic, one of the most beautiful cars ever created.'
     },
     {
       name: 'Wolfgang Dürheimer',
       image: '/images/wolfgang.jpg',
-      bio: 'Former Bugatti CEO who led the development of the modern hypercar era.'
+      period: 'Modern Era',
+      bio: 'Modern visionary. As CEO, Wolfgang led the development of contemporary hypercars, ensuring Bugatti\'s legacy continues with innovation and exclusivity.'
     }
   ];
 
   return (
     <HeritageContainer>
+      {/* Hero Section */}
       <HeroSection>
-        <div>
-          <h1 style={{ fontSize: '4rem', marginBottom: '20px' }}>HERITAGE</h1>
-          <p style={{ fontSize: '1.2rem' }}>A century of automotive excellence</p>
-        </div>
+        <HeroContent
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <h1>HERITAGE</h1>
+          <p>Over 110 Years of Automotive Excellence</p>
+        </HeroContent>
       </HeroSection>
 
+      {/* Timeline Section */}
       <ContentSection>
-        <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '50px' }}>
-          THE BUGATTI LEGACY
-        </h2>
-        
-        <Timeline>
+        <SectionTitle>THE LEGENDARY TIMELINE</SectionTitle>
+        <TimelineContainer>
           {timelineEvents.map((event, index) => (
-            <TimelineItem key={index}>
-              <Year>{event.year}</Year>
-              <Content className="content">
-                <h3>{event.title}</h3>
+            <TimelineItem 
+              key={index}
+              $alternate={index % 2 === 1}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <TimelineContent>
+                <h3>{event.year}</h3>
+                <h4>{event.title}</h4>
+                <p style={{ fontSize: '0.9rem', color: '#BE0F34', marginBottom: '10px' }}>
+                  {event.subtitle}
+                </p>
                 <p>{event.description}</p>
-              </Content>
+              </TimelineContent>
+              <TimelineMarker>
+                <TimelineCircle />
+              </TimelineMarker>
             </TimelineItem>
           ))}
-        </Timeline>
+        </TimelineContainer>
       </ContentSection>
 
+      {/* Gallery Section */}
       <GallerySection>
-        <GalleryTitle>Vintage Bugatti Gallery</GalleryTitle>
-        <GalleryGrid>
-          {galleryItems.map((item, idx) => (
-            <GalleryItem key={idx}>
-              <img src={item.src} alt={item.caption} />
-              <p>{item.caption}</p>
-            </GalleryItem>
-          ))}
-        </GalleryGrid>
+        <GalleryContainer>
+          <SectionTitle>ICONIC MOMENTS</SectionTitle>
+          <GalleryGrid>
+            {galleryItems.map((item, idx) => (
+              <GalleryItem
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+              >
+                <img src={item.src} alt={item.caption} />
+                <div className="overlay">
+                  <FaPlay size={40} color="#BE0F34" />
+                </div>
+                <div className="caption">{item.caption}</div>
+              </GalleryItem>
+            ))}
+          </GalleryGrid>
+        </GalleryContainer>
       </GallerySection>
 
+      {/* Founders Section */}
       <FoundersSection>
-        <FoundersTitle>Founders & Legends</FoundersTitle>
-        {founders.map((founder, idx) => (
-          <FounderCard key={idx}>
-            <img src={founder.image} alt={founder.name} />
-            <h3>{founder.name}</h3>
-            <p>{founder.bio}</p>
-          </FounderCard>
-        ))}
+        <SectionTitle>VISIONARIES & LEGENDS</SectionTitle>
+        <FoundersGrid>
+          {founders.map((founder, idx) => (
+            <FounderCard
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+            >
+              <div className="image-wrapper">
+                <img src={founder.image} alt={founder.name} />
+              </div>
+              <h3>{founder.name}</h3>
+              <p style={{ fontSize: '0.85rem', color: '#9ca3af', marginBottom: '15px' }}>
+                {founder.period}
+              </p>
+              <p>{founder.bio}</p>
+            </FounderCard>
+          ))}
+        </FoundersGrid>
       </FoundersSection>
-
     </HeritageContainer>
   );
 };
