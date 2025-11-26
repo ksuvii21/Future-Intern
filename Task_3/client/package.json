@@ -32,8 +32,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:5000",
-  "homepage": ".",
+  "proxy": "https://ksuvii-bugatti-clone.onrender.com/",
+  "homepage": "https://ksuvii-bugatti-clone.netlify.app",
   "eslintConfig": {
     "extends": [
       "react-app",
