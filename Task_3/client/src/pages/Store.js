@@ -542,7 +542,7 @@ const storeProducts = [
     rating: 4.5,
     reviews: 73,
     description: 'Fine art print of the legendary Chiron with museum-quality materials',
-    image: ''
+    image: '/images/chiron_art_print.jpg'
   },
   {
     id: 8,
