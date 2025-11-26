@@ -1,51 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FaShoppingCart, FaFilter, FaStar, FaHeart } from 'react-icons/fa';
+import { FaShoppingCart, FaFilter, FaStar, FaHeart, FaArrowRight } from 'react-icons/fa';
 
 const StoreContainer = styled.div`
   min-height: 100vh;
   background: linear-gradient(to bottom, #000000, #0a0a0a);
   color: white;
   padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(190, 15, 52, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
 `;
 
-const PageHeader = styled.div`
+const PageHeader = styled(motion.div)`
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  z-index: 2;
 `;
 
 const PageTitle = styled.h1`
-  font-size: 4rem;
+  font-size: 4.5rem;
   margin-bottom: 20px;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: white;
   font-weight: 900;
+  text-transform: uppercase;
+
+  span {
+    color: #BE0F34;
+  }
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
+    letter-spacing: 2px;
   }
 `;
 
 const PageSubtitle = styled.p`
-  font-size: 1.2rem;
-  color: #9ca3af;
+  font-size: 1.1rem;
+  color: #cccccc;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.8;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const MainContent = styled.div`
   display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 30px;
-  max-width: 1400px;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  max-width: 1600px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -53,71 +83,146 @@ const MainContent = styled.div`
 const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
+
+  @media (max-width: 1024px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
 `;
 
-const FilterGroup = styled.div`
-  background: linear-gradient(135deg, #1f2937, #111827);
-  border: 1px solid #374151;
-  border-radius: 10px;
-  padding: 20px;
+const FilterGroup = styled(motion.div)`
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(13, 13, 13, 0.8));
+  border: 1px solid rgba(190, 15, 52, 0.2);
+  border-radius: 8px;
+  padding: 25px 20px;
+  backdrop-filter: blur(10px);
+
+  @media (max-width: 1024px) {
+    flex: 1;
+    min-width: 200px;
+  }
 `;
 
 const FilterTitle = styled.h3`
   font-size: 1.1rem;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   color: white;
   display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  svg {
+    color: #BE0F34;
+  }
 `;
 
 const FilterOption = styled.label`
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 12px;
+  margin-bottom: 14px;
   cursor: pointer;
   color: #d1d5db;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
 
   input {
     cursor: pointer;
     accent-color: #BE0F34;
+    width: 18px;
+    height: 18px;
   }
 
   &:hover {
-    color: white;
+    color: #BE0F34;
+    transform: translateX(5px);
   }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const PriceRangeInput = styled.input`
+  width: 100%;
+  accent-color: #BE0F34;
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  &::-webkit-slider-thumb {
+    background: #BE0F34;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+  }
+`;
+
+const PriceDisplay = styled.div`
+  color: #d1d5db;
+  font-size: 0.95rem;
+  padding: 10px;
+  background: rgba(190, 15, 52, 0.1);
+  border-left: 3px solid #BE0F34;
 `;
 
 const ProductsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 35px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ProductCard = styled(motion.div)`
-  background: linear-gradient(135deg, #1f2937, #111827);
-  border: 1px solid #374151;
-  border-radius: 15px;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(13, 13, 13, 0.9));
+  border: 1px solid rgba(190, 15, 52, 0.15);
+  border-radius: 8px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(190, 15, 52, 0.1), transparent);
+    transition: left 0.5s ease;
+    z-index: 10;
+  }
 
   &:hover {
-    border-color: rgba(190, 15, 52, 0.5);
-    box-shadow: 0 0 30px rgba(190, 15, 52, 0.2);
-    transform: translateY(-5px);
+    border-color: rgba(190, 15, 52, 0.4);
+    box-shadow: 0 20px 60px rgba(190, 15, 52, 0.25);
+    transform: translateY(-12px);
+
+    &::before {
+      left: 100%;
+    }
   }
 `;
 
 const ProductImageWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 320px;
   overflow: hidden;
-  background: #0f172a;
+  background: linear-gradient(135deg, rgba(190, 15, 52, 0.05), transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,99 +232,123 @@ const ProductImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
 
   ${ProductCard}:hover & {
-    transform: scale(1.05);
+    transform: scale(1.08);
   }
 `;
 
-const PlaceholderImage = styled.div`
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #374151, #1f2937);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  color: #6b7280;
+const DiscountBadge = styled.div`
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #BE0F34;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  z-index: 20;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `;
 
 const WishlistButton = styled.button`
   position: absolute;
   top: 15px;
   right: 15px;
-  background: rgba(0, 0, 0, 0.7);
-  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(190, 15, 52, 0.3);
   color: white;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  z-index: 20;
+  font-size: 1.2rem;
 
   &:hover {
     background: #BE0F34;
-    transform: scale(1.1);
+    border-color: #BE0F34;
+    transform: scale(1.15);
+  }
+
+  &.active {
+    background: #BE0F34;
+    border-color: #BE0F34;
+    color: white;
   }
 `;
 
 const ProductInfo = styled.div`
-  padding: 25px;
+  padding: 28px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ProductName = styled.h3`
-  font-size: 1.3rem;
-  margin-bottom: 10px;
+  font-size: 1.35rem;
+  margin-bottom: 8px;
   color: white;
   font-weight: 700;
+  line-height: 1.3;
 `;
 
 const ProductCategory = styled.p`
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #BE0F34;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
+  letter-spacing: 1.5px;
+  margin-bottom: 15px;
+  font-weight: 600;
 `;
 
 const ProductRating = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 15px;
+  flex-wrap: wrap;
 `;
 
 const StarIcon = styled(FaStar)`
   color: #BE0F34;
+  font-size: 0.9rem;
 `;
 
 const RatingText = styled.span`
   color: #9ca3af;
   font-size: 0.9rem;
+  margin-left: 5px;
 `;
 
 const ProductDescription = styled.p`
   color: #d1d5db;
   font-size: 0.95rem;
-  margin-bottom: 15px;
-  line-height: 1.5;
-  min-height: 40px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  flex-grow: 1;
 `;
 
 const PriceSection = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(190, 15, 52, 0.15);
 `;
 
 const Price = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 5px;
 `;
 
 const OriginalPrice = styled.span`
@@ -229,71 +358,104 @@ const OriginalPrice = styled.span`
 `;
 
 const CurrentPrice = styled.span`
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.7rem;
+  font-weight: 900;
   color: #BE0F34;
+  letter-spacing: 0.5px;
 `;
 
-const Discount = styled.span`
-  background: #BE0F34;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 0.85rem;
-  font-weight: bold;
-`;
-
-const AddToCartButton = styled.button`
+const AddToCartButton = styled(motion.button)`
   width: 100%;
-  background: linear-gradient(135deg, #BE0F34, #A00020);
+  background: linear-gradient(135deg, #BE0F34 0%, #A00020 100%);
   color: white;
   border: none;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 15px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 700;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.95rem;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
 
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(190, 15, 52, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(190, 15, 52, 0.4);
+
+    &::before {
+      left: 100%;
+    }
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: translateY(0);
   }
 `;
 
-const ViewAllButton = styled.button`
+const ViewDetailsButton = styled(motion.button)`
   width: 100%;
   background: transparent;
-  color: white;
-  border: 2px solid white;
+  color: #BE0F34;
+  border: 2px solid #BE0F34;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: 700;
   transition: all 0.3s ease;
-  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 
   &:hover {
-    background: white;
-    color: black;
+    background: #BE0F34;
+    color: white;
+
+    svg {
+      transform: translateX(5px);
+    }
+  }
+
+  svg {
+    transition: transform 0.3s ease;
   }
 `;
 
 const EmptyState = styled.div`
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
   color: #9ca3af;
+  grid-column: 1 / -1;
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 10px;
+    color: white;
+  }
+
+  p {
+    font-size: 1.1rem;
   }
 `;
 
@@ -447,7 +609,7 @@ const storeProducts = [
 const Store = () => {
   const [products, setProducts] = useState(storeProducts);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 50000]);
+  const [priceRange, setPriceRange] = useState([0, 20000]);
   const [wishlistItems, setWishlistItems] = useState(new Set());
 
   useEffect(() => {
@@ -480,10 +642,30 @@ const Store = () => {
     return categoryMatch && priceMatch;
   });
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
     <StoreContainer>
-      <PageHeader>
-        <PageTitle>BUGATTI STORE</PageTitle>
+      <PageHeader
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <PageTitle>
+          BUGATTI <span>STORE</span>
+        </PageTitle>
         <PageSubtitle>
           Curated collection of exclusive merchandise and luxury items from the world of Bugatti
         </PageSubtitle>
@@ -491,7 +673,12 @@ const Store = () => {
 
       <MainContent>
         <Sidebar>
-          <FilterGroup>
+          <FilterGroup
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <FilterTitle>
               <FaFilter /> CATEGORIES
             </FilterTitle>
@@ -507,80 +694,78 @@ const Store = () => {
             ))}
           </FilterGroup>
 
-          <FilterGroup>
+          <FilterGroup
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
             <FilterTitle>PRICE RANGE</FilterTitle>
-            <FilterOption>
-              <input
-                type="range"
-                min="0"
-                max="5000"
-                value={priceRange[1]}
-                onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                style={{ width: '100%' }}
-              />
-            </FilterOption>
-            <div style={{ color: '#d1d5db', marginTop: '10px' }}>
+            <PriceRangeInput
+              type="range"
+              min="0"
+              max="20000"
+              step="100"
+              value={priceRange[1]}
+              onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
+            />
+            <PriceDisplay>
               $0 - ${priceRange[1].toLocaleString()}
-            </div>
+            </PriceDisplay>
           </FilterGroup>
         </Sidebar>
 
         <div>
           {filteredProducts.length > 0 ? (
-            <>
-              <ProductsGrid>
-                {filteredProducts.map((product, index) => (
-                  <ProductCard
-                    key={product.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <ProductImageWrapper>
-                      {product.image ? (
-                        <ProductImage src={product.image} alt={product.name} />
-                      ) : (
-                        <PlaceholderImage>Product Image</PlaceholderImage>
-                      )}
-                      <WishlistButton
-                        onClick={() => toggleWishlist(product.id)}
-                        style={{
-                          background: wishlistItems.has(product.id) ? '#BE0F34' : 'rgba(0, 0, 0, 0.7)'
-                        }}
-                      >
-                        <FaHeart fill={wishlistItems.has(product.id) ? 'white' : 'none'} />
-                      </WishlistButton>
-                    </ProductImageWrapper>
-                    <ProductInfo>
-                      <ProductCategory>{product.category}</ProductCategory>
-                      <ProductName>{product.name}</ProductName>
-                      <ProductRating>
-                        {[...Array(5)].map((_, i) => (
-                          <StarIcon key={i} size={14} color={i < Math.floor(product.rating) ? '#BE0F34' : '#4b5563'} />
-                        ))}
-                        <RatingText>({product.reviews})</RatingText>
-                      </ProductRating>
-                      <ProductDescription>{product.description}</ProductDescription>
-                      <PriceSection>
-                        <Price>
-                          {product.originalPrice > product.price && (
-                            <OriginalPrice>${product.originalPrice.toLocaleString()}</OriginalPrice>
-                          )}
-                          <CurrentPrice>${product.price.toLocaleString()}</CurrentPrice>
-                        </Price>
-                        {product.discount > 0 && (
-                          <Discount>-{product.discount}%</Discount>
+            <ProductsGrid
+              as={motion.div}
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {filteredProducts.map((product, index) => (
+                <ProductCard key={product.id} variants={itemVariants}>
+                  <ProductImageWrapper>
+                    <ProductImage src={product.image} alt={product.name} />
+                    {product.discount > 0 && (
+                      <DiscountBadge>-{product.discount}%</DiscountBadge>
+                    )}
+                    <WishlistButton
+                      onClick={() => toggleWishlist(product.id)}
+                      className={wishlistItems.has(product.id) ? 'active' : ''}
+                    >
+                      <FaHeart fill={wishlistItems.has(product.id) ? 'currentColor' : 'none'} />
+                    </WishlistButton>
+                  </ProductImageWrapper>
+                  <ProductInfo>
+                    <ProductCategory>{product.category}</ProductCategory>
+                    <ProductName>{product.name}</ProductName>
+                    <ProductRating>
+                      {[...Array(5)].map((_, i) => (
+                        <StarIcon key={i} color={i < Math.floor(product.rating) ? '#BE0F34' : '#4b5563'} />
+                      ))}
+                      <RatingText>({product.reviews})</RatingText>
+                    </ProductRating>
+                    <ProductDescription>{product.description}</ProductDescription>
+                    <PriceSection>
+                      <Price>
+                        {product.originalPrice > product.price && (
+                          <OriginalPrice>${product.originalPrice.toLocaleString()}</OriginalPrice>
                         )}
-                      </PriceSection>
-                      <AddToCartButton>
-                        <FaShoppingCart /> ADD TO CART
-                      </AddToCartButton>
-                      <ViewAllButton>VIEW DETAILS</ViewAllButton>
-                    </ProductInfo>
-                  </ProductCard>
-                ))}
-              </ProductsGrid>
-            </>
+                        <CurrentPrice>${product.price.toLocaleString()}</CurrentPrice>
+                      </Price>
+                    </PriceSection>
+                    <AddToCartButton whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                      <FaShoppingCart /> ADD TO CART
+                    </AddToCartButton>
+                    <ViewDetailsButton whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                      VIEW DETAILS <FaArrowRight />
+                    </ViewDetailsButton>
+                  </ProductInfo>
+                </ProductCard>
+              ))}
+            </ProductsGrid>
           ) : (
             <EmptyState>
               <h2>No products found</h2>
