@@ -1704,6 +1704,7 @@ footer {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   padding: 1.5rem;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   max-width: 500px;
   width: 100%;
@@ -1949,53 +1950,113 @@ footer {
   font-size: 0.9rem;
 }
 
-/* ========================================
-   CERTIFICATION SLIDER (NEW)
-======================================== */
-
-.cert-slider-container {
+/* 5 Certificates Slider */
+.cert-slider-5 {
   position: relative;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  padding: 20px 0;
+  gap: 15px;
+  padding: 20px 60px;
 }
 
-.cert-slides-wrapper {
+.cert-slides-5 {
   display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  overflow: visible;
+  gap: 15px;
+  overflow: hidden;
 }
 
-.cert-slide {
-  flex: 0 0 280px;
+.cert-slide-5 {
+  flex: 0 0 calc(33.33% - 12px);
+  min-width: 320px;
   cursor: pointer;
-  opacity: 0.5;
-  transform: scale(0.85);
-  transition: all 0.4s ease;
 }
 
-.cert-slide.active {
+.cert-card-5 {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.cert-card-5:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-5px);
+}
+
+.cert-image-5 {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  display: block;
+}
+
+.cert-overlay-5 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(59, 130, 246, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cert-overlay-5 span {
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.cert-card-5:hover .cert-overlay-5 {
   opacity: 1;
-  transform: scale(1);
 }
 
-.cert-card {
+.cert-info-5 {
+  padding: 10px;
+  text-align: center;
+}
+
+.cert-info-5 h4 {
+  color: white;
+  font-size: 0.7rem;
+  margin-bottom: 3px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cert-info-5 h5 {
+  color: #9ca3af;
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+
+.cert-current-slide .cert-card {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.cert-current-slide .cert-card:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-5px);
 }
 
 .cert-image {
   width: 100%;
-  height: 200px;
+  height: 250px;
   object-fit: cover;
   display: block;
 }
@@ -2024,10 +2085,6 @@ footer {
   opacity: 1;
 }
 
-.cert-slide:hover .cert-card {
-  border-color: rgba(59, 130, 246, 0.5);
-}
-
 .cert-info {
   padding: 15px;
   text-align: center;
@@ -2035,14 +2092,14 @@ footer {
 
 .cert-info h4 {
   color: white;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   margin-bottom: 5px;
   line-height: 1.3;
 }
 
 .cert-info h5 {
   color: #9ca3af;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 400;
 }
 
@@ -2053,10 +2110,10 @@ footer {
   background: rgba(59, 130, 246, 0.3);
   border: none;
   color: white;
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
@@ -2067,11 +2124,11 @@ footer {
 }
 
 .cert-prev {
-  left: 10px;
+  left: -50px;
 }
 
 .cert-next {
-  right: 10px;
+  right: -50px;
 }
 
 /* Dots */
@@ -2094,6 +2151,14 @@ footer {
 .cert-dot.active {
   background: #3b82f6;
   transform: scale(1.2);
+}
+
+/* Counter */
+.cert-counter {
+  text-align: center;
+  color: #9ca3af;
+  margin-top: 15px;
+  font-size: 0.9rem;
 }
 
 /* Modal */
@@ -2170,6 +2235,35 @@ footer {
 
 .cert-modal-btn:hover {
   transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .cert-single-slider {
+    max-width: 300px;
+  }
+  
+  .cert-current-slide {
+    flex: 0 0 280px;
+  }
+  
+  .cert-image {
+    height: 200px;
+  }
+  
+  .cert-nav-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .cert-prev {
+    left: -40px;
+  }
+  
+  .cert-next {
+    right: -40px;
+  }
 }
 
 /* Responsive */
