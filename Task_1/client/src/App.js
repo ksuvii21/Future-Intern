@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import PropTypes from 'prop-types';
 import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa"; 
-
-import { TypeAnimation } from 'react-type-animation';
 
 // Import assets
 import profileImage from './assets/profile.png';
@@ -12,69 +11,57 @@ import project3Image from './assets/project3.png';
 import project4Image from './assets/project4.png';
 import project5Image from './assets/project5.png';
 import project6Image from './assets/project6.avif';
-import resumePDF from './assets/resume.pdf';
 
-import FloatingLines from './components/FloatingLines';
+//import FloatingLines from './components/FloatingLines';
 import Hyperspeed from './components/Hyperspeed';
 import { hyperspeedPresets } from './components/HyperSpeedPresets';
+import Hero from './Hero';
 
-const Header = () => (
-  <header id="header">
-    <div className="container"> 
-      <nav>
-        <a href="#home" className="logo">Kritika Gupta</a>
-        <ul className="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li className="dropdown">
-            <a href="#more" className="dropbtn">More</a>
-            <ul className="dropdown-menu">
-              <li><a href="#skills">Skills</a></li>
-              <li><a href="#education">Education</a></li>
-              <li><a href="#certifications">Certifications</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div className="hamburger">
-          <i className="fas fa-bars"></i>
-        </div>
-      </nav>
-    </div>
-  </header>
-);
+const Header = ({ isMenuOpen, onHamburgerClick, onLinkClick }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
 
-const Hero = () => (
-  <section id="home" className="hero">
-    <FloatingLines />
-    <div className="container">
-      <div className="hero-content">
-        <h1>I&apos;m Kritika Gupta, a <br />
-          <TypeAnimation
-            sequence={[
-              'Full-Stack Developer',
-              2000,
-              'MERN Specialist',
-              2000,
-              'Building Scalable Web Apps',
-              2000,
-            ]}
-            wrapper="span"
-            speed={50}
-            repeat={Infinity}
-          />
-        </h1>
-        <p>I build scalable, beautiful, and high-performance web applications.</p>
-        <div className="hero-btns">
-          <a href="#projects" className="btn btn-primary">View My Projects</a>
-          <a href={resumePDF} className="btn btn-outline" target="_blank" rel="noopener noreferrer">View Resume</a>
-        </div>
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header id="header" className={isScrolled ? 'scrolled' : ''}>
+      <div className="container">
+        <nav>
+          <a href="#home" className="logo" onClick={onLinkClick}>Kritika Gupta</a>
+          <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+            <li><a href="#about" onClick={onLinkClick}>About</a></li>
+            <li><a href="#projects" onClick={onLinkClick}>Projects</a></li>
+            <li><a href="#experience" onClick={onLinkClick}>Experience</a></li>
+            <li><a href="#contact" onClick={onLinkClick}>Contact</a></li>
+            <li className="dropdown">
+              <a href="#more" className="dropbtn" onClick={(e) => e.preventDefault()}>More</a>
+              <ul className="dropdown-menu">
+                <li><a href="#skills" onClick={onLinkClick}>Skills</a></li>
+                <li><a href="#education" onClick={onLinkClick}>Education</a></li>
+                <li><a href="#certifications" onClick={onLinkClick}>Certifications</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div className="hamburger" onClick={onHamburgerClick}>
+            <i className="fas fa-bars"></i>
+          </div>
+        </nav>
       </div>
-    </div>
-  </section>
-);
+    </header>
+  );
+};
+
+Header.propTypes = {
+  isMenuOpen: PropTypes.bool.isRequired,
+  onHamburgerClick: PropTypes.func.isRequired,
+  onLinkClick: PropTypes.func.isRequired
+};
 
 const About = () => (
   <section id="about" className="about">
@@ -604,78 +591,50 @@ const Footer = () => (
 );
 
 function App() {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Simulate loading for 2 seconds
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
-
-    // Navbar scroll effect
-    const handleScroll = () => {
-      const header = document.getElementById('header');
-      if (header) {
-        if (window.scrollY > 50) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-      }
-    };
-
-    // Smooth scrolling for anchor links
-    const smoothScroll = (e) => {
-      e.preventDefault();
-      const target = document.querySelector(e.target.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    };
-
-    // Mobile menu toggle
-    const handleHamburgerClick = () => {
-      const navLinks = document.querySelector('.nav-links');
-      if (navLinks) {
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', smoothScroll);
-    });
-
-    const hamburger = document.querySelector('.hamburger');
-    if (hamburger) {
-      hamburger.addEventListener('click', handleHamburgerClick);
-    }
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', smoothScroll);
-      });
-      if (hamburger) {
-        hamburger.removeEventListener('click', handleHamburgerClick);
-      }
-    };
+    return () => clearTimeout(timer);
   }, []);
   
+  const handleHamburgerClick = () => {
+    setIsMenuOpen(prevState => !prevState);
+  };
+
+  const handleLinkClick = (e) => {
+    const href = e.currentTarget.getAttribute('href');
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    // Close menu on link click for mobile
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  };
+
   if (loading) {
     return <Hyperspeed effectOptions={hyperspeedPresets.one} />;
   }
 
   return (
     <div className="App">
-      <Header />
+      <Header 
+        isMenuOpen={isMenuOpen}
+        onHamburgerClick={handleHamburgerClick}
+        onLinkClick={handleLinkClick}
+      />
       <main>
-        <Hero />
+        <Hero onLinkClick={handleLinkClick} />
         <About />
         <Skills />
         <Projects />
