@@ -112,9 +112,9 @@ const Hero = ({ onLinkClick }) => {
                 View Projects
                 </button>
             </a>
-            <a href="#contact" onClick={onLinkClick}>
+            <a href="./assets/resume.pdf" target="_blank" rel="noopener noreferrer">
                 <button className="btn-premium-secondary">
-                Contact Me
+                View Resume
                 </button>
             </a>
           </motion.div>
