@@ -1,11 +1,22 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
 import { TypeAnimation } from 'react-type-animation';
 import Squares from './components/Squares';
+import './hero-styles.css';
 
 const Hero = ({ onLinkClick }) => {
   const cardRef = useRef(null);
+
+  // Spotlight effect
+  useEffect(() => {
+    const move = (e) => {
+      document.documentElement.style.setProperty('--x', e.clientX + 'px');
+      document.documentElement.style.setProperty('--y', e.clientY + 'px');
+    };
+    window.addEventListener('mousemove', move);
+    return () => window.removeEventListener('mousemove', move);
+  }, []);
 
   // Parallax effect for code card
   const handleCardMouseMove = (e) => {
@@ -37,9 +48,16 @@ const Hero = ({ onLinkClick }) => {
   return (
     <section id="home" className="premium-hero">
 
+      {/* Spotlight Effect */}
+      <div className="hero-spotlight" />
+
       <div className="premium-hero-bg">
         <Squares />
       </div>
+
+      {/* GLOW EFFECTS */}
+      <div className="premium-hero-glow blue" />
+      <div className="premium-hero-glow purple" />
 
       {/* MAIN CONTAINER */}
       <div className="premium-hero-container">

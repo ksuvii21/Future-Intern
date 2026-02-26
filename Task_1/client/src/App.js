@@ -14,8 +14,9 @@ import project5Image from './assets/project5.png';
 import project6Image from './assets/project6.avif';
 
 //import FloatingLines from './components/FloatingLines';
-import Hyperspeed from './components/Hyperspeed';
-import { hyperspeedPresets } from './components/HyperSpeedPresets';
+// Temporarily disabled due to build issues - using simple spinner instead
+// import Hyperspeed from './components/Hyperspeed';
+// import { hyperspeedPresets } from './components/HyperSpeedPresets';
 import Hero from './Hero';
 
 const Header = ({ isMenuOpen, onHamburgerClick, onLinkClick }) => {
@@ -377,20 +378,6 @@ const educationData = [
       "Participated in science exhibitions"
     ]
   }
-  /*{
-    institute: "Jeevan Jyoti Higher Secondary School, Varanasi",
-    degree: "Intermediate School (X), CBSE",
-    field: "Science",
-    duration: "2022",
-    location: "Varanasi, India",
-    score: "80%",
-    specialization: ["Science Basics"],
-    achievements: [
-      "Developed interest in programming",
-      "Performed well academically",
-      "Built strong foundational knowledge"
-    ]
-  }*/
 ];
 
 const Education = () => {
@@ -531,7 +518,11 @@ function App() {
   };
 
   if (loading) {
-    return <Hyperspeed effectOptions={hyperspeedPresets.one} />;
+    return (
+      <div className="spinner-overlay">
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
   return (
