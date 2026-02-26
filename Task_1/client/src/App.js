@@ -186,25 +186,6 @@ const Projects = () => (
         <p>A selection of my work</p>
       </div>
       <div className="portfolio-grid">
-        {/* Project 1: MERN Stack Excel Analytics Platform (Existing) */}
-        <div className="portfolio-item glass">
-          <img src={project1Image} alt="MERN Stack Excel Analytics Platform" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>MERN Stack Excel Analytics Platform</h3>
-            <p>An analytics platform to upload Excel files, analyze data, and generate interactive 2D/3D charts. Features user authentication with JWT, a dynamic UI, and chart downloads.</p>
-            <a href="https://xlsx-analytics21.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
-        
-        {/* Project 2: MERN Stack Blogging Platform (Existing) */}
-        <div className="portfolio-item glass">
-          <img src={project2Image} alt="MERN Stack Blogging Platform" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>MERN Stack Blogging Platform</h3>
-            <p>A full-stack blogging app where users can create, edit, and delete blogs. Includes a rich text editor, comments, likes, user authentication, and an admin dashboard for post management.</p>
-            <a href="https://writely-log.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
         
         {/* Project 3: Sharvan Vision */}
         <div className="portfolio-item glass">
@@ -243,6 +224,25 @@ const Projects = () => (
             <h3>ERP Management System (MERN Stack)</h3>
             <p>A full-featured ERP web application to manage core business operations: Products, Customers, Suppliers, Sales/Purchase Orders, Invoices, and secure role-based access control (JWT).</p>
             <a href="#projects" className="btn btn-outline">View Details (No Live Demo)</a>
+          </div>
+        </div>
+        {/* Project 1: MERN Stack Excel Analytics Platform (Existing) */}
+        <div className="portfolio-item glass">
+          <img src={project1Image} alt="MERN Stack Excel Analytics Platform" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>MERN Stack Excel Analytics Platform</h3>
+            <p>An analytics platform to upload Excel files, analyze data, and generate interactive 2D/3D charts. Features user authentication with JWT, a dynamic UI, and chart downloads.</p>
+            <a href="https://xlsx-analytics21.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
+          </div>
+        </div>
+        
+        {/* Project 2: MERN Stack Blogging Platform (Existing) */}
+        <div className="portfolio-item glass">
+          <img src={project2Image} alt="MERN Stack Blogging Platform" className="portfolio-img" />
+          <div className="portfolio-content">
+            <h3>MERN Stack Blogging Platform</h3>
+            <p>A full-stack blogging app where users can create, edit, and delete blogs. Includes a rich text editor, comments, likes, user authentication, and an admin dashboard for post management.</p>
+            <a href="https://writely-log.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
           </div>
         </div>
         
