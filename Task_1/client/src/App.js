@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa"; 
 
+import { TypeAnimation } from 'react-type-animation';
+
 // Import assets
 import profileImage from './assets/profile.png';
 import project1Image from './assets/project1.png';
@@ -49,8 +51,22 @@ const Hero = () => (
     <FloatingLines />
     <div className="container">
       <div className="hero-content">
-        <h1>I&apos;m Kritika Gupta, a <br /><span>Full-Stack Developer</span></h1>
-        <p>Passionate MERN stack developer building scalable applications and growing through hands-on experience in collaborative environments.</p>
+        <h1>I&apos;m Kritika Gupta, a <br />
+          <TypeAnimation
+            sequence={[
+              'Full-Stack Developer',
+              2000,
+              'MERN Specialist',
+              2000,
+              'Building Scalable Web Apps',
+              2000,
+            ]}
+            wrapper="span"
+            speed={50}
+            repeat={Infinity}
+          />
+        </h1>
+        <p>I build scalable, beautiful, and high-performance web applications.</p>
         <div className="hero-btns">
           <a href="#projects" className="btn btn-primary">View My Projects</a>
           <a href={resumePDF} className="btn btn-outline" target="_blank" rel="noopener noreferrer">View Resume</a>
