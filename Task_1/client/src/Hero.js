@@ -52,9 +52,23 @@ const Hero = ({ onLinkClick }) => {
           className="premium-hero-left"
         >
 
-          {/* SMALL BADGE */}
+          {/* SMALL BADGE WITH TYPING ANIMATION */}
           <motion.div variants={itemVariants} className="premium-hero-badge-small">
-            Full Stack Developer • MERN Specialist
+            <TypeAnimation
+              sequence={[
+                'Full Stack Developer',
+                1000,
+                'MERN Specialist',
+                1000,
+                'Building Scalable Web Apps',
+                1000,
+                'React & Node.js Developer',
+                1000,
+              ]}
+              speed={60}
+              repeat={Infinity}
+              style={{ display: 'inline-block' }}
+            />
           </motion.div>
 
           {/* MAIN HEADING */}
