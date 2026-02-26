@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { useSwipeable } from 'react-swipeable';
+import React, { useState, useEffect } from 'react';
 
 // Import assets
 import futureIntensCertImg from '../assets/Future_Intens_Internship_Certificate.jpg';
@@ -18,210 +17,130 @@ import tataCertImg from '../assets/Tata_Crucible_Certificate.png';
 import skybriskCertImg from '../assets/Skybrisk_Internship_Certificate.png';
 import ibmCertImg from '../assets/Getting_started_with_cybersecurity_IBM_Certificate.png';
 
-const PADDING = 5; // Number of items to clone on each side for a seamless loop
-const AUTO_SCROLL_INTERVAL = 3000;
-
-// Real certificate data
+// Certificate data
 const certificatesData = [
     {
       id: 1,
       title: "MERN Stack Internship Completion Certificate",
       issuer: "Future Intens",
-      thumb: futureIntensCertImg,
-      fullImage: futureIntensCertImg
+      image: futureIntensCertImg
     },
     {
       id: 2,
       title: "Zidio Development - Internship Completion Certificate",
       issuer: "Zidio Development",
-      thumb: zidioCertImg,
-      fullImage: zidioCertImg
+      image: zidioCertImg
     },
     {
       id: 3,
       title: "Internship Completion Certificate",
       issuer: "Cognifyz Technologies",
-      thumb: cognifyzCertImg,
-      fullImage: cognifyzCertImg
+      image: cognifyzCertImg
     },
     {
       id: 4,
       title: "Graphics Designer",
       issuer: "InAmigos Foundation (IAF)",
-      thumb: inamigosCertImg,
-      fullImage: inamigosCertImg
+      image: inamigosCertImg
     },
     {
-     id: 5,
-     title: "AI Summit",
-     issuer: "AISashkt",
-     thumb: aisashktCertImg,
-     fullImage: aisashktCertImg   
+      id: 5,
+      title: "AI Summit",
+      issuer: "AISashkt",
+      image: aisashktCertImg   
     },
     {
-     id: 6,
-     title: "Pawzz Internship Completion Certificate",
-     issuer: "Pawzz",
-     thumb: pawzzCertImg,
-     fullImage: pawzzCertImg
+      id: 6,
+      title: "Pawzz Internship Completion Certificate",
+      issuer: "Pawzz",
+      image: pawzzCertImg
     },
     {
-     id: 7,
-     title: "Pawzz Internship Letter of Recommendation",
-     issuer: "Pawzz",
-     thumb: pawzzLetterImg,
-     fullImage: pawzzLetterImg
+      id: 7,
+      title: "Pawzz Internship Letter of Recommendation",
+      issuer: "Pawzz",
+      image: pawzzLetterImg
     },
     {
-     id: 8,
-     title: "SIH Internal Certificate",
-     issuer: "Smart India Hackathon",
-     thumb: sihCertImg,
-     fullImage: sihCertImg
+      id: 8,
+      title: "SIH Internal Certificate",
+      issuer: "Smart India Hackathon",
+      image: sihCertImg
     },
     {
-     id: 9,
-     title: "Emerging AI Trends in Ethical Hacking Certificate",
-     issuer: "Internshala",
-     thumb: emergingCertImg,
-     fullImage: emergingCertImg
+      id: 9,
+      title: "Emerging AI Trends in Ethical Hacking Certificate",
+      issuer: "Internshala",
+      image: emergingCertImg
     },
     {
       id: 10,
       title: "Participation Certificate - ICAT",
       issuer: "ICAT",
-      thumb: participationCertImg,
-      fullImage: participationCertImg
+      image: participationCertImg
     },
     {
       id: 11,
       title: "Codtech Internship Completion Certificate",
       issuer: "Codtech Solutions",
-      thumb: codtechCertImg,
-      fullImage: codtechCertImg
+      image: codtechCertImg
     },
     {
       id: 12,
-      title:"Coding Club Certificate of Appreciation",
-      issuer:"Coding Club, IIT Indore",
-      thumb:codingclubCertImg,
-      fullImage:codingclubCertImg
+      title: "Coding Club Certificate of Appreciation",
+      issuer: "Coding Club, IIT Indore",
+      image: codingclubCertImg
     },
     {
-      id : 13,
-      title:"Tata Crucible Certificate of Appreciation",
-      issuer:"Tata Crucible, IIT Indore",
-      thumb:tataCertImg,
-      fullImage:tataCertImg
+      id: 13,
+      title: "Tata Crucible Certificate of Appreciation",
+      issuer: "Tata Crucible, IIT Indore",
+      image: tataCertImg
     },
     {
-        id : 14,
-        title:"Skybrisk Internship Completion Certificate", 
-        issuer:"Skybrisk Technologies", 
-        thumb : skybriskCertImg, 
-        fullImage : skybriskCertImg
+      id: 14,
+      title: "Skybrisk Internship Completion Certificate",
+      issuer: "Skybrisk Technologies", 
+      image: skybriskCertImg
     },
     {
-        id : 15, 
-        title:"Getting Started with Cybersecurity - IBM", 
-        issuer:"IBM SkillsBuild", 
-        thumb : ibmCertImg, 
-        fullImage : ibmCertImg
+      id: 15, 
+      title: "Getting Started with Cybersecurity - IBM", 
+      issuer: "IBM SkillsBuild", 
+      image: ibmCertImg
     }
 ];
 
 const Certifications = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCert, setSelectedCert] = useState(null);
-    const [isPaused, setIsPaused] = useState(false);
 
-    // --- Infinite Loop Logic ---
-    const paddedData = useMemo(() => {
-        if (certificatesData.length === 0) return [];
-        const actualPadding = Math.min(certificatesData.length, PADDING);
-        if (certificatesData.length <= actualPadding) {
-            return [...certificatesData, ...certificatesData, ...certificatesData];
-        }
-        const start = certificatesData.slice(0, actualPadding);
-        const end = certificatesData.slice(-actualPadding);
-        return [...end, ...certificatesData, ...start];
-    }, []);
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev + 1) % certificatesData.length);
+    };
 
-    const initialIndex = useMemo(() => {
-        if (certificatesData.length === 0) return 0;
-        return certificatesData.length <= PADDING ? certificatesData.length : PADDING;
-    }, []);
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev - 1 + certificatesData.length) % certificatesData.length);
+    };
 
-    const [trackIndex, setTrackIndex] = useState(initialIndex);
-    const [isTransitioning, setIsTransitioning] = useState(true);
-
-    const handleNext = useCallback(() => {
-        if (!isTransitioning) return;
-        setTrackIndex(prev => prev + 1);
-    }, [isTransitioning]);
-
-    const handlePrev = useCallback(() => {
-        if (!isTransitioning) return;
-        setTrackIndex(prev => prev - 1);
-    }, [isTransitioning]);
-
-    const onTransitionEnd = useCallback(() => {
-        if (trackIndex < initialIndex) {
-            setIsTransitioning(false);
-            setTrackIndex(initialIndex + certificatesData.length - 1);
-        }
-        if (trackIndex >= initialIndex + certificatesData.length) {
-            setIsTransitioning(false);
-            setTrackIndex(initialIndex);
-        }
-    }, [trackIndex, initialIndex]);
-
-    useEffect(() => {
-        if (!isTransitioning) {
-            const timer = setTimeout(() => setIsTransitioning(true), 50);
-            return () => clearTimeout(timer);
-        }
-    }, [isTransitioning]);
-    // --- End Infinite Loop Logic ---
-
-    const openModal = useCallback((cert) => {
+    const openModal = (cert) => {
         setSelectedCert(cert);
         setIsModalOpen(true);
-    }, []);
+    };
 
-    const closeModal = useCallback(() => {
+    const closeModal = () => {
         setIsModalOpen(false);
         setSelectedCert(null);
-    }, []);
+    };
 
-    // Auto-Scroll with Pause on Hover
+    // Auto-advance slides
     useEffect(() => {
-        if (isPaused || isModalOpen || !isTransitioning) return;
-        const interval = setInterval(handleNext, AUTO_SCROLL_INTERVAL);
+        const interval = setInterval(() => {
+            nextSlide();
+        }, 3000);
         return () => clearInterval(interval);
-    }, [handleNext, isPaused, isModalOpen, isTransitioning]);
-
-    // Keyboard Navigation
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            if (isModalOpen) {
-                if (e.key === 'Escape') closeModal();
-            } else {
-                if (e.key === "ArrowRight") handleNext();
-                if (e.key === "ArrowLeft") handlePrev();
-            }
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [handleNext, handlePrev, isModalOpen, closeModal]);
-
-    // Swipe Support
-    const handlers = useSwipeable({
-        onSwipedLeft: handleNext,
-        onSwipedRight: handlePrev,
-        preventScrollOnSwipe: true,
-        trackMouse: true,
-    });
+    }, []);
 
     return (
         <section className="certifications">
@@ -229,71 +148,85 @@ const Certifications = () => {
                 <h2>Certifications</h2>
             </div>
 
-            <div
-                className="cert-slider"
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
-                {...handlers}
-            >
-                <div
-                    className="cert-slider-track"
-                    onTransitionEnd={onTransitionEnd}
-                    style={{
-                        '--current-index': trackIndex,
-                        transition: isTransitioning ? 'transform 0.5s ease' : 'none',
-                    }}
-                >
-                    {paddedData.map((cert, index) => {
-                        const isActive = index === trackIndex;
+            {/* Certificate Slider */}
+            <div className="cert-slider-container">
+                <button className="cert-nav-btn cert-prev" onClick={prevSlide}>
+                    &#10094;
+                </button>
+                
+                <div className="cert-slides-wrapper">
+                    {certificatesData.map((cert, index) => {
+                        // Show 3 certificates at a time
+                        const isActive = index === currentIndex || 
+                                        index === (currentIndex + 1) % certificatesData.length ||
+                                        index === (currentIndex - 1 + certificatesData.length) % certificatesData.length;
+                        
+                        if (!isActive) return null;
+
+                        const isCenter = index === currentIndex;
+                        
                         return (
-                            <div
-                                className={`cert-slide ${isActive ? 'active' : ''}`}
-                                key={`${cert.id}-${index}`}
-                                onClick={() => isActive && openModal(cert)}
+                            <div 
+                                key={cert.id} 
+                                className={`cert-slide ${isCenter ? 'active' : ''}`}
+                                onClick={() => openModal(cert)}
                             >
                                 <div className="cert-card">
-                                    <img
-                                        src={cert.thumb}
+                                    <img 
+                                        src={cert.image} 
                                         alt={cert.title}
-                                        className="cert-thumb"
-                                        loading="lazy"
+                                        className="cert-image"
                                     />
-                                    <div className="cert-info">
-                                        <h4>{cert.title}</h4>
-                                        <h5>{cert.issuer}</h5>
+                                    <div className="cert-overlay">
+                                        <span>View Certificate</span>
                                     </div>
+                                </div>
+                                <div className="cert-info">
+                                    <h4>{cert.title}</h4>
+                                    <h5>{cert.issuer}</h5>
                                 </div>
                             </div>
                         );
                     })}
                 </div>
 
-                {/* Navigation Buttons */}
-                <button onClick={handlePrev} className="slider-btn prev-btn" aria-label="Previous" disabled={!isTransitioning}>‹</button>
-                <button onClick={handleNext} className="slider-btn next-btn" aria-label="Next" disabled={!isTransitioning}>›</button>
+                <button className="cert-nav-btn cert-next" onClick={nextSlide}>
+                    &#10095;
+                </button>
             </div>
 
-            {/* Counter Indicator */}
-            <div className="cert-counter">
-                {((trackIndex - initialIndex + certificatesData.length) % certificatesData.length) + 1} / {certificatesData.length}
+            {/* Dots Indicator */}
+            <div className="cert-dots">
+                {certificatesData.map((_, index) => (
+                    <span 
+                        key={index} 
+                        className={`cert-dot ${index === currentIndex ? 'active' : ''}`}
+                        onClick={() => setCurrentIndex(index)}
+                    />
+                ))}
             </div>
 
-            {/* Premium Modal */}
+            {/* Modal */}
             {isModalOpen && selectedCert && (
                 <div className="cert-modal" onClick={closeModal}>
                     <div className="cert-modal-content" onClick={(e) => e.stopPropagation()}>
-                        <img
-                            src={selectedCert.fullImage || selectedCert.thumb}
+                        <button className="cert-modal-close" onClick={closeModal}>&times;</button>
+                        <img 
+                            src={selectedCert.image} 
                             alt={selectedCert.title}
-                            className="cert-preview"
+                            className="cert-modal-image"
                         />
-                        <div className="cert-details">
+                        <div className="cert-modal-info">
                             <h3>{selectedCert.title}</h3>
-                            <h5>Issued by: {selectedCert.issuer}</h5>
-                            <a href={selectedCert.fullImage} className="view-btn" target="_blank" rel="noopener noreferrer">
-                                View Certificate
+                            <p>Issued by: {selectedCert.issuer}</p>
+                            <a 
+                                href={selectedCert.image} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="cert-modal-btn"
+                            >
+                                Open Full Image
                             </a>
-                            <button onClick={closeModal} className="close-modal-btn">Close</button>
                         </div>
                     </div>
                 </div>

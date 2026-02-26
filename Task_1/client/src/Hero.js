@@ -1,53 +1,80 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
+import { TypeAnimation } from 'react-type-animation';
 import Squares from './components/Squares';
 
-const Hero = ({ onLinkClick }) => (
+const Hero = ({ onLinkClick }) => {
+  const cardRef = useRef(null);
+
+  // Parallax effect for code card
+  const handleCardMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const x = (e.clientX - window.innerWidth / 2) / 50;
+    const y = (e.clientY - window.innerHeight / 2) / 50;
+    cardRef.current.style.transform = `translate(${x}px, ${y}px)`;
+  };
+
+  const handleCardMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform = 'translate(0px, 0px)';
+  };
+
+  // Animation variants for stagger effect
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+  };
+
+  return (
     <section id="home" className="premium-hero">
 
       <div className="premium-hero-bg">
-  <Squares />
-</div>
-
-      {/* GLOW EFFECTS */}
-      <div className="premium-hero-glow blue" />
-      <div className="premium-hero-glow purple" />
+        <Squares />
+      </div>
 
       {/* MAIN CONTAINER */}
       <div className="premium-hero-container">
 
         {/* LEFT SIDE */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
           className="premium-hero-left"
         >
 
           {/* SMALL BADGE */}
-          <div className="premium-hero-badge-small">
+          <motion.div variants={itemVariants} className="premium-hero-badge-small">
             Full Stack Developer • MERN Specialist
-          </div>
+          </motion.div>
 
           {/* MAIN HEADING */}
-          <h1 className="premium-hero-heading">
-            Crafting
+          <motion.h1 variants={itemVariants} className="premium-hero-heading">
+            Full Stack Developer
             <span className="premium-hero-gradient-text">
-              Exceptional
+              Building Scalable
             </span>
-            Digital Experiences
-          </h1>
+            Web Applications
+          </motion.h1>
 
           {/* SUBTEXT */}
-          <p className="premium-hero-subtext">
+          <motion.p variants={itemVariants} className="premium-hero-subtext">
             I design and develop scalable full stack applications with
             modern technologies, performance-focused architecture,
             and beautiful user experiences.
-          </p>
+          </motion.p>
 
           {/* BUTTONS */}
-          <div className="premium-hero-buttons">
+          <motion.div variants={itemVariants} className="premium-hero-buttons">
             <a href="#projects" onClick={onLinkClick}>
                 <button className="btn-premium-primary">
                 View Projects
@@ -58,7 +85,16 @@ const Hero = ({ onLinkClick }) => (
                 Contact Me
                 </button>
             </a>
-          </div>
+          </motion.div>
+
+          {/* TRUST INDICATORS */}
+          <motion.div variants={itemVariants} className="premium-hero-trust">
+            <span>13 Certifications</span>
+            <span>•</span>
+            <span>8 Projects</span>
+            <span>•</span>
+            <span>Full Stack MERN</span>
+          </motion.div>
 
         </motion.div>
 
@@ -87,8 +123,13 @@ const Hero = ({ onLinkClick }) => (
             Node.js
           </motion.div>
 
-          {/* CODE CARD */}
-          <div className="premium-hero-code-card">
+          {/* CODE CARD WITH PARALLAX */}
+          <div 
+            className="premium-hero-code-card"
+            ref={cardRef}
+            onMouseMove={handleCardMouseMove}
+            onMouseLeave={handleCardMouseLeave}
+          >
 
             <div className="code-card-header">
               <div className="code-card-dot red"/>
@@ -97,14 +138,24 @@ const Hero = ({ onLinkClick }) => (
             </div>
 
             <pre>
-{`const Kritika = {
-  role: "Full Stack Developer",
-  stack: ["React", "Node", "MongoDB", "Express", "Rest APIs"],
-  focus: "Scalable Web Apps",
-  passion: "Building impactful products",
-  projects: ["Sharvan Vision", "CareerFlow.io", "E-Commerce Platform (Fansee Rebel)", "Excel Analytics", "Writely Log"],
-  achievements: ["Smart India Hackathon(SIH) Internal- First RunnerUp", "8 Deployed Projects", "13 Certifications"],
-};`}
+              <TypeAnimation
+                sequence={[
+                  `const Kritika = {`,
+                  1000,
+                  `const Kritika = {\n  role: "Full Stack Developer",`,
+                  1000,
+                  `const Kritika = {\n  role: "Full Stack Developer",\n  stack: ["React", "Node", "MongoDB"],`,
+                  1000,
+                  `const Kritika = {\n  role: "Full Stack Developer",\n  stack: ["React", "Node", "MongoDB", "Express"],`,
+                  1000,
+                  `const Kritika = {\n  role: "Full Stack Developer",\n  stack: ["React", "Node", "MongoDB", "Express", "Rest APIs"],\n  focus: "Scalable Web Apps",`,
+                  1000,
+                  `const Kritika = {\n  role: "Full Stack Developer",\n  stack: ["React", "Node", "MongoDB", "Express", "Rest APIs"],\n  focus: "Scalable Web Apps",\n  passion: "Building impactful products",\n  projects: ["Sharvan Vision", "CareerFlow.io", "Fansee Rebel"],\n  achievements: ["SIH First RunnerUp", "8 Deployed Projects", "13 Certifications"],\n};`,
+                ]}
+                speed={50}
+                repeat={Infinity}
+                style={{ fontFamily: "'Fira Code', 'Courier New', monospace", fontSize: '0.875rem', color: '#94a3b8', textAlign: 'left', whiteSpace: 'pre-wrap' }}
+              />
             </pre>
 
           </div>
@@ -113,8 +164,20 @@ const Hero = ({ onLinkClick }) => (
 
       </div>
 
+      {/* SCROLL INDICATOR */}
+      <motion.div
+        className="scroll-indicator"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 1.5 }}
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 5v14M19 12l-7 7-7-7"/>
+        </svg>
+      </motion.div>
+
     </section>
-);
+  );
+};
 
 Hero.propTypes = {
   onLinkClick: PropTypes.func.isRequired
