@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import PropTypes from 'prop-types';
 import { TypeAnimation } from 'react-type-animation';
 import Squares from './components/Squares';
+import resumePdf from './assets/resume.pdf';
 import './hero-styles.css';
 
 const Hero = ({ onLinkClick }) => {
@@ -112,7 +113,7 @@ const Hero = ({ onLinkClick }) => {
                 View Projects
                 </button>
             </a>
-            <a href="./assets/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <a href={resumePdf} target="_blank" rel="noopener noreferrer">
                 <button className="btn-premium-secondary">
                 View Resume
                 </button>

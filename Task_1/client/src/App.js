@@ -282,7 +282,7 @@ const experiences = [
       "Created responsive UI with React.js, HTML & CSS",
       "Assisted in backend development"
     ],
-    certificate: "./assets/Zidio_Development_Internship_Certificate.pdf"
+    certificate: require("./assets/Zidio_Development_Internship_Certificate.pdf")
   },
   {
     role: "Software Development Intern",
