@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
+// import { motion } from "framer-motion";
 import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa"; 
-import Certifications from './components/Certifications'; 
+import Certifications from './components/Certifications';
 
 // Import assets
-import profileImage from './assets/profile.png';
+// import profileImage from './assets/profile.png';
 import project1Image from './assets/project1.png';
 import project2Image from './assets/project2.png';
 import project3Image from './assets/project3.png'; 
@@ -18,6 +19,8 @@ import project6Image from './assets/project6.avif';
 // import Hyperspeed from './components/Hyperspeed';
 // import { hyperspeedPresets } from './components/HyperSpeedPresets';
 import Hero from './Hero';
+import Squares from './components/Squares';
+import About from './About';
 
 const Header = ({ isMenuOpen, onHamburgerClick, onLinkClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,26 +68,55 @@ Header.propTypes = {
   onLinkClick: PropTypes.func.isRequired
 };
 
-const About = () => (
-  <section id="about" className="about">
-    <div className="container">
-      <div className="section-title">
-        <h2>About Me</h2>
-      </div>
-      <div className="about-content">
-        <div className="about-img">
-          <img src={profileImage} alt="Kritika Gupta" />
-        </div>
-        <div className="about-text">
-          <h3>MERN Stack Developer & Graphics Designer</h3>
-          <p>I am a skilled and passionate full-stack web developer with expertise in the MERN stack (MongoDB, Express.js, React.js, Node.js). I have hands-on experience developing and maintaining web applications, creating responsive user interfaces, and assisting in backend development.</p>
-          <p>I share my projects on GitHub, where I keep track of my progress and learning journey: <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">GitHub Profile</a>. Before starting my journey into web development, I worked on various small-scale technical projects and self-learning exercises, which helped me build a foundation in problem-solving, clean coding practices, and UI development.</p>
-          <p>Currently, I&apos;m continuing to learn and create, aiming to take on projects that challenge my skills and help me grow into a well-rounded full-stack developer.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+// Section Divider Component
+const SectionDivider = () => (
+  <div className="section-divider" />
 );
+
+// Premium About Section
+// const About = () => {
+//   const [ref, isVisible] = useScrollReveal();
+  
+//   return (
+//     <section id="about" className="about premium-section">
+//       {/* Blur Orbs */}
+//       <div className="premium-blur-orb blue" style={{ width: '400px', height: '400px', top: '10%', left: '-10%' }} />
+//       <div className="premium-blur-orb purple" style={{ width: '300px', height: '300px', bottom: '10%', right: '-5%' }} />
+      
+//       <div className="container premium-section-content" ref={ref}>
+//         <motion.div 
+//           className="section-title"
+//           initial={{ opacity: 0, y: 30 }}
+//           animate={isVisible ? { opacity: 1, y: 0 } : {}}
+//           transition={{ duration: 0.6 }}
+//         >
+//           <h2 className="gradient-text">About Me</h2>
+//         </motion.div>
+//         <div className="about-content">
+//           <motion.div 
+//             className="about-img"
+//             initial={{ opacity: 0, x: -50 }}
+//             animate={isVisible ? { opacity: 1, x: 0 } : {}}
+//             transition={{ duration: 0.6, delay: 0.2 }}
+//           >
+//             <img src={profileImage} alt="Kritika Gupta" />
+//           </motion.div>
+//           <motion.div 
+//             className="about-text"
+//             initial={{ opacity: 0, x: 50 }}
+//             animate={isVisible ? { opacity: 1, x: 0 } : {}}
+//             transition={{ duration: 0.6, delay: 0.3 }}
+//           >
+//             <h3 className="gradient-text">MERN Stack Developer & Graphics Designer</h3>
+//             <p>I am a skilled and passionate full-stack web developer with expertise in the MERN stack (MongoDB, Express.js, React.js, Node.js). I have hands-on experience developing and maintaining web applications, creating responsive user interfaces, and assisting in backend development.</p>
+//             <p>I share my projects on GitHub, where I keep track of my progress and learning journey: <a href="https://github.com/ksuvii21" target="_blank" rel="noopener noreferrer">GitHub Profile</a>. Before starting my journey into web development, I worked on various small-scale technical projects and self-learning exercises, which helped me build a foundation in problem-solving, clean coding practices, and UI development.</p>
+//             <p>Currently, I&apos;m continuing to learn and create, aiming to take on projects that challenge my skills and help me grow into a well-rounded full-stack developer.</p>
+//           </motion.div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
 
 const Skills = () => {
   const skillLogosData = [
@@ -527,6 +559,9 @@ function App() {
 
   return (
     <div className="App">
+      <div className="website-background">
+        <Squares />
+      </div>
       <Header 
         isMenuOpen={isMenuOpen}
         onHamburgerClick={handleHamburgerClick}
@@ -534,12 +569,19 @@ function App() {
       />
       <main>
         <Hero onLinkClick={handleLinkClick} />
+        <SectionDivider />
         <About />
+        <SectionDivider />
         <Skills />
+        <SectionDivider />
         <Projects />
+        <SectionDivider />
         <Experience />
+        <SectionDivider />
         <Education />
+        <SectionDivider />
         <Certifications />
+        <SectionDivider />
         <Contact />
       </main>
       <Footer />
