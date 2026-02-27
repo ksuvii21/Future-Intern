@@ -125,7 +125,7 @@
 }
 
 .premium-section-title h2 {
-  font-size: 2.8rem;
+  font-size: 3.75rem; /* text-6xl */
   font-weight: 700;
   background: linear-gradient(90deg, var(--gradient-blue), var(--gradient-purple));
   -webkit-background-clip: text;
@@ -439,302 +439,315 @@ section {
   margin-top: 15px;
 }
 
+/* ============================
+   EXPERIENCE SECTION (PREMIUM)
+============================ */
 .experience-section {
-  padding: 80px 20px;
-  color: white;
-}
-
-.title-wrapper {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.title-wrapper h2 {
-  font-size: 42px;
-  font-weight: bold;
-  color: #a78bfa;
-}
-
-.title-wrapper p {
-  color: #b3b3b3;
-  margin-top: 12px;
-}
-
-.separator {
-  width: 70px;
-  height: 4px;
-  background: #a78bfa;
-  border-radius: 10px;
-  margin: 15px auto 0;
+  padding: 128px 0; /* py-32 */
 }
 
 .experience-grid {
-  max-width: 1200px;
-  margin: auto;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px 20px;
+  grid-template-columns: 1fr;
+  gap: 48px; /* gap-12 */
+  max-width: 1400px;
+  margin: auto;
 }
 
-.experience-card {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+@media (min-width: 1024px) {
+  .experience-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.exp-card {
+  padding: 48px; /* p-12 */
+  min-height: 420px;
+  border-radius: 24px; /* consistent with premium-glass */
   position: relative;
-  transition: 0.3s ease;
+  overflow: hidden; /* To contain the glow */
+  transition: 0.25s ease;
 }
 
-.experience-card:hover {
-  transform: scale(1.02);
+.exp-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
-.company-logo {
-  width: 65px;
-  height: 65px;
+.exp-card-glow {
+  position: absolute;
+  top: -64px;    /* -top-16 */
+  right: -64px;   /* -right-16 */
+  width: 288px;   /* w-72 */
+  height: 288px;  /* h-72 */
+  background: var(--gradient-purple); /* Using purple for experience to differentiate slightly */
+  filter: blur(120px);
+  opacity: 0.15;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.exp-company-logo {
+  width: 80px;
+  height: 80px;
   object-fit: contain;
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 32px;
+  right: 32px;
   opacity: 0.9;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 8px;
 }
 
-.company-name {
-  color: #b3b3b3;
+.exp-card h3 {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  padding-right: 90px; /* Space for logo */
 }
 
-.badges {
+.exp-company-name {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #a78bfa;
+  margin-bottom: 24px;
+}
+
+.exp-badges {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin-bottom: 24px;
 }
 
-.badge {
-  padding: 6px 12px;
-  font-size: 12px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+.exp-badge {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--text-secondary);
 }
 
-.badge-purple {
-  background: rgba(167, 139, 250, 0.2);
+.exp-badge-purple {
+  background: rgba(167, 139, 250, 0.1);
   border-color: rgba(167, 139, 250, 0.4);
   color: #c4b5fd;
 }
 
-.sub-heading {
-  margin-top: 20px;
-  font-weight: 600;
-  color: #d1d1d1;
+.exp-content-divider {
+  height: 1px;
+  background: var(--glass-border-premium);
+  margin: 24px 0;
 }
 
-.tech-list {
+.exp-sub-heading {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #c4b5fd;
+  margin-bottom: 16px;
+}
+
+.exp-tech-list {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-bottom: 24px;
 }
 
-.tech-item {
-  padding: 5px 12px;
-  background: rgba(255, 255, 255, 0.10);
+.exp-tech-item {
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  font-size: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
 }
 
-.achievement-list {
-  margin-top: 12px;
-  color: #d1d1d1;
+.exp-achievement-list {
   list-style: none;
   padding-left: 0;
 }
 
-.achievement-list li {
-  margin-bottom: 8px;
+.exp-achievement-list li {
+  margin-bottom: 12px;
+  color: var(--text-secondary);
   position: relative;
-  padding-left: 16px;
+  padding-left: 20px;
+  font-size: 1rem; /* text-base */
+  line-height: 1.6;
 }
 
-.achievement-list li::before {
+.exp-achievement-list li::before {
   content: "•";
   color: #a78bfa;
   position: absolute;
   left: 0;
+  font-size: 1.2rem;
 }
 
-.certificate-link {
+.exp-certificate-link {
   margin-top: 20px;
 }
 
-.certificate-link a {
+.exp-certificate-link a {
   color: #a78bfa;
-  text-decoration: underline;
+  text-decoration: none;
+  font-weight: 500;
   transition: 0.2s;
+  display: inline-block;
 }
 
-.certificate-link a:hover {
+.exp-certificate-link a:hover {
   color: #c4b5fd;
+  transform: translateX(5px);
 }
 
 /* ============================
-   EDUCATION SECTION
+   EDUCATION SECTION (PREMIUM)
 ============================ */
 .education-section {
-  padding: 80px 20px;
-  color: #fff;
+  padding: 128px 0; /* py-32 */
 }
 
-.education-title {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.education-title h2 {
-  font-size: 42px;
-  font-weight: 700;
-  color: #a78bfa;
-}
-
-.education-title p {
-  color: #b3b3b3;
-  margin-top: 10px;
-  font-size: 16px;
-}
-
-.education-separator {
-  width: 70px;
-  height: 4px;
-  background: #a78bfa;
-  border-radius: 10px;
-  margin: 15px auto 0;
-}
-
-/* GRID LAYOUT */
 .education-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
-  gap: 40px;
-  max-width: 1250px;
+  grid-template-columns: 1fr;
+  gap: 48px; /* gap-12 */
+  max-width: 1400px;
   margin: auto;
 }
 
-/* CARD */
-.education-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 22px;
-  padding: 35px;
-  border: 1px solid rgba(255,255,255,0.12);
-  webkit-backdrop-filter: blur(12px);
-  box-shadow: 0px 8px 24px rgba(0,0,0,0.3);
-  transition: 0.25s ease;
+@media (min-width: 1024px) {
+  .education-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.edu-card {
+  padding: 48px; /* p-12 */
+  min-height: 420px;
+  border-radius: 24px; /* consistent with premium-glass */
   position: relative;
+  overflow: hidden; /* To contain the glow */
+  transition: 0.25s ease;
 }
 
-.education-card:hover {
-  transform: scale(1.02);
+.edu-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
-/* TOP LEFT ICON */
+.edu-card-glow {
+  position: absolute;
+  top: -64px;    /* -top-16 */
+  right: -64px;   /* -right-16 */
+  width: 288px;   /* w-72 */
+  height: 288px;  /* h-72 */
+  background: var(--gradient-blue);
+  filter: blur(120px);
+  opacity: 0.15;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.edu-score-badge {
+  position: absolute;
+  top: 32px;    /* top-8 */
+  right: 32px;   /* right-8 */
+  padding: 8px 20px; /* px-5 py-2 */
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 9999px;
+  color: #60a5fa; /* text-blue-400 */
+  font-weight: 500;
+  font-size: 1rem; /* text-base */
+}
+
 .edu-icon {
-  width: 58px;
-  height: 58px;
-  background: rgba(167,139,250,0.2);
-  border-radius: 14px;
+  width: 64px;
+  height: 64px;
+  background: rgba(167,139,250,0.15);
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #a78bfa;
-  font-size: 26px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
-/* BADGE (School name at top) */
 .edu-badge {
-  padding: 8px 14px;
-  background: rgba(167,139,250,0.15);
+  display: inline-block;
+  padding: 8px 16px;
+  background: rgba(167,139,250,0.1);
   border-radius: 12px;
   color: #c4b5fd;
-  font-size: 14px;
-  display: inline-block;
-  margin-bottom: 15px;
+  font-size: 0.875rem;
+  margin-bottom: 24px;
 }
 
-/* TITLE */
-.education-card h3 {
-  font-size: 26px;
+.edu-card h3 {
+  font-size: 1.5rem; /* text-2xl */
   font-weight: 700;
-  margin-top: 10px;
+  margin-bottom: 8px;
+  color: var(--text-primary);
 }
 
-/* FIELD OF STUDY */
 .edu-field {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 500;
   color: #a78bfa;
-  margin-bottom: 15px;
-  margin-top: 10px;
+  margin-bottom: 24px;
 }
 
-/* DATE + LOCATION */
 .edu-info {
   display: flex;
-  gap: 25px;
-  margin: 10px 0;
-  color: #b3b3b3;
-  font-size: 15px;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  color: var(--text-secondary);
+  font-size: 1rem; /* text-base */
 }
 
-.edu-info svg {
-  margin-right: 6px;
+.edu-info span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* SCORE BADGE (top-right dark circle) */
-.edu-score {
-  position: absolute;
-  top: 25px;
-  right: 25px;
-  padding: 8px 16px;
-  background: rgba(167,139,250,0.2);
-  color: #c4b5fd;
-  font-weight: 600;
-  border-radius: 14px;
+.edu-content-divider {
+  height: 1px;
+  background: var(--glass-border-premium);
+  margin: 24px 0;
 }
 
-/* SPECIALIZATION */
 .edu-specialization {
-  color: #d7d7d7;
-  margin-top: 8px;
-  margin-bottom: 25px;
-  font-size: 1.05rem;
-  line-height: 1.4;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-/* HEADERS inside card */
-.education-card h5 {
-  margin-top: 20px;
-  font-size: 1.2rem;
+.edu-card h5 {
+  font-size: 1.125rem;
   font-weight: 600;
   color: #c4b5fd;
+  margin-bottom: 16px;
 }
 
-/* ACHIEVEMENT LIST */
 .edu-list {
   list-style: none;
-  margin: 10px 0 0 0;
   padding: 0;
 }
 
 .edu-list li {
-  margin-bottom: 8px;
-  color: #d1d1d1;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
   position: relative;
-  padding-left: 15px;
+  padding-left: 20px;
+  font-size: 1rem; /* text-base */
+  line-height: 1.6;
 }
 
 .edu-list li::before {
@@ -742,6 +755,7 @@ section {
   color: #a78bfa;
   position: absolute;
   left: 0;
+  font-size: 1.2rem;
 }
 
 /* 🧊 Glass Effect Utility */

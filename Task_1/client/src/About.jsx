@@ -61,6 +61,7 @@ const ProfileCard = () => (
     <p className="profile-role">MERN Stack Developer</p>
 
     <div className="profile-divider" />
+    
 
     <div className="profile-stats">
       <Stat value="8.7" label="CGPA" />

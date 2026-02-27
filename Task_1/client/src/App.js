@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import PropTypes from 'prop-types';
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa"; 
 import Certifications from './components/Certifications';
 
@@ -335,48 +335,64 @@ const experiences = [
 
 const Experience = () => (
   <section id="experience" className="experience-section">
-    <div className="title-wrapper">
-      <h2>Experience</h2>
-      <p>
-        Professional journey building real-world skills and contributing to innovative projects
-      </p>
-      <div className="separator"></div>
-    </div>
+    <div className="container">
+      <motion.div 
+        className="premium-section-title"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+      >
+        <h2>Experience</h2>
+        <p>
+          Professional journey building real-world skills and contributing to innovative projects
+        </p>
+      </motion.div>
 
-    <div className="experience-grid">
-      {experiences.map((exp, index) => (
-        <div key={index} className="experience-card">
-          
-          <img src={exp.logo} className="company-logo" alt="logo" />
+      <div className="experience-grid">
+        {experiences.map((exp, index) => (
+          <motion.div 
+            key={index} 
+            className="exp-card premium-glass"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 + index * 0.1 }}
+          >
+            {/* Glow Orb */}
+            <div className="exp-card-glow" />
+            
+            <img src={exp.logo} className="exp-company-logo" alt="logo" />
 
-          <h3>{exp.role}</h3>
-          <p className="company-name">{exp.company}</p>
+            <h3>{exp.role}</h3>
+            <p className="exp-company-name">{exp.company}</p>
 
-          <div className="badges">
-            <span className="badge">{exp.duration}</span>
-            <span className="badge">{exp.mode}</span>
-            <span className="badge badge-purple">{exp.type}</span>
-          </div>
+            <div className="exp-badges">
+              <span className="exp-badge">{exp.duration}</span>
+              <span className="exp-badge">{exp.mode}</span>
+              <span className="exp-badge exp-badge-purple">{exp.type}</span>
+            </div>
 
-          <h4 className="sub-heading">Technologies</h4>
-          <div className="tech-list">
-            {exp.technologies.map((tech, i) => (
-              <span key={i} className="tech-item">{tech}</span>
-            ))}
-          </div>
+            <div className="exp-content-divider" />
 
-          <h4 className="sub-heading">Key Achievements</h4>
-          <ul className="achievement-list">
-            {exp.achievements.map((ach, i) => (
-              <li key={i}>{ach}</li>
-            ))}
-          </ul>
+            <h5 className="exp-sub-heading">Technologies</h5>
+            <div className="exp-tech-list">
+              {exp.technologies.map((tech, i) => (
+                <span key={i} className="exp-tech-item">{tech}</span>
+              ))}
+            </div>
 
-          <div className="certificate-link">
-            <a href={exp.certificate} target="_blank" rel="noopener noreferrer">View Certificate →</a>
-          </div>
-        </div>
-      ))}
+            <h5 className="exp-sub-heading" style={{marginTop: '24px'}}>Key Achievements</h5>
+            <ul className="exp-achievement-list">
+              {exp.achievements.map((ach, i) => (
+                <li key={i}>{ach}</li>
+              ))}
+            </ul>
+
+            <div className="exp-certificate-link">
+              <a href={exp.certificate} target="_blank" rel="noopener noreferrer">View Certificate →</a>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   </section>
 );
@@ -415,42 +431,59 @@ const educationData = [
 const Education = () => {
   return (
     <section id="education" className="education-section">
-      <div className="education-title">
-        <h2>Education</h2>
-        <p>Academic qualifications and journey of continuous learning</p>
-        <div className="education-separator"></div>
-      </div>
+      <div className="container">
+        <motion.div 
+          className="premium-section-title"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          <h2>Education</h2>
+          <p>Academic qualifications and journey of continuous learning</p>
+        </motion.div>
 
-      <div className="edu-grid">
-        {educationData.map((edu, index) => (
-          <div className="edu-card" key={index}>
-            <div className="edu-icon">
-              <FaGraduationCap size={26} />
-            </div>
+        <div className="education-grid">
+          {educationData.map((edu, index) => (
+            <motion.div
+              key={index}
+              className="edu-card premium-glass"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 + index * 0.1 }}
+            >
+              {/* Glow Orb */}
+              <div className="edu-card-glow" />
 
-            <span className="edu-badge">{edu.institute}</span>
+              <div className="edu-score-badge">{edu.score}</div>
 
-            <h3>{edu.degree}</h3>
-            <h4 className="edu-field">{edu.field}</h4>
+              <div className="edu-icon">
+                <FaGraduationCap size={32} />
+              </div>
+              
+              <span className="edu-badge">{edu.institute}</span>
 
-            <div className="edu-info">
-              <span><FaCalendarAlt /> {edu.duration}</span>
-              <span><FaMapMarkerAlt /> {edu.location}</span>
-            </div>
+              <h3>{edu.degree}</h3>
+              <h4 className="edu-field">{edu.field}</h4>
 
-            <div className="edu-score">{edu.score}</div>
+              <div className="edu-info">
+                <span><FaCalendarAlt /> {edu.duration}</span>
+                <span><FaMapMarkerAlt /> {edu.location}</span>
+              </div>
 
-            <h4>Specialization:</h4>
-            <p className="edu-specialization">{edu.specialization.join(", ")}</p>
+              <div className="edu-content-divider" />
 
-            <h4>Key Achievements:</h4>
-            <ul className="edu-list">
-              {edu.achievements.map((ach, i) => (
-                <li key={i}>{ach}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+              <h5>Specialization:</h5>
+              <p className="edu-specialization">{edu.specialization.join(", ")}</p>
+
+              <h5 style={{marginTop: '24px'}}>Key Achievements:</h5>
+              <ul className="edu-list">
+                {edu.achievements.map((ach, i) => (
+                  <li key={i}>{ach}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
