@@ -1488,66 +1488,101 @@ nav {
 }
 
 /* 📂 Projects Section */
-.portfolio {
-  background-color: transparent;
+.projects-section {
+  padding: 80px 0;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.project-card {
+  padding: 0; /* Image takes full width */
+  border-radius: 24px;
+  overflow: hidden;
+  transition: var(--transition);
   position: relative;
 }
 
-.portfolio::before {
-  content: '';
+.project-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.project-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img {
+  transform: scale(1.1);
+}
+
+.project-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-      radial-gradient(circle at 60% 40%, rgba(255, 105, 180, 0.05) 0%, transparent 50%);
-  z-index: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 30px;
-  position: relative;
-  z-index: 1;
+.project-card:hover .project-overlay {
+  opacity: 1;
 }
 
-.portfolio-item {
-  background: var(--card-bg);
-  border-radius: 15px;
-  overflow: hidden;
-  transition: var(--transition);
-  border: 1px solid rgba(74, 159, 255, 0.1);
-}
-
-.portfolio-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(74, 159, 255, 0.2);
-  border-color: rgba(74, 159, 255, 0.3);
-}
-
-.portfolio-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
-}
-
-.portfolio-content {
+.project-content {
   padding: 25px;
 }
 
-.portfolio-content h3 {
-  font-size: 1.3rem;
+.project-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
   margin-bottom: 10px;
   color: var(--text-primary);
 }
 
-.portfolio-content p {
+.project-content p {
   color: var(--text-secondary);
   margin-bottom: 20px;
   font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.project-tag {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  font-weight: 500;
 }
 
 /* 📞 Contact Section */
@@ -1912,6 +1947,13 @@ footer {
         transparent 100%);
 }
 
+.logo-loop-container.premium-glass {
+  -webkit-mask-image: none;
+  mask-image: none;
+  padding: 30px 0;
+  border: 1px solid var(--glass-border-premium);
+}
+
 .logo-line {
     display: flex;
     white-space: nowrap; 
@@ -2070,11 +2112,13 @@ footer {
 /* ============================
    CERTIFICATIONS SECTION
 ============================ */
+.certifications-section {
+  padding: 80px 0;
+}
+
 .certifications {
-  padding: 80px 20px;
   color: white;
   background: transparent;
-  border-radius: 15px;
 }
 
 /* Loading Spinner Styles */
@@ -2443,9 +2487,11 @@ footer {
 }
 
 .cert-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background: var(--glass-bg-premium);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border-premium);
+  border-radius: 24px;
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -2453,7 +2499,7 @@ footer {
 
 .cert-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(59, 130, 246, 0.5);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
 .cert-thumb {

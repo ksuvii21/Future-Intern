@@ -191,11 +191,22 @@ const Skills = () => {
   return (
     <section id="skills" className="skills-section">
       <div className="container">
-        <div className="section-title">
+        <motion.div 
+          className="premium-section-title"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0 }}
+        >
           <h2>Skills</h2>
-        </div>
+          <p>My Technical Toolbox</p>
+        </motion.div>
         
-        <div className="logo-loop-container">
+        <motion.div 
+            className="logo-loop-container premium-glass"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+        >
           {/* First Line: Scrolls Left */}
           <div className="logo-line logo-line-1">
             {firstLineContent}
@@ -205,80 +216,97 @@ const Skills = () => {
           <div className="logo-line logo-line-2">
             {secondLineContent}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
+const projectsData = [
+  {
+    title: "Sharvan Vision - AI Sign Language Translator",
+    description: "An AI-powered Indian Sign Language (ISL) translation application using real-time gesture recognition (MediaPipe & OpenCV) to bridge communication gaps. Built with Flutter, TensorFlow Lite, and Firebase.",
+    image: project3Image,
+    link: "https://sharvan-vision.netlify.app/",
+    tags: ["Flutter", "TensorFlow", "Firebase", "AI"]
+  },
+  {
+    title: "CareerFlow.io - AI Resume & Career Ecosystem",
+    description: "A full-stack MERN application with a dynamic resume builder, an AI Career Assistant (for ATS summaries, comparisons, and cover letters), and a visual Job Application Tracker.",
+    image: project4Image,
+    link: "https://careerflowio.netlify.app/",
+    tags: ["MERN Stack", "OpenAI API", "Redux"]
+  },
+  {
+    title: "Fansee Rebel - E-Commerce Website",
+    description: "A stylish e-commerce platform showcasing western dresses, jewelry, and accessories. Features responsive design, secure payments (placeholder), and a modern user interface.",
+    image: project5Image,
+    link: "https://fanseerebel.netlify.app/",
+    tags: ["React", "Node.js", "Stripe"]
+  },
+  {
+    title: "ERP Management System (MERN Stack)",
+    description: "A full-featured ERP web application to manage core business operations: Products, Customers, Suppliers, Sales/Purchase Orders, Invoices, and secure role-based access control (JWT).",
+    image: project6Image,
+    link: "#projects",
+    tags: ["MERN", "JWT", "Dashboard"]
+  },
+  {
+    title: "MERN Stack Excel Analytics Platform",
+    description: "An analytics platform to upload Excel files, analyze data, and generate interactive 2D/3D charts. Features user authentication with JWT, a dynamic UI, and chart downloads.",
+    image: project1Image,
+    link: "https://xlsx-analytics21.netlify.app/",
+    tags: ["React", "Chart.js", "MongoDB"]
+  },
+  {
+    title: "MERN Stack Blogging Platform",
+    description: "A full-stack blogging app where users can create, edit, and delete blogs. Includes a rich text editor, comments, likes, user authentication, and an admin dashboard for post management.",
+    image: project2Image,
+    link: "https://writely-log.netlify.app/",
+    tags: ["React", "Express", "Rich Text"]
+  }
+];
+
 const Projects = () => (
-  <section id="projects" className="portfolio">
+  <section id="projects" className="projects-section">
     <div className="container">
-      <div className="section-title">
+      <motion.div 
+        className="premium-section-title"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0 }}
+      >
         <h2>Projects</h2>
         <p>A selection of my work</p>
-      </div>
-      <div className="portfolio-grid">
-        
-        {/* Project 3: Sharvan Vision */}
-        <div className="portfolio-item glass">
-          <img src={project3Image} alt="Sharvan Vision - AI Sign Language Translator" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>Sharvan Vision - AI Sign Language Translator</h3>
-            <p>An AI-powered Indian Sign Language (ISL) translation application using real-time gesture recognition (MediaPipe & OpenCV) to bridge communication gaps. Built with Flutter, TensorFlow Lite, and Firebase.</p>
-            <a href="https://sharvan-vision.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
+      </motion.div>
 
-        {/* Project 4: CareerFlow.io*/}
-        <div className="portfolio-item glass">
-          <img src={project4Image} alt="CareerFlow.io - AI Resume & Career Ecosystem" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>CareerFlow.io - AI Resume & Career Ecosystem</h3>
-            <p>A full-stack MERN application with a dynamic resume builder, an AI Career Assistant (for ATS summaries, comparisons, and cover letters), and a visual Job Application Tracker.</p>
-            <a href="https://careerflowio.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
-        
-        {/* Project 5: Fansee Rebel */}
-        <div className="portfolio-item glass">
-          <img src={project5Image} alt="Fansee Rebel - E-Commerce Website" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>Fansee Rebel - E-Commerce Website</h3>
-            <p>A stylish e-commerce platform showcasing western dresses, jewelry, and accessories. Features responsive design, secure payments (placeholder), and a modern user interface.</p>
-            <a href="https://fanseerebel.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
-
-        {/* Project 6: ERP Management System */}
-        <div className="portfolio-item glass">
-          <img src={project6Image} alt="ERP Management System (MERN Stack)" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>ERP Management System (MERN Stack)</h3>
-            <p>A full-featured ERP web application to manage core business operations: Products, Customers, Suppliers, Sales/Purchase Orders, Invoices, and secure role-based access control (JWT).</p>
-            <a href="#projects" className="btn btn-outline">View Details (No Live Demo)</a>
-          </div>
-        </div>
-        {/* Project 1: MERN Stack Excel Analytics Platform (Existing) */}
-        <div className="portfolio-item glass">
-          <img src={project1Image} alt="MERN Stack Excel Analytics Platform" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>MERN Stack Excel Analytics Platform</h3>
-            <p>An analytics platform to upload Excel files, analyze data, and generate interactive 2D/3D charts. Features user authentication with JWT, a dynamic UI, and chart downloads.</p>
-            <a href="https://xlsx-analytics21.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
-        
-        {/* Project 2: MERN Stack Blogging Platform (Existing) */}
-        <div className="portfolio-item glass">
-          <img src={project2Image} alt="MERN Stack Blogging Platform" className="portfolio-img" />
-          <div className="portfolio-content">
-            <h3>MERN Stack Blogging Platform</h3>
-            <p>A full-stack blogging app where users can create, edit, and delete blogs. Includes a rich text editor, comments, likes, user authentication, and an admin dashboard for post management.</p>
-            <a href="https://writely-log.netlify.app/" target="_blank" rel="noopener noreferrer" className="btn btn-outline">Check it out</a>
-          </div>
-        </div>
-        
+      <div className="projects-grid">
+        {projectsData.map((project, index) => (
+          <motion.div 
+            key={index}
+            className="project-card premium-glass"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
+          >
+            <div className="project-img-wrapper">
+              <img src={project.image} alt={project.title} className="project-img" />
+              <div className="project-overlay">
+                <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">View Project</a>
+              </div>
+            </div>
+            
+            <div className="project-content">
+              <h3>{project.title}</h3>
+              <div className="project-tags">
+                {project.tags.map((tag, i) => (
+                  <span key={i} className="project-tag">{tag}</span>
+                ))}
+              </div>
+              <p>{project.description}</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </div>
   </section>
@@ -340,7 +368,7 @@ const Experience = () => (
         className="premium-section-title"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.1 }}
+        transition={{ duration: 0.5, delay: 0 }}
       >
         <h2>Experience</h2>
         <p>
@@ -355,7 +383,7 @@ const Experience = () => (
             className="exp-card premium-glass"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 + index * 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
           >
             {/* Glow Orb */}
             <div className="exp-card-glow" />
@@ -436,7 +464,7 @@ const Education = () => {
           className="premium-section-title"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0 }}
         >
           <h2>Education</h2>
           <p>Academic qualifications and journey of continuous learning</p>
@@ -449,7 +477,7 @@ const Education = () => {
               className="edu-card premium-glass"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 + index * 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
             >
               {/* Glow Orb */}
               <div className="edu-card-glow" />
@@ -613,7 +641,20 @@ function App() {
         <SectionDivider />
         <Education />
         <SectionDivider />
-        <Certifications />
+        <section id="certifications" className="certifications-section">
+          <div className="container">
+            <motion.div 
+              className="premium-section-title"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0 }}
+            >
+              <h2>Certifications</h2>
+              <p>My Verified Credentials</p>
+            </motion.div>
+            <Certifications />
+          </div>
+        </section>
         <SectionDivider />
         <Contact />
       </main>

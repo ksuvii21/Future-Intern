@@ -147,10 +147,7 @@ const Certifications = () => {
     const visibleCerts = certificatesData.slice(currentIndex, currentIndex + VISIBLE_CARDS);
 
     return (
-        <section className="certifications">
-            <div className="section-title">
-                <h2>Certifications</h2>
-            </div>
+        <div className="certifications">
 
             {/* Certificate Slider - Shows 5 at a time */}
             <div className="cert-slider-5">
@@ -213,7 +210,7 @@ const Certifications = () => {
                     </div>
                 </div>
             )}
-        </section>
+        </div>
     );
 };
 
