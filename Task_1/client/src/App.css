@@ -443,14 +443,14 @@ section {
    EXPERIENCE SECTION (PREMIUM)
 ============================ */
 .experience-section {
-  padding: 128px 0; /* py-32 */
+  padding: 80px 0;
 }
 
 .experience-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 48px; /* gap-12 */
-  max-width: 1400px;
+  gap: 20px;
+  max-width: 1200px;
   margin: auto;
 }
 
@@ -461,8 +461,7 @@ section {
 }
 
 .exp-card {
-  padding: 48px; /* p-12 */
-  min-height: 420px;
+  padding: 25px;
   border-radius: 24px; /* consistent with premium-glass */
   position: relative;
   overflow: hidden; /* To contain the glow */
@@ -488,28 +487,28 @@ section {
 }
 
 .exp-company-logo {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   position: absolute;
-  top: 32px;
-  right: 32px;
+  top: 25px;
+  right: 25px;
   opacity: 0.9;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 8px;
+  border-radius: 10px;
+  padding: 6px;
 }
 
 .exp-card h3 {
-  font-size: 1.5rem; /* text-2xl */
+  font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 8px;
   color: var(--text-primary);
-  padding-right: 90px; /* Space for logo */
+  padding-right: 60px; /* Space for logo */
 }
 
 .exp-company-name {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 500;
   color: #a78bfa;
   margin-bottom: 24px;
@@ -523,8 +522,8 @@ section {
 }
 
 .exp-badge {
-  padding: 8px 16px;
-  font-size: 0.875rem;
+  padding: 6px 12px;
+  font-size: 0.75rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
@@ -544,7 +543,7 @@ section {
 }
 
 .exp-sub-heading {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #c4b5fd;
   margin-bottom: 16px;
@@ -558,10 +557,10 @@ section {
 }
 
 .exp-tech-item {
-  padding: 6px 14px;
+  padding: 5px 12px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text-secondary);
 }
@@ -576,7 +575,7 @@ section {
   color: var(--text-secondary);
   position: relative;
   padding-left: 20px;
-  font-size: 1rem; /* text-base */
+  font-size: 0.9rem;
   line-height: 1.6;
 }
 
@@ -609,14 +608,14 @@ section {
    EDUCATION SECTION (PREMIUM)
 ============================ */
 .education-section {
-  padding: 128px 0; /* py-32 */
+  padding: 80px 0;
 }
 
 .education-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 48px; /* gap-12 */
-  max-width: 1400px;
+  gap: 20px;
+  max-width: 1200px;
   margin: auto;
 }
 
@@ -627,8 +626,7 @@ section {
 }
 
 .edu-card {
-  padding: 48px; /* p-12 */
-  min-height: 420px;
+  padding: 25px;
   border-radius: 24px; /* consistent with premium-glass */
   position: relative;
   overflow: hidden; /* To contain the glow */
@@ -655,20 +653,20 @@ section {
 
 .edu-score-badge {
   position: absolute;
-  top: 32px;    /* top-8 */
-  right: 32px;   /* right-8 */
-  padding: 8px 20px; /* px-5 py-2 */
+  top: 25px;
+  right: 25px;
+  padding: 6px 14px;
   background: rgba(59, 130, 246, 0.1);
   border: 1px solid rgba(59, 130, 246, 0.3);
   border-radius: 9999px;
   color: #60a5fa; /* text-blue-400 */
   font-weight: 500;
-  font-size: 1rem; /* text-base */
+  font-size: 0.875rem;
 }
 
 .edu-icon {
-  width: 64px;
-  height: 64px;
+  width: 50px;
+  height: 50px;
   background: rgba(167,139,250,0.15);
   border-radius: 16px;
   display: flex;
@@ -680,23 +678,23 @@ section {
 
 .edu-badge {
   display: inline-block;
-  padding: 8px 16px;
+  padding: 6px 12px;
   background: rgba(167,139,250,0.1);
   border-radius: 12px;
   color: #c4b5fd;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   margin-bottom: 24px;
 }
 
 .edu-card h3 {
-  font-size: 1.5rem; /* text-2xl */
+  font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 8px;
   color: var(--text-primary);
 }
 
 .edu-field {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 500;
   color: #a78bfa;
   margin-bottom: 24px;
@@ -708,7 +706,7 @@ section {
   gap: 12px;
   margin-bottom: 24px;
   color: var(--text-secondary);
-  font-size: 1rem; /* text-base */
+  font-size: 0.9rem;
 }
 
 .edu-info span {
@@ -725,12 +723,12 @@ section {
 
 .edu-specialization {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.6;
 }
 
 .edu-card h5 {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #c4b5fd;
   margin-bottom: 16px;
@@ -746,7 +744,7 @@ section {
   color: var(--text-secondary);
   position: relative;
   padding-left: 20px;
-  font-size: 1rem; /* text-base */
+  font-size: 0.9rem;
   line-height: 1.6;
 }
 
